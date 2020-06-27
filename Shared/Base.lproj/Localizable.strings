@@ -1,0 +1,12 @@
+Ari = "Ari";
+About = "About";
+Hide = "Hide";
+Hide.others = "Hide Others";
+Show.all = "Show All";
+Quit = "Quit";
+Window = "Window";
+Minimize = "Minimize";
+Zoom = "Zoom";
+Bring.all = "Bring All to Front";
+Close = "Close";
+Help = "Help";
