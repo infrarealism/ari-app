@@ -18,6 +18,31 @@ final class Launch: NSWindow, NSWindowDelegate {
         effect.translatesAutoresizingMaskIntoConstraints = false
         contentView = effect
         
+        let title = Label(.key("New"), .bold(10))
+        effect.addSubview(title)
+        
+        let subtitle = Label(.key("Create"), .regular(-2))
+        subtitle.textColor = .secondaryLabelColor
+        effect.addSubview(subtitle)
+        
+        let new = Button(icon: "plus.square.fill", color: .systemBlue)
+        effect.addSubview(new)
+        
+        let open = Label(.key("Open"), .bold(10))
+        effect.addSubview(open)
+        
+        title.topAnchor.constraint(equalTo: effect.topAnchor, constant: 50).isActive = true
+        title.leftAnchor.constraint(equalTo: effect.leftAnchor, constant: 20).isActive = true
+        
+        subtitle.leftAnchor.constraint(equalTo: title.leftAnchor).isActive = true
+        subtitle.topAnchor.constraint(equalTo: title.bottomAnchor).isActive = true
+        
+        new.rightAnchor.constraint(equalTo: effect.rightAnchor, constant: -50).isActive = true
+        new.topAnchor.constraint(equalTo: effect.topAnchor, constant: 60).isActive = true
+        
+        open.topAnchor.constraint(equalTo: subtitle.bottomAnchor, constant: 50).isActive = true
+        open.leftAnchor.constraint(equalTo: title.leftAnchor).isActive = true
+        
         if !setFrameUsingName(frameAutosaveName) {
             center()
         }
