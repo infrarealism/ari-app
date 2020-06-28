@@ -15,9 +15,14 @@ final class App: NSApplication, NSApplicationDelegate  {
 }
 
 extension NSApplication {
-    func close() {
+    func closeLaunch() {
         guard windows.count < 2 else { return }
         terminate(nil)
+    }
+    
+    func closeMain() {
+        guard windows.count < 2 else { return }
+        launch()
     }
     
     @objc

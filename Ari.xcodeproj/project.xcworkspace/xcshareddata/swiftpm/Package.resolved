@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "Core",
+        "repositoryURL": "https://github.com/infrarealism/ari-core.git",
+        "state": {
+          "branch": "master",
+          "revision": "3c0fe114ddc7395e9df803d6276531d28c48cc03",
+          "version": null
+        }
+      },
+      {
         "package": "Balam",
         "repositoryURL": "https://github.com/catverse/balam.git",
         "state": {

@@ -1,4 +1,5 @@
 import AppKit
+import Core
 
 final class Launch: NSWindow, NSWindowDelegate {
     override var frameAutosaveName: NSWindow.FrameAutosaveName { "Launch" }
@@ -26,6 +27,8 @@ final class Launch: NSWindow, NSWindowDelegate {
         effect.addSubview(subtitle)
         
         let new = Button(icon: "plus.square.fill", color: .systemBlue)
+        new.target = self
+        new.action = #selector(self.new)
         effect.addSubview(new)
         
         let open = Label(.key("Open"), .bold(10))
@@ -51,10 +54,16 @@ final class Launch: NSWindow, NSWindowDelegate {
     
     override func close() {
         super.close()
-        NSApp.close()
+        NSApp.closeLaunch()
     }
     
     func windowDidMove(_: Notification) {
         saveFrame(usingName: frameAutosaveName)
+    }
+    
+    @objc
+    private func new() {
+        Main(website: .init()).makeKeyAndOrderFront(nil)
+        close()
     }
 }

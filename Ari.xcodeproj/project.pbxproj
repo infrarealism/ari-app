@@ -18,6 +18,8 @@
 		CE59C4D424A8C8190068C153 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE59C4D324A8C8190068C153 /* Button.swift */; };
 		CE59C4D624A8C82E0068C153 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE59C4D524A8C82E0068C153 /* Label.swift */; };
 		CE59C4D824A8C87D0068C153 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE59C4D724A8C87D0068C153 /* Font.swift */; };
+		CE59C4DA24A8D6260068C153 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE59C4D924A8D6260068C153 /* Main.swift */; };
+		CE60EF5224A8DC50001D2A39 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = CE60EF5124A8DC50001D2A39 /* Core */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +39,7 @@
 		CE59C4D324A8C8190068C153 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		CE59C4D524A8C82E0068C153 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		CE59C4D724A8C87D0068C153 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		CE59C4D924A8D6260068C153 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +48,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE3EAF2324A764E300D29C60 /* Balam in Frameworks */,
+				CE60EF5224A8DC50001D2A39 /* Core in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +85,7 @@
 				CE59C4D124A8C7FD0068C153 /* Control.swift */,
 				CE59C4D524A8C82E0068C153 /* Label.swift */,
 				CE3EAF1524A7649B00D29C60 /* Launch.swift */,
+				CE59C4D924A8D6260068C153 /* Main.swift */,
 				CE58263424A76DE80004726F /* Menu.swift */,
 				CE3EAF1724A7649C00D29C60 /* Assets.xcassets */,
 			);
@@ -115,6 +120,7 @@
 			name = macOS;
 			packageProductDependencies = (
 				CE3EAF2224A764E300D29C60 /* Balam */,
+				CE60EF5124A8DC50001D2A39 /* Core */,
 			);
 			productName = macOS;
 			productReference = CE3EAF1024A7649B00D29C60 /* Ari.app */;
@@ -145,6 +151,7 @@
 			mainGroup = CE3EAF0524A7604B00D29C60;
 			packageReferences = (
 				CE3EAF2124A764E300D29C60 /* XCRemoteSwiftPackageReference "balam" */,
+				CE60EF5024A8DC50001D2A39 /* XCRemoteSwiftPackageReference "ari-core" */,
 			);
 			productRefGroup = CE3EAF1124A7649B00D29C60 /* Products */;
 			projectDirPath = "";
@@ -172,6 +179,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE59C4DA24A8D6260068C153 /* Main.swift in Sources */,
 				CE58263524A76DE80004726F /* Menu.swift in Sources */,
 				CE59C4D424A8C8190068C153 /* Button.swift in Sources */,
 				CE3EAF1624A7649B00D29C60 /* Launch.swift in Sources */,
@@ -386,6 +394,14 @@
 				kind = branch;
 			};
 		};
+		CE60EF5024A8DC50001D2A39 /* XCRemoteSwiftPackageReference "ari-core" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/infrarealism/ari-core.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -393,6 +409,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE3EAF2124A764E300D29C60 /* XCRemoteSwiftPackageReference "balam" */;
 			productName = Balam;
+		};
+		CE60EF5124A8DC50001D2A39 /* Core */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE60EF5024A8DC50001D2A39 /* XCRemoteSwiftPackageReference "ari-core" */;
+			productName = Core;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
