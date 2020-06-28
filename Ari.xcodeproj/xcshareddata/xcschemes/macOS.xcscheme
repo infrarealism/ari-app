@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CE3EAF0F24A7649B00D29C60"
-               BuildableName = "macOS.app"
+               BuildableName = "Ari.app"
                BlueprintName = "macOS"
                ReferencedContainer = "container:Ari.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CE3EAF0F24A7649B00D29C60"
-            BuildableName = "macOS.app"
+            BuildableName = "Ari.app"
             BlueprintName = "macOS"
             ReferencedContainer = "container:Ari.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CE3EAF0F24A7649B00D29C60"
-            BuildableName = "macOS.app"
+            BuildableName = "Ari.app"
             BlueprintName = "macOS"
             ReferencedContainer = "container:Ari.xcodeproj">
          </BuildableReference>

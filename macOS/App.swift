@@ -15,12 +15,13 @@ final class App: NSApplication, NSApplicationDelegate  {
 }
 
 extension NSApplication {
-    func launch() {
-        (windows.filter { $0 is Launch }.first ?? Launch()).makeKeyAndOrderFront(nil)
-    }
-    
     func close() {
         guard windows.count < 2 else { return }
         terminate(nil)
+    }
+    
+    @objc
+    func launch() {
+        (windows.filter { $0 is Launch }.first ?? Launch()).makeKeyAndOrderFront(nil)
     }
 }

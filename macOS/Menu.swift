@@ -9,7 +9,9 @@ final class Menu: NSMenu {
 
     private var amadeus: NSMenuItem {
         menu(.key("Ari"), items: [
-            .init(title: .key("About"), action: #selector(NSApplication.orderFrontStandardAboutPanel(_:)), keyEquivalent: ""),
+        .init(title: .key("Open"), action: #selector(NSApplication.launch), keyEquivalent: "o"),
+        .separator(),
+        .init(title: .key("About"), action: #selector(NSApplication.orderFrontStandardAboutPanel(_:)), keyEquivalent: ""),
         .separator(),
         .init(title: .key("Hide"), action: #selector(NSApplication.hide), keyEquivalent: "h"),
         {
@@ -23,12 +25,12 @@ final class Menu: NSMenu {
     
     private var window: NSMenuItem {
         menu(.key("Window"), items: [
-            .init(title: .key("Minimize"), action: #selector(NSWindow.miniaturize), keyEquivalent: "m"),
-            .init(title: .key("Zoom"), action: #selector(NSWindow.zoom), keyEquivalent: "p"),
-            .separator(),
-            .init(title: .key("Bring.all"), action: #selector(NSApplication.arrangeInFront), keyEquivalent: ""),
-            .separator(),
-            .init(title: .key("Close"), action: #selector(NSWindow.close), keyEquivalent: "w")])
+        .init(title: .key("Minimize"), action: #selector(NSWindow.miniaturize), keyEquivalent: "m"),
+        .init(title: .key("Zoom"), action: #selector(NSWindow.zoom), keyEquivalent: "p"),
+        .separator(),
+        .init(title: .key("Bring.all"), action: #selector(NSApplication.arrangeInFront), keyEquivalent: ""),
+        .separator(),
+        .init(title: .key("Close"), action: #selector(NSWindow.close), keyEquivalent: "w")])
     }
     
     private var help: NSMenuItem {
