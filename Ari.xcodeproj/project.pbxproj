@@ -20,6 +20,7 @@
 		CE59C4D824A8C87D0068C153 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE59C4D724A8C87D0068C153 /* Font.swift */; };
 		CE59C4DA24A8D6260068C153 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE59C4D924A8D6260068C153 /* Main.swift */; };
 		CE60EF5224A8DC50001D2A39 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = CE60EF5124A8DC50001D2A39 /* Core */; };
+		CE87193424A9D15000D5BD55 /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE87193324A9D15000D5BD55 /* Bookmark.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		CE59C4D524A8C82E0068C153 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		CE59C4D724A8C87D0068C153 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		CE59C4D924A8D6260068C153 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
+		CE87193324A9D15000D5BD55 /* Bookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 				CE3EAF1D24A7649C00D29C60 /* macOS.entitlements */,
 				CE3EAF1C24A7649C00D29C60 /* Info.plist */,
 				CE3EAF1324A7649B00D29C60 /* App.swift */,
+				CE87193324A9D15000D5BD55 /* Bookmark.swift */,
 				CE59C4D324A8C8190068C153 /* Button.swift */,
 				CE59C4D124A8C7FD0068C153 /* Control.swift */,
 				CE59C4D524A8C82E0068C153 /* Label.swift */,
@@ -184,6 +187,7 @@
 				CE59C4D424A8C8190068C153 /* Button.swift in Sources */,
 				CE3EAF1624A7649B00D29C60 /* Launch.swift in Sources */,
 				CE59C4D224A8C7FD0068C153 /* Control.swift in Sources */,
+				CE87193424A9D15000D5BD55 /* Bookmark.swift in Sources */,
 				CE59C4D824A8C87D0068C153 /* Font.swift in Sources */,
 				CE58263824A76E090004726F /* String.swift in Sources */,
 				CE59C4D624A8C82E0068C153 /* Label.swift in Sources */,
