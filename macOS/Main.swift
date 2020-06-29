@@ -27,7 +27,7 @@ final class Main: NSWindow, NSWindowDelegate {
     
     override func close() {
         super.close()
-        NSApp.closeMain()
+        NSApp.closeOther()
     }
     
     func windowDidMove(_: Notification) {

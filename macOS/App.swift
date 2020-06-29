@@ -20,7 +20,7 @@ extension NSApplication {
         terminate(nil)
     }
     
-    func closeMain() {
+    func closeOther() {
         guard windows.count < 2 else { return }
         launch()
     }

@@ -1,5 +1,4 @@
 import AppKit
-import Core
 
 final class Launch: NSWindow, NSWindowDelegate {
     override var frameAutosaveName: NSWindow.FrameAutosaveName { "Launch" }
@@ -63,21 +62,7 @@ final class Launch: NSWindow, NSWindowDelegate {
     
     @objc
     private func new() {
-        Main(website: .init()).makeKeyAndOrderFront(nil)
+        Create().makeKeyAndOrderFront(nil)
         close()
     }
-    
-    @objc
-    private func open() {
-        let browse = NSOpenPanel()
-        browse.canChooseFiles = false
-        browse.canChooseDirectories = true
-        browse.begin { [weak self] in
-            guard $0 == .OK, let url = browse.url else { return }
-//            let bookmark = Bookmark(url)
-//            balam.add(bookmark)
-//            self?.select(bookmark)
-        }
-    }
-
 }
