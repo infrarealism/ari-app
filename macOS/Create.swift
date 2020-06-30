@@ -3,6 +3,7 @@ import Core
 
 final class Create: NSWindow {
     private weak var offset: NSLayoutConstraint!
+    private weak var progress: NSLayoutConstraint!
     
     init() {
         super.init(contentRect: .init(x: 0, y: 0, width: 400, height: 300), styleMask:
@@ -23,6 +24,19 @@ final class Create: NSWindow {
         
         let title = Label(.key("New.website"), .bold(6))
         effect.addSubview(title)
+        
+        let progress = NSView()
+        progress.translatesAutoresizingMaskIntoConstraints = false
+        progress.wantsLayer = true
+        progress.layer!.backgroundColor = .init(gray: 0, alpha: 0.2)
+        progress.layer!.cornerRadius = 3
+        effect.addSubview(progress)
+        
+        let bar = NSView()
+        bar.translatesAutoresizingMaskIntoConstraints = false
+        bar.wantsLayer = true
+        bar.layer!.backgroundColor = NSColor.systemBlue.cgColor
+        progress.addSubview(bar)
         
         let first = NSView()
         first.translatesAutoresizingMaskIntoConstraints = false
@@ -74,6 +88,17 @@ final class Create: NSWindow {
         title.topAnchor.constraint(equalTo: effect.topAnchor, constant: 50).isActive = true
         title.leftAnchor.constraint(equalTo: effect.leftAnchor, constant: 20).isActive = true
         
+        progress.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 6).isActive = true
+        progress.leftAnchor.constraint(equalTo: title.leftAnchor, constant: 3).isActive = true
+        progress.widthAnchor.constraint(equalToConstant: 354).isActive = true
+        progress.heightAnchor.constraint(equalToConstant: 6).isActive = true
+        
+        bar.topAnchor.constraint(equalTo: progress.topAnchor).isActive = true
+        bar.leftAnchor.constraint(equalTo: progress.leftAnchor).isActive = true
+        bar.bottomAnchor.constraint(equalTo: progress.bottomAnchor).isActive = true
+        self.progress = bar.widthAnchor.constraint(equalToConstant: 0)
+        self.progress.isActive = true
+        
         enterName.topAnchor.constraint(equalTo: first.topAnchor, constant: 100).isActive = true
         enterName.leftAnchor.constraint(equalTo: first.leftAnchor, constant: 20).isActive = true
         
@@ -99,6 +124,7 @@ final class Create: NSWindow {
     @objc
     private func next() {
         offset.constant -= 400
+        progress.constant = -offset.constant / 1600 * 356
         NSAnimationContext.runAnimationGroup {
             $0.duration = 0.6
             $0.allowsImplicitAnimation = true
@@ -109,6 +135,7 @@ final class Create: NSWindow {
     @objc
     private func previous() {
         offset.constant += 400
+        progress.constant = -offset.constant / 1600 * 356
         NSAnimationContext.runAnimationGroup {
             $0.duration = 0.6
             $0.allowsImplicitAnimation = true
