@@ -2,6 +2,7 @@ New = "New";
 Create = "Create and build\na new Website";
 New.website = "New Website";
 Enter.name = "Name your new Website (optional)";
+Website.name = "Website name";
 
 Ari = "Ari";
 Open = "Open";

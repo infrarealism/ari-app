@@ -2,13 +2,10 @@ import AppKit
 import Core
 
 final class Create: NSWindow {
-    private weak var firstWidth: NSLayoutConstraint!
-    private weak var secondWidth: NSLayoutConstraint!
-    private weak var thirdWidth: NSLayoutConstraint!
-    private let width = CGFloat(400)
+    private weak var offset: NSLayoutConstraint!
     
     init() {
-        super.init(contentRect: .init(x: 0, y: 0, width: width, height: 300), styleMask:
+        super.init(contentRect: .init(x: 0, y: 0, width: 400, height: 300), styleMask:
             [.borderless, .closable, .titled, .unifiedTitleAndToolbar, .fullSizeContentView],
                    backing: .buffered, defer: false)
         titlebarAppearsTransparent = true
@@ -24,13 +21,17 @@ final class Create: NSWindow {
         effect.material = .hudWindow
         contentView = effect
         
+        let title = Label(.key("New.website"), .bold(6))
+        effect.addSubview(title)
+        
         let first = NSView()
         first.translatesAutoresizingMaskIntoConstraints = false
         effect.addSubview(first)
         
-        let title = Label(.key("New.website"), .bold(6))
-        effect.addSubview(title)
-     
+        let second = NSView()
+        second.translatesAutoresizingMaskIntoConstraints = false
+        effect.addSubview(second)
+        
         let enterName = Label(.key("Enter.name"), .medium())
         first.addSubview(enterName)
         
@@ -41,13 +42,34 @@ final class Create: NSWindow {
         name.bezelStyle = .roundedBezel
         name.font = .medium()
         name.maximumNumberOfLines = 1
+        name.placeholderString = .key("Website.name")
         first.addSubview(name)
+        
+        let firstNext = Button(icon: "arrow.right.circle.fill", color: .systemBlue)
+        firstNext.target = self
+        firstNext.action = #selector(next)
+        first.addSubview(firstNext)
+        
+        let secondNext = Button(icon: "arrow.right.circle.fill", color: .systemBlue)
+        secondNext.target = self
+        secondNext.action = #selector(next)
+        second.addSubview(secondNext)
+        
+        let secondPrevious = Button(icon: "arrow.left.circle.fill", color: .systemBlue)
+        secondPrevious.target = self
+        secondPrevious.action = #selector(previous)
+        second.addSubview(secondPrevious)
         
         first.topAnchor.constraint(equalTo: effect.topAnchor).isActive = true
         first.bottomAnchor.constraint(equalTo: effect.bottomAnchor).isActive = true
-        first.leftAnchor.constraint(equalTo: effect.leftAnchor).isActive = true
-        firstWidth = first.widthAnchor.constraint(equalToConstant: width)
-        firstWidth.isActive = true
+        first.widthAnchor.constraint(equalTo: effect.widthAnchor).isActive = true
+        offset = first.leftAnchor.constraint(equalTo: effect.leftAnchor)
+        offset.isActive = true
+        
+        second.topAnchor.constraint(equalTo: effect.topAnchor).isActive = true
+        second.bottomAnchor.constraint(equalTo: effect.bottomAnchor).isActive = true
+        second.widthAnchor.constraint(equalTo: effect.widthAnchor).isActive = true
+        second.leftAnchor.constraint(equalTo: first.rightAnchor).isActive = true
         
         title.topAnchor.constraint(equalTo: effect.topAnchor, constant: 50).isActive = true
         title.leftAnchor.constraint(equalTo: effect.leftAnchor, constant: 20).isActive = true
@@ -58,11 +80,40 @@ final class Create: NSWindow {
         name.topAnchor.constraint(equalTo: enterName.bottomAnchor, constant: 20).isActive = true
         name.leftAnchor.constraint(equalTo: enterName.leftAnchor).isActive = true
         name.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        
+        firstNext.centerXAnchor.constraint(equalTo: first.centerXAnchor).isActive = true
+        firstNext.bottomAnchor.constraint(equalTo: first.bottomAnchor, constant: -30).isActive = true
+        
+        secondNext.leftAnchor.constraint(equalTo: second.centerXAnchor, constant: 20).isActive = true
+        secondNext.bottomAnchor.constraint(equalTo: firstNext.bottomAnchor).isActive = true
+        
+        secondPrevious.rightAnchor.constraint(equalTo: second.centerXAnchor, constant: -20).isActive = true
+        secondPrevious.bottomAnchor.constraint(equalTo: firstNext.bottomAnchor).isActive = true
     }
     
     override func close() {
         super.close()
         NSApp.closeOther()
+    }
+    
+    @objc
+    private func next() {
+        offset.constant -= 400
+        NSAnimationContext.runAnimationGroup {
+            $0.duration = 0.6
+            $0.allowsImplicitAnimation = true
+            contentView!.layoutSubtreeIfNeeded()
+        }
+    }
+    
+    @objc
+    private func previous() {
+        offset.constant += 400
+        NSAnimationContext.runAnimationGroup {
+            $0.duration = 0.6
+            $0.allowsImplicitAnimation = true
+            contentView!.layoutSubtreeIfNeeded()
+        }
     }
     
     @objc
