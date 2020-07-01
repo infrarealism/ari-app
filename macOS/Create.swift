@@ -4,6 +4,8 @@ import Core
 final class Create: NSWindow {
     private weak var offset: NSLayoutConstraint!
     private weak var progress: NSLayoutConstraint!
+    private weak var singleSegment: Segment!
+    private weak var blogSegment: Segment!
     
     init() {
         super.init(contentRect: .init(x: 0, y: 0, width: 400, height: 300), styleMask:
@@ -64,6 +66,22 @@ final class Create: NSWindow {
         firstNext.action = #selector(next)
         first.addSubview(firstNext)
         
+        let enterType = Label(.key("Enter.type"), .medium())
+        second.addSubview(enterType)
+        
+        let singleSegment = Segment(icon: "dot.square.fill", title: .key("Single"))
+        singleSegment.selected = true
+        singleSegment.target = self
+        singleSegment.action = #selector(single)
+        second.addSubview(singleSegment)
+        self.singleSegment = singleSegment
+        
+        let blogSegment = Segment(icon: "square.stack.3d.up.fill", title: .key("Blog"))
+        blogSegment.target = self
+        blogSegment.action = #selector(blog)
+        second.addSubview(blogSegment)
+        self.blogSegment = blogSegment
+        
         let secondNext = Button(icon: "arrow.right.circle.fill", color: .systemBlue)
         secondNext.target = self
         secondNext.action = #selector(next)
@@ -109,6 +127,15 @@ final class Create: NSWindow {
         firstNext.centerXAnchor.constraint(equalTo: first.centerXAnchor).isActive = true
         firstNext.bottomAnchor.constraint(equalTo: first.bottomAnchor, constant: -30).isActive = true
         
+        enterType.topAnchor.constraint(equalTo: second.topAnchor, constant: 100).isActive = true
+        enterType.leftAnchor.constraint(equalTo: second.leftAnchor, constant: 20).isActive = true
+        
+        singleSegment.centerYAnchor.constraint(equalTo: second.centerYAnchor, constant: 10).isActive = true
+        singleSegment.rightAnchor.constraint(equalTo: second.centerXAnchor).isActive = true
+        
+        blogSegment.centerYAnchor.constraint(equalTo: singleSegment.centerYAnchor).isActive = true
+        blogSegment.leftAnchor.constraint(equalTo: second.centerXAnchor).isActive = true
+        
         secondNext.leftAnchor.constraint(equalTo: second.centerXAnchor, constant: 20).isActive = true
         secondNext.bottomAnchor.constraint(equalTo: firstNext.bottomAnchor).isActive = true
         
@@ -119,6 +146,18 @@ final class Create: NSWindow {
     override func close() {
         super.close()
         NSApp.closeOther()
+    }
+    
+    @objc
+    private func single() {
+        singleSegment.selected = true
+        blogSegment.selected = false
+    }
+    
+    @objc
+    private func blog() {
+        blogSegment.selected = true
+        singleSegment.selected = false
     }
     
     @objc
@@ -156,4 +195,42 @@ final class Create: NSWindow {
         }
     }
 
+}
+
+private final class Segment: Control {
+    var selected = false {
+        didSet {
+            icon.contentTintColor = selected ? .systemPink : .quaternaryLabelColor
+            label.textColor = selected ? .labelColor : .secondaryLabelColor
+        }
+    }
+    
+    private weak var icon: NSImageView!
+    private weak var label: Label!
+    
+    required init?(coder: NSCoder) { nil }
+    init(icon: String, title: String) {
+        super.init()
+        
+        let icon = NSImageView(image: NSImage(named: icon)!)
+        icon.translatesAutoresizingMaskIntoConstraints = false
+        icon.imageScaling = .scaleNone
+        icon.contentTintColor = .quaternaryLabelColor
+        addSubview(icon)
+        self.icon = icon
+        
+        let label = Label(title, .medium(-2))
+        label.textColor = .secondaryLabelColor
+        addSubview(label)
+        self.label = label
+        
+        widthAnchor.constraint(equalToConstant: 75).isActive = true
+        heightAnchor.constraint(equalToConstant: 75).isActive = true
+        
+        icon.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        icon.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        
+        label.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        label.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+    }
 }
