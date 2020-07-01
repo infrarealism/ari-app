@@ -6,6 +6,17 @@ final class Create: NSWindow {
     private weak var progress: NSLayoutConstraint!
     private weak var singleSegment: Segment!
     private weak var blogSegment: Segment!
+    private weak var selectedFolder: Label!
+    private weak var thirdNext: Button!
+    
+    private var bookmark: Bookmark? {
+        didSet {
+            guard bookmark != nil else { return }
+            thirdNext.enabled = true
+            selectedFolder.textColor = .labelColor
+            selectedFolder.stringValue = bookmark!.name
+        }
+    }
     
     init() {
         super.init(contentRect: .init(x: 0, y: 0, width: 400, height: 300), styleMask:
@@ -47,6 +58,10 @@ final class Create: NSWindow {
         let second = NSView()
         second.translatesAutoresizingMaskIntoConstraints = false
         effect.addSubview(second)
+        
+        let third = NSView()
+        third.translatesAutoresizingMaskIntoConstraints = false
+        effect.addSubview(third)
         
         let enterName = Label(.key("Enter.name"), .medium())
         first.addSubview(enterName)
@@ -92,6 +107,31 @@ final class Create: NSWindow {
         secondPrevious.action = #selector(previous)
         second.addSubview(secondPrevious)
         
+        let enterLocation = Label(.key("Enter.location"), .medium())
+        third.addSubview(enterLocation)
+        
+        let folderButton = Button(text: .key("Select.folder"), background: .systemPink, foreground: .selectedTextColor)
+        folderButton.target = self
+        folderButton.action = #selector(folder)
+        third.addSubview(folderButton)
+        
+        let selectedFolder = Label(.key("None.selected"), .medium())
+        selectedFolder.textColor = .secondaryLabelColor
+        third.addSubview(selectedFolder)
+        self.selectedFolder = selectedFolder
+        
+        let thirdNext = Button(icon: "arrow.right.circle.fill", color: .systemBlue)
+        thirdNext.target = self
+        thirdNext.action = #selector(next)
+        thirdNext.enabled = false
+        third.addSubview(thirdNext)
+        self.thirdNext = thirdNext
+        
+        let thirdPrevious = Button(icon: "arrow.left.circle.fill", color: .systemBlue)
+        thirdPrevious.target = self
+        thirdPrevious.action = #selector(previous)
+        third.addSubview(thirdPrevious)
+        
         first.topAnchor.constraint(equalTo: effect.topAnchor).isActive = true
         first.bottomAnchor.constraint(equalTo: effect.bottomAnchor).isActive = true
         first.widthAnchor.constraint(equalTo: effect.widthAnchor).isActive = true
@@ -102,6 +142,11 @@ final class Create: NSWindow {
         second.bottomAnchor.constraint(equalTo: effect.bottomAnchor).isActive = true
         second.widthAnchor.constraint(equalTo: effect.widthAnchor).isActive = true
         second.leftAnchor.constraint(equalTo: first.rightAnchor).isActive = true
+        
+        third.topAnchor.constraint(equalTo: effect.topAnchor).isActive = true
+        third.bottomAnchor.constraint(equalTo: effect.bottomAnchor).isActive = true
+        third.widthAnchor.constraint(equalTo: effect.widthAnchor).isActive = true
+        third.leftAnchor.constraint(equalTo: second.rightAnchor).isActive = true
         
         title.topAnchor.constraint(equalTo: effect.topAnchor, constant: 50).isActive = true
         title.leftAnchor.constraint(equalTo: effect.leftAnchor, constant: 20).isActive = true
@@ -141,6 +186,21 @@ final class Create: NSWindow {
         
         secondPrevious.rightAnchor.constraint(equalTo: second.centerXAnchor, constant: -20).isActive = true
         secondPrevious.bottomAnchor.constraint(equalTo: firstNext.bottomAnchor).isActive = true
+        
+        enterLocation.topAnchor.constraint(equalTo: third.topAnchor, constant: 100).isActive = true
+        enterLocation.leftAnchor.constraint(equalTo: third.leftAnchor, constant: 20).isActive = true
+        
+        selectedFolder.centerXAnchor.constraint(equalTo: third.centerXAnchor).isActive = true
+        selectedFolder.bottomAnchor.constraint(equalTo: folderButton.topAnchor, constant: -10).isActive = true
+        
+        folderButton.centerXAnchor.constraint(equalTo: third.centerXAnchor).isActive = true
+        folderButton.centerYAnchor.constraint(equalTo: third.centerYAnchor, constant: 40).isActive = true
+        
+        thirdNext.leftAnchor.constraint(equalTo: third.centerXAnchor, constant: 20).isActive = true
+        thirdNext.bottomAnchor.constraint(equalTo: firstNext.bottomAnchor).isActive = true
+        
+        thirdPrevious.rightAnchor.constraint(equalTo: third.centerXAnchor, constant: -20).isActive = true
+        thirdPrevious.bottomAnchor.constraint(equalTo: firstNext.bottomAnchor).isActive = true
     }
     
     override func close() {
@@ -183,18 +243,15 @@ final class Create: NSWindow {
     }
     
     @objc
-    private func open() {
+    private func folder() {
         let browse = NSOpenPanel()
         browse.canChooseFiles = false
         browse.canChooseDirectories = true
         browse.begin { [weak self] in
             guard $0 == .OK, let url = browse.url else { return }
-//            let bookmark = Bookmark(url)
-//            balam.add(bookmark)
-//            self?.select(bookmark)
+            self?.bookmark = .init(url)
         }
     }
-
 }
 
 private final class Segment: Control {
@@ -219,7 +276,7 @@ private final class Segment: Control {
         addSubview(icon)
         self.icon = icon
         
-        let label = Label(title, .medium(-2))
+        let label = Label(title, .bold(-2))
         label.textColor = .secondaryLabelColor
         addSubview(label)
         self.label = label

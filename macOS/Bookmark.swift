@@ -12,6 +12,14 @@ struct Bookmark: Codable, Identifiable {
         }
     }
     
+    var name: String {
+        getpwuid(getuid()).pointee.pw_dir.map {
+            FileManager.default.string(withFileSystemRepresentation: $0, length: .init(strlen($0)))
+        }.map {
+            NSString(string: id.deletingLastPathComponent().path.replacingOccurrences(of: $0, with: "~")).abbreviatingWithTildeInPath
+        } ?? id.absoluteString
+    }
+    
     init(_ url: URL) {
         id = url
         edited = .init()
