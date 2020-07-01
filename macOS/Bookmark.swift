@@ -1,8 +1,10 @@
 import Foundation
 
 struct Bookmark: Codable, Identifiable {
+    var name = ""
     var edited: Date
-    let id: URL
+    let id = UUID()
+    let url: URL
     private let access: Data
     
     var acccess: URL? {
@@ -12,16 +14,16 @@ struct Bookmark: Codable, Identifiable {
         }
     }
     
-    var name: String {
+    var location: String {
         getpwuid(getuid()).pointee.pw_dir.map {
             FileManager.default.string(withFileSystemRepresentation: $0, length: .init(strlen($0)))
         }.map {
-            NSString(string: id.path.replacingOccurrences(of: $0, with: "~")).abbreviatingWithTildeInPath
-        } ?? id.absoluteString
+            NSString(string: url.path.replacingOccurrences(of: $0, with: "~")).abbreviatingWithTildeInPath
+        } ?? url.absoluteString
     }
     
     init(_ url: URL) {
-        id = url
+        self.url = url
         edited = .init()
         access = try! url.bookmarkData(options: .withSecurityScope)
     }

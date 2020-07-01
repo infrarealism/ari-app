@@ -22,6 +22,8 @@
 		CE59C4DA24A8D6260068C153 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE59C4D924A8D6260068C153 /* Main.swift */; };
 		CE60EF5224A8DC50001D2A39 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = CE60EF5124A8DC50001D2A39 /* Core */; };
 		CE87193424A9D15000D5BD55 /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE87193324A9D15000D5BD55 /* Bookmark.swift */; };
+		CEEDB19924ACB4A100969FD4 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDB19824ACB4A100969FD4 /* Session.swift */; };
+		CEEDB19B24ACBE0A00969FD4 /* Scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDB19A24ACBE0A00969FD4 /* Scroll.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		CE59C4D724A8C87D0068C153 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		CE59C4D924A8D6260068C153 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		CE87193324A9D15000D5BD55 /* Bookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
+		CEEDB19824ACB4A100969FD4 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		CEEDB19A24ACBE0A00969FD4 /* Scroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scroll.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +97,7 @@
 				CE3EAF1524A7649B00D29C60 /* Launch.swift */,
 				CE59C4D924A8D6260068C153 /* Main.swift */,
 				CE58263424A76DE80004726F /* Menu.swift */,
+				CEEDB19A24ACBE0A00969FD4 /* Scroll.swift */,
 				CE3EAF1724A7649C00D29C60 /* Assets.xcassets */,
 			);
 			path = macOS;
@@ -102,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				CE59C4D724A8C87D0068C153 /* Font.swift */,
+				CEEDB19824ACB4A100969FD4 /* Session.swift */,
 				CE58263724A76E090004726F /* String.swift */,
 				CE58264024A76E5D0004726F /* Localizable.strings */,
 			);
@@ -193,9 +199,11 @@
 				CE87193424A9D15000D5BD55 /* Bookmark.swift in Sources */,
 				CE59C4D824A8C87D0068C153 /* Font.swift in Sources */,
 				CE00286424AA10E700F45C8B /* Create.swift in Sources */,
+				CEEDB19924ACB4A100969FD4 /* Session.swift in Sources */,
 				CE58263824A76E090004726F /* String.swift in Sources */,
 				CE59C4D624A8C82E0068C153 /* Label.swift in Sources */,
 				CE3EAF1424A7649B00D29C60 /* App.swift in Sources */,
+				CEEDB19B24ACBE0A00969FD4 /* Scroll.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

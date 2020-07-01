@@ -14,7 +14,7 @@ final class Create: NSWindow {
             guard bookmark != nil else { return }
             thirdNext.enabled = true
             selectedFolder.textColor = .labelColor
-            selectedFolder.stringValue = bookmark!.name
+            selectedFolder.stringValue = bookmark!.location
         }
     }
     
@@ -241,6 +241,7 @@ final class Create: NSWindow {
     
     @objc
     private func finish() {
+        (NSApp as! App).session.create(<#T##category: Category##Category#>, bookmark: <#T##Bookmark#>)
         close()
     }
     
