@@ -63,6 +63,10 @@ final class Create: NSWindow {
         third.translatesAutoresizingMaskIntoConstraints = false
         effect.addSubview(third)
         
+        let fourth = NSView()
+        fourth.translatesAutoresizingMaskIntoConstraints = false
+        effect.addSubview(fourth)
+        
         let enterName = Label(.key("Enter.name"), .medium())
         first.addSubview(enterName)
         
@@ -132,6 +136,19 @@ final class Create: NSWindow {
         thirdPrevious.action = #selector(previous)
         third.addSubview(thirdPrevious)
         
+        let websiteReady = Label(.key("Website.ready"), .medium())
+        fourth.addSubview(websiteReady)
+        
+        let fourthPrevious = Button(icon: "arrow.left.circle.fill", color: .systemBlue)
+        fourthPrevious.target = self
+        fourthPrevious.action = #selector(previous)
+        fourth.addSubview(fourthPrevious)
+        
+        let finish = Button(text: .key("Finish"), background: .systemPink, foreground: .selectedTextColor)
+        finish.target = self
+        finish.action = #selector(self.finish)
+        fourth.addSubview(finish)
+        
         first.topAnchor.constraint(equalTo: effect.topAnchor).isActive = true
         first.bottomAnchor.constraint(equalTo: effect.bottomAnchor).isActive = true
         first.widthAnchor.constraint(equalTo: effect.widthAnchor).isActive = true
@@ -147,6 +164,11 @@ final class Create: NSWindow {
         third.bottomAnchor.constraint(equalTo: effect.bottomAnchor).isActive = true
         third.widthAnchor.constraint(equalTo: effect.widthAnchor).isActive = true
         third.leftAnchor.constraint(equalTo: second.rightAnchor).isActive = true
+        
+        fourth.topAnchor.constraint(equalTo: effect.topAnchor).isActive = true
+        fourth.bottomAnchor.constraint(equalTo: effect.bottomAnchor).isActive = true
+        fourth.widthAnchor.constraint(equalTo: effect.widthAnchor).isActive = true
+        fourth.leftAnchor.constraint(equalTo: third.rightAnchor).isActive = true
         
         title.topAnchor.constraint(equalTo: effect.topAnchor, constant: 50).isActive = true
         title.leftAnchor.constraint(equalTo: effect.leftAnchor, constant: 20).isActive = true
@@ -191,7 +213,7 @@ final class Create: NSWindow {
         enterLocation.leftAnchor.constraint(equalTo: third.leftAnchor, constant: 20).isActive = true
         
         selectedFolder.centerXAnchor.constraint(equalTo: third.centerXAnchor).isActive = true
-        selectedFolder.bottomAnchor.constraint(equalTo: folderButton.topAnchor, constant: -10).isActive = true
+        selectedFolder.bottomAnchor.constraint(equalTo: folderButton.topAnchor, constant: -15).isActive = true
         
         folderButton.centerXAnchor.constraint(equalTo: third.centerXAnchor).isActive = true
         folderButton.centerYAnchor.constraint(equalTo: third.centerYAnchor, constant: 40).isActive = true
@@ -201,11 +223,25 @@ final class Create: NSWindow {
         
         thirdPrevious.rightAnchor.constraint(equalTo: third.centerXAnchor, constant: -20).isActive = true
         thirdPrevious.bottomAnchor.constraint(equalTo: firstNext.bottomAnchor).isActive = true
+        
+        websiteReady.topAnchor.constraint(equalTo: fourth.topAnchor, constant: 100).isActive = true
+        websiteReady.leftAnchor.constraint(equalTo: fourth.leftAnchor, constant: 20).isActive = true
+        
+        finish.centerXAnchor.constraint(equalTo: fourth.centerXAnchor).isActive = true
+        finish.centerYAnchor.constraint(equalTo: fourth.centerYAnchor, constant: 40).isActive = true
+        
+        fourthPrevious.centerXAnchor.constraint(equalTo: fourth.centerXAnchor).isActive = true
+        fourthPrevious.bottomAnchor.constraint(equalTo: firstNext.bottomAnchor).isActive = true
     }
     
     override func close() {
         super.close()
         NSApp.closeOther()
+    }
+    
+    @objc
+    private func finish() {
+        close()
     }
     
     @objc
@@ -223,7 +259,7 @@ final class Create: NSWindow {
     @objc
     private func next() {
         offset.constant -= 400
-        progress.constant = -offset.constant / 1600 * 356
+        progress.constant = -offset.constant / 1200 * 356
         NSAnimationContext.runAnimationGroup {
             $0.duration = 0.6
             $0.allowsImplicitAnimation = true
@@ -234,7 +270,7 @@ final class Create: NSWindow {
     @objc
     private func previous() {
         offset.constant += 400
-        progress.constant = -offset.constant / 1600 * 356
+        progress.constant = -offset.constant / 1200 * 356
         NSAnimationContext.runAnimationGroup {
             $0.duration = 0.6
             $0.allowsImplicitAnimation = true

@@ -16,7 +16,7 @@ struct Bookmark: Codable, Identifiable {
         getpwuid(getuid()).pointee.pw_dir.map {
             FileManager.default.string(withFileSystemRepresentation: $0, length: .init(strlen($0)))
         }.map {
-            NSString(string: id.deletingLastPathComponent().path.replacingOccurrences(of: $0, with: "~")).abbreviatingWithTildeInPath
+            NSString(string: id.path.replacingOccurrences(of: $0, with: "~")).abbreviatingWithTildeInPath
         } ?? id.absoluteString
     }
     
