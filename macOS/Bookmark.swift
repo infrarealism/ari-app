@@ -3,7 +3,7 @@ import Foundation
 struct Bookmark: Codable, Identifiable {
     var name = ""
     var edited: Date
-    let id = UUID()
+    let id: UUID
     let url: URL
     private let access: Data
     
@@ -26,5 +26,6 @@ struct Bookmark: Codable, Identifiable {
         self.url = url
         edited = .init()
         access = try! url.bookmarkData(options: .withSecurityScope)
+        id = .init()
     }
 }

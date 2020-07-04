@@ -1,9 +1,9 @@
 import AppKit
 
+let session = Session()
+
 @NSApplicationMain
 final class App: NSApplication, NSApplicationDelegate  {
-    let session = Session()
-    
     required init?(coder: NSCoder) { nil }
     override init() {
         super.init()

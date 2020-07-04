@@ -4,6 +4,7 @@ import Core
 final class Create: NSWindow {
     private weak var offset: NSLayoutConstraint!
     private weak var progress: NSLayoutConstraint!
+    private weak var name: NSTextField!
     private weak var singleSegment: Segment!
     private weak var blogSegment: Segment!
     private weak var selectedFolder: Label!
@@ -79,6 +80,7 @@ final class Create: NSWindow {
         name.maximumNumberOfLines = 1
         name.placeholderString = .key("Website.name")
         first.addSubview(name)
+        self.name = name
         
         let firstNext = Button(icon: "arrow.right.circle.fill", color: .systemBlue)
         firstNext.target = self
@@ -121,6 +123,7 @@ final class Create: NSWindow {
         
         let selectedFolder = Label(.key("None.selected"), .medium())
         selectedFolder.textColor = .secondaryLabelColor
+        selectedFolder.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         third.addSubview(selectedFolder)
         self.selectedFolder = selectedFolder
         
@@ -214,6 +217,8 @@ final class Create: NSWindow {
         
         selectedFolder.centerXAnchor.constraint(equalTo: third.centerXAnchor).isActive = true
         selectedFolder.bottomAnchor.constraint(equalTo: folderButton.topAnchor, constant: -15).isActive = true
+        selectedFolder.leftAnchor.constraint(greaterThanOrEqualTo: third.leftAnchor, constant: 20).isActive = true
+        selectedFolder.rightAnchor.constraint(lessThanOrEqualTo: third.rightAnchor, constant: -20).isActive = true
         
         folderButton.centerXAnchor.constraint(equalTo: third.centerXAnchor).isActive = true
         folderButton.centerYAnchor.constraint(equalTo: third.centerYAnchor, constant: 40).isActive = true
@@ -241,7 +246,8 @@ final class Create: NSWindow {
     
     @objc
     private func finish() {
-        (NSApp as! App).session.create(<#T##category: Category##Category#>, bookmark: <#T##Bookmark#>)
+        bookmark!.name = name.stringValue
+        Main(website: session.create(singleSegment.selected ? .single : .blog, bookmark: bookmark!)).makeKeyAndOrderFront(nil)
         close()
     }
     

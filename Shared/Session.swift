@@ -16,11 +16,19 @@ final class Session {
         }
     }
     
-    func create(_ category: Core.Category, bookmark: Bookmark) -> Bookmark {
+    func create(_ category: Core.Category, bookmark: Bookmark) -> Website {
         var website = Website(bookmark.id, category: category)
         website.name = bookmark.name
         _websites.add(website)
         _bookmarks.add(bookmark)
-        return bookmark
+        return website
+    }
+    
+    func website(_ bookmark: Bookmark) -> Future <Website, Never> {
+        .init { promise in
+            self._websites.nodes(Website.self).sink {
+                promise(.success($0.first { $0.id == bookmark.id }!))
+            }.store(in: &self.subs)
+        }
     }
 }
