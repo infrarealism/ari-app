@@ -8,10 +8,10 @@ final class Main: NSWindow, NSWindowDelegate {
     
     init(website: Website) {
         self.website = website
-        super.init(contentRect: .init(x: 0, y: 0, width: 900, height: 800), styleMask:
+        super.init(contentRect: .init(x: 0, y: 0, width: 1200, height: 800), styleMask:
             [.borderless, .closable, .miniaturizable, .resizable, .titled, .unifiedTitleAndToolbar, .fullSizeContentView],
                    backing: .buffered, defer: false)
-        minSize = .init(width: 500, height: 400)
+        minSize = .init(width: 600, height: 400)
         titlebarAppearsTransparent = true
         titleVisibility = .hidden
         toolbar = .init()
@@ -19,6 +19,13 @@ final class Main: NSWindow, NSWindowDelegate {
         collectionBehavior = .fullScreenNone
         isReleasedWhenClosed = false
 
+        let bar = Bar()
+        contentView!.addSubview(bar)
+        
+        bar.topAnchor.constraint(equalTo: contentView!.topAnchor).isActive = true
+        bar.leftAnchor.constraint(equalTo: contentView!.leftAnchor).isActive = true
+        bar.bottomAnchor.constraint(equalTo: contentView!.bottomAnchor).isActive = true
+        
         if !setFrameUsingName(frameAutosaveName) {
             center()
         }
