@@ -1,9 +1,7 @@
 import AppKit
 import Combine
 
-final class Launch: NSWindow, NSWindowDelegate {
-    override var frameAutosaveName: NSWindow.FrameAutosaveName { "Launch" }
-    
+final class Launch: NSWindow {
     private var subs = Set<AnyCancellable>()
     
     init() {
@@ -78,10 +76,8 @@ final class Launch: NSWindow, NSWindowDelegate {
         scroll.right.constraint(equalTo: scroll.rightAnchor).isActive = true
         scroll.bottom.constraint(greaterThanOrEqualTo: scroll.bottomAnchor).isActive = true
         
-        if !setFrameUsingName(frameAutosaveName) {
-            center()
-        }
-        delegate = self
+        center()
+        setFrameAutosaveName("Launch")
         
         session.bookmarks.sink { [weak self] in
             guard let self = self else { return }
@@ -117,10 +113,6 @@ final class Launch: NSWindow, NSWindowDelegate {
     override func close() {
         super.close()
         NSApp.closeLaunch()
-    }
-    
-    func windowDidMove(_: Notification) {
-        saveFrame(usingName: frameAutosaveName)
     }
     
     @objc

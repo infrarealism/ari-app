@@ -1,9 +1,7 @@
 import AppKit
 import Core
 
-final class Main: NSWindow, NSWindowDelegate {
-    override var frameAutosaveName: NSWindow.FrameAutosaveName { "Main" }
-    
+final class Main: NSWindow {
     private let website: Website
     
     init(website: Website) {
@@ -26,23 +24,13 @@ final class Main: NSWindow, NSWindowDelegate {
         bar.leftAnchor.constraint(equalTo: contentView!.leftAnchor).isActive = true
         bar.bottomAnchor.constraint(equalTo: contentView!.bottomAnchor).isActive = true
         
-        if !setFrameUsingName(frameAutosaveName) {
-            center()
-        }
-        delegate = self
+        center()
+        setFrameAutosaveName("Main")
     }
     
     override func close() {
         super.close()
         NSApp.closeOther()
-    }
-    
-    func windowDidMove(_: Notification) {
-        saveFrame(usingName: frameAutosaveName)
-    }
-    
-    func windowDidResize(_: Notification) {
-        saveFrame(usingName: frameAutosaveName)
     }
 }
 

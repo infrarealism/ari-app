@@ -8,8 +8,11 @@ Website.name = "Website name";
 Select.folder = "Select folder";
 None.selected = "None selected";
 Website.ready = "Your new Website is ready!";
+Edit = "Edit";
+Export = "Export";
+Preview = "Preview";
 
-Ari = "Ari";
+App = "App";
 Open = "Open";
 About = "About";
 Hide = "Hide";

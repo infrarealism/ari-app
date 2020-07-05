@@ -26,13 +26,13 @@ class Control: NSView {
     
     override func mouseUp(with: NSEvent) {
         guard enabled else { return }
+        hoverOff()
         window!.makeFirstResponder(self)
         if bounds.contains(convert(with.locationInWindow, from: nil)) {
             _ = target.perform(action, with: self)
         } else {
             super.mouseUp(with: with)
         }
-        hoverOff()
     }
     
     func hoverOn() {

@@ -4,11 +4,11 @@ final class Menu: NSMenu {
     required init(coder: NSCoder) { super.init(coder: coder) }
     init() {
         super.init(title: "")
-        items = [amadeus, window, help]
+        items = [app, window, help]
     }
 
-    private var amadeus: NSMenuItem {
-        menu(.key("Ari"), items: [
+    private var app: NSMenuItem {
+        menu(.key("App"), items: [
         .init(title: .key("Open"), action: #selector(NSApplication.launch), keyEquivalent: "o"),
         .separator(),
         .init(title: .key("About"), action: #selector(NSApplication.orderFrontStandardAboutPanel(_:)), keyEquivalent: ""),
