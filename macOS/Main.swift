@@ -51,7 +51,6 @@ final class Main: NSWindow {
         }
         
         let text = Text()
-        
         let scroll = NSScrollView()
         scroll.translatesAutoresizingMaskIntoConstraints = false
         scroll.hasVerticalScroller = true
@@ -64,11 +63,6 @@ final class Main: NSWindow {
         scroll.leftAnchor.constraint(equalTo: bar.rightAnchor).isActive = true
         scroll.rightAnchor.constraint(equalTo: contentView!.rightAnchor).isActive = true
         scroll.bottomAnchor.constraint(equalTo: contentView!.bottomAnchor, constant: -1).isActive = true
-        
-//        text.topAnchor.constraint(equalTo: scroll.topAnchor).isActive = true
-//        text.leftAnchor.constraint(equalTo: scroll.leftAnchor).isActive = true
-//        text.rightAnchor.constraint(equalTo: scroll.rightAnchor).isActive = true
-//        text.bottomAnchor.constraint(greaterThanOrEqualTo: scroll.bottomAnchor).isActive = true
     }
     
     @objc
