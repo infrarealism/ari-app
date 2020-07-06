@@ -10,8 +10,9 @@ final class Session {
     
     var bookmarks: Future <[Bookmark], Never> {
         .init { promise in
+            self._bookmarks.remove(Bookmark.self) { !FileManager.default.fileExists(atPath: $0.url.path) }
             self._bookmarks.nodes(Bookmark.self).sink {
-                promise(.success($0))
+                promise(.success($0.sorted { $0.edited > $1.edited }))
             }.store(in: &self.subs)
         }
     }
@@ -26,6 +27,9 @@ final class Session {
     
     func website(_ bookmark: Bookmark) -> Future <Website, Never> {
         .init { promise in
+            var bookmark = bookmark
+            bookmark.edited = .init()
+            self._bookmarks.update(bookmark)
             self._websites.nodes(Website.self).sink {
                 promise(.success($0.first { $0.id == bookmark.id }!))
             }.store(in: &self.subs)
