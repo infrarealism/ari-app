@@ -2,6 +2,7 @@ import AppKit
 import Core
 
 final class Main: NSWindow {
+    private weak var bar: Bar!
     private let website: Website
     
     init(website: Website) {
@@ -18,7 +19,14 @@ final class Main: NSWindow {
         isReleasedWhenClosed = false
 
         let bar = Bar()
+        bar.edit.target = self
+        bar.edit.action = #selector(edit)
+        bar.preview.target = self
+        bar.preview.action = #selector(preview)
+        bar.export.target = self
+        bar.export.action = #selector(export)
         contentView!.addSubview(bar)
+        self.bar = bar
         
         bar.topAnchor.constraint(equalTo: contentView!.topAnchor).isActive = true
         bar.leftAnchor.constraint(equalTo: contentView!.leftAnchor).isActive = true
@@ -31,6 +39,24 @@ final class Main: NSWindow {
     override func close() {
         super.close()
         NSApp.closeOther()
+    }
+    
+    @objc
+    private func edit(_ control: Control) {
+        bar.select(control: control)
+        contentView!.subviews.filter { !($0 is Bar) }.forEach {
+            $0.removeFromSuperview()
+        }
+    }
+    
+    @objc
+    private func preview(_ control: Control) {
+        bar.select(control: control)
+    }
+    
+    @objc
+    private func export(_ control: Control) {
+        bar.select(control: control)
     }
 }
 

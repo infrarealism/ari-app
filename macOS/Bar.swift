@@ -1,6 +1,10 @@
 import AppKit
 
 final class Bar: NSVisualEffectView {
+    private(set) weak var edit: Control!
+    private(set) weak var preview: Control!
+    private(set) weak var export: Control!
+    
     required init?(coder: NSCoder) { nil }
     init() {
         super.init(frame: .zero)
@@ -10,20 +14,17 @@ final class Bar: NSVisualEffectView {
         widthAnchor.constraint(equalToConstant: 180).isActive = true
         
         let edit = Item(icon: "hammer", title: .key("Edit"))
-        edit.target = self
-        edit.action = #selector(select(item:))
         edit.enabled = false
         addSubview(edit)
+        self.edit = edit
         
         let preview = Item(icon: "paperplane", title: .key("Preview"))
-        preview.target = self
-        preview.action = #selector(select(item:))
         addSubview(preview)
+        self.preview = preview
         
         let export = Item(icon: "square.and.arrow.up", title: .key("Export"))
-        export.target = self
-        export.action = #selector(select(item:))
         addSubview(export)
+        self.export = export
         
         edit.bottomAnchor.constraint(equalTo: preview.topAnchor, constant: -20).isActive = true
         edit.leftAnchor.constraint(equalTo: export.leftAnchor).isActive = true
@@ -38,10 +39,9 @@ final class Bar: NSVisualEffectView {
         export.rightAnchor.constraint(equalTo: rightAnchor, constant: -20).isActive = true
     }
     
-    @objc
-    private func select(item: Item) {
+    func select(control: Control) {
         subviews.compactMap { $0 as? Item }.forEach {
-            $0.enabled = $0 != item
+            $0.enabled = $0 != control
         }
     }
 }
