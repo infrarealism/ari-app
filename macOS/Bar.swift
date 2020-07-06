@@ -14,7 +14,6 @@ final class Bar: NSVisualEffectView {
         widthAnchor.constraint(equalToConstant: 180).isActive = true
         
         let edit = Item(icon: "hammer", title: .key("Edit"))
-        edit.enabled = false
         addSubview(edit)
         self.edit = edit
         

@@ -34,6 +34,8 @@ final class Main: NSWindow {
         
         center()
         setFrameAutosaveName("Main")
+        
+        edit()
     }
     
     override func close() {
@@ -42,21 +44,41 @@ final class Main: NSWindow {
     }
     
     @objc
-    private func edit(_ control: Control) {
-        bar.select(control: control)
+    private func edit() {
+        bar.select(control: bar.edit)
         contentView!.subviews.filter { !($0 is Bar) }.forEach {
             $0.removeFromSuperview()
         }
+        
+        let text = Text()
+        
+        let scroll = NSScrollView()
+        scroll.translatesAutoresizingMaskIntoConstraints = false
+        scroll.hasVerticalScroller = true
+        scroll.verticalScroller!.controlSize = .mini
+        scroll.drawsBackground = false
+        scroll.documentView = text
+        contentView!.addSubview(scroll)
+        
+        scroll.topAnchor.constraint(equalTo: contentView!.topAnchor, constant: 1).isActive = true
+        scroll.leftAnchor.constraint(equalTo: bar.rightAnchor).isActive = true
+        scroll.rightAnchor.constraint(equalTo: contentView!.rightAnchor).isActive = true
+        scroll.bottomAnchor.constraint(equalTo: contentView!.bottomAnchor, constant: -1).isActive = true
+        
+//        text.topAnchor.constraint(equalTo: scroll.topAnchor).isActive = true
+//        text.leftAnchor.constraint(equalTo: scroll.leftAnchor).isActive = true
+//        text.rightAnchor.constraint(equalTo: scroll.rightAnchor).isActive = true
+//        text.bottomAnchor.constraint(greaterThanOrEqualTo: scroll.bottomAnchor).isActive = true
     }
     
     @objc
-    private func preview(_ control: Control) {
-        bar.select(control: control)
+    private func preview() {
+        bar.select(control: bar.preview)
     }
     
     @objc
-    private func export(_ control: Control) {
-        bar.select(control: control)
+    private func export() {
+        bar.select(control: bar.export)
     }
 }
 
