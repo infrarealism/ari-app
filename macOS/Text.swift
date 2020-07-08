@@ -6,7 +6,7 @@ final class Text: NSTextView {
     override var canBecomeKeyView: Bool { true }
     override var isSelectable: Bool { get { true } set { } }
     override func accessibilityValue() -> String? { string }
-    private let caret = CGFloat(3)
+    private let caret = CGFloat(4)
     
     required init?(coder: NSCoder) { nil }
     init() {
