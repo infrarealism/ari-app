@@ -22,6 +22,7 @@
 		CE59C4D824A8C87D0068C153 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE59C4D724A8C87D0068C153 /* Font.swift */; };
 		CE59C4DA24A8D6260068C153 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE59C4D924A8D6260068C153 /* Main.swift */; };
 		CE60EF5224A8DC50001D2A39 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = CE60EF5124A8DC50001D2A39 /* Core */; };
+		CE7D5C9724B628550067D6C5 /* Web.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7D5C9624B628550067D6C5 /* Web.swift */; };
 		CE87193424A9D15000D5BD55 /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE87193324A9D15000D5BD55 /* Bookmark.swift */; };
 		CE9824B024B0AC4300AD14FF /* Separator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9824AF24B0AC4300AD14FF /* Separator.swift */; };
 		CEB1A74824B30D750094DEE1 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1A74724B30D750094DEE1 /* Text.swift */; };
@@ -49,6 +50,7 @@
 		CE59C4D524A8C82E0068C153 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		CE59C4D724A8C87D0068C153 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		CE59C4D924A8D6260068C153 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
+		CE7D5C9624B628550067D6C5 /* Web.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Web.swift; sourceTree = "<group>"; };
 		CE87193324A9D15000D5BD55 /* Bookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
 		CE9824AF24B0AC4300AD14FF /* Separator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Separator.swift; sourceTree = "<group>"; };
 		CEB1A74724B30D750094DEE1 /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				CEEDB19A24ACBE0A00969FD4 /* Scroll.swift */,
 				CE9824AF24B0AC4300AD14FF /* Separator.swift */,
 				CEB1A74724B30D750094DEE1 /* Text.swift */,
+				CE7D5C9624B628550067D6C5 /* Web.swift */,
 				CE3EAF1724A7649C00D29C60 /* Assets.xcassets */,
 			);
 			path = macOS;
@@ -207,6 +210,7 @@
 				CE3EAF1624A7649B00D29C60 /* Launch.swift in Sources */,
 				CE59C4D224A8C7FD0068C153 /* Control.swift in Sources */,
 				CE87193424A9D15000D5BD55 /* Bookmark.swift in Sources */,
+				CE7D5C9724B628550067D6C5 /* Web.swift in Sources */,
 				CE59C4D824A8C87D0068C153 /* Font.swift in Sources */,
 				CE00286424AA10E700F45C8B /* Create.swift in Sources */,
 				CEEDB19924ACB4A100969FD4 /* Session.swift in Sources */,

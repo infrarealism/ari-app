@@ -43,36 +43,42 @@ final class Main: NSWindow {
         NSApp.closeOther()
     }
     
-    @objc
-    private func edit() {
-        bar.select(control: bar.edit)
+    private func select(control: Control, view: NSView) {
+        bar.select(control: control)
         contentView!.subviews.filter { !($0 is Bar) }.forEach {
             $0.removeFromSuperview()
         }
         
-        let text = Text()
+        contentView!.addSubview(view)
+        
+        view.topAnchor.constraint(equalTo: contentView!.topAnchor, constant: 1).isActive = true
+        view.leftAnchor.constraint(equalTo: bar.rightAnchor).isActive = true
+        view.rightAnchor.constraint(equalTo: contentView!.rightAnchor).isActive = true
+        view.bottomAnchor.constraint(equalTo: contentView!.bottomAnchor, constant: -1).isActive = true
+    }
+    
+    @objc
+    private func edit() {
+        let text = Text(website: website, page: website.pages.first!)
         let scroll = NSScrollView()
         scroll.translatesAutoresizingMaskIntoConstraints = false
         scroll.hasVerticalScroller = true
         scroll.verticalScroller!.controlSize = .mini
         scroll.drawsBackground = false
         scroll.documentView = text
-        contentView!.addSubview(scroll)
         
-        scroll.topAnchor.constraint(equalTo: contentView!.topAnchor, constant: 1).isActive = true
-        scroll.leftAnchor.constraint(equalTo: bar.rightAnchor).isActive = true
-        scroll.rightAnchor.constraint(equalTo: contentView!.rightAnchor).isActive = true
-        scroll.bottomAnchor.constraint(equalTo: contentView!.bottomAnchor, constant: -1).isActive = true
+        select(control: bar.edit, view: scroll)
+        makeFirstResponder(text)
     }
     
     @objc
     private func preview() {
-        bar.select(control: bar.preview)
+        select(control: bar.preview, view: Web())
     }
     
     @objc
     private func export() {
-        bar.select(control: bar.export)
+        select(control: bar.export, view: Web())
     }
 }
 

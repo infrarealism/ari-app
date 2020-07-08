@@ -69,13 +69,11 @@ private final class Item: Control {
         let icon = NSImageView(image: NSImage(named: icon)!)
         icon.translatesAutoresizingMaskIntoConstraints = false
         icon.imageScaling = .scaleNone
-        icon.contentTintColor = .controlTextColor
         addSubview(icon)
         self.icon = icon
         
         let label = Label(title, .medium())
         label.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        label.textColor = .controlTextColor
         addSubview(label)
         self.label = label
         
@@ -98,7 +96,7 @@ private final class Item: Control {
     
     override func hoverOff() {
         label.textColor = .secondaryLabelColor
-        icon.contentTintColor = .disabledControlTextColor
+        icon.contentTintColor = .tertiaryLabelColor
         layer!.borderColor = .clear
     }
 }

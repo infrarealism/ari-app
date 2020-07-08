@@ -18,7 +18,7 @@ final class Session {
     }
     
     func create(_ category: Core.Category, bookmark: Bookmark) -> Website {
-        var website = Website(bookmark.id, category: category)
+        var website = category.make(id: bookmark.id)
         website.name = bookmark.name
         _websites.add(website)
         _bookmarks.add(bookmark)
@@ -34,5 +34,10 @@ final class Session {
                 promise(.success($0.first { $0.id == bookmark.id }!))
             }.store(in: &self.subs)
         }
+    }
+    
+    func update(website: Website) {
+        print(website.pages.first!.content)
+        _websites.update(website)
     }
 }
