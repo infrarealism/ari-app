@@ -247,7 +247,7 @@ final class Create: NSWindow {
     @objc
     private func finish() {
         bookmark!.name = name.stringValue
-        Main(website: session.create(singleSegment.selected ? .single : .blog, bookmark: bookmark!)).makeKeyAndOrderFront(nil)
+        Main(url: bookmark!.access!, website: session.create(singleSegment.selected ? .single : .blog, bookmark: bookmark!)).makeKeyAndOrderFront(nil)
         close()
     }
     

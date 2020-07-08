@@ -2,10 +2,12 @@ import AppKit
 import Core
 
 final class Main: NSWindow {
+    var website: Website
+    let url: URL
     private weak var bar: Bar!
-    private let website: Website
     
-    init(website: Website) {
+    init(url: URL, website: Website) {
+        self.url = url
         self.website = website
         super.init(contentRect: .init(x: 0, y: 0, width: 1200, height: 800), styleMask:
             [.borderless, .closable, .miniaturizable, .resizable, .titled, .unifiedTitleAndToolbar, .fullSizeContentView],
@@ -40,7 +42,14 @@ final class Main: NSWindow {
     
     override func close() {
         super.close()
+        url.stopAccessingSecurityScopedResource()
         NSApp.closeOther()
+    }
+    
+    func render() {
+        website.pages.first.map {
+            try? Data($0.render.utf8).write(to: url.appendingPathComponent($0.id + ".html"))
+        }
     }
     
     private func select(control: Control, view: NSView) {
@@ -59,7 +68,9 @@ final class Main: NSWindow {
     
     @objc
     private func edit() {
-        let text = Text(website: website, page: website.pages.first!)
+        let text = Text(page: website.pages.first!)
+        text.main = self
+        
         let scroll = NSScrollView()
         scroll.translatesAutoresizingMaskIntoConstraints = false
         scroll.hasVerticalScroller = true

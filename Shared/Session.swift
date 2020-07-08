@@ -5,8 +5,8 @@ import Combine
 
 final class Session {
     private var subs = Set<AnyCancellable>()
-    private let _bookmarks = Balam("bookmarks")
-    private let _websites = Balam("websites")
+    private let _bookmarks = Balam("Bookmarks")
+    private let _websites = Balam("Websites")
     
     var bookmarks: Future <[Bookmark], Never> {
         .init { promise in
@@ -37,7 +37,6 @@ final class Session {
     }
     
     func update(website: Website) {
-        print(website.pages.first!.content)
         _websites.update(website)
     }
 }

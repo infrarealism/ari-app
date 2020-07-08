@@ -5,11 +5,11 @@ struct Bookmark: Codable, Identifiable {
     var edited: Date
     let id: UUID
     let url: URL
-    private let access: Data
+    private let data: Data
     
-    var acccess: URL? {
+    var access: URL? {
         var stale = false
-        return (try? URL(resolvingBookmarkData: access, options: .withSecurityScope, bookmarkDataIsStale: &stale)).flatMap {
+        return (try? URL(resolvingBookmarkData: data, options: .withSecurityScope, bookmarkDataIsStale: &stale)).flatMap {
             $0.startAccessingSecurityScopedResource() ? $0 : nil
         }
     }
@@ -25,7 +25,7 @@ struct Bookmark: Codable, Identifiable {
     init(_ url: URL) {
         self.url = url
         edited = .init()
-        access = try! url.bookmarkData(options: .withSecurityScope)
+        data = try! url.bookmarkData(options: .withSecurityScope)
         id = .init()
     }
 }

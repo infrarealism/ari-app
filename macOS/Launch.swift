@@ -123,10 +123,12 @@ final class Launch: NSWindow {
     
     @objc
     private func select(item: Item) {
-        session.website(item.bookmark).sink { [weak self] in
-            Main(website: $0).makeKeyAndOrderFront(nil)
-            self?.close()
-        }.store(in: &subs)
+        item.bookmark.access.map { url in
+            session.website(item.bookmark).sink { [weak self] in
+                Main(url: url,  website: $0).makeKeyAndOrderFront(nil)
+                self?.close()
+            }.store(in: &subs)
+        }
     }
 }
 
