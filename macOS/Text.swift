@@ -43,7 +43,7 @@ final class Text: NSTextView {
         }.store(in: &subs)
         
         NotificationCenter.default.publisher(for: NSTextView.didChangeNotification, object: self)
-            .debounce(for: .seconds(1), scheduler: DispatchQueue.global(qos: .utility))
+            .debounce(for: .seconds(1.1), scheduler: DispatchQueue.global(qos: .utility))
             .sink { [weak self] _ in
                 self?.main.render()
         }.store(in: &subs)

@@ -3,7 +3,7 @@ import Core
 
 final class Main: NSWindow {
     var website: Website
-    let url: URL
+    private let url: URL
     private weak var bar: Bar!
     
     init(url: URL, website: Website) {
@@ -47,9 +47,7 @@ final class Main: NSWindow {
     }
     
     func render() {
-        website.pages.first.map {
-            try? Data($0.render.utf8).write(to: url.appendingPathComponent($0.id + ".html"))
-        }
+        website.render(url)
     }
     
     private func select(control: Control, view: NSView) {
