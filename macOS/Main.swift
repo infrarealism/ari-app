@@ -3,7 +3,7 @@ import Core
 
 final class Main: NSWindow {
     var website: Website
-    private let url: URL
+    let url: URL
     private weak var bar: Bar!
     
     init(url: URL, website: Website) {
@@ -23,6 +23,8 @@ final class Main: NSWindow {
         let bar = Bar()
         bar.edit.target = self
         bar.edit.action = #selector(edit)
+        bar.style.target = self
+        bar.style.action = #selector(style)
         bar.preview.target = self
         bar.preview.action = #selector(preview)
         bar.export.target = self
@@ -66,8 +68,7 @@ final class Main: NSWindow {
     
     @objc
     private func edit() {
-        let text = Text(page: website.pages.first!)
-        text.main = self
+        let text = Text(main: self)
         
         let scroll = NSScrollView()
         scroll.translatesAutoresizingMaskIntoConstraints = false
@@ -81,13 +82,18 @@ final class Main: NSWindow {
     }
     
     @objc
+    private func style() {
+        select(control: bar.style, view: Web(main: self))
+    }
+    
+    @objc
     private func preview() {
-        select(control: bar.preview, view: Web())
+        select(control: bar.preview, view: Web(main: self))
     }
     
     @objc
     private func export() {
-        select(control: bar.export, view: Web())
+        select(control: bar.export, view: Web(main: self))
     }
 }
 

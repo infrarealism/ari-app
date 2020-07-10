@@ -3,19 +3,18 @@ import Core
 import Combine
 
 final class Text: NSTextView {
-    weak var main: Main!
     override var acceptsFirstResponder: Bool { true }
     override var mouseDownCanMoveWindow: Bool { true }
     override var canBecomeKeyView: Bool { true }
     override var isSelectable: Bool { get { true } set { } }
     override func accessibilityValue() -> String? { string }
+    
+    private weak var main: Main!
     private var subs = Set<AnyCancellable>()
-    private var page: Page
     private let caret = CGFloat(4)
     
     required init?(coder: NSCoder) { nil }
-    init(page: Page) {
-        self.page = page
+    init(main: Main) {
         super.init(frame: .init(x: 0, y: 0, width: 0, height: 100_000), textContainer: Container())
         setAccessibilityElement(true)
         setAccessibilityRole(.textField)
@@ -31,15 +30,17 @@ final class Text: NSTextView {
         isHorizontallyResizable = true
         textContainerInset.width = 40
         textContainerInset.height = 40
-        string = page.content
+        string = main.website.pages.first!.content
+        self.main = main
         
         NotificationCenter.default.publisher(for: NSTextView.didChangeNotification, object: self)
             .debounce(for: .seconds(1), scheduler: DispatchQueue.main)
             .sink { [weak self] _ in
                 guard let self = self else { return }
-                self.page.content = self.string
-                self.main.website.pages = [self.page]
-                session.update(website: self.main.website)
+                var page = main.website.pages.first!
+                page.content = self.string
+                main.website.pages = [page]
+                session.update(website: main.website)
         }.store(in: &subs)
         
         NotificationCenter.default.publisher(for: NSTextView.didChangeNotification, object: self)

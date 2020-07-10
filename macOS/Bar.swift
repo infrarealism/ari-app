@@ -2,6 +2,7 @@ import AppKit
 
 final class Bar: NSVisualEffectView {
     private(set) weak var edit: Control!
+    private(set) weak var style: Control!
     private(set) weak var preview: Control!
     private(set) weak var export: Control!
     
@@ -17,6 +18,10 @@ final class Bar: NSVisualEffectView {
         addSubview(edit)
         self.edit = edit
         
+        let style = Item(icon: "paintbrush", title: .key("Style"))
+        addSubview(style)
+        self.style = style
+        
         let preview = Item(icon: "paperplane", title: .key("Preview"))
         addSubview(preview)
         self.preview = preview
@@ -25,9 +30,13 @@ final class Bar: NSVisualEffectView {
         addSubview(export)
         self.export = export
         
-        edit.bottomAnchor.constraint(equalTo: preview.topAnchor, constant: -20).isActive = true
+        edit.bottomAnchor.constraint(equalTo: style.topAnchor, constant: -20).isActive = true
         edit.leftAnchor.constraint(equalTo: export.leftAnchor).isActive = true
         edit.rightAnchor.constraint(equalTo: export.rightAnchor).isActive = true
+        
+        style.bottomAnchor.constraint(equalTo: preview.topAnchor, constant: -20).isActive = true
+        style.leftAnchor.constraint(equalTo: export.leftAnchor).isActive = true
+        style.rightAnchor.constraint(equalTo: export.rightAnchor).isActive = true
         
         preview.bottomAnchor.constraint(equalTo: export.topAnchor, constant: -20).isActive = true
         preview.leftAnchor.constraint(equalTo: export.leftAnchor).isActive = true

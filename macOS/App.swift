@@ -8,9 +8,6 @@ final class App: NSApplication, NSApplicationDelegate  {
     override init() {
         super.init()
         delegate = self
-        
-        print(NSColor.labelColor.color)
-        print(NSColor.controlBackgroundColor.color)
     }
     
     func applicationWillFinishLaunching(_: Notification) {
