@@ -27,6 +27,7 @@
 		CE9824B024B0AC4300AD14FF /* Separator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9824AF24B0AC4300AD14FF /* Separator.swift */; };
 		CEB1A74824B30D750094DEE1 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1A74724B30D750094DEE1 /* Text.swift */; };
 		CEE0FD1324B89186006B7CF6 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE0FD1224B89186006B7CF6 /* Color.swift */; };
+		CEE7334724B8A86E0093CBC3 /* Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE7334624B8A86E0093CBC3 /* Design.swift */; };
 		CEEDB19924ACB4A100969FD4 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDB19824ACB4A100969FD4 /* Session.swift */; };
 		CEEDB19B24ACBE0A00969FD4 /* Scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDB19A24ACBE0A00969FD4 /* Scroll.swift */; };
 /* End PBXBuildFile section */
@@ -56,6 +57,7 @@
 		CE9824AF24B0AC4300AD14FF /* Separator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Separator.swift; sourceTree = "<group>"; };
 		CEB1A74724B30D750094DEE1 /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
 		CEE0FD1224B89186006B7CF6 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		CEE7334624B8A86E0093CBC3 /* Design.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Design.swift; sourceTree = "<group>"; };
 		CEEDB19824ACB4A100969FD4 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		CEEDB19A24ACBE0A00969FD4 /* Scroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scroll.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -104,6 +106,7 @@
 				CE59C4D324A8C8190068C153 /* Button.swift */,
 				CE59C4D124A8C7FD0068C153 /* Control.swift */,
 				CE00286324AA10E700F45C8B /* Create.swift */,
+				CEE7334624B8A86E0093CBC3 /* Design.swift */,
 				CE59C4D524A8C82E0068C153 /* Label.swift */,
 				CE3EAF1524A7649B00D29C60 /* Launch.swift */,
 				CE59C4D924A8D6260068C153 /* Main.swift */,
@@ -217,6 +220,7 @@
 				CE59C4D824A8C87D0068C153 /* Font.swift in Sources */,
 				CE00286424AA10E700F45C8B /* Create.swift in Sources */,
 				CEEDB19924ACB4A100969FD4 /* Session.swift in Sources */,
+				CEE7334724B8A86E0093CBC3 /* Design.swift in Sources */,
 				CEB1A74824B30D750094DEE1 /* Text.swift in Sources */,
 				CE431B6424B1EAE6007B1C53 /* Bar.swift in Sources */,
 				CE58263824A76E090004726F /* String.swift in Sources */,

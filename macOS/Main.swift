@@ -83,7 +83,7 @@ final class Main: NSWindow {
     
     @objc
     private func style() {
-        select(control: bar.style, view: Web(main: self))
+        select(control: bar.style, view: Design(main: self))
     }
     
     @objc
