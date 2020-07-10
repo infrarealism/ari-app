@@ -26,6 +26,7 @@
 		CE87193424A9D15000D5BD55 /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE87193324A9D15000D5BD55 /* Bookmark.swift */; };
 		CE9824B024B0AC4300AD14FF /* Separator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9824AF24B0AC4300AD14FF /* Separator.swift */; };
 		CEB1A74824B30D750094DEE1 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1A74724B30D750094DEE1 /* Text.swift */; };
+		CEE0FD1324B89186006B7CF6 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE0FD1224B89186006B7CF6 /* Color.swift */; };
 		CEEDB19924ACB4A100969FD4 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDB19824ACB4A100969FD4 /* Session.swift */; };
 		CEEDB19B24ACBE0A00969FD4 /* Scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDB19A24ACBE0A00969FD4 /* Scroll.swift */; };
 /* End PBXBuildFile section */
@@ -54,6 +55,7 @@
 		CE87193324A9D15000D5BD55 /* Bookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
 		CE9824AF24B0AC4300AD14FF /* Separator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Separator.swift; sourceTree = "<group>"; };
 		CEB1A74724B30D750094DEE1 /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
+		CEE0FD1224B89186006B7CF6 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		CEEDB19824ACB4A100969FD4 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		CEEDB19A24ACBE0A00969FD4 /* Scroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scroll.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -118,6 +120,7 @@
 		CE58263624A76DFC0004726F /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				CEE0FD1224B89186006B7CF6 /* Color.swift */,
 				CE59C4D724A8C87D0068C153 /* Font.swift */,
 				CEEDB19824ACB4A100969FD4 /* Session.swift */,
 				CE58263724A76E090004726F /* String.swift */,
@@ -220,6 +223,7 @@
 				CE59C4D624A8C82E0068C153 /* Label.swift in Sources */,
 				CE3EAF1424A7649B00D29C60 /* App.swift in Sources */,
 				CEEDB19B24ACBE0A00969FD4 /* Scroll.swift in Sources */,
+				CEE0FD1324B89186006B7CF6 /* Color.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

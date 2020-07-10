@@ -1,8 +1,6 @@
 #if os(macOS)
 import AppKit
 
-typealias Font = NSFont
-
 extension NSFont {
     class func light(_ adding: CGFloat = 0) -> NSFont {
         .systemFont(ofSize: systemFontSize + adding, weight: .light)
@@ -28,8 +26,6 @@ extension NSFont {
 #endif
 #if os(iOS)
 import UIKit
-
-typealias Font = UIFont
 
 extension UIFont {
     class func light(_ adding: CGFloat = 0) -> UIFont {
