@@ -61,6 +61,11 @@ final class Text: NSTextView {
         rect.size.width += caret
         super.setNeedsDisplay(rect, avoidAdditionalLayout: avoidAdditionalLayout)
     }
+    
+    override func didChangeText() {
+        super.didChangeText()
+        layoutManager!.ensureLayout(for: textContainer!)
+    }
 }
 
 private final class Container: NSTextContainer {

@@ -38,7 +38,7 @@ final class Web: NSView {
         
         appareance.centerYAnchor.constraint(equalTo: bar.centerYAnchor, constant: -1).isActive = true
         appareance.rightAnchor.constraint(equalTo: rightAnchor, constant: -20).isActive = true
-        appareance.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        appareance.widthAnchor.constraint(equalToConstant: 260).isActive = true
         
         separator.topAnchor.constraint(equalTo: bar.bottomAnchor).isActive = true
         separator.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
