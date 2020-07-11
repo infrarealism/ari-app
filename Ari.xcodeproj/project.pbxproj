@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CE00286424AA10E700F45C8B /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00286324AA10E700F45C8B /* Create.swift */; };
+		CE20ADFC24B9C8AC00007F5F /* Segmented.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE20ADFB24B9C8AC00007F5F /* Segmented.swift */; };
 		CE3EAF1424A7649B00D29C60 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3EAF1324A7649B00D29C60 /* App.swift */; };
 		CE3EAF1624A7649B00D29C60 /* Launch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3EAF1524A7649B00D29C60 /* Launch.swift */; };
 		CE3EAF1824A7649C00D29C60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE3EAF1724A7649C00D29C60 /* Assets.xcassets */; };
@@ -34,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		CE00286324AA10E700F45C8B /* Create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Create.swift; sourceTree = "<group>"; };
+		CE20ADFB24B9C8AC00007F5F /* Segmented.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Segmented.swift; sourceTree = "<group>"; };
 		CE3EAF1024A7649B00D29C60 /* Ari.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ari.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE3EAF1324A7649B00D29C60 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		CE3EAF1524A7649B00D29C60 /* Launch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Launch.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				CE59C4D924A8D6260068C153 /* Main.swift */,
 				CE58263424A76DE80004726F /* Menu.swift */,
 				CEEDB19A24ACBE0A00969FD4 /* Scroll.swift */,
+				CE20ADFB24B9C8AC00007F5F /* Segmented.swift */,
 				CE9824AF24B0AC4300AD14FF /* Separator.swift */,
 				CEB1A74724B30D750094DEE1 /* Text.swift */,
 				CE7D5C9624B628550067D6C5 /* Web.swift */,
@@ -223,6 +226,7 @@
 				CEE7334724B8A86E0093CBC3 /* Design.swift in Sources */,
 				CEB1A74824B30D750094DEE1 /* Text.swift in Sources */,
 				CE431B6424B1EAE6007B1C53 /* Bar.swift in Sources */,
+				CE20ADFC24B9C8AC00007F5F /* Segmented.swift in Sources */,
 				CE58263824A76E090004726F /* String.swift in Sources */,
 				CE59C4D624A8C82E0068C153 /* Label.swift in Sources */,
 				CE3EAF1424A7649B00D29C60 /* App.swift in Sources */,
