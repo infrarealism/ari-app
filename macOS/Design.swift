@@ -41,11 +41,13 @@ final class Design: NSView {
         primary.color.sink {
             main.website.style.primary = $0
             session.update(website: main.website)
+            main.render()
         }.store(in: &subs)
         
         secondary.color.sink {
             main.website.style.secondary = $0
             session.update(website: main.website)
+            main.render()
         }.store(in: &subs)
     }
 }
@@ -94,7 +96,7 @@ private final class Tint: NSView {
         background.topAnchor.constraint(equalTo: description.bottomAnchor, constant: 15).isActive = true
         background.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         background.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-        background.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        background.heightAnchor.constraint(equalToConstant: 90).isActive = true
     }
     
     func select(color: Color) {
@@ -127,24 +129,40 @@ private final class Circle: Control {
     init(color: Color) {
         self.color = color
         super.init()
-        let tint = NSColor(srgbRed: .init(color.red), green: .init(color.green), blue: .init(color.blue), alpha: 1)
         wantsLayer = true
-        layer!.cornerRadius = 15
-        layer!.backgroundColor = tint.cgColor
-        layer!.borderColor = tint.cgColor
+        layer!.cornerRadius = 20
         
-        widthAnchor.constraint(equalToConstant: 30).isActive = true
-        heightAnchor.constraint(equalToConstant: 30).isActive = true
+        let inner = NSView()
+        inner.translatesAutoresizingMaskIntoConstraints = false
+        inner.wantsLayer = true
+        inner.layer!.backgroundColor = color.color
+        inner.layer!.cornerRadius = 12
+        addSubview(inner)
+        
+        widthAnchor.constraint(equalToConstant: 40).isActive = true
+        heightAnchor.constraint(equalToConstant: 40).isActive = true
+        
+        inner.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        inner.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        inner.widthAnchor.constraint(equalToConstant: 24).isActive = true
+        inner.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        
         hoverOff()
     }
     
     override func hoverOn() {
-        layer!.borderWidth = 10
+        layer!.backgroundColor = color.color
         alphaValue = 1
     }
     
     override func hoverOff() {
-        layer!.borderWidth = 0
-        alphaValue = 0.3
+        layer!.backgroundColor = .clear
+        alphaValue = 0.7
+    }
+}
+
+private extension Color {
+    var color: CGColor {
+        .init(srgbRed: .init(red), green: .init(green), blue: .init(blue), alpha: 1)
     }
 }
