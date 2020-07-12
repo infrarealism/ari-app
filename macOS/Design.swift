@@ -140,12 +140,12 @@ private final class Circle: Control {
         addSubview(inner)
         
         widthAnchor.constraint(equalToConstant: 40).isActive = true
-        heightAnchor.constraint(equalToConstant: 40).isActive = true
+        heightAnchor.constraint(equalTo: widthAnchor).isActive = true
         
         inner.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         inner.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         inner.widthAnchor.constraint(equalToConstant: 24).isActive = true
-        inner.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        inner.heightAnchor.constraint(equalTo: inner.widthAnchor).isActive = true
         
         hoverOff()
     }

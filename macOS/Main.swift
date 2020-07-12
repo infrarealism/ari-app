@@ -68,17 +68,9 @@ final class Main: NSWindow {
     
     @objc
     private func edit() {
-        let text = Text(main: self)
-        
-        let scroll = NSScrollView()
-        scroll.translatesAutoresizingMaskIntoConstraints = false
-        scroll.hasVerticalScroller = true
-        scroll.verticalScroller!.controlSize = .mini
-        scroll.drawsBackground = false
-        scroll.documentView = text
-        
-        select(control: bar.edit, view: scroll)
-        makeFirstResponder(text)
+        let edit = Edit(main: self)
+        select(control: bar.edit, view: edit)
+        makeFirstResponder(edit.text)
     }
     
     @objc

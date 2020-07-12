@@ -8,7 +8,6 @@ final class Text: NSTextView {
     override var canBecomeKeyView: Bool { true }
     override var isSelectable: Bool { get { true } set { } }
     override func accessibilityValue() -> String? { string }
-    
     private weak var main: Main!
     private var subs = Set<AnyCancellable>()
     private let caret = CGFloat(4)
@@ -28,8 +27,8 @@ final class Text: NSTextView {
         selectedTextAttributes = [.backgroundColor: NSColor.systemPink, .foregroundColor: NSColor.controlTextColor]
         isVerticallyResizable = true
         isHorizontallyResizable = true
-        textContainerInset.width = 40
-        textContainerInset.height = 40
+        textContainerInset.width = 60
+        textContainerInset.height = 80
         string = main.website.pages.first!.content
         self.main = main
         
@@ -74,7 +73,6 @@ private final class Container: NSTextContainer {
     required init(coder: NSCoder) { fatalError() }
     init() {
         super.init(size: .zero)
-        widthTracksTextView = true
         size.height = 100_000
         
         let layout = Layout()

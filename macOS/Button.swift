@@ -22,7 +22,7 @@ final class Button: Control {
         addSubview(icon)
         
         widthAnchor.constraint(equalToConstant: 40).isActive = true
-        heightAnchor.constraint(equalToConstant: 40).isActive = true
+        heightAnchor.constraint(equalTo: widthAnchor).isActive = true
         
         icon.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         icon.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true

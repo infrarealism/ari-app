@@ -17,9 +17,9 @@ final class Web: NSView {
         bar.material = .titlebar
         addSubview(bar)
         
-        let appareance = Segmented(items: [.key("Light"), .key("Dark")])
-        appareance.selected.value = effectiveAppearance == NSAppearance(named: .darkAqua) ? 1 : 0
-        bar.addSubview(appareance)
+        let appeareance = Segmented(items: [.key("Light"), .key("Dark")])
+        appeareance.selected.value = effectiveAppearance == NSAppearance(named: .darkAqua) ? 1 : 0
+        bar.addSubview(appeareance)
         
         let separator = NSView()
         separator.translatesAutoresizingMaskIntoConstraints = false
@@ -36,9 +36,9 @@ final class Web: NSView {
         bar.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         bar.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
-        appareance.centerYAnchor.constraint(equalTo: bar.centerYAnchor, constant: -1).isActive = true
-        appareance.rightAnchor.constraint(equalTo: rightAnchor, constant: -20).isActive = true
-        appareance.widthAnchor.constraint(equalToConstant: 260).isActive = true
+        appeareance.centerYAnchor.constraint(equalTo: bar.centerYAnchor, constant: -1).isActive = true
+        appeareance.rightAnchor.constraint(equalTo: rightAnchor, constant: -20).isActive = true
+        appeareance.widthAnchor.constraint(equalToConstant: 280).isActive = true
         
         separator.topAnchor.constraint(equalTo: bar.bottomAnchor).isActive = true
         separator.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
@@ -52,7 +52,7 @@ final class Web: NSView {
         
         web.load(.init(url: main.url.appendingPathComponent("index.html")))
         
-        appareance.selected.sink {
+        appeareance.selected.sink {
             web.appearance = $0 == 0 ? NSAppearance(named: .aqua) : NSAppearance(named: .darkAqua)
         }.store(in: &subs)
     }
