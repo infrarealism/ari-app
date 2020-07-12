@@ -5,7 +5,7 @@ import Core
 extension NSColor {
     var color: Color {
         {
-            .init(red: $0.redComponent, green: $0.greenComponent, blue: $0.blueComponent)
+            .init(red: .init($0.redComponent), green: .init($0.greenComponent), blue: .init($0.blueComponent))
         } (usingColorSpace(.sRGB)!)
     }
 }

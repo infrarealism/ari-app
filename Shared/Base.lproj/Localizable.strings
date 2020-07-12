@@ -12,6 +12,10 @@ Edit = "Edit";
 Style = "Style";
 Export = "Export";
 Preview = "Preview";
+Primary.title = "Primary";
+Primary.description = "Titles and headings";
+Secondary.title = "Secondary";
+Secondary.description = "Links and buttons";
 
 App = "App";
 Open = "Open";
