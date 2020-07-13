@@ -16,6 +16,9 @@ Primary.title = "Primary";
 Primary.description = "Titles and headings";
 Secondary.title = "Secondary";
 Secondary.description = "Links and buttons";
+Link.header = "Add link";
+Link.title = "Title (optional)";
+Link.url = "URL";
 
 App = "App";
 Open = "Open";

@@ -4,7 +4,7 @@ import Core
 final class Create: NSWindow {
     private weak var offset: NSLayoutConstraint!
     private weak var progress: NSLayoutConstraint!
-    private weak var name: NSTextField!
+    private weak var name: Field!
     private weak var singleSegment: Segment!
     private weak var blogSegment: Segment!
     private weak var selectedFolder: Label!
@@ -71,13 +71,7 @@ final class Create: NSWindow {
         let enterName = Label(.key("Enter.name"), .medium())
         first.addSubview(enterName)
         
-        let name = NSTextField()
-        name.translatesAutoresizingMaskIntoConstraints = false
-        name.refusesFirstResponder = true
-        name.drawsBackground = false
-        name.bezelStyle = .roundedBezel
-        name.font = .medium()
-        name.maximumNumberOfLines = 1
+        let name = Field()
         name.placeholderString = .key("Website.name")
         first.addSubview(name)
         self.name = name
