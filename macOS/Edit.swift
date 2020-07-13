@@ -21,6 +21,8 @@ final class Edit: NSView {
         self.text = text
         
         let link = Button(icon: "link.circle", color: .controlTextColor)
+        link.target = self
+        link.action = #selector(self.link)
         link.wantsLayer = true
         link.layer!.backgroundColor = NSColor.systemBlue.cgColor
         link.layer!.cornerRadius = 20
@@ -48,5 +50,12 @@ final class Edit: NSView {
         didSet {
             text.textContainer!.size.width = bounds.width - (text.textContainerInset.width * 2)
         }
+    }
+    
+    @objc
+    private func link(_ button: Button) {
+        let link = Link()
+        link.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
+        link.contentViewController!.view.window!.makeKey()
     }
 }
