@@ -11,19 +11,19 @@ final class Text: NSTextView {
     private weak var main: Main!
     private var subs = Set<AnyCancellable>()
     private let caret = CGFloat(4)
-    
+
     required init?(coder: NSCoder) { nil }
     init(main: Main) {
         super.init(frame: .init(x: 0, y: 0, width: 0, height: 100_000), textContainer: Container())
         setAccessibilityElement(true)
-        setAccessibilityRole(.textField)
+        setAccessibilityRole(.textArea)
         allowsUndo = true
         isRichText = false
         drawsBackground = false
         isContinuousSpellCheckingEnabled = false
         isAutomaticTextCompletionEnabled = false
         insertionPointColor = .systemBlue
-//        font = .monospacedSystemFont(ofSize: NSFont.systemFontSize + 5, weight: .medium)
+        font = .monospacedSystemFont(ofSize: NSFont.systemFontSize + 5, weight: .medium)
         selectedTextAttributes = [.backgroundColor: NSColor.systemPink, .foregroundColor: NSColor.controlTextColor]
         isVerticallyResizable = true
         isHorizontallyResizable = true
@@ -47,6 +47,10 @@ final class Text: NSTextView {
             .sink { [weak self] _ in
                 self?.main.render()
         }.store(in: &subs)
+    }
+    
+    func close() {
+        subs.forEach { $0.cancel() }
     }
     
     override final func drawInsertionPoint(in rect: NSRect, color: NSColor, turnedOn: Bool) {

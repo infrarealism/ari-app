@@ -4,6 +4,10 @@ import Combine
 final class Edit: NSView {
     private(set) weak var text: Text!
 
+    deinit {
+        text.close()
+    }
+    
     required init?(coder: NSCoder) { nil }
     init(main: Main) {
         super.init(frame: .zero)

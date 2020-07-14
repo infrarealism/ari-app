@@ -65,7 +65,7 @@ final class Link: Pop {
     
     @objc
     private func add() {
-        send("hello world")
+        send("[\(titleField.stringValue)](\(urlField.stringValue))")
     }
 }
 
@@ -78,6 +78,6 @@ final class Link: Pop {
  Links
 
  http://github.com - automatic!
- [GitHub](http://github.com)
+ 
 
  */
