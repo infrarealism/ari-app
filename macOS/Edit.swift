@@ -57,9 +57,8 @@ final class Edit: NSView {
     private func link(_ button: Button) {
         let link = Link()
         link.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
-//        link.contentViewController!.view.window!.makeKey()
         link.subscription = link.sink { [weak self] in
-            self?.text.insertText($0, replacementRange: .init())
+            self?.text.insertText($0, replacementRange: self?.text.selectedRange() ?? .init())
         }
     }
 }

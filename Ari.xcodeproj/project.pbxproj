@@ -29,6 +29,7 @@
 		CE9E4E2D24BC4BEE00F3097C /* Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E4E2C24BC4BEE00F3097C /* Link.swift */; };
 		CEB1A74824B30D750094DEE1 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1A74724B30D750094DEE1 /* Text.swift */; };
 		CEB2AE0024BCB1EE000ED8FD /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2ADFF24BCB1EE000ED8FD /* Field.swift */; };
+		CEC93C1924BE1BDA00BC86E3 /* Pop.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC93C1824BE1BDA00BC86E3 /* Pop.swift */; };
 		CEE0FD1324B89186006B7CF6 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE0FD1224B89186006B7CF6 /* Color.swift */; };
 		CEE7334724B8A86E0093CBC3 /* Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE7334624B8A86E0093CBC3 /* Design.swift */; };
 		CEEDB19924ACB4A100969FD4 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDB19824ACB4A100969FD4 /* Session.swift */; };
@@ -63,6 +64,7 @@
 		CE9E4E2C24BC4BEE00F3097C /* Link.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Link.swift; sourceTree = "<group>"; };
 		CEB1A74724B30D750094DEE1 /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
 		CEB2ADFF24BCB1EE000ED8FD /* Field.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
+		CEC93C1824BE1BDA00BC86E3 /* Pop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pop.swift; sourceTree = "<group>"; };
 		CEE0FD1224B89186006B7CF6 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		CEE7334624B8A86E0093CBC3 /* Design.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Design.swift; sourceTree = "<group>"; };
 		CEEDB19824ACB4A100969FD4 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
@@ -116,15 +118,16 @@
 				CE00286324AA10E700F45C8B /* Create.swift */,
 				CEE7334624B8A86E0093CBC3 /* Design.swift */,
 				CEFF302224BB4EFB0034C8A4 /* Edit.swift */,
+				CEB2ADFF24BCB1EE000ED8FD /* Field.swift */,
 				CE59C4D524A8C82E0068C153 /* Label.swift */,
 				CE3EAF1524A7649B00D29C60 /* Launch.swift */,
 				CE9E4E2C24BC4BEE00F3097C /* Link.swift */,
 				CE59C4D924A8D6260068C153 /* Main.swift */,
 				CE58263424A76DE80004726F /* Menu.swift */,
+				CEC93C1824BE1BDA00BC86E3 /* Pop.swift */,
 				CEEDB19A24ACBE0A00969FD4 /* Scroll.swift */,
 				CE20ADFB24B9C8AC00007F5F /* Segmented.swift */,
 				CE9824AF24B0AC4300AD14FF /* Separator.swift */,
-				CEB2ADFF24BCB1EE000ED8FD /* Field.swift */,
 				CEB1A74724B30D750094DEE1 /* Text.swift */,
 				CE7D5C9624B628550067D6C5 /* Web.swift */,
 				CE3EAF1724A7649C00D29C60 /* Assets.xcassets */,
@@ -224,6 +227,7 @@
 				CE59C4DA24A8D6260068C153 /* Main.swift in Sources */,
 				CE58263524A76DE80004726F /* Menu.swift in Sources */,
 				CE59C4D424A8C8190068C153 /* Button.swift in Sources */,
+				CEC93C1924BE1BDA00BC86E3 /* Pop.swift in Sources */,
 				CE9824B024B0AC4300AD14FF /* Separator.swift in Sources */,
 				CE3EAF1624A7649B00D29C60 /* Launch.swift in Sources */,
 				CE59C4D224A8C7FD0068C153 /* Control.swift in Sources */,
