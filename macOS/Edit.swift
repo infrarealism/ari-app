@@ -58,8 +58,8 @@ final class Edit: NSView {
         let link = Link()
         link.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
 //        link.contentViewController!.view.window!.makeKey()
-        link.subscription = link.sink {
-            print("received: \($0)")
+        link.subscription = link.sink { [weak self] in
+            self?.text.insertText($0, replacementRange: .init())
         }
     }
 }

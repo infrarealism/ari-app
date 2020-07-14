@@ -4,7 +4,7 @@ final class Menu: NSMenu {
     required init(coder: NSCoder) { super.init(coder: coder) }
     init() {
         super.init(title: "")
-        items = [app, window, help]
+        items = [app, edit, window, help]
     }
 
     private var app: NSMenuItem {
@@ -21,6 +21,31 @@ final class Menu: NSMenu {
         .init(title: .key("Show.all"), action: #selector(NSApplication.unhideAllApplications), keyEquivalent: ""),
         .separator(),
         .init(title: .key("Quit"), action: #selector(NSApplication.terminate), keyEquivalent: "q")])
+    }
+    
+    private var edit: NSMenuItem {
+        menu(.key("Edit"), items: [
+        { $0.keyEquivalentModifierMask = [.option, .command]
+            $0.keyEquivalentModifierMask = [.command]
+            return $0
+        } (NSMenuItem(title: .key("Undo"), action: Selector(("undo:")), keyEquivalent: "z")),
+        { $0.keyEquivalentModifierMask = [.command, .shift]
+            return $0
+        } (NSMenuItem(title: .key("Redo"), action: Selector(("redo:")), keyEquivalent: "z")),
+        .separator(),
+        { $0.keyEquivalentModifierMask = [.command]
+            return $0
+        } (NSMenuItem(title: .key("Cut"), action: #selector(NSText.cut), keyEquivalent: "x")),
+        { $0.keyEquivalentModifierMask = [.command]
+            return $0
+        } (NSMenuItem(title: .key("Copy"), action: #selector(NSText.copy(_:)), keyEquivalent: "c")),
+        { $0.keyEquivalentModifierMask = [.command]
+            return $0
+        } (NSMenuItem(title: .key("Paste"), action: #selector(NSText.paste), keyEquivalent: "v")),
+        .init(title: .key("Delete"), action: #selector(NSText.delete), keyEquivalent: ""),
+        { $0.keyEquivalentModifierMask = [.command]
+            return $0
+        } (NSMenuItem(title: .key("Select.all"), action: #selector(NSText.selectAll), keyEquivalent: "a"))])
     }
     
     private var window: NSMenuItem {
