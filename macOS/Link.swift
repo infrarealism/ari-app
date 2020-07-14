@@ -1,15 +1,24 @@
 import AppKit
+import Combine
 
-final class Link: NSPopover {
+final class Link: NSPopover, Publisher, Subscription {
+    typealias Output = String
+    typealias Failure = Never
+    var subscription: AnyCancellable?
     private weak var titleField: Field!
     private weak var urlField: Field!
+    private var subscriber: AnySubscriber<Output, Failure>?
+    
+    deinit {
+        print("pop gone")
+    }
     
     required init?(coder: NSCoder) { nil }
     override init() {
+        
         super.init()
         contentSize = .init(width: 260, height: 340)
         behavior = .transient
-        
         let view = NSView()
         
         let header = Label(.key("Link.header"), .bold(4))
@@ -28,6 +37,7 @@ final class Link: NSPopover {
         view.addSubview(url)
         
         let urlField = Field()
+        urlField.placeholderString = .key("Link.placeholder")
         view.addSubview(urlField)
         self.urlField = urlField
         
@@ -68,9 +78,28 @@ final class Link: NSPopover {
         contentViewController!.view = view
     }
     
+    func receive<S>(subscriber: S) where S : Subscriber, Failure == S.Failure, Output == S.Input {
+        self.subscriber = .init(subscriber)
+        subscriber.receive(subscription: self)
+    }
+    
+    func request(_: Subscribers.Demand) {
+        
+    }
+    
+    func cancel() {
+        subscriber = nil
+    }
+    
     @objc
     private func add() {
-        
+        _ = subscriber?.receive("hello world")
+        close()
+    }
+    
+    override func close() {
+        contentViewController = nil
+        super.close()
     }
 }
 

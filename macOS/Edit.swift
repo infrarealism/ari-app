@@ -1,7 +1,12 @@
 import AppKit
+import Combine
 
 final class Edit: NSView {
     private(set) weak var text: Text!
+
+    deinit {
+        print("edit gone")
+    }
     
     required init?(coder: NSCoder) { nil }
     init(main: Main) {
@@ -56,6 +61,9 @@ final class Edit: NSView {
     private func link(_ button: Button) {
         let link = Link()
         link.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
-        link.contentViewController!.view.window!.makeKey()
+//        link.contentViewController!.view.window!.makeKey()
+//        link.sink {
+//            print("received: \($0)")
+//        }
     }
 }

@@ -19,6 +19,7 @@ Secondary.description = "Links and buttons";
 Link.header = "Add link";
 Link.title = "Title (optional)";
 Link.url = "URL";
+Link.placeholder = "https://";
 
 App = "App";
 Open = "Open";

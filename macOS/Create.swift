@@ -28,7 +28,7 @@ final class Create: NSWindow {
         toolbar = .init()
         toolbar!.showsBaselineSeparator = false
         collectionBehavior = .fullScreenNone
-        isReleasedWhenClosed = false
+        isReleasedWhenClosed = true
         center()
         
         let effect = NSVisualEffectView()
@@ -234,8 +234,8 @@ final class Create: NSWindow {
     }
     
     override func close() {
-        super.close()
         NSApp.closeOther()
+        super.close()
     }
     
     @objc

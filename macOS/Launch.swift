@@ -4,6 +4,10 @@ import Combine
 final class Launch: NSWindow {
     private var subs = Set<AnyCancellable>()
     
+    deinit {
+        print("launch gone")
+    }
+    
     init() {
         super.init(contentRect: .init(x: 0, y: 0, width: 500, height: 400), styleMask:
             [.borderless, .closable, .titled, .unifiedTitleAndToolbar, .fullSizeContentView],

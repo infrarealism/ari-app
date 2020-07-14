@@ -18,7 +18,7 @@ final class Main: NSWindow {
         toolbar = .init()
         toolbar!.showsBaselineSeparator = false
         collectionBehavior = .fullScreenNone
-        isReleasedWhenClosed = false
+        isReleasedWhenClosed = true
 
         let bar = Bar()
         bar.edit.target = self
