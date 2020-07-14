@@ -4,10 +4,6 @@ import Combine
 final class Launch: NSWindow {
     private var subs = Set<AnyCancellable>()
     
-    deinit {
-        print("launch gone")
-    }
-    
     init() {
         super.init(contentRect: .init(x: 0, y: 0, width: 500, height: 400), styleMask:
             [.borderless, .closable, .titled, .unifiedTitleAndToolbar, .fullSizeContentView],
@@ -115,21 +111,21 @@ final class Launch: NSWindow {
     }
     
     override func close() {
-        super.close()
         NSApp.closeLaunch()
+        super.close()
     }
     
     @objc
     private func new() {
-        Create().makeKeyAndOrderFront(nil)
+        (NSApp.windows.first { $0 is Create } ?? Create()).makeKeyAndOrderFront(nil)
         close()
     }
     
     @objc
     private func select(item: Item) {
         item.bookmark.access.map { url in
-            session.website(item.bookmark).sink { [weak self] in
-                Main(url: url,  website: $0).makeKeyAndOrderFront(nil)
+            session.website(item.bookmark).sink { [weak self] website in
+                (NSApp.windows.compactMap { $0 as? Main }.first { $0.website.id == website.id } ?? Main(url: url,  website: website)).makeKeyAndOrderFront(nil)
                 self?.close()
             }.store(in: &subs)
         }

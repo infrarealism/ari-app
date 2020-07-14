@@ -4,10 +4,6 @@ import Combine
 final class Edit: NSView {
     private(set) weak var text: Text!
 
-    deinit {
-        print("edit gone")
-    }
-    
     required init?(coder: NSCoder) { nil }
     init(main: Main) {
         super.init(frame: .zero)
@@ -62,8 +58,8 @@ final class Edit: NSView {
         let link = Link()
         link.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
 //        link.contentViewController!.view.window!.makeKey()
-//        link.sink {
-//            print("received: \($0)")
-//        }
+        link.subscription = link.sink {
+            print("received: \($0)")
+        }
     }
 }

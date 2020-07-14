@@ -1,7 +1,7 @@
 import AppKit
 import Combine
 
-final class Link: NSPopover, Publisher, Subscription {
+final class Link: NSPopover, Publisher, Subscription, NSPopoverDelegate {
     typealias Output = String
     typealias Failure = Never
     var subscription: AnyCancellable?
@@ -9,13 +9,8 @@ final class Link: NSPopover, Publisher, Subscription {
     private weak var urlField: Field!
     private var subscriber: AnySubscriber<Output, Failure>?
     
-    deinit {
-        print("pop gone")
-    }
-    
     required init?(coder: NSCoder) { nil }
     override init() {
-        
         super.init()
         contentSize = .init(width: 260, height: 340)
         behavior = .transient
@@ -78,6 +73,10 @@ final class Link: NSPopover, Publisher, Subscription {
         contentViewController!.view = view
     }
     
+    func popoverDidClose(_: Notification) {
+        subscription?.cancel()
+    }
+    
     func receive<S>(subscriber: S) where S : Subscriber, Failure == S.Failure, Output == S.Input {
         self.subscriber = .init(subscriber)
         subscriber.receive(subscription: self)
@@ -95,11 +94,6 @@ final class Link: NSPopover, Publisher, Subscription {
     private func add() {
         _ = subscriber?.receive("hello world")
         close()
-    }
-    
-    override func close() {
-        contentViewController = nil
-        super.close()
     }
 }
 

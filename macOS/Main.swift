@@ -43,9 +43,9 @@ final class Main: NSWindow {
     }
     
     override func close() {
-        super.close()
         url.stopAccessingSecurityScopedResource()
         NSApp.closeOther()
+        super.close()
     }
     
     func render() {

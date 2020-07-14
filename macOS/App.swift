@@ -19,7 +19,7 @@ final class App: NSApplication, NSApplicationDelegate  {
 extension NSApplication {
     func closeLaunch() {
         guard windows.count < 1 else { return }
-//        terminate(nil)
+        terminate(nil)
     }
     
     func closeOther() {

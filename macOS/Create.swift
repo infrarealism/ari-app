@@ -28,7 +28,7 @@ final class Create: NSWindow {
         toolbar = .init()
         toolbar!.showsBaselineSeparator = false
         collectionBehavior = .fullScreenNone
-        isReleasedWhenClosed = true
+        isReleasedWhenClosed = false
         center()
         
         let effect = NSVisualEffectView()

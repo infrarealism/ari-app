@@ -16,6 +16,7 @@ class Control: NSView {
     }
     
     override func resetCursorRects() {
+        super.resetCursorRects()
         addCursorRect(bounds, cursor: .pointingHand)
     }
     
