@@ -43,7 +43,7 @@ final class Design: NSView {
             session.update(website: main.website)
             main.render()
         }.store(in: &subs)
-        
+
         secondary.color.sink {
             main.website.style.secondary = $0
             session.update(website: main.website)

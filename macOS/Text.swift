@@ -1,15 +1,12 @@
 import AppKit
 import Core
-import Combine
 
 final class Text: NSTextView {
-    override var acceptsFirstResponder: Bool { true }
     override var mouseDownCanMoveWindow: Bool { true }
     override var canBecomeKeyView: Bool { true }
     override var isSelectable: Bool { get { true } set { } }
     override func accessibilityValue() -> String? { string }
     private weak var main: Main!
-    private var subs = Set<AnyCancellable>()
     private let caret = CGFloat(4)
 
     required init?(coder: NSCoder) { nil }
@@ -31,26 +28,6 @@ final class Text: NSTextView {
         textContainerInset.height = 80
         string = main.website.pages.first!.content
         self.main = main
-        
-        NotificationCenter.default.publisher(for: NSTextView.didChangeNotification, object: self)
-            .debounce(for: .seconds(1), scheduler: DispatchQueue.main)
-            .sink { [weak self] _ in
-                guard let self = self else { return }
-                var page = main.website.pages.first!
-                page.content = self.string
-                main.website.pages = [page]
-                session.update(website: main.website)
-        }.store(in: &subs)
-        
-        NotificationCenter.default.publisher(for: NSTextView.didChangeNotification, object: self)
-            .debounce(for: .seconds(1.1), scheduler: DispatchQueue.global(qos: .utility))
-            .sink { [weak self] _ in
-                self?.main.render()
-        }.store(in: &subs)
-    }
-    
-    func close() {
-        subs.forEach { $0.cancel() }
     }
     
     override final func drawInsertionPoint(in rect: NSRect, color: NSColor, turnedOn: Bool) {

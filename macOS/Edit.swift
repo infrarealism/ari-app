@@ -3,10 +3,7 @@ import Combine
 
 final class Edit: NSView {
     private(set) weak var text: Text!
-
-    deinit {
-        text.close()
-    }
+    private var subs = Set<AnyCancellable>()
     
     required init?(coder: NSCoder) { nil }
     init(main: Main) {
@@ -51,6 +48,21 @@ final class Edit: NSView {
         
         link.topAnchor.constraint(equalTo: image.topAnchor).isActive = true
         link.rightAnchor.constraint(equalTo: image.leftAnchor, constant: -20).isActive = true
+        
+        NotificationCenter.default.publisher(for: NSTextView.didChangeNotification, object: text)
+            .debounce(for: .seconds(1), scheduler: DispatchQueue.main)
+            .sink { _ in
+                var page = main.website.pages.first!
+                page.content = text.string
+                main.website.pages = [page]
+                session.update(website: main.website)
+        }.store(in: &subs)
+        
+        NotificationCenter.default.publisher(for: NSTextView.didChangeNotification, object: text)
+            .debounce(for: .seconds(1.1), scheduler: DispatchQueue.global(qos: .utility))
+            .sink { _ in
+                main.render()
+        }.store(in: &subs)
     }
     
     override var frame: NSRect {

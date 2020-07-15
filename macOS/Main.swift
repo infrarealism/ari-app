@@ -18,7 +18,7 @@ final class Main: NSWindow {
         toolbar = .init()
         toolbar!.showsBaselineSeparator = false
         collectionBehavior = .fullScreenNone
-        isReleasedWhenClosed = true
+        isReleasedWhenClosed = false
 
         let bar = Bar()
         bar.edit.target = self
@@ -43,6 +43,7 @@ final class Main: NSWindow {
     }
     
     override func close() {
+        contentView = nil
         url.stopAccessingSecurityScopedResource()
         NSApp.closeOther()
         super.close()
@@ -57,7 +58,6 @@ final class Main: NSWindow {
         contentView!.subviews.filter { !($0 is Bar) }.forEach {
             $0.removeFromSuperview()
         }
-        
         contentView!.addSubview(view)
         
         view.topAnchor.constraint(equalTo: contentView!.topAnchor, constant: 1).isActive = true
