@@ -5,7 +5,6 @@ final class Field: NSTextField {
     init() {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
-        refusesFirstResponder = true
         drawsBackground = false
         bezelStyle = .roundedBezel
         font = .medium()

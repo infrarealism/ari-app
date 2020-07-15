@@ -31,7 +31,7 @@ final class Link: Pop {
         
         let add = Button(text: .key("Add"), background: .systemBlue, foreground: .controlTextColor)
         add.target = self
-        add.action = #selector(self.add)
+        add.action = #selector(submit)
         contentViewController!.view.addSubview(add)
         
         let cancel = Button(text: .key("Cancel"), background: .clear, foreground: .secondaryLabelColor)
@@ -64,7 +64,7 @@ final class Link: Pop {
     }
     
     @objc
-    private func add() {
+    private func submit() {
         send("[\(titleField.stringValue)](\(urlField.stringValue))")
     }
 }
