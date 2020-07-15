@@ -34,6 +34,8 @@ final class Edit: NSView {
         addSubview(link)
 
         let image = Button(icon: "photo", color: .controlTextColor)
+        image.target = self
+        image.action = #selector(self.image)
         image.wantsLayer = true
         image.layer!.backgroundColor = NSColor.systemBlue.cgColor
         image.layer!.cornerRadius = 20
@@ -63,6 +65,16 @@ final class Edit: NSView {
         link.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
         link.contentViewController!.view.window!.makeKey()
         link.subscription = link.sink { [weak self] in
+            self?.text.insertText($0, replacementRange: self?.text.selectedRange() ?? .init())
+        }
+    }
+    
+    @objc
+    private func image(_ button: Button) {
+        let image = Image()
+        image.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
+        image.contentViewController!.view.window!.makeKey()
+        image.subscription = image.sink { [weak self] in
             self?.text.insertText($0, replacementRange: self?.text.selectedRange() ?? .init())
         }
     }
