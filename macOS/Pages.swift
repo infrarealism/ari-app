@@ -28,7 +28,7 @@ final class Pages: NSView {
         page.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         page.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         
-        if let previous = subviews.last {
+        if let previous = subviews.filter({ $0 != page }).last {
             page.leftAnchor.constraint(equalTo: previous.rightAnchor).isActive = true
         } else {
             center(page)

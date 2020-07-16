@@ -4,17 +4,17 @@ import Core
 final class Create: NSWindow {
     private weak var progress: NSLayoutConstraint!
     private weak var name: Field!
-    private weak var singleSegment: Segment!
-    private weak var blogSegment: Segment!
-    private weak var selectedFolder: Label!
-    private weak var thirdNext: Button!
+    private weak var next: Button!
+    private weak var _single: Segment!
+    private weak var _blog: Segment!
+    private weak var _folder: Label!
     
     private var bookmark: Bookmark? {
         didSet {
             guard bookmark != nil else { return }
-            thirdNext.enabled = true
-            selectedFolder.textColor = .labelColor
-            selectedFolder.stringValue = bookmark!.location
+            next.enabled = true
+            _folder.textColor = .labelColor
+            _folder.stringValue = bookmark!.location
         }
     }
     
@@ -35,15 +35,15 @@ final class Create: NSWindow {
         effect.material = .hudWindow
         contentView = effect
         
-        let title = Label(title, .bold(6))
-        addSubview(title)
+        let title = Label(.key("New.website"), .bold(6))
+        effect.addSubview(title)
         
         let progress = NSView()
         progress.translatesAutoresizingMaskIntoConstraints = false
         progress.wantsLayer = true
         progress.layer!.backgroundColor = .init(gray: 0, alpha: 0.2)
         progress.layer!.cornerRadius = 3
-        addSubview(progress)
+        effect.addSubview(progress)
         
         let bar = NSView()
         bar.translatesAutoresizingMaskIntoConstraints = false
@@ -51,9 +51,147 @@ final class Create: NSWindow {
         bar.layer!.backgroundColor = NSColor.systemBlue.cgColor
         progress.addSubview(bar)
         
+        let pages = Pages()
+        effect.addSubview(pages)
         
+        pages.page {
+            let title = Label(.key("Enter.name"), .medium())
+            $0.addSubview(title)
+            
+            let name = Field()
+            name.placeholderString = .key("Website.name")
+            $0.addSubview(name)
+            self.name = name
+            
+            let next = Button(icon: "arrow.right.circle.fill", color: .systemBlue)
+            next.target = pages
+            next.action = #selector(pages.next)
+            $0.addSubview(next)
+            
+            title.topAnchor.constraint(equalTo: $0.topAnchor, constant: 100).isActive = true
+            title.leftAnchor.constraint(equalTo: $0.leftAnchor, constant: 20).isActive = true
+            
+            name.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 20).isActive = true
+            name.leftAnchor.constraint(equalTo: title.leftAnchor).isActive = true
+            name.widthAnchor.constraint(equalToConstant: 200).isActive = true
+            
+            next.centerXAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
+            next.bottomAnchor.constraint(equalTo: $0.bottomAnchor, constant: -30).isActive = true
+        }
         
-        title.topAnchor.constraint(equalTo: topAnchor, constant: 50).isActive = true
+        pages.page {
+            let type = Label(.key("Enter.type"), .medium())
+            $0.addSubview(type)
+            
+            let _single = Segment(icon: "dot.square.fill", title: .key("Single"))
+            _single.selected = true
+            _single.target = self
+            _single.action = #selector(single)
+            $0.addSubview(_single)
+            self._single = _single
+            
+            let _blog = Segment(icon: "square.stack.3d.up.fill", title: .key("Blog"))
+            _blog.target = self
+            _blog.action = #selector(blog)
+            $0.addSubview(_blog)
+            self._blog = _blog
+            
+            let next = Button(icon: "arrow.right.circle.fill", color: .systemBlue)
+            next.target = pages
+            next.action = #selector(pages.next)
+            $0.addSubview(next)
+            
+            let previous = Button(icon: "arrow.left.circle.fill", color: .systemBlue)
+            previous.target = pages
+            previous.action = #selector(pages.previous)
+            $0.addSubview(previous)
+            
+            type.topAnchor.constraint(equalTo: $0.topAnchor, constant: 100).isActive = true
+            type.leftAnchor.constraint(equalTo: $0.leftAnchor, constant: 20).isActive = true
+            
+            _single.centerYAnchor.constraint(equalTo: $0.centerYAnchor, constant: 10).isActive = true
+            _single.rightAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
+            
+            _blog.centerYAnchor.constraint(equalTo: _single.centerYAnchor).isActive = true
+            _blog.leftAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
+            
+            next.leftAnchor.constraint(equalTo: $0.centerXAnchor, constant: 20).isActive = true
+            next.bottomAnchor.constraint(equalTo: $0.bottomAnchor, constant: -30).isActive = true
+            
+            previous.rightAnchor.constraint(equalTo: $0.centerXAnchor, constant: -20).isActive = true
+            previous.bottomAnchor.constraint(equalTo: $0.bottomAnchor, constant: -30).isActive = true
+        }
+        
+        pages.page {
+            let location = Label(.key("Enter.location"), .medium())
+            $0.addSubview(location)
+            
+            let button = Button(text: .key("Select.folder"), background: .systemPink, foreground: .selectedTextColor)
+            button.target = self
+            button.action = #selector(folder)
+            $0.addSubview(button)
+            
+            let _folder = Label(.key("None.selected"), .medium())
+            _folder.textColor = .secondaryLabelColor
+            _folder.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+            $0.addSubview(_folder)
+            self._folder = _folder
+            
+            let next = Button(icon: "arrow.right.circle.fill", color: .systemBlue)
+            next.target = pages
+            next.action = #selector(pages.next)
+            next.enabled = false
+            $0.addSubview(next)
+            self.next = next
+            
+            let previous = Button(icon: "arrow.left.circle.fill", color: .systemBlue)
+            previous.target = pages
+            previous.action = #selector(pages.previous)
+            $0.addSubview(previous)
+            
+            location.topAnchor.constraint(equalTo: $0.topAnchor, constant: 100).isActive = true
+            location.leftAnchor.constraint(equalTo: $0.leftAnchor, constant: 20).isActive = true
+            
+            _folder.centerXAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
+            _folder.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -15).isActive = true
+            _folder.leftAnchor.constraint(greaterThanOrEqualTo: $0.leftAnchor, constant: 20).isActive = true
+            _folder.rightAnchor.constraint(lessThanOrEqualTo: $0.rightAnchor, constant: -20).isActive = true
+            
+            button.centerXAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
+            button.centerYAnchor.constraint(equalTo: $0.centerYAnchor, constant: 40).isActive = true
+            
+            next.leftAnchor.constraint(equalTo: $0.centerXAnchor, constant: 20).isActive = true
+            next.bottomAnchor.constraint(equalTo: $0.bottomAnchor, constant: -30).isActive = true
+            
+            previous.rightAnchor.constraint(equalTo: $0.centerXAnchor, constant: -20).isActive = true
+            previous.bottomAnchor.constraint(equalTo: $0.bottomAnchor, constant: -30).isActive = true
+        }
+        
+        pages.page {
+            let ready = Label(.key("Website.ready"), .medium())
+            $0.addSubview(ready)
+            
+            let previous = Button(icon: "arrow.left.circle.fill", color: .systemBlue)
+            previous.target = pages
+            previous.action = #selector(pages.previous)
+            $0.addSubview(previous)
+            
+            let finish = Button(text: .key("Finish"), background: .systemPink, foreground: .selectedTextColor)
+            finish.target = self
+            finish.action = #selector(self.finish)
+            $0.addSubview(finish)
+            
+            ready.topAnchor.constraint(equalTo: $0.topAnchor, constant: 100).isActive = true
+            ready.leftAnchor.constraint(equalTo: $0.leftAnchor, constant: 20).isActive = true
+            
+            finish.centerXAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
+            finish.centerYAnchor.constraint(equalTo: $0.centerYAnchor, constant: 40).isActive = true
+            
+            previous.centerXAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
+            previous.bottomAnchor.constraint(equalTo: $0.bottomAnchor, constant: -30).isActive = true
+        }
+        
+        title.topAnchor.constraint(equalTo: effect.topAnchor, constant: 50).isActive = true
         title.leftAnchor.constraint(equalTo: effect.leftAnchor, constant: 20).isActive = true
         
         progress.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 6).isActive = true
@@ -67,141 +205,10 @@ final class Create: NSWindow {
         self.progress = bar.widthAnchor.constraint(equalToConstant: 0)
         self.progress.isActive = true
         
-        
-        
-        let items = Array(repeating: NSView(), count: 4)
-        let pages = Pages(title: .key("New.website"), pages: items)
-        
-        let enterName = Label(.key("Enter.name"), .medium())
-        items[0].addSubview(enterName)
-        
-        let name = Field()
-        name.placeholderString = .key("Website.name")
-        items[0].addSubview(name)
-        self.name = name
-        
-        let firstNext = Button(icon: "arrow.right.circle.fill", color: .systemBlue)
-        firstNext.target = self
-        firstNext.action = #selector(next)
-        items[0].addSubview(firstNext)
-        
-        let enterType = Label(.key("Enter.type"), .medium())
-        items[1].addSubview(enterType)
-        
-        let singleSegment = Segment(icon: "dot.square.fill", title: .key("Single"))
-        singleSegment.selected = true
-        singleSegment.target = self
-        singleSegment.action = #selector(single)
-        items[1].addSubview(singleSegment)
-        self.singleSegment = singleSegment
-        
-        let blogSegment = Segment(icon: "square.stack.3d.up.fill", title: .key("Blog"))
-        blogSegment.target = self
-        blogSegment.action = #selector(blog)
-        items[1].addSubview(blogSegment)
-        self.blogSegment = blogSegment
-        
-        let secondNext = Button(icon: "arrow.right.circle.fill", color: .systemBlue)
-        secondNext.target = self
-        secondNext.action = #selector(next)
-        items[1].addSubview(secondNext)
-        
-        let secondPrevious = Button(icon: "arrow.left.circle.fill", color: .systemBlue)
-        secondPrevious.target = self
-        secondPrevious.action = #selector(previous)
-        second.addSubview(secondPrevious)
-        
-        let enterLocation = Label(.key("Enter.location"), .medium())
-        third.addSubview(enterLocation)
-        
-        let folderButton = Button(text: .key("Select.folder"), background: .systemPink, foreground: .selectedTextColor)
-        folderButton.target = self
-        folderButton.action = #selector(folder)
-        third.addSubview(folderButton)
-        
-        let selectedFolder = Label(.key("None.selected"), .medium())
-        selectedFolder.textColor = .secondaryLabelColor
-        selectedFolder.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        third.addSubview(selectedFolder)
-        self.selectedFolder = selectedFolder
-        
-        let thirdNext = Button(icon: "arrow.right.circle.fill", color: .systemBlue)
-        thirdNext.target = self
-        thirdNext.action = #selector(next)
-        thirdNext.enabled = false
-        third.addSubview(thirdNext)
-        self.thirdNext = thirdNext
-        
-        let thirdPrevious = Button(icon: "arrow.left.circle.fill", color: .systemBlue)
-        thirdPrevious.target = self
-        thirdPrevious.action = #selector(previous)
-        third.addSubview(thirdPrevious)
-        
-        let websiteReady = Label(.key("Website.ready"), .medium())
-        fourth.addSubview(websiteReady)
-        
-        let fourthPrevious = Button(icon: "arrow.left.circle.fill", color: .systemBlue)
-        fourthPrevious.target = self
-        fourthPrevious.action = #selector(previous)
-        fourth.addSubview(fourthPrevious)
-        
-        let finish = Button(text: .key("Finish"), background: .systemPink, foreground: .selectedTextColor)
-        finish.target = self
-        finish.action = #selector(self.finish)
-        fourth.addSubview(finish)
-        
-        
-        
-        enterName.topAnchor.constraint(equalTo: first.topAnchor, constant: 100).isActive = true
-        enterName.leftAnchor.constraint(equalTo: first.leftAnchor, constant: 20).isActive = true
-        
-        name.topAnchor.constraint(equalTo: enterName.bottomAnchor, constant: 20).isActive = true
-        name.leftAnchor.constraint(equalTo: enterName.leftAnchor).isActive = true
-        name.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        
-        firstNext.centerXAnchor.constraint(equalTo: first.centerXAnchor).isActive = true
-        firstNext.bottomAnchor.constraint(equalTo: first.bottomAnchor, constant: -30).isActive = true
-        
-        enterType.topAnchor.constraint(equalTo: second.topAnchor, constant: 100).isActive = true
-        enterType.leftAnchor.constraint(equalTo: second.leftAnchor, constant: 20).isActive = true
-        
-        singleSegment.centerYAnchor.constraint(equalTo: second.centerYAnchor, constant: 10).isActive = true
-        singleSegment.rightAnchor.constraint(equalTo: second.centerXAnchor).isActive = true
-        
-        blogSegment.centerYAnchor.constraint(equalTo: singleSegment.centerYAnchor).isActive = true
-        blogSegment.leftAnchor.constraint(equalTo: second.centerXAnchor).isActive = true
-        
-        secondNext.leftAnchor.constraint(equalTo: second.centerXAnchor, constant: 20).isActive = true
-        secondNext.bottomAnchor.constraint(equalTo: firstNext.bottomAnchor).isActive = true
-        
-        secondPrevious.rightAnchor.constraint(equalTo: second.centerXAnchor, constant: -20).isActive = true
-        secondPrevious.bottomAnchor.constraint(equalTo: firstNext.bottomAnchor).isActive = true
-        
-        enterLocation.topAnchor.constraint(equalTo: third.topAnchor, constant: 100).isActive = true
-        enterLocation.leftAnchor.constraint(equalTo: third.leftAnchor, constant: 20).isActive = true
-        
-        selectedFolder.centerXAnchor.constraint(equalTo: third.centerXAnchor).isActive = true
-        selectedFolder.bottomAnchor.constraint(equalTo: folderButton.topAnchor, constant: -15).isActive = true
-        selectedFolder.leftAnchor.constraint(greaterThanOrEqualTo: third.leftAnchor, constant: 20).isActive = true
-        selectedFolder.rightAnchor.constraint(lessThanOrEqualTo: third.rightAnchor, constant: -20).isActive = true
-        
-        folderButton.centerXAnchor.constraint(equalTo: third.centerXAnchor).isActive = true
-        folderButton.centerYAnchor.constraint(equalTo: third.centerYAnchor, constant: 40).isActive = true
-        
-        thirdNext.leftAnchor.constraint(equalTo: third.centerXAnchor, constant: 20).isActive = true
-        thirdNext.bottomAnchor.constraint(equalTo: firstNext.bottomAnchor).isActive = true
-        
-        thirdPrevious.rightAnchor.constraint(equalTo: third.centerXAnchor, constant: -20).isActive = true
-        thirdPrevious.bottomAnchor.constraint(equalTo: firstNext.bottomAnchor).isActive = true
-        
-        websiteReady.topAnchor.constraint(equalTo: fourth.topAnchor, constant: 100).isActive = true
-        websiteReady.leftAnchor.constraint(equalTo: fourth.leftAnchor, constant: 20).isActive = true
-        
-        finish.centerXAnchor.constraint(equalTo: fourth.centerXAnchor).isActive = true
-        finish.centerYAnchor.constraint(equalTo: fourth.centerYAnchor, constant: 40).isActive = true
-        
-        fourthPrevious.centerXAnchor.constraint(equalTo: fourth.centerXAnchor).isActive = true
-        fourthPrevious.bottomAnchor.constraint(equalTo: firstNext.bottomAnchor).isActive = true
+        pages.topAnchor.constraint(equalTo: effect.topAnchor).isActive = true
+        pages.bottomAnchor.constraint(equalTo: effect.bottomAnchor).isActive = true
+        pages.leftAnchor.constraint(equalTo: effect.leftAnchor).isActive = true
+        pages.rightAnchor.constraint(equalTo: effect.rightAnchor).isActive = true
     }
     
     override func close() {
@@ -212,20 +219,20 @@ final class Create: NSWindow {
     @objc
     private func finish() {
         bookmark!.name = name.stringValue
-        Main(url: bookmark!.access!, website: session.create(singleSegment.selected ? .single : .blog, bookmark: bookmark!)).makeKeyAndOrderFront(nil)
+        Main(url: bookmark!.access!, website: session.create(_single.selected ? .single : .blog, bookmark: bookmark!)).makeKeyAndOrderFront(nil)
         close()
     }
     
     @objc
     private func single() {
-        singleSegment.selected = true
-        blogSegment.selected = false
+        _single.selected = true
+        _blog.selected = false
     }
     
     @objc
     private func blog() {
-        blogSegment.selected = true
-        singleSegment.selected = false
+        _blog.selected = true
+        _single.selected = false
     }
     
     @objc
