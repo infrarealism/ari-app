@@ -2,7 +2,6 @@ import AppKit
 import Core
 
 final class Create: NSWindow {
-    private weak var offset: NSLayoutConstraint!
     private weak var progress: NSLayoutConstraint!
     private weak var name: Field!
     private weak var singleSegment: Segment!
@@ -35,6 +34,40 @@ final class Create: NSWindow {
         effect.translatesAutoresizingMaskIntoConstraints = false
         effect.material = .hudWindow
         contentView = effect
+        
+        let title = Label(title, .bold(6))
+        addSubview(title)
+        
+        let progress = NSView()
+        progress.translatesAutoresizingMaskIntoConstraints = false
+        progress.wantsLayer = true
+        progress.layer!.backgroundColor = .init(gray: 0, alpha: 0.2)
+        progress.layer!.cornerRadius = 3
+        addSubview(progress)
+        
+        let bar = NSView()
+        bar.translatesAutoresizingMaskIntoConstraints = false
+        bar.wantsLayer = true
+        bar.layer!.backgroundColor = NSColor.systemBlue.cgColor
+        progress.addSubview(bar)
+        
+        
+        
+        title.topAnchor.constraint(equalTo: topAnchor, constant: 50).isActive = true
+        title.leftAnchor.constraint(equalTo: effect.leftAnchor, constant: 20).isActive = true
+        
+        progress.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 6).isActive = true
+        progress.leftAnchor.constraint(equalTo: title.leftAnchor, constant: 3).isActive = true
+        progress.widthAnchor.constraint(equalToConstant: 354).isActive = true
+        progress.heightAnchor.constraint(equalToConstant: 6).isActive = true
+        
+        bar.topAnchor.constraint(equalTo: progress.topAnchor).isActive = true
+        bar.leftAnchor.constraint(equalTo: progress.leftAnchor).isActive = true
+        bar.bottomAnchor.constraint(equalTo: progress.bottomAnchor).isActive = true
+        self.progress = bar.widthAnchor.constraint(equalToConstant: 0)
+        self.progress.isActive = true
+        
+        
         
         let items = Array(repeating: NSView(), count: 4)
         let pages = Pages(title: .key("New.website"), pages: items)
@@ -193,28 +226,6 @@ final class Create: NSWindow {
     private func blog() {
         blogSegment.selected = true
         singleSegment.selected = false
-    }
-    
-    @objc
-    private func next() {
-        offset.constant -= 400
-        progress.constant = -offset.constant / 1200 * 356
-        NSAnimationContext.runAnimationGroup {
-            $0.duration = 0.6
-            $0.allowsImplicitAnimation = true
-            contentView!.layoutSubtreeIfNeeded()
-        }
-    }
-    
-    @objc
-    private func previous() {
-        offset.constant += 400
-        progress.constant = -offset.constant / 1200 * 356
-        NSAnimationContext.runAnimationGroup {
-            $0.duration = 0.6
-            $0.allowsImplicitAnimation = true
-            contentView!.layoutSubtreeIfNeeded()
-        }
     }
     
     @objc

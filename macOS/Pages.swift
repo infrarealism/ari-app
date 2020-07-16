@@ -1,60 +1,62 @@
 import AppKit
+import Combine
 
 final class Pages: NSView {
+    let progress = CurrentValueSubject<CGFloat, Never>(0)
+    
+    private weak var middle: NSLayoutConstraint! {
+        didSet {
+            oldValue?.isActive = false
+            middle.isActive = true
+        }
+    }
+    
     required init?(coder: NSCoder) { nil }
-    init(title: String, pages: [NSView]) {
+    init() {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    func page(_ build: (NSView) -> Void) {
+        let page = NSView()
+        page.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(page)
         
-        let title = Label(title, .bold(6))
-        addSubview(title)
+        build(page)
         
-        let progress = NSView()
-        progress.translatesAutoresizingMaskIntoConstraints = false
-        progress.wantsLayer = true
-        progress.layer!.backgroundColor = .init(gray: 0, alpha: 0.2)
-        progress.layer!.cornerRadius = 3
-        addSubview(progress)
+        page.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        page.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        page.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         
-        let bar = NSView()
-        bar.translatesAutoresizingMaskIntoConstraints = false
-        bar.wantsLayer = true
-        bar.layer!.backgroundColor = NSColor.systemBlue.cgColor
-        progress.addSubview(bar)
-        
-        first.topAnchor.constraint(equalTo: effect.topAnchor).isActive = true
-        first.bottomAnchor.constraint(equalTo: effect.bottomAnchor).isActive = true
-        first.widthAnchor.constraint(equalTo: effect.widthAnchor).isActive = true
-        offset = first.leftAnchor.constraint(equalTo: effect.leftAnchor)
-        offset.isActive = true
-        
-        second.topAnchor.constraint(equalTo: effect.topAnchor).isActive = true
-        second.bottomAnchor.constraint(equalTo: effect.bottomAnchor).isActive = true
-        second.widthAnchor.constraint(equalTo: effect.widthAnchor).isActive = true
-        second.leftAnchor.constraint(equalTo: first.rightAnchor).isActive = true
-        
-        third.topAnchor.constraint(equalTo: effect.topAnchor).isActive = true
-        third.bottomAnchor.constraint(equalTo: effect.bottomAnchor).isActive = true
-        third.widthAnchor.constraint(equalTo: effect.widthAnchor).isActive = true
-        third.leftAnchor.constraint(equalTo: second.rightAnchor).isActive = true
-        
-        fourth.topAnchor.constraint(equalTo: effect.topAnchor).isActive = true
-        fourth.bottomAnchor.constraint(equalTo: effect.bottomAnchor).isActive = true
-        fourth.widthAnchor.constraint(equalTo: effect.widthAnchor).isActive = true
-        fourth.leftAnchor.constraint(equalTo: third.rightAnchor).isActive = true
-        
-        title.topAnchor.constraint(equalTo: effect.topAnchor, constant: 50).isActive = true
-        title.leftAnchor.constraint(equalTo: effect.leftAnchor, constant: 20).isActive = true
-        
-        progress.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 6).isActive = true
-        progress.leftAnchor.constraint(equalTo: title.leftAnchor, constant: 3).isActive = true
-        progress.widthAnchor.constraint(equalToConstant: 354).isActive = true
-        progress.heightAnchor.constraint(equalToConstant: 6).isActive = true
-        
-        bar.topAnchor.constraint(equalTo: progress.topAnchor).isActive = true
-        bar.leftAnchor.constraint(equalTo: progress.leftAnchor).isActive = true
-        bar.bottomAnchor.constraint(equalTo: progress.bottomAnchor).isActive = true
-        self.progress = bar.widthAnchor.constraint(equalToConstant: 0)
-        self.progress.isActive = true
+        if let previous = subviews.last {
+            page.leftAnchor.constraint(equalTo: previous.rightAnchor).isActive = true
+        } else {
+            center(page)
+        }
+    }
+    
+    @objc
+    func next() {
+        center(subviews.firstIndex(of: middle.firstItem as! NSView)! + 1)
+    }
+    
+    @objc
+    func previous() {
+        center(subviews.firstIndex(of: middle.firstItem as! NSView)! - 1)
+    }
+    
+    private func center(_ on: Int) {
+        progress.value = .init(on) / CGFloat(subviews.count)
+        center(subviews[on])
+        NSAnimationContext.runAnimationGroup {
+            $0.duration = 0.6
+            $0.allowsImplicitAnimation = true
+            layoutSubtreeIfNeeded()
+        }
+    }
+    
+    private func center(_ on: NSView) {
+        middle = on.centerXAnchor.constraint(equalTo: centerXAnchor)
+        middle.isActive = true
     }
 }
