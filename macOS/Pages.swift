@@ -46,7 +46,7 @@ final class Pages: NSView {
     }
     
     private func center(_ on: Int) {
-        progress.value = .init(on) / CGFloat(subviews.count)
+        progress.value = .init(on) / CGFloat(subviews.count - 1)
         center(subviews[on])
         NSAnimationContext.runAnimationGroup {
             $0.duration = 0.6

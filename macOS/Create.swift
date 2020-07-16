@@ -1,13 +1,14 @@
 import AppKit
 import Core
+import Combine
 
 final class Create: NSWindow {
-    private weak var progress: NSLayoutConstraint!
     private weak var name: Field!
     private weak var next: Button!
     private weak var _single: Segment!
     private weak var _blog: Segment!
     private weak var _folder: Label!
+    private var subs = Set<AnyCancellable>()
     
     private var bookmark: Bookmark? {
         didSet {
@@ -202,13 +203,22 @@ final class Create: NSWindow {
         bar.topAnchor.constraint(equalTo: progress.topAnchor).isActive = true
         bar.leftAnchor.constraint(equalTo: progress.leftAnchor).isActive = true
         bar.bottomAnchor.constraint(equalTo: progress.bottomAnchor).isActive = true
-        self.progress = bar.widthAnchor.constraint(equalToConstant: 0)
-        self.progress.isActive = true
+        let width = bar.widthAnchor.constraint(equalToConstant: 0)
+        width.isActive = true
         
         pages.topAnchor.constraint(equalTo: effect.topAnchor).isActive = true
         pages.bottomAnchor.constraint(equalTo: effect.bottomAnchor).isActive = true
         pages.leftAnchor.constraint(equalTo: effect.leftAnchor).isActive = true
         pages.rightAnchor.constraint(equalTo: effect.rightAnchor).isActive = true
+        
+        pages.progress.sink {
+            width.constant = progress.frame.width * $0
+            NSAnimationContext.runAnimationGroup {
+                $0.duration = 0.3
+                $0.allowsImplicitAnimation = true
+                progress.layoutSubtreeIfNeeded()
+            }
+        }.store(in: &subs)
     }
     
     override func close() {
