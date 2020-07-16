@@ -39,18 +39,9 @@ final class Create: NSWindow {
         let title = Label(.key("New.website"), .bold(6))
         effect.addSubview(title)
         
-        let progress = NSView()
-        progress.translatesAutoresizingMaskIntoConstraints = false
-        progress.wantsLayer = true
-        progress.layer!.backgroundColor = .init(gray: 0, alpha: 0.2)
-        progress.layer!.cornerRadius = 3
-        effect.addSubview(progress)
         
-        let bar = NSView()
-        bar.translatesAutoresizingMaskIntoConstraints = false
-        bar.wantsLayer = true
-        bar.layer!.backgroundColor = NSColor.systemBlue.cgColor
-        progress.addSubview(bar)
+        
+        
         
         let first = NSView()
         first.translatesAutoresizingMaskIntoConstraints = false
