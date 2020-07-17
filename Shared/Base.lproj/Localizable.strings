@@ -21,7 +21,7 @@ Link.title = "Title (optional)";
 Link.url = "URL";
 Link.placeholder = "https://";
 Image.header = "Add image";
-Image.title = "Select image";
+Select.image = "Select image";
 
 App = "App";
 Open = "Open";
