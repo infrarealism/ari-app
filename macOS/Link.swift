@@ -6,7 +6,7 @@ final class Link: Pop {
     
     required init?(coder: NSCoder) { nil }
     init(relative: NSView) {
-        super.init(relative: relative, size: .init(width: 260, height: 340))
+        super.init(size: .init(width: 260, height: 340))
         
         let header = Label(.key("Link.header"), .bold(4))
         contentViewController!.view.addSubview(header)
@@ -60,6 +60,8 @@ final class Link: Pop {
         
         cancel.centerXAnchor.constraint(equalTo: contentViewController!.view.centerXAnchor).isActive = true
         cancel.topAnchor.constraint(equalTo: add.bottomAnchor, constant: 15).isActive = true
+        
+        show(relative: relative)
     }
     
     @objc

@@ -8,14 +8,17 @@ class Pop: NSPopover, Publisher, Subscription, NSPopoverDelegate {
     private var subscriber: AnySubscriber<Output, Failure>?
     
     required init?(coder: NSCoder) { nil }
-    init(relative: NSView, size: CGSize) {
+    init(size: CGSize) {
         super.init()
         behavior = .transient
         contentSize = size
         contentViewController = .init()
         contentViewController!.view = .init()
+    }
+    
+    func show(relative: NSView) {
         show(relativeTo: relative.bounds, of: relative, preferredEdge: .minY)
-        contentViewController!.view.window!.makeKey()
+//        contentViewController!.view.window!.makeKey()
     }
     
     func send(_ message: Output) {

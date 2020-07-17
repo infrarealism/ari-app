@@ -23,6 +23,7 @@ Link.placeholder = "https://";
 Add.image = "Add image";
 Duplicate = "Copy file to project's directory";
 Edit.original = "This will overwrite the original image";
+Image.alt = "Alternative text";
 
 App = "App";
 Open = "Open";

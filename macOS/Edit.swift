@@ -86,7 +86,7 @@ final class Edit: NSView {
         let browse = NSOpenPanel()
         browse.message = .key("Add.image")
         browse.allowedFileTypes = NSImage.imageTypes
-        browse.begin { [weak self] in
+        browse.beginSheetModal(for: main) { [weak self] in
             guard $0 == .OK, let url = browse.url, let main = self?.main else { return }
             let image = Image(relative: button, url: url, main: main)
             image.subscription = image.sink { [weak self] in

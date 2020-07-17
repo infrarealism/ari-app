@@ -250,7 +250,7 @@ final class Create: NSWindow {
         let browse = NSOpenPanel()
         browse.canChooseFiles = false
         browse.canChooseDirectories = true
-        browse.begin { [weak self] in
+        browse.beginSheetModal(for: self) { [weak self] in
             guard $0 == .OK, let url = browse.url else { return }
             self?.bookmark = .init(url)
         }
