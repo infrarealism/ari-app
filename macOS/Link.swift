@@ -5,9 +5,8 @@ final class Link: Pop {
     private weak var urlField: Field!
     
     required init?(coder: NSCoder) { nil }
-    override init() {
-        super.init()
-        contentSize = .init(width: 260, height: 340)
+    init(relative: NSView) {
+        super.init(relative: relative, size: .init(width: 260, height: 340))
         
         let header = Label(.key("Link.header"), .bold(4))
         contentViewController!.view.addSubview(header)

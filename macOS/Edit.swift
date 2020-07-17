@@ -73,9 +73,7 @@ final class Edit: NSView {
     
     @objc
     private func link(_ button: Button) {
-        let link = Link()
-        link.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
-        link.contentViewController!.view.window!.makeKey()
+        let link = Link(relative: button)
         link.subscription = link.sink { [weak self] in
             self?.text.insertText($0, replacementRange: self?.text.selectedRange() ?? .init())
         }
@@ -83,11 +81,15 @@ final class Edit: NSView {
     
     @objc
     private func image(_ button: Button) {
-        let image = Image()
-        image.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
-        image.contentViewController!.view.window!.makeKey()
-        image.subscription = image.sink { [weak self] in
-            self?.text.insertText($0, replacementRange: self?.text.selectedRange() ?? .init())
+        let browse = NSOpenPanel()
+        browse.message = .key("Add.image")
+        browse.allowedFileTypes = NSImage.imageTypes
+        browse.begin { [weak self] in
+            guard $0 == .OK, let url = browse.url else { return }
+            let image = Image(relative: button, url: url)
+            image.subscription = image.sink { [weak self] in
+                self?.text.insertText($0, replacementRange: self?.text.selectedRange() ?? .init())
+            }
         }
     }
 }

@@ -20,8 +20,7 @@ Link.header = "Add link";
 Link.title = "Title (optional)";
 Link.url = "URL";
 Link.placeholder = "https://";
-Image.header = "Add image";
-Select.image = "Select image";
+Add.image = "Add image";
 
 App = "App";
 Open = "Open";

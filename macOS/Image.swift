@@ -1,14 +1,15 @@
 import AppKit
 
 final class Image: Pop {
-    
+    private weak var name: Label!
+    private let url: URL
     
     required init?(coder: NSCoder) { nil }
-    override init() {
-        super.init()
-        contentSize = .init(width: 320, height: 260)
+    init(relative: NSView, url: URL) {
+        self.url = url
+        super.init(relative: relative, size: .init(width: 320, height: 260))
         
-        let header = Label(.key("Image.header"), .bold(4))
+        let header = Label(.key("Add.image"), .bold(4))
         contentViewController!.view.addSubview(header)
         
         let cancel = Button(text: .key("Cancel"), background: .clear, foreground: .secondaryLabelColor)
@@ -20,19 +21,18 @@ final class Image: Pop {
         contentViewController!.view.addSubview(pages)
         
         pages.page {
-            let title = Label("", .medium(2))
-            title.textColor = .secondaryLabelColor
-            $0.addSubview(title)
+            let name = Label("", .medium(2))
+            name.textColor = .secondaryLabelColor
+            $0.addSubview(name)
+            self.name = name
             
             let button = Button(text: .key("Select.image"), background: .systemPink, foreground: .controlTextColor)
-            button.target = self
-            button.action = #selector(file)
             $0.addSubview(button)
             
-            title.topAnchor.constraint(equalTo: $0.topAnchor, constant: 100).isActive = true
-            title.centerXAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
+            name.topAnchor.constraint(equalTo: $0.topAnchor, constant: 100).isActive = true
+            name.centerXAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
             
-            button.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 20).isActive = true
+            button.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 20).isActive = true
             button.centerXAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
         }
         
@@ -46,16 +46,6 @@ final class Image: Pop {
         pages.bottomAnchor.constraint(equalTo: contentViewController!.view.bottomAnchor).isActive = true
         pages.leftAnchor.constraint(equalTo: contentViewController!.view.leftAnchor).isActive = true
         pages.rightAnchor.constraint(equalTo: contentViewController!.view.rightAnchor).isActive = true
-    }
-    
-    @objc
-    private func file() {
-        let browse = NSOpenPanel()
-        browse.allowedFileTypes = NSImage.imageTypes
-        browse.begin { [weak self] in
-            guard $0 == .OK, let url = browse.url else { return }
-            Swift.print(url)
-        }
     }
     
     @objc
