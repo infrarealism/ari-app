@@ -1,13 +1,21 @@
 import AppKit
+import Combine
 
 final class Image: Pop {
+    private weak var duplicate: NSSwitch!
     private weak var name: Label!
+    private weak var segmented: Segmented!
+    private weak var main: Main!
+    private var subs = Set<AnyCancellable>()
+    private let images: [NSImage]
     private let url: URL
     
     required init?(coder: NSCoder) { nil }
-    init(relative: NSView, url: URL) {
+    init(relative: NSView, url: URL, main: Main) {
         self.url = url
-        super.init(relative: relative, size: .init(width: 320, height: 260))
+        self.main = main
+        images = NSImage(contentsOf: url)!.scales([0.25, 0.5])
+        super.init(relative: relative, size: .init(width: 380, height: 380))
         
         let header = Label(.key("Add.image"), .bold(4))
         contentViewController!.view.addSubview(header)
@@ -21,19 +29,107 @@ final class Image: Pop {
         contentViewController!.view.addSubview(pages)
         
         pages.page {
-            let name = Label("", .medium(2))
-            name.textColor = .secondaryLabelColor
+            let name = Label(url.lastPathComponent, .medium(2))
+            name.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
             $0.addSubview(name)
             self.name = name
             
-            let button = Button(text: .key("Select.image"), background: .systemPink, foreground: .controlTextColor)
-            $0.addSubview(button)
+            let next = Button(icon: "arrow.right.circle.fill", color: .systemBlue)
+            next.target = pages
+            next.action = #selector(pages.next)
+            $0.addSubview(next)
             
-            name.topAnchor.constraint(equalTo: $0.topAnchor, constant: 100).isActive = true
+            let _duplicate = Label(.key("Duplicate"), .regular())
+            $0.addSubview(_duplicate)
+            
+            let duplicate = NSSwitch()
+            duplicate.translatesAutoresizingMaskIntoConstraints = false
+            $0.addSubview(duplicate)
+            self.duplicate = duplicate
+            
+            if url.absoluteString.hasPrefix(main.url.absoluteString) {
+                _duplicate.isHidden = true
+                duplicate.isHidden = true
+            } else {
+                duplicate.state = .on
+            }
+            
+            name.topAnchor.constraint(equalTo: $0.topAnchor, constant: 80).isActive = true
             name.centerXAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
+            name.leftAnchor.constraint(greaterThanOrEqualTo: $0.leftAnchor, constant: 30).isActive = true
+            name.rightAnchor.constraint(lessThanOrEqualTo: $0.rightAnchor, constant: -30).isActive = true
             
-            button.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 20).isActive = true
-            button.centerXAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
+            _duplicate.rightAnchor.constraint(equalTo: duplicate.leftAnchor, constant: -10).isActive = true
+            _duplicate.centerYAnchor.constraint(equalTo: duplicate.centerYAnchor).isActive = true
+            
+            duplicate.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 40).isActive = true
+            duplicate.leftAnchor.constraint(equalTo: $0.centerXAnchor, constant: 80).isActive = true
+            
+            next.bottomAnchor.constraint(equalTo: $0.bottomAnchor, constant: -80).isActive = true
+            next.centerXAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
+        }
+        
+        pages.page {
+            let title = Label(.key("Scale"), .medium(2))
+            title.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+            $0.addSubview(title)
+            
+            let segmented = Segmented(items: ["25%", "50%", "100%"])
+            segmented.selected.value = 2
+            $0.addSubview(segmented)
+            self.segmented = segmented
+            
+            let scale = Label(.key(""), .medium(2))
+            scale.textColor = .secondaryLabelColor
+            scale.alignment = .center
+            $0.addSubview(scale)
+            
+            let original = Label(.key("Edit.original"), .regular())
+            original.textColor = .secondaryLabelColor
+            $0.addSubview(original)
+            
+            let next = Button(icon: "arrow.right.circle.fill", color: .systemBlue)
+            next.target = pages
+            next.action = #selector(pages.next)
+            $0.addSubview(next)
+            
+            let previous = Button(icon: "arrow.left.circle.fill", color: .systemBlue)
+            previous.target = pages
+            previous.action = #selector(pages.previous)
+            $0.addSubview(previous)
+            
+            title.centerXAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
+            title.topAnchor.constraint(equalTo: $0.topAnchor, constant: 80).isActive = true
+            
+            segmented.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 20).isActive = true
+            segmented.leftAnchor.constraint(equalTo: $0.leftAnchor, constant: 40).isActive = true
+            segmented.rightAnchor.constraint(equalTo: $0.rightAnchor, constant: -40).isActive = true
+            
+            scale.topAnchor.constraint(equalTo: segmented.bottomAnchor, constant: 20).isActive = true
+            scale.centerXAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
+            
+            original.topAnchor.constraint(equalTo: scale.bottomAnchor, constant: 10).isActive = true
+            original.centerXAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
+            original.leftAnchor.constraint(greaterThanOrEqualTo: $0.leftAnchor, constant: 30).isActive = true
+            original.rightAnchor.constraint(lessThanOrEqualTo: $0.rightAnchor, constant: -30).isActive = true
+            
+            next.leftAnchor.constraint(equalTo: $0.centerXAnchor, constant: 20).isActive = true
+            next.bottomAnchor.constraint(equalTo: $0.bottomAnchor, constant: -80).isActive = true
+            
+            previous.rightAnchor.constraint(equalTo: $0.centerXAnchor, constant: -20).isActive = true
+            previous.bottomAnchor.constraint(equalTo: $0.bottomAnchor, constant: -80).isActive = true
+            
+            let bytes = ByteCountFormatter()
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .decimal
+            
+            segmented.selected.sink { [weak self] in
+                guard let self = self else { return }
+                original.isHidden = self.duplicate.state != .off || (self.duplicate.state == .off && $0 == 2)
+                let image = self.images[$0]
+                let data = NSBitmapImageRep(data: image.tiffRepresentation!)!.representation(using: .png, properties: [:])!
+                scale.stringValue = formatter.string(from: .init(value: Int(image.size.width)))! + "×" + formatter.string(from: .init(value: Int(image.size.height)))! + "\n" + bytes.string(fromByteCount: .init(data.count))
+            }.store(in: &self.subs)
         }
         
         header.topAnchor.constraint(equalTo: contentViewController!.view.topAnchor, constant: 30).isActive = true
@@ -51,5 +147,32 @@ final class Image: Pop {
     @objc
     private func submit() {
         
+    }
+}
+
+private extension NSImage {
+    func scales(_ scales: [CGFloat]) -> [NSImage] {
+        let original = NSBitmapImageRep(data: tiffRepresentation!)!
+        let width = CGFloat(size.width)
+        let height = CGFloat(size.height)
+        return scales.map {
+            let bitmap = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: .init(width * $0), pixelsHigh: .init(height * $0),
+                bitsPerSample: original.bitsPerSample,
+                samplesPerPixel: original.samplesPerPixel,
+                hasAlpha: original.hasAlpha,
+                isPlanar: original.isPlanar,
+                colorSpaceName: original.colorSpaceName,
+                bytesPerRow: original.bytesPerRow,
+                bitsPerPixel: original.bitsPerPixel)!
+            
+            NSGraphicsContext.saveGraphicsState()
+            NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: bitmap)!
+            draw(in: .init(origin: .zero, size: bitmap.size))
+            NSGraphicsContext.restoreGraphicsState()
+
+            let resizedImage = NSImage(size: bitmap.size)
+            resizedImage.addRepresentation(bitmap)
+            return resizedImage
+        } + [self]
     }
 }

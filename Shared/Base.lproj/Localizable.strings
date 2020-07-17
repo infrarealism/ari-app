@@ -21,6 +21,8 @@ Link.title = "Title (optional)";
 Link.url = "URL";
 Link.placeholder = "https://";
 Add.image = "Add image";
+Duplicate = "Copy file to project's directory";
+Edit.original = "This will overwrite the original image";
 
 App = "App";
 Open = "Open";

@@ -3,12 +3,14 @@ import Combine
 
 final class Edit: NSView {
     private(set) weak var text: Text!
+    private weak var main: Main!
     private var subs = Set<AnyCancellable>()
     
     required init?(coder: NSCoder) { nil }
     init(main: Main) {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
+        self.main = main
         
         let scroll = NSScrollView()
         scroll.translatesAutoresizingMaskIntoConstraints = false
@@ -85,8 +87,8 @@ final class Edit: NSView {
         browse.message = .key("Add.image")
         browse.allowedFileTypes = NSImage.imageTypes
         browse.begin { [weak self] in
-            guard $0 == .OK, let url = browse.url else { return }
-            let image = Image(relative: button, url: url)
+            guard $0 == .OK, let url = browse.url, let main = self?.main else { return }
+            let image = Image(relative: button, url: url, main: main)
             image.subscription = image.sink { [weak self] in
                 self?.text.insertText($0, replacementRange: self?.text.selectedRange() ?? .init())
             }
