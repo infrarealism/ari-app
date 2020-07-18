@@ -140,8 +140,7 @@ final class Image: Pop {
                 guard let self = self else { return }
                 original.isHidden = self.duplicate.state != .off || (self.duplicate.state == .off && $0 == 2)
                 let image = self.images[$0]
-                let data = NSBitmapImageRep(data: image.tiffRepresentation!)!.representation(using: .png, properties: [:])!
-                scale.stringValue = formatter.string(from: .init(value: Int(image.size.width)))! + "×" + formatter.string(from: .init(value: Int(image.size.height)))! + "\n" + bytes.string(fromByteCount: .init(data.count))
+                scale.stringValue = formatter.string(from: .init(value: Int(image.size.width)))! + "×" + formatter.string(from: .init(value: Int(image.size.height)))! + "\n" + bytes.string(fromByteCount: .init(image.data.count))
             }.store(in: &self.subs)
         }
         
@@ -192,11 +191,36 @@ final class Image: Pop {
     
     @objc
     private func submit() {
-        
+        if duplicate.state == .on {
+            images[segmented.selected.value].write(main.url.appendingPathComponent(url.lastPathComponent))
+            send(url: url.lastPathComponent)
+        } else if url.absoluteString.hasPrefix(main.url.absoluteString) {
+            if segmented.selected.value != 2 {
+                images[segmented.selected.value].write(url)
+            }
+            send(url: .init(url.absoluteString.dropFirst(main.url.absoluteString.count)))
+        } else {
+            if segmented.selected.value != 2 {
+                images[segmented.selected.value].write(url)
+            }
+            send(url: url.relativeString)
+        }
+    }
+    
+    private func send(url: String) {
+        send("![\(field.stringValue)](\(url))")
     }
 }
 
 private extension NSImage {
+    var data: Data {
+        NSBitmapImageRep(data: tiffRepresentation!)!.representation(using: .png, properties: [:])!
+    }
+    
+    func write(_ to: URL) {
+        try! data.write(to: to, options: .atomic)
+    }
+    
     func scales(_ scales: [CGFloat]) -> [NSImage] {
         let original = NSBitmapImageRep(data: tiffRepresentation!)!
         let width = CGFloat(size.width)
