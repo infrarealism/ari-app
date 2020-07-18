@@ -27,6 +27,7 @@ final class Bar: NSVisualEffectView {
         self.preview = preview
         
         let export = Item(icon: "square.and.arrow.up", title: .key("Export"))
+        export.isHidden = true
         addSubview(export)
         self.export = export
         
