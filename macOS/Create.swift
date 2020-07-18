@@ -80,48 +80,48 @@ final class Create: NSWindow {
             next.bottomAnchor.constraint(equalTo: $0.bottomAnchor, constant: -30).isActive = true
         }
         
-        pages.page {
-            let type = Label(.key("Enter.type"), .medium())
-            $0.addSubview(type)
-            
-            let _single = Segment(icon: "dot.square.fill", title: .key("Single"))
-            _single.selected = true
-            _single.target = self
-            _single.action = #selector(single)
-            $0.addSubview(_single)
-            self._single = _single
-            
-            let _blog = Segment(icon: "square.stack.3d.up.fill", title: .key("Blog"))
-            _blog.target = self
-            _blog.action = #selector(blog)
-            $0.addSubview(_blog)
-            self._blog = _blog
-            
-            let next = Button(icon: "arrow.right.circle.fill", color: .systemBlue)
-            next.target = pages
-            next.action = #selector(pages.next)
-            $0.addSubview(next)
-            
-            let previous = Button(icon: "arrow.left.circle.fill", color: .systemBlue)
-            previous.target = pages
-            previous.action = #selector(pages.previous)
-            $0.addSubview(previous)
-            
-            type.topAnchor.constraint(equalTo: $0.topAnchor, constant: 100).isActive = true
-            type.leftAnchor.constraint(equalTo: $0.leftAnchor, constant: 20).isActive = true
-            
-            _single.centerYAnchor.constraint(equalTo: $0.centerYAnchor, constant: 10).isActive = true
-            _single.rightAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
-            
-            _blog.centerYAnchor.constraint(equalTo: _single.centerYAnchor).isActive = true
-            _blog.leftAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
-            
-            next.leftAnchor.constraint(equalTo: $0.centerXAnchor, constant: 20).isActive = true
-            next.bottomAnchor.constraint(equalTo: $0.bottomAnchor, constant: -30).isActive = true
-            
-            previous.rightAnchor.constraint(equalTo: $0.centerXAnchor, constant: -20).isActive = true
-            previous.bottomAnchor.constraint(equalTo: $0.bottomAnchor, constant: -30).isActive = true
-        }
+//        pages.page {
+//            let type = Label(.key("Enter.type"), .medium())
+//            $0.addSubview(type)
+//
+//            let _single = Segment(icon: "dot.square.fill", title: .key("Single"))
+//            _single.selected = true
+//            _single.target = self
+//            _single.action = #selector(single)
+//            $0.addSubview(_single)
+//            self._single = _single
+//
+//            let _blog = Segment(icon: "square.stack.3d.up.fill", title: .key("Blog"))
+//            _blog.target = self
+//            _blog.action = #selector(blog)
+//            $0.addSubview(_blog)
+//            self._blog = _blog
+//
+//            let next = Button(icon: "arrow.right.circle.fill", color: .systemBlue)
+//            next.target = pages
+//            next.action = #selector(pages.next)
+//            $0.addSubview(next)
+//
+//            let previous = Button(icon: "arrow.left.circle.fill", color: .systemBlue)
+//            previous.target = pages
+//            previous.action = #selector(pages.previous)
+//            $0.addSubview(previous)
+//
+//            type.topAnchor.constraint(equalTo: $0.topAnchor, constant: 100).isActive = true
+//            type.leftAnchor.constraint(equalTo: $0.leftAnchor, constant: 20).isActive = true
+//
+//            _single.centerYAnchor.constraint(equalTo: $0.centerYAnchor, constant: 10).isActive = true
+//            _single.rightAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
+//
+//            _blog.centerYAnchor.constraint(equalTo: _single.centerYAnchor).isActive = true
+//            _blog.leftAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
+//
+//            next.leftAnchor.constraint(equalTo: $0.centerXAnchor, constant: 20).isActive = true
+//            next.bottomAnchor.constraint(equalTo: $0.bottomAnchor, constant: -30).isActive = true
+//
+//            previous.rightAnchor.constraint(equalTo: $0.centerXAnchor, constant: -20).isActive = true
+//            previous.bottomAnchor.constraint(equalTo: $0.bottomAnchor, constant: -30).isActive = true
+//        }
         
         pages.page {
             let location = Label(.key("Enter.location"), .medium())
@@ -229,7 +229,8 @@ final class Create: NSWindow {
     @objc
     private func finish() {
         bookmark!.name = name.stringValue
-        Main(url: bookmark!.access!, website: session.create(_single.selected ? .single : .blog, bookmark: bookmark!)).makeKeyAndOrderFront(nil)
+//        Main(url: bookmark!.access!, website: session.create(_single.selected ? .single : .blog, bookmark: bookmark!)).makeKeyAndOrderFront(nil)
+        Main(url: bookmark!.access!, website: session.create(.single, bookmark: bookmark!)).makeKeyAndOrderFront(nil)
         close()
     }
     
