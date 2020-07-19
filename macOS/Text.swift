@@ -20,7 +20,8 @@ final class Text: NSTextView {
         isContinuousSpellCheckingEnabled = false
         isAutomaticTextCompletionEnabled = false
         insertionPointColor = .systemBlue
-        font = .monospacedSystemFont(ofSize: NSFont.systemFontSize + 5, weight: .medium)
+        typingAttributes[.font] = NSFont.monospacedSystemFont(ofSize: NSFont.systemFontSize + 6, weight: .medium)
+        font = .monospacedSystemFont(ofSize: NSFont.systemFontSize + 6, weight: .medium)
         selectedTextAttributes = [.backgroundColor: NSColor.systemPink, .foregroundColor: NSColor.controlTextColor]
         isVerticallyResizable = true
         isHorizontallyResizable = true
