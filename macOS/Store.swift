@@ -17,9 +17,8 @@ final class Store: NSWindow {
         toolbar!.showsBaselineSeparator = false
         collectionBehavior = .fullScreenNone
         isReleasedWhenClosed = false
-        center()
         
-        let restore = Button(text: .key("Restore.purchases"), background: .systemBlue, foreground: .black)
+        let restore = Button(text: .key("Restore.purchases"), background: .systemPink, foreground: .controlTextColor)
         restore.target = self
         restore.action = #selector(self.restore)
         contentView!.addSubview(restore)
@@ -92,8 +91,17 @@ final class Store: NSWindow {
             self?.error($0)
         }.store(in: &subs)
         
+        center()
+        setFrameAutosaveName("Store")
+        
         loading()
         purchases.load()
+    }
+    
+    override func close() {
+//        contentView = nil
+        NSApp.closeOther()
+        super.close()
     }
     
     func error(_ string: String) {

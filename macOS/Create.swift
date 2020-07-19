@@ -244,7 +244,7 @@ final class Create: NSWindow {
             _blog.selected = true
             _single.selected = false
         } else {
-            
+            (NSApp.windows.first { $0 is Store } ?? Store()).makeKeyAndOrderFront(nil)
         }
     }
     
