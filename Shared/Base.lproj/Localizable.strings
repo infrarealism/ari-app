@@ -24,6 +24,10 @@ Duplicate = "Copy file to project's directory";
 Edit.original = "This will overwrite the original image";
 Image.alt = "Alternative text";
 In.app = "In-App Purchase";
+Restore.purchases = "Restore Purchases";
+Purchases.are = "Purchases are non-consumable, you pay for them only once.\nThey are shared between iOS and macOS.";
+Loading = "Loading";
+Purchase = "Purchase";
 
 App = "App";
 Open = "Open";
