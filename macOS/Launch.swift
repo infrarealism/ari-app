@@ -78,7 +78,6 @@ final class Launch: NSWindow {
         
         center()
         setFrameAutosaveName("Launch")
-        
         session.bookmarks.sink { [weak self] in
             guard let self = self else { return }
             var top = scroll.top

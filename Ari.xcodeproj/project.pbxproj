@@ -26,6 +26,7 @@
 		CE60EF5224A8DC50001D2A39 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = CE60EF5124A8DC50001D2A39 /* Core */; };
 		CE68DC8824BF624500011DC1 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68DC8724BF624500011DC1 /* Image.swift */; };
 		CE7D5C9724B628550067D6C5 /* Web.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7D5C9624B628550067D6C5 /* Web.swift */; };
+		CE8524D224C468BF00F84E60 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8524D124C468BF00F84E60 /* User.swift */; };
 		CE87193424A9D15000D5BD55 /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE87193324A9D15000D5BD55 /* Bookmark.swift */; };
 		CE9824B024B0AC4300AD14FF /* Separator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9824AF24B0AC4300AD14FF /* Separator.swift */; };
 		CE9E4E2D24BC4BEE00F3097C /* Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E4E2C24BC4BEE00F3097C /* Link.swift */; };
@@ -63,6 +64,7 @@
 		CE59C4D924A8D6260068C153 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		CE68DC8724BF624500011DC1 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		CE7D5C9624B628550067D6C5 /* Web.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Web.swift; sourceTree = "<group>"; };
+		CE8524D124C468BF00F84E60 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CE87193324A9D15000D5BD55 /* Bookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
 		CE9824AF24B0AC4300AD14FF /* Separator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Separator.swift; sourceTree = "<group>"; };
 		CE9E4E2C24BC4BEE00F3097C /* Link.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Link.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				CE59C4D724A8C87D0068C153 /* Font.swift */,
 				CEEDB19824ACB4A100969FD4 /* Session.swift */,
 				CE58263724A76E090004726F /* String.swift */,
+				CE8524D124C468BF00F84E60 /* User.swift */,
 				CE58264024A76E5D0004726F /* Localizable.strings */,
 			);
 			path = Shared;
@@ -235,6 +238,7 @@
 				CE59C4D424A8C8190068C153 /* Button.swift in Sources */,
 				CEC93C1924BE1BDA00BC86E3 /* Pop.swift in Sources */,
 				CE9824B024B0AC4300AD14FF /* Separator.swift in Sources */,
+				CE8524D224C468BF00F84E60 /* User.swift in Sources */,
 				CE3EAF1624A7649B00D29C60 /* Launch.swift in Sources */,
 				CE59C4D224A8C7FD0068C153 /* Control.swift in Sources */,
 				CE87193424A9D15000D5BD55 /* Bookmark.swift in Sources */,

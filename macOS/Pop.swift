@@ -6,7 +6,7 @@ class Pop: NSPopover, Publisher, Subscription, NSPopoverDelegate {
     typealias Failure = Never
     var subscription: AnyCancellable?
     private var subscriber: AnySubscriber<Output, Failure>?
-    
+
     required init?(coder: NSCoder) { nil }
     init(size: CGSize) {
         super.init()
@@ -18,7 +18,6 @@ class Pop: NSPopover, Publisher, Subscription, NSPopoverDelegate {
     
     func show(relative: NSView) {
         show(relativeTo: relative.bounds, of: relative, preferredEdge: .minY)
-//        contentViewController!.view.window!.makeKey()
     }
     
     func send(_ message: Output) {

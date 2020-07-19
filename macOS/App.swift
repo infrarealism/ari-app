@@ -14,6 +14,10 @@ final class App: NSApplication, NSApplicationDelegate  {
         mainMenu = Menu()
         launch()
     }
+    
+    func applicationDidFinishLaunching(_: Notification) {
+        session.load()
+    }
 }
 
 extension NSApplication {

@@ -4,16 +4,31 @@ import Core
 import Combine
 
 final class Session {
-    private var subs = Set<AnyCancellable>()
+    var user = User()
     private let _bookmarks = Balam("Bookmarks")
     private let _websites = Balam("Websites")
+    private let _user = Balam("User")
     
     var bookmarks: Future <[Bookmark], Never> {
         .init { promise in
+            var sub: AnyCancellable?
             self._bookmarks.remove(Bookmark.self) { !FileManager.default.fileExists(atPath: $0.url.path) }
-            self._bookmarks.nodes(Bookmark.self).sink {
+            sub = self._bookmarks.nodes(Bookmark.self).sink {
                 promise(.success($0.sorted { $0.edited > $1.edited }))
-            }.store(in: &self.subs)
+                sub?.cancel()
+            }
+        }
+    }
+    
+    func load() {
+        var sub: AnyCancellable?
+        sub = _user.nodes(User.self).sink {
+            if let user = $0.first {
+                self.user = user
+            } else {
+                self._user.add(self.user)
+            }
+            sub?.cancel()
         }
     }
     
@@ -27,12 +42,14 @@ final class Session {
     
     func website(_ bookmark: Bookmark) -> Future <Website, Never> {
         .init { promise in
+            var sub: AnyCancellable?
             var bookmark = bookmark
             bookmark.edited = .init()
             self._bookmarks.update(bookmark)
-            self._websites.nodes(Website.self).sink {
+            sub = self._websites.nodes(Website.self).sink {
                 promise(.success($0.first { $0.id == bookmark.id }!))
-            }.store(in: &self.subs)
+                sub?.cancel()
+            }
         }
     }
     
