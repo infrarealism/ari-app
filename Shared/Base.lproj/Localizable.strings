@@ -7,7 +7,6 @@ Enter.location = "Select a destination";
 Website.name = "Website name";
 Select.folder = "Select folder";
 None.selected = "None selected";
-Website.ready = "Your new Website is ready!";
 Edit = "Edit";
 Style = "Style";
 Export = "Export";
