@@ -1,7 +1,7 @@
 import Foundation
 
 struct User: Codable, Equatable {
-    public var purchases = Set<String>()
+    public var purchases = Set<Purchase>()
     public var rated = false
     public var created = Date()
     

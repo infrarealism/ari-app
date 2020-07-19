@@ -27,6 +27,7 @@
 		CE68DC8824BF624500011DC1 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68DC8724BF624500011DC1 /* Image.swift */; };
 		CE7D5C9724B628550067D6C5 /* Web.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7D5C9624B628550067D6C5 /* Web.swift */; };
 		CE8524D224C468BF00F84E60 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8524D124C468BF00F84E60 /* User.swift */; };
+		CE8524D424C48EBB00F84E60 /* Purchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8524D324C48EBB00F84E60 /* Purchase.swift */; };
 		CE87193424A9D15000D5BD55 /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE87193324A9D15000D5BD55 /* Bookmark.swift */; };
 		CE9824B024B0AC4300AD14FF /* Separator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9824AF24B0AC4300AD14FF /* Separator.swift */; };
 		CE9E4E2D24BC4BEE00F3097C /* Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E4E2C24BC4BEE00F3097C /* Link.swift */; };
@@ -65,6 +66,7 @@
 		CE68DC8724BF624500011DC1 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		CE7D5C9624B628550067D6C5 /* Web.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Web.swift; sourceTree = "<group>"; };
 		CE8524D124C468BF00F84E60 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		CE8524D324C48EBB00F84E60 /* Purchase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Purchase.swift; sourceTree = "<group>"; };
 		CE87193324A9D15000D5BD55 /* Bookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
 		CE9824AF24B0AC4300AD14FF /* Separator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Separator.swift; sourceTree = "<group>"; };
 		CE9E4E2C24BC4BEE00F3097C /* Link.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Link.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 			children = (
 				CEE0FD1224B89186006B7CF6 /* Color.swift */,
 				CE59C4D724A8C87D0068C153 /* Font.swift */,
+				CE8524D324C48EBB00F84E60 /* Purchase.swift */,
 				CEEDB19824ACB4A100969FD4 /* Session.swift */,
 				CE58263724A76E090004726F /* String.swift */,
 				CE8524D124C468BF00F84E60 /* User.swift */,
@@ -253,6 +256,7 @@
 				CE431B6424B1EAE6007B1C53 /* Bar.swift in Sources */,
 				CE9E4E2D24BC4BEE00F3097C /* Link.swift in Sources */,
 				CE20ADFC24B9C8AC00007F5F /* Segmented.swift in Sources */,
+				CE8524D424C48EBB00F84E60 /* Purchase.swift in Sources */,
 				CE58263824A76E090004726F /* String.swift in Sources */,
 				CE59C4D624A8C82E0068C153 /* Label.swift in Sources */,
 				CE3EAF1424A7649B00D29C60 /* App.swift in Sources */,

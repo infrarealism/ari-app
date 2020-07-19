@@ -106,21 +106,44 @@ final class Create: NSWindow {
             previous.target = pages
             previous.action = #selector(pages.previous)
             $0.addSubview(previous)
+            
+            let purchase = NSView()
+            purchase.translatesAutoresizingMaskIntoConstraints = false
+            purchase.wantsLayer = true
+            purchase.layer!.backgroundColor = NSColor.systemPink.cgColor
+            purchase.layer!.cornerRadius = 10
+            $0.addSubview(purchase)
+            
+            let _purchase = Label(.key("In.app"), .regular(-2))
+            _purchase.textColor = .controlTextColor
+            purchase.addSubview(_purchase)
 
             type.topAnchor.constraint(equalTo: $0.topAnchor, constant: 100).isActive = true
             type.leftAnchor.constraint(equalTo: $0.leftAnchor, constant: 20).isActive = true
 
-            _single.centerYAnchor.constraint(equalTo: $0.centerYAnchor, constant: 10).isActive = true
-            _single.rightAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
+            _single.centerYAnchor.constraint(equalTo: $0.centerYAnchor, constant: 20).isActive = true
+            _single.rightAnchor.constraint(equalTo: $0.centerXAnchor, constant: -30).isActive = true
 
             _blog.centerYAnchor.constraint(equalTo: _single.centerYAnchor).isActive = true
-            _blog.leftAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
+            _blog.leftAnchor.constraint(equalTo: $0.centerXAnchor, constant: 30).isActive = true
 
             next.leftAnchor.constraint(equalTo: $0.centerXAnchor, constant: 20).isActive = true
             next.bottomAnchor.constraint(equalTo: $0.bottomAnchor, constant: -30).isActive = true
 
             previous.rightAnchor.constraint(equalTo: $0.centerXAnchor, constant: -20).isActive = true
             previous.bottomAnchor.constraint(equalTo: $0.bottomAnchor, constant: -30).isActive = true
+            
+            purchase.topAnchor.constraint(equalTo: _blog.bottomAnchor, constant: -35).isActive = true
+            purchase.centerXAnchor.constraint(equalTo: _blog.centerXAnchor).isActive = true
+            purchase.rightAnchor.constraint(equalTo: _purchase.rightAnchor, constant: 6).isActive = true
+            purchase.heightAnchor.constraint(equalToConstant: 20).isActive = true
+            
+            _purchase.leftAnchor.constraint(equalTo: purchase.leftAnchor, constant: 6).isActive = true
+            _purchase.centerYAnchor.constraint(equalTo: purchase.centerYAnchor).isActive = true
+            
+            session.user.sink {
+                purchase.isHidden = $0.purchases.contains(.blog)
+            }.store(in: &subs)
         }
         
         pages.page {
@@ -217,8 +240,12 @@ final class Create: NSWindow {
     
     @objc
     private func blog() {
-        _blog.selected = true
-        _single.selected = false
+        if session.user.value.purchases.contains(.blog) {
+            _blog.selected = true
+            _single.selected = false
+        } else {
+            
+        }
     }
     
     @objc
@@ -260,13 +287,13 @@ private final class Segment: Control {
         addSubview(label)
         self.label = label
         
-        widthAnchor.constraint(equalToConstant: 75).isActive = true
-        heightAnchor.constraint(equalToConstant: 75).isActive = true
+        widthAnchor.constraint(equalToConstant: 110).isActive = true
+        heightAnchor.constraint(equalToConstant: 110).isActive = true
         
         icon.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        icon.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        icon.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -20).isActive = true
         
         label.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        label.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -40).isActive = true
     }
 }

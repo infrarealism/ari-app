@@ -4,7 +4,7 @@ import Core
 import Combine
 
 final class Session {
-    var user = User()
+    var user = CurrentValueSubject<User, Never>(.init())
     private let _bookmarks = Balam("Bookmarks")
     private let _websites = Balam("Websites")
     private let _user = Balam("User")
@@ -24,9 +24,9 @@ final class Session {
         var sub: AnyCancellable?
         sub = _user.nodes(User.self).sink {
             if let user = $0.first {
-                self.user = user
+                self.user.value = user
             } else {
-                self._user.add(self.user)
+                self._user.add(self.user.value)
             }
             sub?.cancel()
         }
