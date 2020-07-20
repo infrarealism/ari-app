@@ -11,6 +11,7 @@ final class Design: NSView {
         translatesAutoresizingMaskIntoConstraints = false
         
         let scroll = Scroll()
+        scroll.drawsBackground = false
         addSubview(scroll)
         
         let primary = Tint(title: .key("Primary.title"), description: .key("Primary.description"))

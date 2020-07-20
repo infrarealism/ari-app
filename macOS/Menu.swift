@@ -4,7 +4,7 @@ final class Menu: NSMenu {
     required init(coder: NSCoder) { super.init(coder: coder) }
     init() {
         super.init(title: "")
-        items = [app, edit, window, help]
+        items = [app, edit, store, window, help]
     }
 
     private var app: NSMenuItem {
@@ -46,6 +46,11 @@ final class Menu: NSMenu {
         { $0.keyEquivalentModifierMask = [.command]
             return $0
         } (NSMenuItem(title: .key("Select.all"), action: #selector(NSText.selectAll), keyEquivalent: "a"))])
+    }
+    
+    private var store: NSMenuItem {
+        menu(.key("Store"), items: [
+            .init(title: .key("In.apps"), action: #selector(NSApp.purchases), keyEquivalent: "")])
     }
     
     private var window: NSMenuItem {

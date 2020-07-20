@@ -6,7 +6,7 @@ enum Purchase: String, CaseIterable, Codable {
     
     var image: String {
         switch self {
-        case .blog: return ""
+        case .blog: return "square.stack.3d.up.fill"
         }
     }
     

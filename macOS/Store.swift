@@ -9,7 +9,7 @@ final class Store: NSWindow {
     
     init() {
         super.init(contentRect: .init(x: 0, y: 0, width: 600, height: 600), styleMask:
-            [.borderless, .miniaturizable, .closable, .titled, .unifiedTitleAndToolbar, .fullSizeContentView],
+            [.borderless, .closable, .titled, .unifiedTitleAndToolbar, .fullSizeContentView],
                    backing: .buffered, defer: false)
         titlebarAppearsTransparent = true
         titleVisibility = .hidden
@@ -17,6 +17,11 @@ final class Store: NSWindow {
         toolbar!.showsBaselineSeparator = false
         collectionBehavior = .fullScreenNone
         isReleasedWhenClosed = false
+        
+        let blur = NSVisualEffectView()
+        blur.translatesAutoresizingMaskIntoConstraints = false
+        blur.material = .titlebar
+        contentView!.addSubview(blur)
         
         let restore = Button(text: .key("Restore.purchases"), background: .systemPink, foreground: .controlTextColor)
         restore.target = self
@@ -36,6 +41,11 @@ final class Store: NSWindow {
         scroll.verticalScroller!.controlSize = .mini
         contentView!.addSubview(scroll)
         self.scroll = scroll
+        
+        blur.leftAnchor.constraint(equalTo: contentView!.leftAnchor).isActive = true
+        blur.rightAnchor.constraint(equalTo: contentView!.rightAnchor).isActive = true
+        blur.topAnchor.constraint(equalTo: contentView!.topAnchor).isActive = true
+        blur.bottomAnchor.constraint(equalTo: separator.topAnchor).isActive = true
         
         restore.rightAnchor.constraint(equalTo: contentView!.rightAnchor, constant: -20).isActive = true
         restore.topAnchor.constraint(equalTo: contentView!.topAnchor, constant: 20).isActive = true
@@ -153,9 +163,8 @@ private final class Item: NSView {
         
         let image = NSImageView(image: NSImage(named: purchase.image)!)
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.imageScaling = .scaleProportionallyDown
-        image.wantsLayer = true
-        image.layer!.cornerRadius = 12
+        image.imageScaling = .scaleProportionallyUpOrDown
+        image.contentTintColor = .systemPink
         addSubview(image)
         
         let title = Label(purchase.title, .bold(6))
@@ -182,24 +191,24 @@ private final class Item: NSView {
             purchased.widthAnchor.constraint(equalToConstant: 30).isActive = true
             purchased.heightAnchor.constraint(equalToConstant: 30).isActive = true
         } else {
-//            let formatter = NumberFormatter()
-//            formatter.numberStyle = .currencyISOCode
-//            formatter.locale = product.priceLocale
-//
-//            let price = Label(formatter.string(from: product.price)!, .medium(-2))
-//            addSubview(price)
-//
-//            let purchase = ButtonPurchase(.key("Purchase"), product: product)
-//            addSubview(purchase)
-//            self.purchase = purchase
-//
-//            bottomAnchor.constraint(greaterThanOrEqualTo: purchase.bottomAnchor, constant: 60).isActive = true
-//
-//            price.centerXAnchor.constraint(equalTo: image.centerXAnchor).isActive = true
-//            price.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 30).isActive = true
-//
-//            purchase.topAnchor.constraint(equalTo: price.bottomAnchor, constant: 10).isActive = true
-//            purchase.centerXAnchor.constraint(equalTo: price.centerXAnchor).isActive = true
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .currencyISOCode
+            formatter.locale = product.priceLocale
+
+            let price = Label(formatter.string(from: product.price)!, .medium(-2))
+            addSubview(price)
+
+            let purchase = Button(text: .key("Purchase"), background: .systemBlue, foreground: .controlTextColor)
+            addSubview(purchase)
+            self.purchase = purchase
+
+            bottomAnchor.constraint(greaterThanOrEqualTo: purchase.bottomAnchor, constant: 60).isActive = true
+
+            price.centerXAnchor.constraint(equalTo: image.centerXAnchor).isActive = true
+            price.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 30).isActive = true
+
+            purchase.topAnchor.constraint(equalTo: price.bottomAnchor, constant: 10).isActive = true
+            purchase.centerXAnchor.constraint(equalTo: price.centerXAnchor).isActive = true
         }
 
         widthAnchor.constraint(equalToConstant: 400).isActive = true
@@ -208,8 +217,8 @@ private final class Item: NSView {
         height.priority = .defaultLow
         height.isActive = true
         
-        image.widthAnchor.constraint(equalToConstant: 120).isActive = true
-        image.heightAnchor.constraint(equalToConstant: 156).isActive = true
+        image.widthAnchor.constraint(equalToConstant: 90).isActive = true
+        image.heightAnchor.constraint(equalToConstant: 90).isActive = true
         image.leftAnchor.constraint(equalTo: leftAnchor, constant: 40).isActive = true
         image.topAnchor.constraint(equalTo: topAnchor, constant: 60).isActive = true
         

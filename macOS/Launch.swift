@@ -43,6 +43,7 @@ final class Launch: NSWindow {
         effect.addSubview(open)
         
         let scroll = Scroll()
+        scroll.drawsBackground = false
         scroll.hasVerticalScroller = true
         scroll.verticalScroller!.controlSize = .mini
         second.addSubview(scroll)
