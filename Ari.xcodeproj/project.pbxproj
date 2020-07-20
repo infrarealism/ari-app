@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		CE00286424AA10E700F45C8B /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00286324AA10E700F45C8B /* Create.swift */; };
 		CE08F0E224C053EE001E033A /* Pages.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08F0E124C053EE001E033A /* Pages.swift */; };
+		CE0E87CD24C5FC0900FC9994 /* Blob.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0E87CC24C5FC0900FC9994 /* Blob.swift */; };
 		CE20ADFC24B9C8AC00007F5F /* Segmented.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE20ADFB24B9C8AC00007F5F /* Segmented.swift */; };
 		CE3EAF1424A7649B00D29C60 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3EAF1324A7649B00D29C60 /* App.swift */; };
 		CE3EAF1624A7649B00D29C60 /* Launch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3EAF1524A7649B00D29C60 /* Launch.swift */; };
@@ -46,6 +47,7 @@
 /* Begin PBXFileReference section */
 		CE00286324AA10E700F45C8B /* Create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Create.swift; sourceTree = "<group>"; };
 		CE08F0E124C053EE001E033A /* Pages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pages.swift; sourceTree = "<group>"; };
+		CE0E87CC24C5FC0900FC9994 /* Blob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blob.swift; sourceTree = "<group>"; };
 		CE20ADFB24B9C8AC00007F5F /* Segmented.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Segmented.swift; sourceTree = "<group>"; };
 		CE3EAF1024A7649B00D29C60 /* Ari.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ari.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE3EAF1324A7649B00D29C60 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				CE3EAF1C24A7649C00D29C60 /* Info.plist */,
 				CE3EAF1324A7649B00D29C60 /* App.swift */,
 				CE431B6324B1EAE6007B1C53 /* Bar.swift */,
+				CE0E87CC24C5FC0900FC9994 /* Blob.swift */,
 				CE87193324A9D15000D5BD55 /* Bookmark.swift */,
 				CE59C4D324A8C8190068C153 /* Button.swift */,
 				CE59C4D124A8C7FD0068C153 /* Control.swift */,
@@ -268,6 +271,7 @@
 				CE3EAF1424A7649B00D29C60 /* App.swift in Sources */,
 				CEEDB19B24ACBE0A00969FD4 /* Scroll.swift in Sources */,
 				CEE0FD1324B89186006B7CF6 /* Color.swift in Sources */,
+				CE0E87CD24C5FC0900FC9994 /* Blob.swift in Sources */,
 				CE8524D824C4913E00F84E60 /* Purchases.swift in Sources */,
 				CEB2AE0024BCB1EE000ED8FD /* Field.swift in Sources */,
 				CE8524D624C4911600F84E60 /* Store.swift in Sources */,

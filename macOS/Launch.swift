@@ -5,7 +5,7 @@ final class Launch: NSWindow {
     private var subs = Set<AnyCancellable>()
     
     init() {
-        super.init(contentRect: .init(x: 0, y: 0, width: 500, height: 400), styleMask:
+        super.init(contentRect: .init(x: 0, y: 0, width: 600, height: 500), styleMask:
             [.borderless, .closable, .titled, .unifiedTitleAndToolbar, .fullSizeContentView],
                    backing: .buffered, defer: false)
         titlebarAppearsTransparent = true
@@ -19,6 +19,11 @@ final class Launch: NSWindow {
         effect.translatesAutoresizingMaskIntoConstraints = false
         effect.material = .menu
         contentView = effect
+        
+        let logo = NSImageView(image: NSImage(named: "logo")!)
+        logo.translatesAutoresizingMaskIntoConstraints = false
+        logo.imageScaling = .scaleNone
+        effect.addSubview(logo)
         
         let second = NSVisualEffectView()
         second.translatesAutoresizingMaskIntoConstraints = false
@@ -34,13 +39,10 @@ final class Launch: NSWindow {
         subtitle.textColor = .secondaryLabelColor
         effect.addSubview(subtitle)
         
-        let new = Button(icon: "plus.square.fill", color: .systemPink)
+        let new = Button(icon: "plus.circle.fill", color: .systemPink)
         new.target = self
         new.action = #selector(self.new)
         effect.addSubview(new)
-        
-        let open = Label(.key("Open"), .bold(10))
-        effect.addSubview(open)
         
         let scroll = Scroll()
         scroll.drawsBackground = false
@@ -48,24 +50,24 @@ final class Launch: NSWindow {
         scroll.verticalScroller!.controlSize = .mini
         second.addSubview(scroll)
         
-        title.topAnchor.constraint(equalTo: effect.topAnchor, constant: 50).isActive = true
-        title.leftAnchor.constraint(equalTo: effect.leftAnchor, constant: 20).isActive = true
+        logo.centerXAnchor.constraint(equalTo: effect.centerXAnchor).isActive = true
+        logo.topAnchor.constraint(equalTo: effect.topAnchor, constant: 70).isActive = true
         
-        subtitle.leftAnchor.constraint(equalTo: title.leftAnchor).isActive = true
+        new.centerXAnchor.constraint(equalTo: effect.centerXAnchor).isActive = true
+        new.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 10).isActive = true
+        
+        title.centerXAnchor.constraint(equalTo: effect.centerXAnchor).isActive = true
+        title.topAnchor.constraint(equalTo: new.bottomAnchor, constant: 10).isActive = true
+        
+        subtitle.centerXAnchor.constraint(equalTo: effect.centerXAnchor).isActive = true
         subtitle.topAnchor.constraint(equalTo: title.bottomAnchor).isActive = true
-        
-        new.rightAnchor.constraint(equalTo: effect.rightAnchor, constant: -50).isActive = true
-        new.topAnchor.constraint(equalTo: effect.topAnchor, constant: 60).isActive = true
-        
-        open.topAnchor.constraint(equalTo: subtitle.bottomAnchor, constant: 50).isActive = true
-        open.leftAnchor.constraint(equalTo: title.leftAnchor).isActive = true
         
         separator.leftAnchor.constraint(equalTo: effect.leftAnchor, constant: 1).isActive = true
         separator.rightAnchor.constraint(equalTo: effect.rightAnchor, constant: -1).isActive = true
         separator.heightAnchor.constraint(equalToConstant: 1).isActive = true
         separator.bottomAnchor.constraint(equalTo: second.topAnchor).isActive = true
         
-        second.topAnchor.constraint(equalTo: open.bottomAnchor, constant: 20).isActive = true
+        second.topAnchor.constraint(equalTo: subtitle.bottomAnchor, constant: 40).isActive = true
         second.leftAnchor.constraint(equalTo: effect.leftAnchor).isActive = true
         second.bottomAnchor.constraint(equalTo: effect.bottomAnchor).isActive = true
         second.rightAnchor.constraint(equalTo: effect.rightAnchor).isActive = true

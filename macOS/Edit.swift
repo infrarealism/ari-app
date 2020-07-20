@@ -24,20 +24,14 @@ final class Edit: NSView {
         scroll.documentView = text
         self.text = text
         
-        let link = Button(icon: "link.circle", color: .controlTextColor)
+        let link = Blob(icon: "link.circle")
         link.target = self
         link.action = #selector(self.link)
-        link.wantsLayer = true
-        link.layer!.backgroundColor = NSColor.systemBlue.cgColor
-        link.layer!.cornerRadius = 20
         addSubview(link)
 
-        let image = Button(icon: "photo", color: .controlTextColor)
+        let image = Blob(icon: "photo")
         image.target = self
         image.action = #selector(self.image)
-        image.wantsLayer = true
-        image.layer!.backgroundColor = NSColor.systemBlue.cgColor
-        image.layer!.cornerRadius = 20
         addSubview(image)
         
         scroll.topAnchor.constraint(equalTo: topAnchor).isActive = true
@@ -49,7 +43,7 @@ final class Edit: NSView {
         image.rightAnchor.constraint(equalTo: rightAnchor, constant: -30).isActive = true
         
         link.topAnchor.constraint(equalTo: image.topAnchor).isActive = true
-        link.rightAnchor.constraint(equalTo: image.leftAnchor, constant: -20).isActive = true
+        link.rightAnchor.constraint(equalTo: image.leftAnchor, constant: -10).isActive = true
         
         NotificationCenter.default.publisher(for: NSTextView.didChangeNotification, object: text)
             .debounce(for: .seconds(1), scheduler: DispatchQueue.main)
