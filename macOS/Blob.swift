@@ -18,7 +18,6 @@ final class Blob: Control {
         let drop = NSImageView(image: NSImage(named: "shadow")!)
         drop.translatesAutoresizingMaskIntoConstraints = false
         drop.imageScaling = .scaleNone
-        drop.contentTintColor = .systemPink
         addSubview(drop)
         self.drop = drop
         

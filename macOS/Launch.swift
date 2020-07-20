@@ -168,7 +168,7 @@ private final class Item: Control {
     }
     
     override func hoverOn() {
-        layer!.backgroundColor = NSColor.selectedControlColor.cgColor
+        layer!.backgroundColor = NSColor.systemPink.cgColor
     }
     
     override func hoverOff() {

@@ -39,11 +39,11 @@ final class Edit: NSView {
         scroll.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         scroll.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         
-        image.topAnchor.constraint(equalTo: topAnchor, constant: 30).isActive = true
-        image.rightAnchor.constraint(equalTo: rightAnchor, constant: -30).isActive = true
+        image.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
+        image.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
         
         link.topAnchor.constraint(equalTo: image.topAnchor).isActive = true
-        link.rightAnchor.constraint(equalTo: image.leftAnchor, constant: -10).isActive = true
+        link.rightAnchor.constraint(equalTo: image.leftAnchor, constant: -5).isActive = true
         
         NotificationCenter.default.publisher(for: NSTextView.didChangeNotification, object: text)
             .debounce(for: .seconds(1), scheduler: DispatchQueue.main)
