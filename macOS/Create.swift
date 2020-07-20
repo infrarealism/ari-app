@@ -142,7 +142,7 @@ final class Create: NSWindow {
             _purchase.centerYAnchor.constraint(equalTo: purchase.centerYAnchor).isActive = true
             
             session.user.sink {
-                purchase.isHidden = $0.purchases.contains(Purchase.blog.rawValue)
+                purchase.isHidden = $0.purchases.contains(.blog)
             }.store(in: &subs)
         }
         
@@ -240,7 +240,7 @@ final class Create: NSWindow {
     
     @objc
     private func blog() {
-        if session.user.value.purchases.contains(Purchase.blog.rawValue) {
+        if session.user.value.purchases.contains(.blog) {
             _blog.selected = true
             _single.selected = false
         } else {

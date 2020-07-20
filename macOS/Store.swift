@@ -149,26 +149,26 @@ private final class Item: NSView {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         
-        let purchase = Purchase(rawValue: product.productIdentifier)
+        let purchase = Purchase(rawValue: product.productIdentifier)!
         
-        let image = NSImageView(image: purchase.flatMap { NSImage(named: $0.image) } ?? NSImage())
+        let image = NSImageView(image: NSImage(named: purchase.image)!)
         image.translatesAutoresizingMaskIntoConstraints = false
         image.imageScaling = .scaleProportionallyDown
         image.wantsLayer = true
         image.layer!.cornerRadius = 12
         addSubview(image)
         
-        let title = Label(purchase?.title ?? "", .bold(6))
+        let title = Label(purchase.title, .bold(6))
         title.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         addSubview(title)
         
-        let subtitle = Label(purchase?.subtitle ?? "", .medium(2))
+        let subtitle = Label(purchase.subtitle, .medium(2))
         subtitle.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         subtitle.textColor = .secondaryLabelColor
         subtitle.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         addSubview(subtitle)
         
-        if session.user.value.purchases.contains(product.productIdentifier) {
+        if session.user.value.purchases.contains(Purchase(rawValue: product.productIdentifier)!) {
             let purchased = NSImageView(image: NSImage(named: "purchased")!)
             purchased.translatesAutoresizingMaskIntoConstraints = false
             purchased.imageScaling = .scaleNone

@@ -52,7 +52,7 @@ final class Purchases: NSObject, SKRequestDelegate, SKProductsRequestDelegate, S
                 SKPaymentQueue.default().finishTransaction(transation)
             case .restored, .purchased:
                 DispatchQueue.main.async {
-                    session.user.value.purchases.insert(transation.payment.productIdentifier)
+                    session.user.value.purchases.insert(Purchase(rawValue: transation.payment.productIdentifier)!)
                 }
                 SKPaymentQueue.default().finishTransaction(transation)
             default:
