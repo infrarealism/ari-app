@@ -11,14 +11,10 @@ enum Purchase: String, CaseIterable, Codable {
     }
     
     var title: String {
-        switch self {
-        case .blog: return ""
-        }
+        .key(rawValue + ".title")
     }
     
     var subtitle: String {
-        switch self {
-        case .blog: return ""
-        }
+        .key(rawValue + ".subtitle")
     }
 }

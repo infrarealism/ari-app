@@ -23,7 +23,10 @@ final class Store: NSWindow {
         blur.material = .titlebar
         contentView!.addSubview(blur)
         
-        let restore = Button(text: .key("Restore.purchases"), background: .systemPink, foreground: .controlTextColor)
+        let title = Label(.key("Store"), .bold(6))
+        contentView!.addSubview(title)
+        
+        let restore = Button(text: .key("Restore.purchases"), background: .systemBlue, foreground: .controlTextColor)
         restore.target = self
         restore.action = #selector(self.restore)
         contentView!.addSubview(restore)
@@ -47,16 +50,19 @@ final class Store: NSWindow {
         blur.topAnchor.constraint(equalTo: contentView!.topAnchor).isActive = true
         blur.bottomAnchor.constraint(equalTo: separator.topAnchor).isActive = true
         
-        restore.rightAnchor.constraint(equalTo: contentView!.rightAnchor, constant: -20).isActive = true
-        restore.topAnchor.constraint(equalTo: contentView!.topAnchor, constant: 20).isActive = true
+        title.topAnchor.constraint(equalTo: contentView!.topAnchor, constant: 40).isActive = true
+        title.leftAnchor.constraint(equalTo: contentView!.leftAnchor, constant: 20).isActive = true
         
-        subtitle.leftAnchor.constraint(equalTo: contentView!.leftAnchor, constant: 20).isActive = true
-        subtitle.topAnchor.constraint(equalTo: contentView!.topAnchor, constant: 40).isActive = true
-        subtitle.rightAnchor.constraint(lessThanOrEqualTo: restore.leftAnchor, constant: -10).isActive = true
+        restore.centerXAnchor.constraint(equalTo: contentView!.centerXAnchor).isActive = true
+        restore.topAnchor.constraint(equalTo: subtitle.bottomAnchor, constant: 20).isActive = true
+        
+        subtitle.leftAnchor.constraint(equalTo: title.leftAnchor).isActive = true
+        subtitle.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 4).isActive = true
+        subtitle.rightAnchor.constraint(lessThanOrEqualTo: contentView!.rightAnchor, constant: -20).isActive = true
         
         separator.leftAnchor.constraint(equalTo: contentView!.leftAnchor).isActive = true
         separator.rightAnchor.constraint(equalTo: contentView!.rightAnchor).isActive = true
-        separator.topAnchor.constraint(equalTo: subtitle.bottomAnchor, constant: 20).isActive = true
+        separator.topAnchor.constraint(equalTo: restore.bottomAnchor, constant: 20).isActive = true
         separator.heightAnchor.constraint(equalToConstant: 1).isActive = true
         
         scroll.topAnchor.constraint(equalTo: separator.bottomAnchor).isActive = true
@@ -164,14 +170,14 @@ private final class Item: NSView {
         let image = NSImageView(image: NSImage(named: purchase.image)!)
         image.translatesAutoresizingMaskIntoConstraints = false
         image.imageScaling = .scaleProportionallyUpOrDown
-        image.contentTintColor = .systemPink
+        image.contentTintColor = .systemIndigo
         addSubview(image)
         
-        let title = Label(purchase.title, .bold(6))
+        let title = Label(purchase.title, .bold(4))
         title.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         addSubview(title)
         
-        let subtitle = Label(purchase.subtitle, .medium(2))
+        let subtitle = Label(purchase.subtitle, .medium())
         subtitle.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         subtitle.textColor = .secondaryLabelColor
         subtitle.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
@@ -195,10 +201,10 @@ private final class Item: NSView {
             formatter.numberStyle = .currencyISOCode
             formatter.locale = product.priceLocale
 
-            let price = Label(formatter.string(from: product.price)!, .medium(-2))
+            let price = Label(formatter.string(from: product.price)!, .medium())
             addSubview(price)
 
-            let purchase = Button(text: .key("Purchase"), background: .systemBlue, foreground: .controlTextColor)
+            let purchase = Button(text: .key("Purchase"), background: .systemPink, foreground: .controlTextColor)
             addSubview(purchase)
             self.purchase = purchase
 
@@ -217,17 +223,17 @@ private final class Item: NSView {
         height.priority = .defaultLow
         height.isActive = true
         
-        image.widthAnchor.constraint(equalToConstant: 90).isActive = true
-        image.heightAnchor.constraint(equalToConstant: 90).isActive = true
-        image.leftAnchor.constraint(equalTo: leftAnchor, constant: 40).isActive = true
+        image.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        image.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        image.leftAnchor.constraint(equalTo: leftAnchor, constant: 50).isActive = true
         image.topAnchor.constraint(equalTo: topAnchor, constant: 60).isActive = true
         
-        title.leftAnchor.constraint(equalTo: image.rightAnchor, constant: 30).isActive = true
+        title.leftAnchor.constraint(equalTo: image.rightAnchor, constant: 40).isActive = true
         title.rightAnchor.constraint(lessThanOrEqualTo: rightAnchor, constant: -10).isActive = true
         title.topAnchor.constraint(equalTo: image.topAnchor, constant: 5).isActive = true
         
-        subtitle.leftAnchor.constraint(equalTo: image.rightAnchor, constant: 30).isActive = true
-        subtitle.rightAnchor.constraint(lessThanOrEqualTo: rightAnchor, constant: -10).isActive = true
-        subtitle.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 2).isActive = true
+        subtitle.leftAnchor.constraint(equalTo: image.rightAnchor, constant: 40).isActive = true
+        subtitle.rightAnchor.constraint(lessThanOrEqualTo: rightAnchor, constant: -20).isActive = true
+        subtitle.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 4).isActive = true
     }
 }

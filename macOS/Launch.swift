@@ -34,7 +34,7 @@ final class Launch: NSWindow {
         subtitle.textColor = .secondaryLabelColor
         effect.addSubview(subtitle)
         
-        let new = Button(icon: "plus.square.fill", color: .systemBlue)
+        let new = Button(icon: "plus.square.fill", color: .systemPink)
         new.target = self
         new.action = #selector(self.new)
         effect.addSubview(new)

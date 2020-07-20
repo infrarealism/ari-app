@@ -32,16 +32,16 @@ final class Button: Control {
         super.init()
         wantsLayer = true
         layer!.backgroundColor = background.cgColor
-        layer!.cornerRadius = 14
+        layer!.cornerRadius = 15
         
         let label = Label(text, .medium())
         label.textColor = foreground
         addSubview(label)
         
-        heightAnchor.constraint(equalToConstant: 28).isActive = true
+        heightAnchor.constraint(equalToConstant: 30).isActive = true
         rightAnchor.constraint(equalTo: label.rightAnchor, constant: 20).isActive = true
         
-        label.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        label.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -1).isActive = true
         label.leftAnchor.constraint(equalTo: leftAnchor, constant: 20).isActive = true
     }
     

@@ -50,7 +50,7 @@ final class Menu: NSMenu {
     
     private var store: NSMenuItem {
         menu(.key("Store"), items: [
-            .init(title: .key("In.apps"), action: #selector(NSApp.purchases), keyEquivalent: "")])
+            .init(title: .key("In.apps"), action: #selector(NSApp.purchases), keyEquivalent: "s")])
     }
     
     private var window: NSMenuItem {

@@ -110,8 +110,8 @@ final class Create: NSWindow {
             let purchase = NSView()
             purchase.translatesAutoresizingMaskIntoConstraints = false
             purchase.wantsLayer = true
-            purchase.layer!.backgroundColor = NSColor.systemPink.cgColor
-            purchase.layer!.cornerRadius = 10
+            purchase.layer!.backgroundColor = NSColor.systemIndigo.cgColor
+            purchase.layer!.cornerRadius = 11
             $0.addSubview(purchase)
             
             let _purchase = Label(.key("In.app"), .regular(-2))
@@ -135,10 +135,10 @@ final class Create: NSWindow {
             
             purchase.topAnchor.constraint(equalTo: _blog.bottomAnchor, constant: -35).isActive = true
             purchase.centerXAnchor.constraint(equalTo: _blog.centerXAnchor).isActive = true
-            purchase.rightAnchor.constraint(equalTo: _purchase.rightAnchor, constant: 6).isActive = true
-            purchase.heightAnchor.constraint(equalToConstant: 20).isActive = true
+            purchase.rightAnchor.constraint(equalTo: _purchase.rightAnchor, constant: 8).isActive = true
+            purchase.heightAnchor.constraint(equalToConstant: 22).isActive = true
             
-            _purchase.leftAnchor.constraint(equalTo: purchase.leftAnchor, constant: 6).isActive = true
+            _purchase.leftAnchor.constraint(equalTo: purchase.leftAnchor, constant: 8).isActive = true
             _purchase.centerYAnchor.constraint(equalTo: purchase.centerYAnchor).isActive = true
             
             session.user.sink {
