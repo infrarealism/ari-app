@@ -49,7 +49,7 @@ final class Create: NSWindow {
         let bar = NSView()
         bar.translatesAutoresizingMaskIntoConstraints = false
         bar.wantsLayer = true
-        bar.layer!.backgroundColor = NSColor.systemBlue.cgColor
+        bar.layer!.backgroundColor = NSColor.systemPink.cgColor
         progress.addSubview(bar)
         
         let pages = Pages()
@@ -64,13 +64,13 @@ final class Create: NSWindow {
             $0.addSubview(name)
             self.name = name
             
-            let next = Button(icon: "arrow.right.circle.fill", color: .systemBlue)
+            let next = Button(icon: "arrow.right.circle.fill", color: .systemPink)
             next.target = pages
             next.action = #selector(pages.next)
             $0.addSubview(next)
             
             title.topAnchor.constraint(equalTo: $0.topAnchor, constant: 100).isActive = true
-            title.leftAnchor.constraint(equalTo: $0.leftAnchor, constant: 20).isActive = true
+            title.leftAnchor.constraint(equalTo: $0.leftAnchor, constant: 21).isActive = true
             
             name.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 20).isActive = true
             name.leftAnchor.constraint(equalTo: title.leftAnchor).isActive = true
@@ -97,12 +97,12 @@ final class Create: NSWindow {
             $0.addSubview(_blog)
             self._blog = _blog
 
-            let next = Button(icon: "arrow.right.circle.fill", color: .systemBlue)
+            let next = Button(icon: "arrow.right.circle.fill", color: .systemPink)
             next.target = pages
             next.action = #selector(pages.next)
             $0.addSubview(next)
 
-            let previous = Button(icon: "arrow.left.circle.fill", color: .systemBlue)
+            let previous = Button(icon: "arrow.left.circle.fill", color: .systemPink)
             previous.target = pages
             previous.action = #selector(pages.previous)
             $0.addSubview(previous)
@@ -119,7 +119,7 @@ final class Create: NSWindow {
             purchase.addSubview(_purchase)
 
             type.topAnchor.constraint(equalTo: $0.topAnchor, constant: 100).isActive = true
-            type.leftAnchor.constraint(equalTo: $0.leftAnchor, constant: 20).isActive = true
+            type.leftAnchor.constraint(equalTo: $0.leftAnchor, constant: 21).isActive = true
 
             _single.centerYAnchor.constraint(equalTo: $0.centerYAnchor, constant: 20).isActive = true
             _single.rightAnchor.constraint(equalTo: $0.centerXAnchor, constant: -30).isActive = true
@@ -161,7 +161,7 @@ final class Create: NSWindow {
             $0.addSubview(_folder)
             self._folder = _folder
             
-            let previous = Button(icon: "arrow.left.circle.fill", color: .systemBlue)
+            let previous = Button(icon: "arrow.left.circle.fill", color: .systemPink)
             previous.target = pages
             previous.action = #selector(pages.previous)
             $0.addSubview(previous)
@@ -174,7 +174,7 @@ final class Create: NSWindow {
             self._finish = _finish
             
             location.topAnchor.constraint(equalTo: $0.topAnchor, constant: 100).isActive = true
-            location.leftAnchor.constraint(equalTo: $0.leftAnchor, constant: 20).isActive = true
+            location.leftAnchor.constraint(equalTo: $0.leftAnchor, constant: 21).isActive = true
             
             _folder.centerXAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
             _folder.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -15).isActive = true
