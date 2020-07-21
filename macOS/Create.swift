@@ -226,7 +226,7 @@ final class Create: NSWindow {
 private final class Segment: Control {
     var selected = false {
         didSet {
-            icon.contentTintColor = selected ? .systemPink : .quaternaryLabelColor
+            icon.contentTintColor = selected ? .systemPink : .disabledControlTextColor
             label.textColor = selected ? .labelColor : .secondaryLabelColor
         }
     }
@@ -241,7 +241,7 @@ private final class Segment: Control {
         let icon = NSImageView(image: NSImage(named: icon)!)
         icon.translatesAutoresizingMaskIntoConstraints = false
         icon.imageScaling = .scaleNone
-        icon.contentTintColor = .quaternaryLabelColor
+        icon.contentTintColor = .disabledControlTextColor
         addSubview(icon)
         self.icon = icon
         
@@ -257,7 +257,7 @@ private final class Segment: Control {
         icon.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -20).isActive = true
         
         label.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -40).isActive = true
+        label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30).isActive = true
     }
 }
 
