@@ -5,6 +5,7 @@ import Combine
 
 final class Session {
     var user = CurrentValueSubject<User, Never>(.init())
+    private var sub: AnyCancellable?
     private let _bookmarks = Balam("Bookmarks")
     private let _websites = Balam("Websites")
     private let _user = Balam("User")
@@ -29,6 +30,9 @@ final class Session {
                 self._user.add(self.user.value)
             }
             sub?.cancel()
+            self.sub = self.user.dropFirst().sink {
+                self._user.update($0)
+            }
         }
     }
     

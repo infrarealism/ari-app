@@ -106,8 +106,7 @@ private final class Tint: NSView {
         }
     }
     
-    @objc
-    private func select(circle: Circle) {
+    @objc private func select(circle: Circle) {
         select(color: circle.color)
         color.send(circle.color)
     }

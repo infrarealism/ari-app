@@ -21,7 +21,6 @@ class Control: NSView {
     
     override func mouseDown(with: NSEvent) {
         guard enabled else { return }
-        resetCursorRects()
         hoverOn()
     }
     

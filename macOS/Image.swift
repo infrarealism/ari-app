@@ -189,8 +189,7 @@ final class Image: Pop {
         pages.rightAnchor.constraint(equalTo: contentViewController!.view.rightAnchor).isActive = true
     }
     
-    @objc
-    private func submit() {
+    @objc private func submit() {
         if duplicate.state == .on {
             images[segmented.selected.value].write(main.url.appendingPathComponent(url.lastPathComponent))
             send(url: url.lastPathComponent)

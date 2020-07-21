@@ -29,7 +29,7 @@ Purchases.are = "Purchases are non-consumable, you pay for them only once.\nThey
 Loading = "Loading";
 Purchase = "Purchase";
 ari.app.blog.title = "Blog";
-ari.app.blog.subtitle = "This In-App Purchase enables creating a Blog.\n\nBlogs are static websites that allows you to add multiple entries and constantly update with new content.";
+ari.app.blog.subtitle = "This In-App Purchase enables creating a Blog.\n\nBlogs are static website that you can constantly update with new content or add new entries.";
 
 App = "App";
 Open = "Open";

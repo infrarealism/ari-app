@@ -3,7 +3,7 @@ import Combine
 
 final class Pages: NSView {
     let progress = CurrentValueSubject<CGFloat, Never>(0)
-    
+
     private weak var middle: NSLayoutConstraint! {
         didSet {
             oldValue?.isActive = false
@@ -35,13 +35,11 @@ final class Pages: NSView {
         }
     }
     
-    @objc
-    func next() {
+    @objc func next() {
         center(subviews.firstIndex(of: middle.firstItem as! NSView)! + 1)
     }
     
-    @objc
-    func previous() {
+    @objc func previous() {
         center(subviews.firstIndex(of: middle.firstItem as! NSView)! - 1)
     }
     

@@ -67,16 +67,14 @@ final class Edit: NSView {
         }
     }
     
-    @objc
-    private func link(_ button: Button) {
+    @objc private func link(_ button: Button) {
         let link = Link(relative: button)
         link.subscription = link.sink { [weak self] in
             self?.text.insertText($0, replacementRange: self?.text.selectedRange() ?? .init())
         }
     }
     
-    @objc
-    private func image(_ button: Button) {
+    @objc private func image(_ button: Button) {
         let browse = NSOpenPanel()
         browse.message = .key("Add.image")
         browse.allowedFileTypes = NSImage.imageTypes

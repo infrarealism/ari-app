@@ -64,8 +64,7 @@ final class Segmented: NSView {
         }
     }
     
-    @objc
-    private func select(item: Item) {
+    @objc private func select(item: Item) {
         let index = subviews.compactMap { $0 as? Item }.firstIndex(of: item)!
         guard index != selected.value else { return }
         selected.value = index

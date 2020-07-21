@@ -66,25 +66,21 @@ final class Main: NSWindow {
         view.bottomAnchor.constraint(equalTo: contentView!.bottomAnchor, constant: -1).isActive = true
     }
     
-    @objc
-    private func edit() {
+    @objc private func edit() {
         let edit = Edit(main: self)
         select(control: bar.edit, view: edit)
         makeFirstResponder(edit.text)
     }
     
-    @objc
-    private func style() {
+    @objc private func style() {
         select(control: bar.style, view: Design(main: self))
     }
     
-    @objc
-    private func preview() {
+    @objc private func preview() {
         select(control: bar.preview, view: Web(main: self))
     }
     
-    @objc
-    private func export() {
+    @objc private func export() {
         select(control: bar.export, view: Web(main: self))
     }
 }

@@ -6,6 +6,11 @@ final class Purchases: NSObject, SKRequestDelegate, SKProductsRequestDelegate, S
     private(set) var error = PassthroughSubject<String, Never>()
     private weak var request: SKProductsRequest?
     
+    deinit {
+        request?.cancel()
+        SKPaymentQueue.default().remove(self)
+    }
+    
     func load() {
         SKPaymentQueue.default().add(self)
 
@@ -13,11 +18,6 @@ final class Purchases: NSObject, SKRequestDelegate, SKProductsRequestDelegate, S
         request.delegate = self
         self.request = request
         request.start()
-    }
-    
-    deinit {
-        request?.cancel()
-        SKPaymentQueue.default().remove(self)
     }
     
     func productsRequest(_: SKProductsRequest, didReceive: SKProductsResponse) {

@@ -117,14 +117,12 @@ final class Launch: NSWindow {
         super.close()
     }
     
-    @objc
-    private func new() {
+    @objc private func new() {
         (NSApp.windows.first { $0 is Create } ?? Create()).makeKeyAndOrderFront(nil)
         close()
     }
     
-    @objc
-    private func select(item: Item) {
+    @objc private func select(item: Item) {
         item.bookmark.access.map { url in
             session.website(item.bookmark).sink { [weak self] website in
                 (NSApp.windows.compactMap { $0 as? Main }.first { $0.website.id == website.id } ?? Main(url: url,  website: website)).makeKeyAndOrderFront(nil)

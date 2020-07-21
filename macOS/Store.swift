@@ -92,7 +92,7 @@ final class Store: NSWindow {
                 
                 let item = Item(product: $0)
                 item.purchase?.target = self
-//                item.purchase?.action = #selector(self.purchase)
+                item.purchase?.action = #selector(self.purchase)
                 scroll.add(item)
                 
                 item.centerXAnchor.constraint(equalTo: self.contentView!.centerXAnchor).isActive = true
@@ -144,10 +144,10 @@ final class Store: NSWindow {
         label.topAnchor.constraint(equalTo: scroll.top, constant: 30).isActive = true
     }
     
-//    @objc private func purchase(_ button: ButtonPurchase) {
-//        loading()
-//        purchases.purchase(button.product)
-//    }
+    @objc private func purchase(_ button: Button) {
+        loading()
+        purchases.purchase((button.superview as! Item).product)
+    }
     
     @objc private func restore() {
         loading()
@@ -157,7 +157,7 @@ final class Store: NSWindow {
 
 private final class Item: NSView {
     private(set) weak var purchase: Button?
-    private let product: SKProduct
+    let product: SKProduct
     
     required init?(coder: NSCoder) { nil }
     init(product: SKProduct) {
@@ -184,10 +184,10 @@ private final class Item: NSView {
         addSubview(subtitle)
         
         if session.user.value.purchases.contains(Purchase(rawValue: product.productIdentifier)!) {
-            let purchased = NSImageView(image: NSImage(named: "purchased")!)
+            let purchased = NSImageView(image: NSImage(named: "checkmark.circle.fill")!)
             purchased.translatesAutoresizingMaskIntoConstraints = false
             purchased.imageScaling = .scaleNone
-            purchased.contentTintColor = .systemBlue
+            purchased.contentTintColor = .systemIndigo
             addSubview(purchased)
             
             bottomAnchor.constraint(greaterThanOrEqualTo: purchased.bottomAnchor, constant: 60).isActive = true

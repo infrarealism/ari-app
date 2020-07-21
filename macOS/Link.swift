@@ -64,8 +64,7 @@ final class Link: Pop {
         show(relative: relative)
     }
     
-    @objc
-    private func submit() {
+    @objc private func submit() {
         send("[\(titleField.stringValue)](\(urlField.stringValue))")
     }
 }

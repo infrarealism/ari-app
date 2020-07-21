@@ -10,6 +10,10 @@ final class Create: NSWindow {
     private weak var _folder: Label!
     private var subs = Set<AnyCancellable>()
     
+    deinit {
+        print("create gone")
+    }
+    
     private var bookmark: Bookmark? {
         didSet {
             guard bookmark != nil else { return }
@@ -100,13 +104,13 @@ final class Create: NSWindow {
             $0.addPrevious(pages).rightAnchor.constraint(equalTo: $0.centerXAnchor, constant: -20).isActive = true
             $0.addNext(pages).leftAnchor.constraint(equalTo: $0.centerXAnchor, constant: 20).isActive = true
             
-            _single.centerYAnchor.constraint(equalTo: $0.centerYAnchor, constant: 20).isActive = true
+            _single.centerYAnchor.constraint(equalTo: $0.centerYAnchor, constant: 10).isActive = true
             _single.rightAnchor.constraint(equalTo: $0.centerXAnchor, constant: -30).isActive = true
 
             _blog.centerYAnchor.constraint(equalTo: _single.centerYAnchor).isActive = true
             _blog.leftAnchor.constraint(equalTo: $0.centerXAnchor, constant: 30).isActive = true
 
-            purchase.topAnchor.constraint(equalTo: _blog.bottomAnchor, constant: -35).isActive = true
+            purchase.topAnchor.constraint(equalTo: _blog.bottomAnchor, constant: -25).isActive = true
             purchase.centerXAnchor.constraint(equalTo: _blog.centerXAnchor).isActive = true
             purchase.rightAnchor.constraint(equalTo: _purchase.rightAnchor, constant: 8).isActive = true
             purchase.heightAnchor.constraint(equalToConstant: 22).isActive = true
@@ -188,21 +192,18 @@ final class Create: NSWindow {
         super.close()
     }
     
-    @objc
-    private func finish() {
+    @objc private func finish() {
         bookmark!.name = name.stringValue
         Main(url: bookmark!.access!, website: session.create(_single.selected ? .single : .blog, bookmark: bookmark!)).makeKeyAndOrderFront(nil)
         close()
     }
     
-    @objc
-    private func single() {
+    @objc private func single() {
         _single.selected = true
         _blog.selected = false
     }
     
-    @objc
-    private func blog() {
+    @objc private func blog() {
         if session.user.value.purchases.contains(.blog) {
             _blog.selected = true
             _single.selected = false
@@ -211,8 +212,7 @@ final class Create: NSWindow {
         }
     }
     
-    @objc
-    private func folder() {
+    @objc private func folder() {
         let browse = NSOpenPanel()
         browse.canChooseFiles = false
         browse.canChooseDirectories = true
