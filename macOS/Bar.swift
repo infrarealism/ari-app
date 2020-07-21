@@ -1,6 +1,7 @@
 import AppKit
 
 final class Bar: NSVisualEffectView {
+    private(set) weak var title: Label!
     private(set) weak var edit: Control!
     private(set) weak var style: Control!
     private(set) weak var preview: Control!
@@ -9,10 +10,13 @@ final class Bar: NSVisualEffectView {
     required init?(coder: NSCoder) { nil }
     init() {
         super.init(frame: .zero)
+        wantsLayer = true
         translatesAutoresizingMaskIntoConstraints = false
         material = .hudWindow
         
-        widthAnchor.constraint(equalToConstant: 180).isActive = true
+        let title = Label("", .bold())
+        addSubview(title)
+        self.title = title
         
         let edit = Item(icon: "hammer", title: .key("Edit"))
         addSubview(edit)
@@ -30,6 +34,12 @@ final class Bar: NSVisualEffectView {
         export.isHidden = true
         addSubview(export)
         self.export = export
+        
+        widthAnchor.constraint(equalToConstant: 180).isActive = true
+        
+        title.topAnchor.constraint(equalTo: topAnchor, constant: 40).isActive = true
+        title.leftAnchor.constraint(equalTo: leftAnchor, constant: 20).isActive = true
+        title.rightAnchor.constraint(equalTo: rightAnchor, constant: -20).isActive = true
         
         edit.bottomAnchor.constraint(equalTo: style.topAnchor, constant: -20).isActive = true
         edit.leftAnchor.constraint(equalTo: export.leftAnchor).isActive = true
@@ -68,13 +78,13 @@ private final class Item: Control {
     
     private weak var icon: NSImageView!
     private weak var label: Label!
+    private weak var blur: NSVisualEffectView!
     
     required init?(coder: NSCoder) { nil }
     init(icon: String, title: String) {
         super.init()
         wantsLayer = true
         layer!.cornerRadius = 6
-        layer!.borderWidth = 1
         
         let icon = NSImageView(image: NSImage(named: icon)!)
         icon.translatesAutoresizingMaskIntoConstraints = false
@@ -99,14 +109,14 @@ private final class Item: Control {
     }
     
     override func hoverOn() {
-        label.textColor = .controlTextColor
-        icon.contentTintColor = .controlTextColor
-        layer!.borderColor = NSColor.controlTextColor.cgColor
+        label.textColor = .controlBackgroundColor
+        icon.contentTintColor = .controlBackgroundColor
+        layer!.backgroundColor = NSColor.labelColor.cgColor
     }
     
     override func hoverOff() {
-        label.textColor = .secondaryLabelColor
-        icon.contentTintColor = .tertiaryLabelColor
-        layer!.borderColor = .clear
+        label.textColor = .labelColor
+        icon.contentTintColor = .secondaryLabelColor
+        layer!.backgroundColor = .clear
     }
 }
