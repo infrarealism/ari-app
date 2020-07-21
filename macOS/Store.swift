@@ -169,7 +169,7 @@ private final class Item: NSView {
         
         let image = NSImageView(image: NSImage(named: purchase.image)!)
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.imageScaling = .scaleProportionallyUpOrDown
+        image.imageScaling = .scaleNone
         image.contentTintColor = .systemIndigo
         addSubview(image)
         

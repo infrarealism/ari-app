@@ -56,56 +56,35 @@ final class Create: NSWindow {
         effect.addSubview(pages)
         
         pages.page {
-            let title = Label(.key("Enter.name"), .medium())
-            $0.addSubview(title)
+            $0.title(.key("Enter.name"))
             
             let name = Field()
             name.placeholderString = .key("Website.name")
             $0.addSubview(name)
             self.name = name
             
-            let next = Button(icon: "arrow.right.circle.fill", color: .systemPink)
-            next.target = pages
-            next.action = #selector(pages.next)
-            $0.addSubview(next)
+            $0.addNext(pages).centerXAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
             
-            title.topAnchor.constraint(equalTo: $0.topAnchor, constant: 100).isActive = true
-            title.leftAnchor.constraint(equalTo: $0.leftAnchor, constant: 21).isActive = true
-            
-            name.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 20).isActive = true
-            name.leftAnchor.constraint(equalTo: title.leftAnchor).isActive = true
+            name.topAnchor.constraint(equalTo: $0.topAnchor, constant: 140).isActive = true
+            name.centerXAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
             name.widthAnchor.constraint(equalToConstant: 200).isActive = true
-            
-            next.centerXAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
-            next.bottomAnchor.constraint(equalTo: $0.bottomAnchor, constant: -30).isActive = true
         }
         
         pages.page {
-            let type = Label(.key("Enter.type"), .medium())
-            $0.addSubview(type)
+            $0.title(.key("Enter.type"))
 
-            let _single = Segment(icon: "dot.square.fill", title: .key("Single"))
+            let _single = Segment(icon: "dot.square", title: .key("Single"))
             _single.selected = true
             _single.target = self
             _single.action = #selector(single)
             $0.addSubview(_single)
             self._single = _single
 
-            let _blog = Segment(icon: "square.stack.3d.up.fill", title: .key("Blog"))
+            let _blog = Segment(icon: "square.stack.3d.up", title: .key("Blog"))
             _blog.target = self
             _blog.action = #selector(blog)
             $0.addSubview(_blog)
             self._blog = _blog
-
-            let next = Button(icon: "arrow.right.circle.fill", color: .systemPink)
-            next.target = pages
-            next.action = #selector(pages.next)
-            $0.addSubview(next)
-
-            let previous = Button(icon: "arrow.left.circle.fill", color: .systemPink)
-            previous.target = pages
-            previous.action = #selector(pages.previous)
-            $0.addSubview(previous)
             
             let purchase = NSView()
             purchase.translatesAutoresizingMaskIntoConstraints = false
@@ -118,21 +97,15 @@ final class Create: NSWindow {
             _purchase.textColor = .controlTextColor
             purchase.addSubview(_purchase)
 
-            type.topAnchor.constraint(equalTo: $0.topAnchor, constant: 100).isActive = true
-            type.leftAnchor.constraint(equalTo: $0.leftAnchor, constant: 21).isActive = true
-
+            $0.addPrevious(pages).rightAnchor.constraint(equalTo: $0.centerXAnchor, constant: -20).isActive = true
+            $0.addNext(pages).leftAnchor.constraint(equalTo: $0.centerXAnchor, constant: 20).isActive = true
+            
             _single.centerYAnchor.constraint(equalTo: $0.centerYAnchor, constant: 20).isActive = true
             _single.rightAnchor.constraint(equalTo: $0.centerXAnchor, constant: -30).isActive = true
 
             _blog.centerYAnchor.constraint(equalTo: _single.centerYAnchor).isActive = true
             _blog.leftAnchor.constraint(equalTo: $0.centerXAnchor, constant: 30).isActive = true
 
-            next.leftAnchor.constraint(equalTo: $0.centerXAnchor, constant: 20).isActive = true
-            next.bottomAnchor.constraint(equalTo: $0.bottomAnchor, constant: -30).isActive = true
-
-            previous.rightAnchor.constraint(equalTo: $0.centerXAnchor, constant: -20).isActive = true
-            previous.bottomAnchor.constraint(equalTo: $0.bottomAnchor, constant: -30).isActive = true
-            
             purchase.topAnchor.constraint(equalTo: _blog.bottomAnchor, constant: -35).isActive = true
             purchase.centerXAnchor.constraint(equalTo: _blog.centerXAnchor).isActive = true
             purchase.rightAnchor.constraint(equalTo: _purchase.rightAnchor, constant: 8).isActive = true
@@ -147,8 +120,7 @@ final class Create: NSWindow {
         }
         
         pages.page {
-            let location = Label(.key("Enter.location"), .medium())
-            $0.addSubview(location)
+            $0.title(.key("Enter.location"))
             
             let button = Button(text: .key("Select.folder"), background: .systemPink, foreground: .selectedTextColor)
             button.target = self
@@ -161,11 +133,6 @@ final class Create: NSWindow {
             $0.addSubview(_folder)
             self._folder = _folder
             
-            let previous = Button(icon: "arrow.left.circle.fill", color: .systemPink)
-            previous.target = pages
-            previous.action = #selector(pages.previous)
-            $0.addSubview(previous)
-            
             let _finish = Button(text: .key("Finish"), background: .systemPink, foreground: .selectedTextColor)
             _finish.target = self
             _finish.action = #selector(finish)
@@ -173,8 +140,7 @@ final class Create: NSWindow {
             $0.addSubview(_finish)
             self._finish = _finish
             
-            location.topAnchor.constraint(equalTo: $0.topAnchor, constant: 100).isActive = true
-            location.leftAnchor.constraint(equalTo: $0.leftAnchor, constant: 21).isActive = true
+            $0.addPrevious(pages).rightAnchor.constraint(equalTo: _finish.leftAnchor, constant: -40).isActive = true
             
             _folder.centerXAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
             _folder.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -15).isActive = true
@@ -185,17 +151,14 @@ final class Create: NSWindow {
             button.centerYAnchor.constraint(equalTo: $0.centerYAnchor, constant: 40).isActive = true
             
             _finish.centerXAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
-            _finish.centerYAnchor.constraint(equalTo: previous.centerYAnchor).isActive = true
-            
-            previous.rightAnchor.constraint(equalTo: _finish.leftAnchor, constant: -40).isActive = true
-            previous.bottomAnchor.constraint(equalTo: $0.bottomAnchor, constant: -30).isActive = true
+            _finish.centerYAnchor.constraint(equalTo: $0.bottomAnchor, constant: -50).isActive = true
         }
         
-        title.topAnchor.constraint(equalTo: effect.topAnchor, constant: 50).isActive = true
-        title.leftAnchor.constraint(equalTo: effect.leftAnchor, constant: 20).isActive = true
+        title.topAnchor.constraint(equalTo: effect.topAnchor, constant: 30).isActive = true
+        title.centerXAnchor.constraint(equalTo: effect.centerXAnchor).isActive = true
         
-        progress.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 6).isActive = true
-        progress.leftAnchor.constraint(equalTo: title.leftAnchor, constant: 3).isActive = true
+        progress.topAnchor.constraint(equalTo: effect.topAnchor, constant: 84).isActive = true
+        progress.leftAnchor.constraint(equalTo: effect.leftAnchor, constant: 23).isActive = true
         progress.widthAnchor.constraint(equalToConstant: 354).isActive = true
         progress.heightAnchor.constraint(equalToConstant: 6).isActive = true
         
@@ -295,5 +258,33 @@ private final class Segment: Control {
         
         label.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -40).isActive = true
+    }
+}
+
+private extension NSView {
+    func title(_ text: String) {
+        let label = Label(text, .regular())
+        addSubview(label)
+        
+        label.topAnchor.constraint(equalTo: topAnchor, constant: 62).isActive = true
+        label.leftAnchor.constraint(equalTo: leftAnchor, constant: 21).isActive = true
+    }
+    
+    func addNext(_ pages: Pages) -> NSView {
+        let button = Button(icon: "arrow.right.circle.fill", color: .systemPink)
+        button.target = pages
+        button.action = #selector(pages.next)
+        addSubview(button)
+        button.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30).isActive = true
+        return button
+    }
+    
+    func addPrevious(_ pages: Pages) -> NSView {
+        let button = Button(icon: "arrow.left.circle.fill", color: .systemPink)
+        button.target = pages
+        button.action = #selector(pages.previous)
+        addSubview(button)
+        button.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30).isActive = true
+        return button
     }
 }
