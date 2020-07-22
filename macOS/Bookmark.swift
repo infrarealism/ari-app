@@ -3,8 +3,7 @@ import Foundation
 struct Bookmark: Codable, Identifiable {
     var name = ""
     var edited: Date
-    let id: UUID
-    let url: URL
+    let id: URL
     private let data: Data
     
     var access: URL? {
@@ -18,14 +17,13 @@ struct Bookmark: Codable, Identifiable {
         getpwuid(getuid()).pointee.pw_dir.map {
             FileManager.default.string(withFileSystemRepresentation: $0, length: .init(strlen($0)))
         }.map {
-            NSString(string: url.path.replacingOccurrences(of: $0, with: "~")).abbreviatingWithTildeInPath
-        } ?? url.absoluteString
+            NSString(string: id.path.replacingOccurrences(of: $0, with: "~")).abbreviatingWithTildeInPath
+        } ?? id.absoluteString
     }
     
     init(_ url: URL) {
-        self.url = url
+        id = url
         edited = .init()
         data = try! url.bookmarkData(options: .withSecurityScope)
-        id = .init()
     }
 }
