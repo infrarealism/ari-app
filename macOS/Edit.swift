@@ -1,5 +1,6 @@
 import AppKit
 import Combine
+import Core
 
 final class Edit: NSView {
     private(set) weak var text: Text!
@@ -7,7 +8,7 @@ final class Edit: NSView {
     private var subs = Set<AnyCancellable>()
     
     required init?(coder: NSCoder) { nil }
-    init(main: Main) {
+    init(main: Main, page: Page) {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         self.main = main
@@ -19,7 +20,7 @@ final class Edit: NSView {
         scroll.drawsBackground = false
         addSubview(scroll)
         
-        let text = Text(main: main)
+        let text = Text(page: page)
         text.setSelectedRange(.init())
         scroll.documentView = text
         self.text = text
@@ -46,19 +47,11 @@ final class Edit: NSView {
         link.rightAnchor.constraint(equalTo: image.leftAnchor, constant: -5).isActive = true
         
         NotificationCenter.default.publisher(for: NSTextView.didChangeNotification, object: text)
-            .debounce(for: .seconds(1), scheduler: DispatchQueue.main)
-            .sink { _ in
-                var page = main.website.pages.first!
-                page.content = text.string
-                main.website.pages = [page]
-                session.update(website: main.website)
-        }.store(in: &subs)
-        
-        NotificationCenter.default.publisher(for: NSTextView.didChangeNotification, object: text)
-            .debounce(for: .seconds(1.1), scheduler: DispatchQueue.global(qos: .utility))
-            .sink { _ in
-                main.render()
-        }.store(in: &subs)
+            .map { ($0.object as! Text).string }
+            .map(page.content)
+            .debounce(for: .seconds(1.1), scheduler: DispatchQueue(label: "", qos: .utility))
+            .sink(receiveValue: main.website.update)
+            .store(in: &subs)
     }
     
     override var frame: NSRect {

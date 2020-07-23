@@ -41,6 +41,8 @@ final class Main: NSWindow {
         center()
         setFrameAutosaveName("Main")
         
+        try! website.open()
+        
         edit()
     }
     
@@ -65,7 +67,7 @@ final class Main: NSWindow {
     }
     
     @objc private func edit() {
-        let edit = Edit(main: self)
+        let edit = Edit(main: self, page: website.model.pages.first!)
         select(control: bar.edit, view: edit)
         makeFirstResponder(edit.text)
     }

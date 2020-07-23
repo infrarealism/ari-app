@@ -8,16 +8,8 @@ final class Create: NSWindow {
     private weak var _single: Segment!
     private weak var _blog: Segment!
     private weak var _folder: Label!
+    private var url: URL!
     private var subs = Set<AnyCancellable>()
-    
-    private var bookmark: Bookmark? {
-        didSet {
-            guard bookmark != nil else { return }
-            _finish.enabled = true
-            _folder.textColor = .labelColor
-            _folder.stringValue = bookmark!.location
-        }
-    }
     
     init() {
         super.init(contentRect: .init(x: 0, y: 0, width: 400, height: 300), styleMask:
@@ -189,10 +181,11 @@ final class Create: NSWindow {
     }
     
     @objc private func finish() {
-        bookmark!.name = name.stringValue
+        let bookmark = Bookmark(name.stringValue, url: _single.selected
+            ? Website.single(name.stringValue, directory: url!)
+            : Website.blog(name.stringValue, directory: url!))
         session.add(bookmark)
-        let website: Website = single.selected ? .single(name.stringValue, directory: <#T##URL#>) : .blog(<#T##name: String##String#>, directory: <#T##URL#>)
-        Main(url: bookmark!.access!, website: session.create(_single.selected ? .single : .blog, bookmark: bookmark!)).makeKeyAndOrderFront(nil)
+        Main.open(bookmark)
         close()
     }
     
@@ -215,8 +208,11 @@ final class Create: NSWindow {
         browse.canChooseFiles = false
         browse.canChooseDirectories = true
         browse.beginSheetModal(for: self) { [weak self] in
-            guard $0 == .OK, let url = browse.url else { return }
-            self?.bookmark = .init(url)
+            guard $0 == .OK else { return }
+            self?.url = browse.url
+            self?._finish.enabled = true
+            self?._folder.textColor = .labelColor
+            self?._folder.stringValue = browse.url!.directory ?? browse.url!.path
         }
     }
 }

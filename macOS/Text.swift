@@ -6,11 +6,10 @@ final class Text: NSTextView {
     override var canBecomeKeyView: Bool { true }
     override var isSelectable: Bool { get { true } set { } }
     override func accessibilityValue() -> String? { string }
-    private weak var main: Main!
     private let caret = CGFloat(4)
 
     required init?(coder: NSCoder) { nil }
-    init(main: Main) {
+    init(page: Page) {
         super.init(frame: .init(x: 0, y: 0, width: 0, height: 100_000), textContainer: Container())
         setAccessibilityElement(true)
         setAccessibilityRole(.textArea)
@@ -27,8 +26,7 @@ final class Text: NSTextView {
         isHorizontallyResizable = true
         textContainerInset.width = 60
         textContainerInset.height = 80
-        string = main.website.pages.first!.content
-        self.main = main
+        string = page.content
     }
     
     override final func drawInsertionPoint(in rect: NSRect, color: NSColor, turnedOn: Bool) {

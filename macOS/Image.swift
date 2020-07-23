@@ -55,7 +55,7 @@ final class Image: Pop {
             $0.addSubview(duplicate)
             self.duplicate = duplicate
             
-            if url.absoluteString.hasPrefix(main.url.absoluteString) {
+            if url.absoluteString.hasPrefix(main.website.url!.absoluteString) {
                 _duplicate.isHidden = true
                 duplicate.isHidden = true
             } else {
@@ -191,13 +191,13 @@ final class Image: Pop {
     
     @objc private func submit() {
         if duplicate.state == .on {
-            images[segmented.selected.value].write(main.url.appendingPathComponent(url.lastPathComponent))
+            images[segmented.selected.value].write(main.website.url!.appendingPathComponent(url.lastPathComponent))
             send(url: url.lastPathComponent)
-        } else if url.absoluteString.hasPrefix(main.url.absoluteString) {
+        } else if url.absoluteString.hasPrefix(main.website.url!.absoluteString) {
             if segmented.selected.value != 2 {
                 images[segmented.selected.value].write(url)
             }
-            send(url: .init(url.absoluteString.dropFirst(main.url.absoluteString.count)))
+            send(url: .init(url.absoluteString.dropFirst(main.website.url!.absoluteString.count)))
         } else {
             if segmented.selected.value != 2 {
                 images[segmented.selected.value].write(url)
