@@ -1,5 +1,6 @@
 import AppKit
 import Combine
+import Core
 
 final class Launch: NSWindow {
     private var subs = Set<AnyCancellable>()
@@ -123,12 +124,12 @@ final class Launch: NSWindow {
     }
     
     @objc private func select(item: Item) {
-        item.bookmark.access.map { url in
-            session.website(item.bookmark).sink { [weak self] website in
-                (NSApp.windows.compactMap { $0 as? Main }.first { $0.website.id == website.id } ?? Main(url: url,  website: website)).makeKeyAndOrderFront(nil)
-                self?.close()
-            }.store(in: &subs)
+        if let window = NSApp.windows.compactMap({ $0 as? Main }).first(where: { item.bookmark.id == $0.website.url }) {
+            window.orderFront(nil)
+        } else {
+            Main.open(item.bookmark)
         }
+        close()
     }
 }
 

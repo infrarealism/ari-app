@@ -10,10 +10,6 @@ final class Create: NSWindow {
     private weak var _folder: Label!
     private var subs = Set<AnyCancellable>()
     
-    deinit {
-        print("create gone")
-    }
-    
     private var bookmark: Bookmark? {
         didSet {
             guard bookmark != nil else { return }
@@ -194,6 +190,8 @@ final class Create: NSWindow {
     
     @objc private func finish() {
         bookmark!.name = name.stringValue
+        session.add(bookmark)
+        let website: Website = single.selected ? .single(name.stringValue, directory: <#T##URL#>) : .blog(<#T##name: String##String#>, directory: <#T##URL#>)
         Main(url: bookmark!.access!, website: session.create(_single.selected ? .single : .blog, bookmark: bookmark!)).makeKeyAndOrderFront(nil)
         close()
     }

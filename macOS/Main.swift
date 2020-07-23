@@ -3,11 +3,13 @@ import Core
 
 final class Main: NSWindow {
     var website: Website
-    let url: URL
     private weak var bar: Bar!
     
-    init(url: URL, website: Website) {
-        self.url = url
+    class func open(_ bookmark: Bookmark) {
+        bookmark.access.flatMap(Website.load).map(Main.init(website:))?.makeKeyAndOrderFront(nil)
+    }
+    
+    private init(website: Website) {
         self.website = website
         super.init(contentRect: .init(x: 0, y: 0, width: 1200, height: 800), styleMask:
             [.borderless, .closable, .miniaturizable, .resizable, .titled, .unifiedTitleAndToolbar, .fullSizeContentView],
@@ -44,13 +46,9 @@ final class Main: NSWindow {
     
     override func close() {
         contentView = nil
-        url.stopAccessingSecurityScopedResource()
+        website.close()
         NSApp.closeOther()
         super.close()
-    }
-    
-    func render() {
-        website.render(url)
     }
     
     private func select(control: Control, view: NSView) {

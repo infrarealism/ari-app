@@ -40,7 +40,9 @@ final class Web: NSView {
         web.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         web.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         
-        web.load(.init(url: main.url.appendingPathComponent("index.html")))
+        main.website.url.map {
+            _ = web.load(.init(url: $0.appendingPathComponent("index.html")))
+        }
         
         appeareance.selected.sink {
             web.appearance = $0 == 0 ? NSAppearance(named: .aqua) : NSAppearance(named: .darkAqua)
