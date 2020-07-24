@@ -19,7 +19,7 @@
 			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>ari.app.website</string>
+				<string>ari.website</string>
 			</array>
 		</dict>
 	</array>
@@ -61,7 +61,7 @@
 			<key>UTTypeIconFile</key>
 			<string>ari</string>
 			<key>UTTypeIdentifier</key>
-			<string>ari.app.website</string>
+			<string>ari.website</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
