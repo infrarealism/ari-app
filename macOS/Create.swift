@@ -2,7 +2,7 @@ import AppKit
 import Core
 import Combine
 
-final class Create: NSWindow {
+final class Create: NSWindow, NSTextFieldDelegate {
     private weak var name: Field!
     private weak var _finish: Button!
     private weak var _single: Segment!
@@ -44,10 +44,10 @@ final class Create: NSWindow {
         bar.layer!.backgroundColor = NSColor.systemPink.cgColor
         progress.addSubview(bar)
         
-        let pages = Pages()
-        effect.addSubview(pages)
+        let steps = Steps()
+        effect.addSubview(steps)
         
-        pages.page {
+        steps.step {
             $0.title(.key("Enter.name"))
             
             let name = Field()
@@ -55,14 +55,14 @@ final class Create: NSWindow {
             $0.addSubview(name)
             self.name = name
             
-            $0.addNext(pages).centerXAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
+            $0.next(steps).centerXAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
             
             name.topAnchor.constraint(equalTo: $0.topAnchor, constant: 140).isActive = true
             name.centerXAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
             name.widthAnchor.constraint(equalToConstant: 200).isActive = true
         }
         
-        pages.page {
+        steps.step {
             $0.title(.key("Enter.type"))
 
             let _single = Segment(icon: "dot.square", title: .key("Single"))
@@ -89,8 +89,8 @@ final class Create: NSWindow {
             _purchase.textColor = .controlTextColor
             purchase.addSubview(_purchase)
 
-            $0.addPrevious(pages).rightAnchor.constraint(equalTo: $0.centerXAnchor, constant: -20).isActive = true
-            $0.addNext(pages).leftAnchor.constraint(equalTo: $0.centerXAnchor, constant: 20).isActive = true
+            $0.previous(steps).rightAnchor.constraint(equalTo: $0.centerXAnchor, constant: -20).isActive = true
+            $0.next(steps).leftAnchor.constraint(equalTo: $0.centerXAnchor, constant: 20).isActive = true
             
             _single.centerYAnchor.constraint(equalTo: $0.centerYAnchor, constant: 10).isActive = true
             _single.rightAnchor.constraint(equalTo: $0.centerXAnchor, constant: -30).isActive = true
@@ -111,7 +111,7 @@ final class Create: NSWindow {
             }.store(in: &subs)
         }
         
-        pages.page {
+        steps.step {
             $0.title(.key("Enter.location"))
             
             let button = Button(text: .key("Select.folder"), background: .systemPink, foreground: .selectedTextColor)
@@ -132,7 +132,7 @@ final class Create: NSWindow {
             $0.addSubview(_finish)
             self._finish = _finish
             
-            $0.addPrevious(pages).rightAnchor.constraint(equalTo: _finish.leftAnchor, constant: -40).isActive = true
+            $0.previous(steps).rightAnchor.constraint(equalTo: _finish.leftAnchor, constant: -40).isActive = true
             
             _folder.centerXAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
             _folder.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -15).isActive = true
@@ -160,12 +160,12 @@ final class Create: NSWindow {
         let width = bar.widthAnchor.constraint(equalToConstant: 0)
         width.isActive = true
         
-        pages.topAnchor.constraint(equalTo: effect.topAnchor).isActive = true
-        pages.bottomAnchor.constraint(equalTo: effect.bottomAnchor).isActive = true
-        pages.leftAnchor.constraint(equalTo: effect.leftAnchor).isActive = true
-        pages.rightAnchor.constraint(equalTo: effect.rightAnchor).isActive = true
+        steps.topAnchor.constraint(equalTo: effect.topAnchor).isActive = true
+        steps.bottomAnchor.constraint(equalTo: effect.bottomAnchor).isActive = true
+        steps.leftAnchor.constraint(equalTo: effect.leftAnchor).isActive = true
+        steps.rightAnchor.constraint(equalTo: effect.rightAnchor).isActive = true
         
-        pages.progress.sink {
+        steps.progress.sink {
             width.constant = progress.frame.width * $0
             NSAnimationContext.runAnimationGroup {
                 $0.duration = 0.3
@@ -181,9 +181,12 @@ final class Create: NSWindow {
     }
     
     @objc private func finish() {
-        let bookmark = Bookmark(name.stringValue, url: _single.selected
-            ? Website.single(name.stringValue, directory: url!)
-            : Website.blog(name.stringValue, directory: url!))
+        let name = {
+            $0.isEmpty ? "Website" : $0
+        } (self.name.stringValue.trimmingCharacters(in: .whitespacesAndNewlines))
+        let bookmark = Bookmark(name, url: _single.selected
+            ? Website.single(name, directory: url!)
+            : Website.blog(name, directory: url!))
         session.add(bookmark)
         Main.open(bookmark)
         close()
@@ -262,23 +265,5 @@ private extension NSView {
         
         label.topAnchor.constraint(equalTo: topAnchor, constant: 62).isActive = true
         label.leftAnchor.constraint(equalTo: leftAnchor, constant: 21).isActive = true
-    }
-    
-    func addNext(_ pages: Pages) -> NSView {
-        let button = Button(icon: "arrow.right.circle.fill", color: .systemPink)
-        button.target = pages
-        button.action = #selector(pages.next)
-        addSubview(button)
-        button.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30).isActive = true
-        return button
-    }
-    
-    func addPrevious(_ pages: Pages) -> NSView {
-        let button = Button(icon: "arrow.left.circle.fill", color: .systemPink)
-        button.target = pages
-        button.action = #selector(pages.previous)
-        addSubview(button)
-        button.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30).isActive = true
-        return button
     }
 }

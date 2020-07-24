@@ -26,11 +26,11 @@ final class Image: Pop {
         cancel.target = self
         cancel.action = #selector(close)
         contentViewController!.view.addSubview(cancel)
-        
-        let pages = Pages()
+        /*
+        let pages = Steps()
         contentViewController!.view.addSubview(pages)
         
-        pages.page {
+        pages.step {
             let snipped = NSImageView(image: images.last!)
             snipped.translatesAutoresizingMaskIntoConstraints = false
             snipped.imageScaling = .scaleProportionallyDown
@@ -82,7 +82,7 @@ final class Image: Pop {
             next.centerXAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
         }
         
-        pages.page {
+        pages.step {
             let title = Label(.key("Scale"), .medium(2))
             title.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
             $0.addSubview(title)
@@ -144,7 +144,7 @@ final class Image: Pop {
             }.store(in: &self.subs)
         }
         
-        pages.page {
+        pages.step {
             let title = Label(.key("Image.alt"), .medium(2))
             title.textColor = .secondaryLabelColor
             $0.addSubview(title)
@@ -187,6 +187,7 @@ final class Image: Pop {
         pages.bottomAnchor.constraint(equalTo: contentViewController!.view.bottomAnchor).isActive = true
         pages.leftAnchor.constraint(equalTo: contentViewController!.view.leftAnchor).isActive = true
         pages.rightAnchor.constraint(equalTo: contentViewController!.view.rightAnchor).isActive = true
+ */
     }
     
     @objc private func submit() {
