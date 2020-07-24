@@ -4,10 +4,8 @@ import Combine
 
 final class Create: NSWindow, NSTextFieldDelegate {
     private weak var name: Field!
-    private weak var _finish: Button!
     private weak var _single: Segment!
     private weak var _blog: Segment!
-    private weak var _folder: Label!
     private weak var steps: Steps!
     private var url: URL!
     private var subs = Set<AnyCancellable>()
@@ -45,7 +43,7 @@ final class Create: NSWindow, NSTextFieldDelegate {
         bar.layer!.backgroundColor = NSColor.systemPink.cgColor
         progress.addSubview(bar)
         
-        let steps = Steps()
+        let steps = Steps(bottom: -30)
         effect.addSubview(steps)
         self.steps = steps
         
@@ -122,31 +120,10 @@ final class Create: NSWindow, NSTextFieldDelegate {
             button.action = #selector(folder)
             $0.addSubview(button)
             
-            let _folder = Label(.key("None.selected"), .medium())
-            _folder.textColor = .secondaryLabelColor
-            _folder.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-            $0.addSubview(_folder)
-            self._folder = _folder
-            
-            let _finish = Button(text: .key("Finish"), background: .systemPink, foreground: .selectedTextColor)
-            _finish.target = self
-            _finish.action = #selector(finish)
-            _finish.enabled = false
-            $0.addSubview(_finish)
-            self._finish = _finish
-            
-            $0.previous(steps).rightAnchor.constraint(equalTo: _finish.leftAnchor, constant: -40).isActive = true
-            
-            _folder.centerXAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
-            _folder.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -15).isActive = true
-            _folder.leftAnchor.constraint(greaterThanOrEqualTo: $0.leftAnchor, constant: 20).isActive = true
-            _folder.rightAnchor.constraint(lessThanOrEqualTo: $0.rightAnchor, constant: -20).isActive = true
+            $0.previous(steps).centerXAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
             
             button.centerXAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
-            button.centerYAnchor.constraint(equalTo: $0.centerYAnchor, constant: 40).isActive = true
-            
-            _finish.centerXAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
-            _finish.centerYAnchor.constraint(equalTo: $0.bottomAnchor, constant: -50).isActive = true
+            button.centerYAnchor.constraint(equalTo: $0.centerYAnchor, constant: 20).isActive = true
         }
         
         title.topAnchor.constraint(equalTo: effect.topAnchor, constant: 30).isActive = true
@@ -196,15 +173,7 @@ final class Create: NSWindow, NSTextFieldDelegate {
     }
     
     @objc private func finish() {
-        let name = {
-            $0.isEmpty ? "Website" : $0
-        } (self.name.stringValue.trimmingCharacters(in: .whitespacesAndNewlines))
-        let bookmark = Bookmark(name, url: _single.selected
-            ? Website.single(name, directory: url!)
-            : Website.blog(name, directory: url!))
-        session.add(bookmark)
-        Main.open(bookmark)
-        close()
+        
     }
     
     @objc private func single() {
@@ -225,12 +194,18 @@ final class Create: NSWindow, NSTextFieldDelegate {
         let browse = NSOpenPanel()
         browse.canChooseFiles = false
         browse.canChooseDirectories = true
+        browse.prompt = .key("Save")
         browse.beginSheetModal(for: self) { [weak self] in
-            guard $0 == .OK else { return }
-            self?.url = browse.url
-            self?._finish.enabled = true
-            self?._folder.textColor = .labelColor
-            self?._folder.stringValue = browse.url!.directory ?? browse.url!.path
+            guard $0 == .OK, let self = self else { return }
+            let name = {
+                $0.isEmpty ? "Website" : $0
+            } (self.name.stringValue.trimmingCharacters(in: .whitespacesAndNewlines))
+            let bookmark = Bookmark(name, url: self._single.selected
+                ? Website.single(name, directory: browse.url!)
+                : Website.blog(name, directory: browse.url!))
+            session.add(bookmark)
+            Main.open(bookmark)
+            self.close()
         }
     }
 }

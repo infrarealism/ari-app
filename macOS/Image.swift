@@ -15,7 +15,7 @@ final class Image: Pop {
     init(relative: NSView, url: URL, main: Main) {
         self.url = url
         self.main = main
-        images = NSImage(contentsOf: url)!.scales([0.25, 0.5])
+        images = NSImage(contentsOf: url)!.scales([0.25, 0.5, 1])
         super.init(size: .init(width: 380, height: 380))
         show(relative: relative)
         
@@ -26,25 +26,22 @@ final class Image: Pop {
         cancel.target = self
         cancel.action = #selector(close)
         contentViewController!.view.addSubview(cancel)
-        /*
-        let pages = Steps()
-        contentViewController!.view.addSubview(pages)
         
-        pages.step {
+        let steps = Steps(bottom: -70)
+        contentViewController!.view.addSubview(steps)
+        
+        steps.step {
             let snipped = NSImageView(image: images.last!)
             snipped.translatesAutoresizingMaskIntoConstraints = false
-            snipped.imageScaling = .scaleProportionallyDown
+            snipped.imageScaling = .scaleProportionallyUpOrDown
+            snipped.wantsLayer = true
+            snipped.layer!.backgroundColor = .black
             $0.addSubview(snipped)
             
             let name = Label(url.lastPathComponent, .medium(-2))
             name.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
             $0.addSubview(name)
             self.name = name
-            
-            let next = Button(icon: "arrow.right.circle.fill", color: .systemBlue)
-            next.target = pages
-            next.action = #selector(pages.next)
-            $0.addSubview(next)
             
             let _duplicate = Label(.key("Duplicate"), .regular())
             _duplicate.textColor = .secondaryLabelColor
@@ -62,10 +59,12 @@ final class Image: Pop {
                 duplicate.state = .on
             }
             
-            snipped.topAnchor.constraint(equalTo: $0.topAnchor, constant: 70).isActive = true
+            $0.next(steps).centerXAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
+            
+            snipped.topAnchor.constraint(equalTo: $0.topAnchor, constant: 60).isActive = true
             snipped.centerXAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
-            snipped.widthAnchor.constraint(equalToConstant: 80).isActive = true
-            snipped.heightAnchor.constraint(equalTo: snipped.widthAnchor).isActive = true
+            snipped.widthAnchor.constraint(equalToConstant: 320).isActive = true
+            snipped.heightAnchor.constraint(equalToConstant: 90).isActive = true
             
             name.topAnchor.constraint(equalTo: snipped.bottomAnchor, constant: 10).isActive = true
             name.centerXAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
@@ -77,12 +76,9 @@ final class Image: Pop {
             
             duplicate.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 30).isActive = true
             duplicate.leftAnchor.constraint(equalTo: $0.centerXAnchor, constant: 80).isActive = true
-            
-            next.bottomAnchor.constraint(equalTo: $0.bottomAnchor, constant: -80).isActive = true
-            next.centerXAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
         }
         
-        pages.step {
+        steps.step {
             let title = Label(.key("Scale"), .medium(2))
             title.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
             $0.addSubview(title)
@@ -101,15 +97,8 @@ final class Image: Pop {
             original.textColor = .secondaryLabelColor
             $0.addSubview(original)
             
-            let next = Button(icon: "arrow.right.circle.fill", color: .systemBlue)
-            next.target = pages
-            next.action = #selector(pages.next)
-            $0.addSubview(next)
-            
-            let previous = Button(icon: "arrow.left.circle.fill", color: .systemBlue)
-            previous.target = pages
-            previous.action = #selector(pages.previous)
-            $0.addSubview(previous)
+            $0.previous(steps).rightAnchor.constraint(equalTo: $0.centerXAnchor, constant: -20).isActive = true
+            $0.next(steps).leftAnchor.constraint(equalTo: $0.centerXAnchor, constant: 20).isActive = true
             
             title.centerXAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
             title.topAnchor.constraint(equalTo: $0.topAnchor, constant: 80).isActive = true
@@ -126,12 +115,6 @@ final class Image: Pop {
             original.leftAnchor.constraint(greaterThanOrEqualTo: $0.leftAnchor, constant: 30).isActive = true
             original.rightAnchor.constraint(lessThanOrEqualTo: $0.rightAnchor, constant: -30).isActive = true
             
-            next.leftAnchor.constraint(equalTo: $0.centerXAnchor, constant: 20).isActive = true
-            next.bottomAnchor.constraint(equalTo: $0.bottomAnchor, constant: -80).isActive = true
-            
-            previous.rightAnchor.constraint(equalTo: $0.centerXAnchor, constant: -20).isActive = true
-            previous.bottomAnchor.constraint(equalTo: $0.bottomAnchor, constant: -80).isActive = true
-            
             let bytes = ByteCountFormatter()
             let formatter = NumberFormatter()
             formatter.numberStyle = .decimal
@@ -144,7 +127,7 @@ final class Image: Pop {
             }.store(in: &self.subs)
         }
         
-        pages.step {
+        steps.step {
             let title = Label(.key("Image.alt"), .medium(2))
             title.textColor = .secondaryLabelColor
             $0.addSubview(title)
@@ -153,15 +136,12 @@ final class Image: Pop {
             $0.addSubview(field)
             self.field = field
             
-            let previous = Button(icon: "arrow.left.circle.fill", color: .systemBlue)
-            previous.target = pages
-            previous.action = #selector(pages.previous)
-            $0.addSubview(previous)
-            
-            let add = Button(text: .key("Add"), background: .systemBlue, foreground: .controlTextColor)
+            let add = Button(text: .key("Add"), background: .systemPink, foreground: .controlTextColor)
             add.target = self
             add.action = #selector(submit)
             $0.addSubview(add)
+            
+            $0.previous(steps).rightAnchor.constraint(equalTo: add.leftAnchor, constant: -40).isActive = true
             
             title.topAnchor.constraint(equalTo: $0.topAnchor, constant: 80).isActive = true
             title.centerXAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
@@ -171,10 +151,7 @@ final class Image: Pop {
             field.widthAnchor.constraint(equalToConstant: 200).isActive = true
             
             add.centerXAnchor.constraint(equalTo: $0.centerXAnchor).isActive = true
-            add.centerYAnchor.constraint(equalTo: previous.centerYAnchor).isActive = true
-            
-            previous.rightAnchor.constraint(equalTo: add.leftAnchor, constant: -40).isActive = true
-            previous.bottomAnchor.constraint(equalTo: $0.bottomAnchor, constant: -80).isActive = true
+            add.centerYAnchor.constraint(equalTo: $0.bottomAnchor, constant: -90).isActive = true
         }
         
         header.topAnchor.constraint(equalTo: contentViewController!.view.topAnchor, constant: 30).isActive = true
@@ -183,11 +160,10 @@ final class Image: Pop {
         cancel.centerXAnchor.constraint(equalTo: contentViewController!.view.centerXAnchor).isActive = true
         cancel.bottomAnchor.constraint(equalTo: contentViewController!.view.bottomAnchor, constant: -30).isActive = true
         
-        pages.topAnchor.constraint(equalTo: contentViewController!.view.topAnchor).isActive = true
-        pages.bottomAnchor.constraint(equalTo: contentViewController!.view.bottomAnchor).isActive = true
-        pages.leftAnchor.constraint(equalTo: contentViewController!.view.leftAnchor).isActive = true
-        pages.rightAnchor.constraint(equalTo: contentViewController!.view.rightAnchor).isActive = true
- */
+        steps.topAnchor.constraint(equalTo: contentViewController!.view.topAnchor).isActive = true
+        steps.bottomAnchor.constraint(equalTo: contentViewController!.view.bottomAnchor).isActive = true
+        steps.leftAnchor.constraint(equalTo: contentViewController!.view.leftAnchor).isActive = true
+        steps.rightAnchor.constraint(equalTo: contentViewController!.view.rightAnchor).isActive = true
     }
     
     @objc private func submit() {
@@ -222,27 +198,12 @@ private extension NSImage {
     }
     
     func scales(_ scales: [CGFloat]) -> [NSImage] {
-        let original = NSBitmapImageRep(data: tiffRepresentation!)!
-        let width = CGFloat(size.width)
-        let height = CGFloat(size.height)
-        return scales.map {
-            let bitmap = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: .init(width * $0), pixelsHigh: .init(height * $0),
-                bitsPerSample: original.bitsPerSample,
-                samplesPerPixel: original.samplesPerPixel,
-                hasAlpha: original.hasAlpha,
-                isPlanar: original.isPlanar,
-                colorSpaceName: original.colorSpaceName,
-                bytesPerRow: original.bytesPerRow,
-                bitsPerPixel: original.bitsPerPixel)!
-            
-            NSGraphicsContext.saveGraphicsState()
-            NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: bitmap)!
-            draw(in: .init(origin: .zero, size: bitmap.size))
-            NSGraphicsContext.restoreGraphicsState()
-
-            let resizedImage = NSImage(size: bitmap.size)
-            resizedImage.addRepresentation(bitmap)
-            return resizedImage
+        scales.map {
+            let image = NSImage(size: .init(width: size.width * $0, height: size.height * $0))
+            image.lockFocus()
+            draw(in: .init(origin: .zero, size: image.size))
+            image.unlockFocus()
+            return image
         } + [self]
     }
 }

@@ -3,6 +3,7 @@ import Combine
 
 final class Steps: NSView {
     let progress = CurrentValueSubject<CGFloat, Never>(0)
+    fileprivate let bottom: CGFloat
 
     private weak var middle: NSLayoutConstraint! {
         didSet {
@@ -12,7 +13,8 @@ final class Steps: NSView {
     }
     
     required init?(coder: NSCoder) { nil }
-    init() {
+    init(bottom: CGFloat) {
+        self.bottom = bottom
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
     }
@@ -76,7 +78,7 @@ final class Step: NSView {
         button.target = pages
         button.action = #selector(pages.next)
         addSubview(button)
-        button.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30).isActive = true
+        button.bottomAnchor.constraint(equalTo: bottomAnchor, constant: pages.bottom).isActive = true
         return button
     }
     
@@ -85,7 +87,7 @@ final class Step: NSView {
         button.target = pages
         button.action = #selector(pages.previous)
         addSubview(button)
-        button.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30).isActive = true
+        button.bottomAnchor.constraint(equalTo: bottomAnchor, constant: pages.bottom).isActive = true
         return button
     }
 }
