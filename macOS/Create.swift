@@ -8,6 +8,7 @@ final class Create: NSWindow, NSTextFieldDelegate {
     private weak var _single: Segment!
     private weak var _blog: Segment!
     private weak var _folder: Label!
+    private weak var steps: Steps!
     private var url: URL!
     private var subs = Set<AnyCancellable>()
     
@@ -46,12 +47,14 @@ final class Create: NSWindow, NSTextFieldDelegate {
         
         let steps = Steps()
         effect.addSubview(steps)
+        self.steps = steps
         
         steps.step {
             $0.title(.key("Enter.name"))
             
             let name = Field()
             name.placeholderString = .key("Website.name")
+            name.delegate = self
             $0.addSubview(name)
             self.name = name
             
@@ -173,6 +176,18 @@ final class Create: NSWindow, NSTextFieldDelegate {
                 progress.layoutSubtreeIfNeeded()
             }
         }.store(in: &subs)
+    }
+    
+    func control(_: NSControl, textView: NSTextView, doCommandBy: Selector) -> Bool {
+        switch doCommandBy {
+        case #selector(insertNewline):
+            makeFirstResponder(steps)
+            steps.next()
+        case #selector(cancelOperation):
+            makeFirstResponder(steps)
+        default: return false
+        }
+        return true
     }
     
     override func close() {

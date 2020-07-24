@@ -35,6 +35,21 @@ final class Steps: NSView {
         }
     }
     
+    override func keyDown(with: NSEvent) {
+        if with.keyCode == 36 {
+            if subviews.count > subviews.firstIndex(of: middle.firstItem as! NSView)! + 1 {
+                next()
+            }
+        } else {
+            super.keyDown(with: with)
+        }
+    }
+    
+    @objc func next() {
+        window!.makeFirstResponder(self)
+        center(subviews.firstIndex(of: middle.firstItem as! NSView)! + 1)
+    }
+    
     private func center(_ on: Int) {
         progress.value = .init(on) / CGFloat(subviews.count - 1)
         center(subviews[on])
@@ -48,11 +63,6 @@ final class Steps: NSView {
     private func center(_ on: NSView) {
         middle = on.centerXAnchor.constraint(equalTo: centerXAnchor)
         middle.isActive = true
-    }
-    
-    @objc fileprivate func next() {
-        window!.makeFirstResponder(self)
-        center(subviews.firstIndex(of: middle.firstItem as! NSView)! + 1)
     }
     
     @objc fileprivate func previous() {
