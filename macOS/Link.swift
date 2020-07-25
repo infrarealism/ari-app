@@ -5,7 +5,7 @@ final class Link: Pop {
     private weak var urlField: Field!
     
     required init?(coder: NSCoder) { nil }
-    init(relative: NSView) {
+    init(relative: NSView, text: String) {
         super.init(size: .init(width: 260, height: 340))
         
         let header = Label(.key("Link.header"), .bold(4))
@@ -16,6 +16,7 @@ final class Link: Pop {
         contentViewController!.view.addSubview(title)
         
         let titleField = Field()
+        titleField.stringValue = text
         contentViewController!.view.addSubview(titleField)
         self.titleField = titleField
         

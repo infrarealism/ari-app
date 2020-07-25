@@ -61,7 +61,7 @@ final class Edit: NSView {
     }
     
     @objc private func link(_ button: Button) {
-        let link = Link(relative: button)
+        let link = Link(relative: button, text: text.selectedText)
         link.subscription = link.sink { [weak self] in
             self?.text.insertText($0, replacementRange: self?.text.selectedRange() ?? .init())
         }

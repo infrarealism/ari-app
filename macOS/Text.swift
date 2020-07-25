@@ -18,7 +18,7 @@ final class Text: NSTextView {
         drawsBackground = false
         isContinuousSpellCheckingEnabled = false
         isAutomaticTextCompletionEnabled = false
-        insertionPointColor = .systemBlue
+        insertionPointColor = .systemPink
         typingAttributes[.font] = NSFont.monospacedSystemFont(ofSize: NSFont.systemFontSize + 4, weight: .medium)
         font = .monospacedSystemFont(ofSize: NSFont.systemFontSize + 4, weight: .medium)
         selectedTextAttributes = [.backgroundColor: NSColor.systemPink, .foregroundColor: NSColor.controlTextColor]
@@ -44,6 +44,10 @@ final class Text: NSTextView {
     override func didChangeText() {
         super.didChangeText()
         layoutManager!.ensureLayout(for: textContainer!)
+    }
+    
+    var selectedText: String {
+        string[selectedRange()]
     }
 }
 
@@ -80,5 +84,11 @@ private final class Layout: NSLayoutManager, NSLayoutManagerDelegate {
         rect.size.height += padding + padding
         used.size.height += padding + padding
         super.setExtraLineFragmentRect(rect, usedRect: used, textContainer: textContainer)
+    }
+}
+
+private extension String {
+    subscript (_ range: NSRange) -> Self {
+        .init(self[index(startIndex, offsetBy: range.lowerBound) ..< index(startIndex, offsetBy: range.upperBound)])
     }
 }

@@ -172,10 +172,6 @@ final class Create: NSWindow, NSTextFieldDelegate {
         super.close()
     }
     
-    @objc private func finish() {
-        
-    }
-    
     @objc private func single() {
         _single.selected = true
         _blog.selected = false

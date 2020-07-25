@@ -12,5 +12,6 @@ final class Field: NSTextField {
         bezelStyle = .roundedBezel
         font = .medium()
         maximumNumberOfLines = 1
+        lineBreakMode = .byTruncatingHead
     }
 }

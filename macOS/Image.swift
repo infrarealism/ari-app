@@ -1,7 +1,7 @@
 import AppKit
 import Combine
 
-final class Image: Pop {
+final class Image: Pop, NSTextFieldDelegate {
     private weak var duplicate: NSSwitch!
     private weak var name: Label!
     private weak var segmented: Segmented!
@@ -15,7 +15,7 @@ final class Image: Pop {
     init(relative: NSView, url: URL, main: Main) {
         self.url = url
         self.main = main
-        images = NSImage(contentsOf: url)!.scales([0.25, 0.5, 1])
+        images = NSImage(contentsOf: url)!.scales([0.25, 0.5])
         super.init(size: .init(width: 380, height: 380))
         show(relative: relative)
         
@@ -133,6 +133,7 @@ final class Image: Pop {
             $0.addSubview(title)
             
             let field = Field()
+            field.delegate = self
             $0.addSubview(field)
             self.field = field
             
@@ -164,6 +165,18 @@ final class Image: Pop {
         steps.bottomAnchor.constraint(equalTo: contentViewController!.view.bottomAnchor).isActive = true
         steps.leftAnchor.constraint(equalTo: contentViewController!.view.leftAnchor).isActive = true
         steps.rightAnchor.constraint(equalTo: contentViewController!.view.rightAnchor).isActive = true
+    }
+    
+    func control(_: NSControl, textView: NSTextView, doCommandBy: Selector) -> Bool {
+        switch doCommandBy {
+        case #selector(insertNewline):
+            contentViewController!.view.window!.makeFirstResponder(contentViewController!.view)
+            submit()
+        case #selector(cancelOperation):
+            contentViewController!.view.window!.makeFirstResponder(contentViewController!.view)
+        default: return false
+        }
+        return true
     }
     
     @objc private func submit() {
