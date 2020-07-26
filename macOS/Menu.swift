@@ -9,7 +9,8 @@ final class Menu: NSMenu {
 
     private var app: NSMenuItem {
         menu(.key("App"), items: [
-        .init(title: .key("Open"), action: #selector(NSApplication.launch), keyEquivalent: "o"),
+        .init(title: .key("New"), action: #selector(NSApplication.launch), keyEquivalent: "n"),
+        .init(title: .key("Open"), action: #selector(NSApplication.open), keyEquivalent: "o"),
         .separator(),
         .init(title: .key("About"), action: #selector(NSApplication.orderFrontStandardAboutPanel(_:)), keyEquivalent: ""),
         .separator(),

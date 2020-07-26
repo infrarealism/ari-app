@@ -1,22 +1,28 @@
 import AppKit
+import Core
 
 final class Bar: NSVisualEffectView {
-    private(set) weak var title: Label!
     private(set) weak var edit: Control!
     private(set) weak var style: Control!
     private(set) weak var preview: Control!
-    private(set) weak var export: Control!
     
     required init?(coder: NSCoder) { nil }
-    init() {
+    init(main: Main) {
         super.init(frame: .zero)
         wantsLayer = true
         translatesAutoresizingMaskIntoConstraints = false
         material = .hudWindow
         
-        let title = Label("", .bold())
+        let icon = NSImageView(image: NSImage(named: main.website is Single ? "dot.square.fill" : "square.stack.3d.fill")!)
+        icon.contentTintColor = .systemIndigo
+        icon.translatesAutoresizingMaskIntoConstraints = false
+        icon.imageScaling = .scaleProportionallyDown
+        addSubview(icon)
+        
+        let title = Label(main.website.model.name, .bold())
+        title.alignment = .center
+        title.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         addSubview(title)
-        self.title = title
         
         let edit = Item(icon: "hammer", title: .key("Edit"))
         addSubview(edit)
@@ -30,32 +36,29 @@ final class Bar: NSVisualEffectView {
         addSubview(preview)
         self.preview = preview
         
-        let export = Item(icon: "square.and.arrow.up", title: .key("Export"))
-        export.isHidden = true
-        addSubview(export)
-        self.export = export
-        
         widthAnchor.constraint(equalToConstant: 180).isActive = true
         
-        title.topAnchor.constraint(equalTo: topAnchor, constant: 40).isActive = true
-        title.leftAnchor.constraint(equalTo: leftAnchor, constant: 20).isActive = true
-        title.rightAnchor.constraint(equalTo: rightAnchor, constant: -20).isActive = true
+        icon.topAnchor.constraint(equalTo: topAnchor, constant: 60).isActive = true
+        icon.centerXAnchor.constraint(equalTo: centerXAnchor, constant: -5).isActive = true
+        icon.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        icon.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
+        title.topAnchor.constraint(equalTo: icon.bottomAnchor, constant: 20).isActive = true
+        title.centerXAnchor.constraint(equalTo: centerXAnchor, constant: -5).isActive = true
+        title.leftAnchor.constraint(greaterThanOrEqualTo: leftAnchor, constant: 20).isActive = true
+        title.rightAnchor.constraint(lessThanOrEqualTo: rightAnchor, constant: -20).isActive = true
         
         edit.bottomAnchor.constraint(equalTo: style.topAnchor, constant: -20).isActive = true
-        edit.leftAnchor.constraint(equalTo: export.leftAnchor).isActive = true
-        edit.rightAnchor.constraint(equalTo: export.rightAnchor).isActive = true
+        edit.leftAnchor.constraint(equalTo: preview.leftAnchor).isActive = true
+        edit.rightAnchor.constraint(equalTo: preview.rightAnchor).isActive = true
         
         style.bottomAnchor.constraint(equalTo: preview.topAnchor, constant: -20).isActive = true
-        style.leftAnchor.constraint(equalTo: export.leftAnchor).isActive = true
-        style.rightAnchor.constraint(equalTo: export.rightAnchor).isActive = true
+        style.leftAnchor.constraint(equalTo: preview.leftAnchor).isActive = true
+        style.rightAnchor.constraint(equalTo: preview.rightAnchor).isActive = true
         
-        preview.bottomAnchor.constraint(equalTo: export.topAnchor, constant: -20).isActive = true
-        preview.leftAnchor.constraint(equalTo: export.leftAnchor).isActive = true
-        preview.rightAnchor.constraint(equalTo: export.rightAnchor).isActive = true
-        
-        export.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30).isActive = true
-        export.leftAnchor.constraint(equalTo: leftAnchor, constant: 20).isActive = true
-        export.rightAnchor.constraint(equalTo: rightAnchor, constant: -20).isActive = true
+        preview.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30).isActive = true
+        preview.leftAnchor.constraint(equalTo: leftAnchor, constant: 20).isActive = true
+        preview.rightAnchor.constraint(equalTo: rightAnchor, constant: -25).isActive = true
     }
     
     func select(control: Control) {

@@ -22,15 +22,13 @@ final class Main: NSWindow {
         collectionBehavior = .fullScreenNone
         isReleasedWhenClosed = false
 
-        let bar = Bar()
+        let bar = Bar(main: self)
         bar.edit.target = self
         bar.edit.action = #selector(edit)
         bar.style.target = self
         bar.style.action = #selector(style)
         bar.preview.target = self
         bar.preview.action = #selector(preview)
-        bar.export.target = self
-        bar.export.action = #selector(export)
         contentView!.addSubview(bar)
         self.bar = bar
         
@@ -78,10 +76,6 @@ final class Main: NSWindow {
     
     @objc private func preview() {
         select(control: bar.preview, view: Web(main: self))
-    }
-    
-    @objc private func export() {
-        select(control: bar.export, view: Web(main: self))
     }
 }
 

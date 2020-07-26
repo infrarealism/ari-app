@@ -11,6 +11,7 @@
 		CE08F0E224C053EE001E033A /* Steps.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08F0E124C053EE001E033A /* Steps.swift */; };
 		CE0E87CD24C5FC0900FC9994 /* Blob.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0E87CC24C5FC0900FC9994 /* Blob.swift */; };
 		CE20ADFC24B9C8AC00007F5F /* Segmented.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE20ADFB24B9C8AC00007F5F /* Segmented.swift */; };
+		CE38F43324CDA3C50059D7E9 /* ari.icns in Resources */ = {isa = PBXBuildFile; fileRef = CE5F40BC24C81F4200BF93DF /* ari.icns */; };
 		CE3EAF1424A7649B00D29C60 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3EAF1324A7649B00D29C60 /* App.swift */; };
 		CE3EAF1624A7649B00D29C60 /* Launch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3EAF1524A7649B00D29C60 /* Launch.swift */; };
 		CE3EAF1824A7649C00D29C60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE3EAF1724A7649C00D29C60 /* Assets.xcassets */; };
@@ -24,7 +25,6 @@
 		CE59C4D624A8C82E0068C153 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE59C4D524A8C82E0068C153 /* Label.swift */; };
 		CE59C4D824A8C87D0068C153 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE59C4D724A8C87D0068C153 /* Font.swift */; };
 		CE59C4DA24A8D6260068C153 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE59C4D924A8D6260068C153 /* Main.swift */; };
-		CE5F40BD24C81F4200BF93DF /* ari.icns in Resources */ = {isa = PBXBuildFile; fileRef = CE5F40BC24C81F4200BF93DF /* ari.icns */; };
 		CE60EF5224A8DC50001D2A39 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = CE60EF5124A8DC50001D2A39 /* Core */; };
 		CE68DC8824BF624500011DC1 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68DC8724BF624500011DC1 /* Image.swift */; };
 		CE7D5C9724B628550067D6C5 /* Web.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7D5C9624B628550067D6C5 /* Web.swift */; };
@@ -238,7 +238,7 @@
 			files = (
 				CE3EAF1824A7649C00D29C60 /* Assets.xcassets in Resources */,
 				CE58264224A76E5D0004726F /* Localizable.strings in Resources */,
-				CE5F40BD24C81F4200BF93DF /* ari.icns in Resources */,
+				CE38F43324CDA3C50059D7E9 /* ari.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

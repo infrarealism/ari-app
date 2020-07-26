@@ -35,6 +35,10 @@ extension NSApplication {
         (windows.filter { $0 is Launch }.first ?? Launch()).makeKeyAndOrderFront(nil)
     }
     
+    @objc func open() {
+        (windows.filter { $0 is Launch }.first ?? Launch()).makeKeyAndOrderFront(nil)
+    }
+    
     @objc func purchases() {
         (NSApp.windows.first { $0 is Store } ?? Store()).makeKeyAndOrderFront(nil)
     }
