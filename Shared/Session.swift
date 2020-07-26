@@ -6,7 +6,7 @@ import Combine
 final class Session {
     var user = CurrentValueSubject<User, Never>(.init())
     private var sub: AnyCancellable?
-    let store = Balam("Ari")
+    private let store = Balam("Ari")
     
     var bookmarks: Future <[Bookmark], Never> {
         .init { promise in
@@ -35,6 +35,11 @@ final class Session {
     }
     
     func add(_ bookmark: Bookmark) {
+        store.add(bookmark)
+    }
+    
+    func open(_ bookmark: Bookmark) {
+        store.remove(bookmark)
         store.add(bookmark)
     }
 }

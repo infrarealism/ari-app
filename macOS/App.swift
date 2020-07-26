@@ -36,7 +36,21 @@ extension NSApplication {
     }
     
     @objc func open() {
-        (windows.filter { $0 is Launch }.first ?? Launch()).makeKeyAndOrderFront(nil)
+        guard let panel = windows.compactMap({ $0 as? NSOpenPanel }).filter({ $0.allowedFileTypes == ["ari"] }).first else {
+            let browse = NSOpenPanel()
+            browse.message = .key("Open")
+            browse.allowedFileTypes = ["ari"]
+            browse.begin {
+                guard $0 == .OK else { return }
+                browse.url.flatMap(Bookmark.open).map {
+                    session.open($0)
+                    Main.open($0)
+                }
+            }
+            windows.filter { $0 is Launch }.first?.close()
+            return
+        }
+        panel.makeKeyAndOrderFront(nil)
     }
     
     @objc func purchases() {

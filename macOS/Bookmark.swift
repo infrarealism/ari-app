@@ -10,6 +10,12 @@ struct Bookmark: Codable, Identifiable {
     var access: URL? { data.access }
     var location: String { id.directory ?? id.absoluteString }
     
+    static func open(_ url: URL) -> Self? {
+        Website.load(url).map {
+            .init($0.model.name, url: url)
+        }
+    }
+    
     init(_ name: String, url: URL) {
         self.name = name
         id = url
