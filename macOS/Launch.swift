@@ -114,7 +114,7 @@ final class Launch: NSWindow {
     }
     
     override func close() {
-        NSApp.closeLaunch()
+        NSApp.closedLaunch()
         super.close()
     }
     

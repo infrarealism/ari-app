@@ -168,7 +168,7 @@ final class Create: NSWindow, NSTextFieldDelegate {
     }
     
     override func close() {
-        NSApp.closeOther()
+        NSApp.closedOther()
         super.close()
     }
     

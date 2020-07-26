@@ -10,23 +10,28 @@ final class App: NSApplication, NSApplicationDelegate  {
         delegate = self
     }
     
+    func application(_: NSApplication, open: [URL]) {
+        open.forEach(NSApp.open)
+    }
+    
     func applicationWillFinishLaunching(_: Notification) {
         mainMenu = Menu()
-        launch()
+        session.load()
     }
     
     func applicationDidFinishLaunching(_: Notification) {
-        session.load()
+        guard NSApp.windows.isEmpty else { return }
+        launch()
     }
 }
 
 extension NSApplication {
-    func closeLaunch() {
+    func closedLaunch() {
         guard windows.count < 2 else { return }
         terminate(nil)
     }
     
-    func closeOther() {
+    func closedOther() {
         guard windows.count < 2 else { return }
         launch()
     }
@@ -40,12 +45,9 @@ extension NSApplication {
             let browse = NSOpenPanel()
             browse.message = .key("Open")
             browse.allowedFileTypes = ["ari"]
-            browse.begin {
-                guard $0 == .OK else { return }
-                browse.url.flatMap(Bookmark.open).map {
-                    session.open($0)
-                    Main.open($0)
-                }
+            browse.begin { [weak self] in
+                guard $0 == .OK, let url = browse.url else { return }
+                self?.open(url)
             }
             windows.filter { $0 is Launch }.first?.close()
             return
@@ -55,5 +57,12 @@ extension NSApplication {
     
     @objc func purchases() {
         (NSApp.windows.first { $0 is Store } ?? Store()).makeKeyAndOrderFront(nil)
+    }
+    
+    fileprivate func open(_ url: URL) {
+        Bookmark.open(url).map {
+            session.open($0)
+            Main.open($0)
+        }
     }
 }

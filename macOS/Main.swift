@@ -47,7 +47,7 @@ final class Main: NSWindow {
     override func close() {
         contentView = nil
         website.close()
-        NSApp.closeOther()
+        NSApp.closedOther()
         super.close()
     }
     
