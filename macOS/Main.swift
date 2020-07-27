@@ -65,8 +65,9 @@ final class Main: NSWindow {
     }
     
     @objc private func edit() {
-        let edit = Edit(website: website)
+        let edit = website.edit
         select(control: bar.edit, view: edit)
+        edit.ready(main: self)
     }
     
     @objc private func style() {

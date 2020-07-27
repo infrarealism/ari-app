@@ -3,8 +3,34 @@ import Combine
 import Core
 
 class Edit: NSView {
+    final class Single: Edit {
+        required init?(coder: NSCoder) { nil }
+        required init(website: Website) {
+            super.init(website: website)
+            scrollLeft.constant = 20
+        }
+        
+        override func ready(main: Main) {
+            text.page = website.model.pages.first!
+            main.makeFirstResponder(text)
+        }
+    }
+    
+    final class Blog: Edit {
+        required init?(coder: NSCoder) { nil }
+        required init(website: Website) {
+            super.init(website: website)
+            scrollLeft.constant = 100
+        }
+        
+        override func ready(main: Main) {
+            text.isEditable = false
+        }
+    }
+    
     private weak var website: Website!
     private weak var text: Text!
+    private weak var scrollLeft: NSLayoutConstraint!
     private var subs = Set<AnyCancellable>()
     
     required init?(coder: NSCoder) { nil }
@@ -13,8 +39,6 @@ class Edit: NSView {
         translatesAutoresizingMaskIntoConstraints = false
         self.website = website
         
-        let page = website.model.pages.first!
-        
         let scroll = NSScrollView()
         scroll.translatesAutoresizingMaskIntoConstraints = false
         scroll.hasVerticalScroller = true
@@ -22,8 +46,7 @@ class Edit: NSView {
         scroll.drawsBackground = false
         addSubview(scroll)
         
-        let text = Text(page: page)
-        text.setSelectedRange(.init())
+        let text = Text()
         scroll.documentView = text
         self.text = text
         
@@ -37,10 +60,11 @@ class Edit: NSView {
         image.action = #selector(self.image)
         addSubview(image)
         
-        scroll.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         scroll.topAnchor.constraint(equalTo: topAnchor).isActive = true
         scroll.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         scroll.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        scrollLeft = scroll.leftAnchor.constraint(equalTo: leftAnchor)
+        scrollLeft.isActive = true
         
         image.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
         image.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
@@ -49,8 +73,7 @@ class Edit: NSView {
         link.rightAnchor.constraint(equalTo: image.leftAnchor, constant: -5).isActive = true
         
         NotificationCenter.default.publisher(for: NSTextView.didChangeNotification, object: text)
-            .map { ($0.object as! Text).string }
-            .map(page.content)
+            .map { ($0.object as! Text).updated }
             .debounce(for: .seconds(1.1), scheduler: DispatchQueue(label: "", qos: .utility))
             .sink(receiveValue: website.update)
             .store(in: &subs)
@@ -58,8 +81,12 @@ class Edit: NSView {
     
     override var frame: NSRect {
         didSet {
-            text.textContainer!.size.width = bounds.width - (text.textContainerInset.width * 2)
+            text.textContainer!.size.width = bounds.width - (text.textContainerInset.width * 2) - scrollLeft.constant
         }
+    }
+    
+    func ready(main: Main) {
+        
     }
     
     @objc private func link(_ button: Button) {

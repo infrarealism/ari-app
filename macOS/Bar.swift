@@ -13,7 +13,7 @@ final class Bar: NSVisualEffectView {
         translatesAutoresizingMaskIntoConstraints = false
         material = .hudWindow
         
-        let icon = NSImageView(image: NSImage(named: website is Single ? "dot.square.fill" : "square.stack.3d.fill")!)
+        let icon = NSImageView(image: NSImage(named: website.icon)!)
         icon.contentTintColor = .systemIndigo
         icon.translatesAutoresizingMaskIntoConstraints = false
         icon.imageScaling = .scaleProportionallyDown

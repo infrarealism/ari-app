@@ -2,6 +2,17 @@ import AppKit
 import Core
 
 final class Text: NSTextView {
+    var page: Page! {
+        didSet {
+            string = page.content
+            setSelectedRange(.init())
+        }
+    }
+    
+    var updated: Page {
+        page.content(string)
+    }
+    
     override var mouseDownCanMoveWindow: Bool { true }
     override var canBecomeKeyView: Bool { true }
     override var isSelectable: Bool { get { true } set { } }
@@ -9,7 +20,7 @@ final class Text: NSTextView {
     private let caret = CGFloat(4)
 
     required init?(coder: NSCoder) { nil }
-    init(page: Page) {
+    init() {
         super.init(frame: .init(x: 0, y: 0, width: 0, height: 100_000), textContainer: Container())
         setAccessibilityElement(true)
         setAccessibilityRole(.textArea)
@@ -24,9 +35,8 @@ final class Text: NSTextView {
         selectedTextAttributes = [.backgroundColor: NSColor.systemPink, .foregroundColor: NSColor.controlTextColor]
         isVerticallyResizable = true
         isHorizontallyResizable = true
-        textContainerInset.width = 30
-        textContainerInset.height = 60
-        string = page.content
+        textContainerInset.width = 40
+        textContainerInset.height = 40
     }
     
     override final func drawInsertionPoint(in rect: NSRect, color: NSColor, turnedOn: Bool) {
