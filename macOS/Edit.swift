@@ -8,7 +8,7 @@ class Edit: NSView {
     private var subs = Set<AnyCancellable>()
     
     required init?(coder: NSCoder) { nil }
-    init(website: Website) {
+    required init(website: Website) {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         self.website = website

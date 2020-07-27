@@ -28,6 +28,7 @@
 		CE60EF5224A8DC50001D2A39 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = CE60EF5124A8DC50001D2A39 /* Core */; };
 		CE68DC8824BF624500011DC1 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68DC8724BF624500011DC1 /* Image.swift */; };
 		CE69636124CEBA3500FECA22 /* SingleEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE69636024CEBA3500FECA22 /* SingleEdit.swift */; };
+		CE69636324CEC0BD00FECA22 /* Website.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE69636224CEC0BD00FECA22 /* Website.swift */; };
 		CE7D5C9724B628550067D6C5 /* Web.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7D5C9624B628550067D6C5 /* Web.swift */; };
 		CE8524D224C468BF00F84E60 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8524D124C468BF00F84E60 /* User.swift */; };
 		CE8524D424C48EBB00F84E60 /* Purchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8524D324C48EBB00F84E60 /* Purchase.swift */; };
@@ -72,6 +73,7 @@
 		CE5F40BC24C81F4200BF93DF /* ari.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = ari.icns; sourceTree = "<group>"; };
 		CE68DC8724BF624500011DC1 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		CE69636024CEBA3500FECA22 /* SingleEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleEdit.swift; sourceTree = "<group>"; };
+		CE69636224CEC0BD00FECA22 /* Website.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Website.swift; sourceTree = "<group>"; };
 		CE7D5C9624B628550067D6C5 /* Web.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Web.swift; sourceTree = "<group>"; };
 		CE8524D124C468BF00F84E60 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CE8524D324C48EBB00F84E60 /* Purchase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Purchase.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				CEB1A74724B30D750094DEE1 /* Text.swift */,
 				CE7D5C9624B628550067D6C5 /* Web.swift */,
 				CE3EAF1724A7649C00D29C60 /* Assets.xcassets */,
+				CE69636224CEC0BD00FECA22 /* Website.swift */,
 			);
 			path = macOS;
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 				CE59C4D424A8C8190068C153 /* Button.swift in Sources */,
 				CEC93C1924BE1BDA00BC86E3 /* Pop.swift in Sources */,
 				CE9824B024B0AC4300AD14FF /* Separator.swift in Sources */,
+				CE69636324CEC0BD00FECA22 /* Website.swift in Sources */,
 				CE8524D224C468BF00F84E60 /* User.swift in Sources */,
 				CE3EAF1624A7649B00D29C60 /* Launch.swift in Sources */,
 				CE59C4D224A8C7FD0068C153 /* Control.swift in Sources */,
