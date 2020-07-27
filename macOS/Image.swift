@@ -1,4 +1,5 @@
 import AppKit
+import Core
 import Combine
 
 final class Image: Pop, NSTextFieldDelegate {
@@ -6,18 +7,18 @@ final class Image: Pop, NSTextFieldDelegate {
     private weak var name: Label!
     private weak var segmented: Segmented!
     private weak var field: Field!
-    private weak var main: Main!
+    private weak var website: Website!
     private var subs = Set<AnyCancellable>()
     private let images: [NSImage]
     private let url: URL
     
     required init?(coder: NSCoder) { nil }
-    init(relative: NSView, url: URL, main: Main) {
+    init(relative: NSView, url: URL, website: Website) {
         self.url = url
-        self.main = main
         images = NSImage(contentsOf: url)!.scales([0.25, 0.5])
         super.init(size: .init(width: 380, height: 380))
         show(relative: relative)
+        self.website = website
         
         let header = Label(.key("Add.image"), .bold(4))
         contentViewController!.view.addSubview(header)
@@ -52,7 +53,7 @@ final class Image: Pop, NSTextFieldDelegate {
             $0.addSubview(duplicate)
             self.duplicate = duplicate
             
-            if url.absoluteString.hasPrefix(main.website.url!.absoluteString) {
+            if url.absoluteString.hasPrefix(website.url!.absoluteString) {
                 _duplicate.isHidden = true
                 duplicate.isHidden = true
             } else {
@@ -181,13 +182,13 @@ final class Image: Pop, NSTextFieldDelegate {
     
     @objc private func submit() {
         if duplicate.state == .on {
-            images[segmented.selected.value].write(main.website.url!.appendingPathComponent(url.lastPathComponent))
+            images[segmented.selected.value].write(website.url!.appendingPathComponent(url.lastPathComponent))
             send(url: url.lastPathComponent)
-        } else if url.absoluteString.hasPrefix(main.website.url!.absoluteString) {
+        } else if url.absoluteString.hasPrefix(website.url!.absoluteString) {
             if segmented.selected.value != 2 {
                 images[segmented.selected.value].write(url)
             }
-            send(url: .init(url.absoluteString.dropFirst(main.website.url!.absoluteString.count)))
+            send(url: .init(url.absoluteString.dropFirst(website.url!.absoluteString.count)))
         } else {
             if segmented.selected.value != 2 {
                 images[segmented.selected.value].write(url)

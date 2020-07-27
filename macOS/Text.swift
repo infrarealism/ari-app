@@ -24,8 +24,8 @@ final class Text: NSTextView {
         selectedTextAttributes = [.backgroundColor: NSColor.systemPink, .foregroundColor: NSColor.controlTextColor]
         isVerticallyResizable = true
         isHorizontallyResizable = true
-        textContainerInset.width = 60
-        textContainerInset.height = 80
+        textContainerInset.width = 30
+        textContainerInset.height = 60
         string = page.content
     }
     

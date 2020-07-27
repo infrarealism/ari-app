@@ -6,7 +6,7 @@ final class Design: NSView {
     private var subs = Set<AnyCancellable>()
     
     required init?(coder: NSCoder) { nil }
-    init(main: Main) {
+    init(website: Website) {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         
@@ -15,11 +15,11 @@ final class Design: NSView {
         addSubview(scroll)
         
         let primary = Tint(title: .key("Primary.title"), description: .key("Primary.description"))
-        primary.select(color: main.website.model.style.primary)
+        primary.select(color: website.model.style.primary)
         scroll.add(primary)
         
         let secondary = Tint(title: .key("Secondary.title"), description: .key("Secondary.description"))
-        secondary.select(color: main.website.model.style.secondary)
+        secondary.select(color: website.model.style.secondary)
         scroll.add(secondary)
         
         scroll.topAnchor.constraint(equalTo: topAnchor).isActive = true
@@ -40,11 +40,11 @@ final class Design: NSView {
         scroll.bottom.constraint(greaterThanOrEqualTo: secondary.bottomAnchor, constant: 20).isActive = true
         
         primary.color.sink {
-            main.website.model.style.primary = $0
+            website.model.style.primary = $0
         }.store(in: &subs)
 
         secondary.color.sink {
-            main.website.model.style.secondary = $0
+            website.model.style.secondary = $0
         }.store(in: &subs)
     }
 }

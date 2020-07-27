@@ -2,7 +2,7 @@ import AppKit
 import Core
 
 final class Main: NSWindow {
-    var website: Website
+    let website: Website
     private weak var bar: Bar!
     
     class func open(_ bookmark: Bookmark) {
@@ -22,7 +22,7 @@ final class Main: NSWindow {
         collectionBehavior = .fullScreenNone
         isReleasedWhenClosed = false
 
-        let bar = Bar(main: self)
+        let bar = Bar(website: website)
         bar.edit.target = self
         bar.edit.action = #selector(edit)
         bar.style.target = self
@@ -65,17 +65,16 @@ final class Main: NSWindow {
     }
     
     @objc private func edit() {
-        let edit = Edit(main: self, page: website.model.pages.first!)
+        let edit = Edit(website: website)
         select(control: bar.edit, view: edit)
-        makeFirstResponder(edit.text)
     }
     
     @objc private func style() {
-        select(control: bar.style, view: Design(main: self))
+        select(control: bar.style, view: Design(website: website))
     }
     
     @objc private func preview() {
-        select(control: bar.preview, view: Web(main: self))
+        select(control: bar.preview, view: Web(website: website))
     }
 }
 

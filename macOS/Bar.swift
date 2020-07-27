@@ -7,19 +7,19 @@ final class Bar: NSVisualEffectView {
     private(set) weak var preview: Control!
     
     required init?(coder: NSCoder) { nil }
-    init(main: Main) {
+    init(website: Website) {
         super.init(frame: .zero)
         wantsLayer = true
         translatesAutoresizingMaskIntoConstraints = false
         material = .hudWindow
         
-        let icon = NSImageView(image: NSImage(named: main.website is Single ? "dot.square.fill" : "square.stack.3d.fill")!)
+        let icon = NSImageView(image: NSImage(named: website is Single ? "dot.square.fill" : "square.stack.3d.fill")!)
         icon.contentTintColor = .systemIndigo
         icon.translatesAutoresizingMaskIntoConstraints = false
         icon.imageScaling = .scaleProportionallyDown
         addSubview(icon)
         
-        let title = Label(main.website.model.name, .bold())
+        let title = Label(website.model.name, .bold())
         title.alignment = .center
         title.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         addSubview(title)

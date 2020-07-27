@@ -1,16 +1,15 @@
 import WebKit
+import Core
 import Combine
 
 final class Web: NSView {
     override var mouseDownCanMoveWindow: Bool { true }
-    private weak var main: Main!
     private var subs = Set<AnyCancellable>()
     
     required init?(coder: NSCoder) { nil }
-    init(main: Main) {
+    init(website: Website) {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
-        self.main = main
         
         let appeareance = Segmented(items: [.key("Light"), .key("Dark")])
         appeareance.selected.value = effectiveAppearance == NSAppearance(named: .darkAqua) ? 1 : 0
@@ -40,7 +39,7 @@ final class Web: NSView {
         web.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         web.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         
-        main.website.url.map {
+        website.url.map {
             _ = web.load(.init(url: $0.appendingPathComponent("index.html")))
         }
         
