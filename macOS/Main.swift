@@ -57,6 +57,7 @@ final class Main: NSWindow {
             $0.removeFromSuperview()
         }
         contentView!.addSubview(view)
+        makeFirstResponder(view)
         
         view.topAnchor.constraint(equalTo: contentView!.topAnchor, constant: 1).isActive = true
         view.leftAnchor.constraint(equalTo: bar.rightAnchor).isActive = true
@@ -65,9 +66,7 @@ final class Main: NSWindow {
     }
     
     @objc private func edit() {
-        let edit = website.edit
-        select(control: bar.edit, view: edit)
-        edit.ready(main: self)
+        select(control: bar.edit, view: website.edit)
     }
     
     @objc private func style() {
