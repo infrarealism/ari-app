@@ -27,6 +27,8 @@ Restore.purchases = "Restore Purchases";
 Purchases.are = "Purchases are non-consumable, you pay for them only once.\nThey are shared between iOS and macOS.";
 Loading = "Loading";
 Purchase = "Purchase";
+New.entry = "New entry";
+
 ari.app.blog.title = "Blog";
 ari.app.blog.subtitle = "This In-App Purchase enables creating a Blog.\n\nBlogs are static website that you can constantly update with fresh content or add new entries.";
 

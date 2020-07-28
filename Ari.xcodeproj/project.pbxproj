@@ -36,6 +36,7 @@
 		CE87193424A9D15000D5BD55 /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE87193324A9D15000D5BD55 /* Bookmark.swift */; };
 		CE9824B024B0AC4300AD14FF /* Separator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9824AF24B0AC4300AD14FF /* Separator.swift */; };
 		CE9E4E2D24BC4BEE00F3097C /* Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E4E2C24BC4BEE00F3097C /* Link.swift */; };
+		CE9E6B7B24D074F900C68215 /* Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E6B7A24D074F900C68215 /* Name.swift */; };
 		CEB1A74824B30D750094DEE1 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1A74724B30D750094DEE1 /* Text.swift */; };
 		CEB2AE0024BCB1EE000ED8FD /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2ADFF24BCB1EE000ED8FD /* Field.swift */; };
 		CEC93C1924BE1BDA00BC86E3 /* Pop.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC93C1824BE1BDA00BC86E3 /* Pop.swift */; };
@@ -80,6 +81,7 @@
 		CE87193324A9D15000D5BD55 /* Bookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
 		CE9824AF24B0AC4300AD14FF /* Separator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Separator.swift; sourceTree = "<group>"; };
 		CE9E4E2C24BC4BEE00F3097C /* Link.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Link.swift; sourceTree = "<group>"; };
+		CE9E6B7A24D074F900C68215 /* Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Name.swift; sourceTree = "<group>"; };
 		CEB1A74724B30D750094DEE1 /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
 		CEB2ADFF24BCB1EE000ED8FD /* Field.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
 		CEC93C1824BE1BDA00BC86E3 /* Pop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pop.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				CE9E4E2C24BC4BEE00F3097C /* Link.swift */,
 				CE59C4D924A8D6260068C153 /* Main.swift */,
 				CE58263424A76DE80004726F /* Menu.swift */,
+				CE9E6B7A24D074F900C68215 /* Name.swift */,
 				CEC93C1824BE1BDA00BC86E3 /* Pop.swift */,
 				CEEDB19A24ACBE0A00969FD4 /* Scroll.swift */,
 				CE20ADFB24B9C8AC00007F5F /* Segmented.swift */,
@@ -261,6 +264,7 @@
 				CE8524D224C468BF00F84E60 /* User.swift in Sources */,
 				CE3EAF1624A7649B00D29C60 /* Launch.swift in Sources */,
 				CE59C4D224A8C7FD0068C153 /* Control.swift in Sources */,
+				CE9E6B7B24D074F900C68215 /* Name.swift in Sources */,
 				CE87193424A9D15000D5BD55 /* Bookmark.swift in Sources */,
 				CE7D5C9724B628550067D6C5 /* Web.swift in Sources */,
 				CE59C4D824A8C87D0068C153 /* Font.swift in Sources */,

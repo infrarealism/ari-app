@@ -31,7 +31,7 @@ class Edit: NSView {
             
             let new = Blob(icon: "plus")
             new.target = self
-            new.action = #selector(self.link)
+            new.action = #selector(create)
             addSubview(new)
             
             let separator = NSView()
@@ -79,6 +79,13 @@ class Edit: NSView {
             }
             text.page = item.page
         }
+        
+        @objc private func create(_ button: Button) {
+           let name = Name(relative: button, website: website)
+           name.subscription = name.sink { [weak self] _ in
+//               self?.text.insertText($0, replacementRange: self?.text.selectedRange() ?? .init())
+           }
+       }
     }
     
     private weak var website: Website!

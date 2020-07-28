@@ -29,7 +29,7 @@ final class Link: Pop {
         contentViewController!.view.addSubview(urlField)
         self.urlField = urlField
         
-        let add = Button(text: .key("Add"), background: .systemBlue, foreground: .controlTextColor)
+        let add = Button(text: .key("Add"), background: .systemPink, foreground: .controlTextColor)
         add.target = self
         add.action = #selector(submit)
         contentViewController!.view.addSubview(add)
