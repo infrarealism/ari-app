@@ -64,10 +64,7 @@ extension Edit {
         }
         
         @objc private func create(_ button: Button) {
-           let name = Name(relative: button, website: website)
-           name.subscription = name.sink { [weak self] _ in
-    //               self?.text.insertText($0, replacementRange: self?.text.selectedRange() ?? .init())
-           }
+            Name(website: website).show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
        }
     }
 }
