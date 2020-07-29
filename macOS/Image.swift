@@ -2,7 +2,7 @@ import AppKit
 import Core
 import Combine
 
-final class Image: Pop, NSTextFieldDelegate {
+final class Image: Pop<String>, NSTextFieldDelegate {
     private weak var duplicate: NSSwitch!
     private weak var name: Label!
     private weak var segmented: Segmented!

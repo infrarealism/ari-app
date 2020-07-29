@@ -1,17 +1,13 @@
 import AppKit
 import Core
 
-final class Name: NSPopover, NSTextFieldDelegate {
+final class Name: Pop<Void>, NSTextFieldDelegate {
     private weak var field: Field!
     private weak var website: Website.Blog!
     
     required init?(coder: NSCoder) { nil }
-    init(website: Website.Blog) {
-        super.init()
-        behavior = .transient
-        contentSize = .init(width: 260, height: 250)
-        contentViewController = .init()
-        contentViewController!.view = .init()
+    init(relative: NSView, website: Website.Blog) {
+        super.init(size: .init(width: 260, height: 250))
         self.website = website
         
         let formater = DateFormatter()
@@ -48,6 +44,8 @@ final class Name: NSPopover, NSTextFieldDelegate {
         
         cancel.centerXAnchor.constraint(equalTo: contentViewController!.view.centerXAnchor).isActive = true
         cancel.topAnchor.constraint(equalTo: add.bottomAnchor, constant: 15).isActive = true
+        
+        show(relative: relative)
     }
     
     func control(_: NSControl, textView: NSTextView, doCommandBy: Selector) -> Bool {
@@ -61,6 +59,6 @@ final class Name: NSPopover, NSTextFieldDelegate {
     @objc private func save() {
         let id = field.stringValue.isEmpty ? field.placeholderString! : field.stringValue
         website.add(id: id)
-        close()
+        send(())
     }
 }

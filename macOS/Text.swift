@@ -6,6 +6,7 @@ final class Text: NSTextView {
         didSet {
             string = page.content
             setSelectedRange(.init())
+            needsDisplay = true
         }
     }
     

@@ -1,6 +1,6 @@
 import AppKit
 
-final class Link: Pop {
+final class Link: Pop<String> {
     private weak var titleField: Field!
     private weak var urlField: Field!
     

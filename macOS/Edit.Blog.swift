@@ -40,8 +40,14 @@ extension Edit {
             separator.leftAnchor.constraint(equalTo: list.rightAnchor).isActive = true
             separator.widthAnchor.constraint(equalToConstant: 2).isActive = true
             
+            refresh()
+            select(page: .index)
+        }
+        
+        private func refresh() {
             var top = list.top
-            website.model.pages.map(Item.init).forEach {
+            list.views.forEach { $0.removeFromSuperview() }
+            website.model.pages.sorted { $0.created < $1.created }.map { Item(id: $0.id) }.forEach {
                 $0.target = self
                 $0.action = #selector(select(item:))
                 list.add($0)
@@ -52,25 +58,34 @@ extension Edit {
                 top = $0.bottomAnchor
             }
             list.bottom.constraint(greaterThanOrEqualTo: top, constant: 20).isActive = true
-            
-            select(item: list.views.map { $0 as! Item }.first { $0.page.id == "index" }!)
+        }
+        
+        private func select(page: Page) {
+            select(item: list.views.map { $0 as! Item }.first { $0.id == page.id }!)
         }
         
         @objc private func select(item: Item) {
             list.views.map { $0 as! Item }.forEach {
                 $0.enabled = $0 != item
             }
-            text.page = item.page
+            text.page = website.model.pages.first { $0.id == item.id }
+            window?.makeFirstResponder(text)
         }
         
         @objc private func create(_ button: Button) {
-            Name(website: website).show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
+            let name = Name(relative: button, website: website)
+            name.subscription = name.sink { [weak self] in
+                self?.refresh()
+                self?.website.model.pages.sorted { $0.created > $1.created }.first.map {
+                    self?.select(page: $0)
+                }
+            }
        }
     }
 }
 
 private final class Item: Control {
-    let page: Page
+    let id: String
     override var enabled: Bool {
         didSet {
             layer!.backgroundColor = enabled ? .clear : NSColor.controlLightHighlightColor.cgColor
@@ -78,12 +93,12 @@ private final class Item: Control {
     }
     
     required init?(coder: NSCoder) { nil }
-    init(page: Page) {
-        self.page = page
+    init(id: String) {
+        self.id = id
         super.init()
         wantsLayer = true
         
-        let label = Label(page.id, .medium())
+        let label = Label(id, .medium())
         label.maximumNumberOfLines = 1
         label.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         addSubview(label)

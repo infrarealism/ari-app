@@ -1,8 +1,7 @@
 import AppKit
 import Combine
 
-class Pop: NSPopover, Publisher, Subscription, NSPopoverDelegate {
-    typealias Output = String
+class Pop<Output>: NSPopover, Publisher, Subscription, NSPopoverDelegate {
     typealias Failure = Never
     var subscription: AnyCancellable?
     private var subscriber: AnySubscriber<Output, Failure>?
@@ -20,8 +19,8 @@ class Pop: NSPopover, Publisher, Subscription, NSPopoverDelegate {
         show(relativeTo: relative.bounds, of: relative, preferredEdge: .minY)
     }
     
-    func send(_ message: Output) {
-        _ = subscriber?.receive(message)
+    func send(_ output: Output) {
+        _ = subscriber?.receive(output)
         close()
     }
     
