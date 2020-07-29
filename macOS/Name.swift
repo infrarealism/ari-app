@@ -4,6 +4,7 @@ import Core
 final class Name: Pop<Void>, NSTextFieldDelegate {
     private weak var field: Field!
     private weak var website: Website.Blog!
+    private weak var warning: Label!
     
     required init?(coder: NSCoder) { nil }
     init(relative: NSView, website: Website.Blog) {
@@ -22,6 +23,13 @@ final class Name: Pop<Void>, NSTextFieldDelegate {
         contentViewController!.view.addSubview(field)
         self.field = field
         
+        let warning = Label(.key("Name.exists"), .medium())
+        warning.isHidden = true
+        warning.textColor = .systemRed
+        warning.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        contentViewController!.view.addSubview(warning)
+        self.warning = warning
+        
         let add = Button(text: .key("Add"), background: .systemPink, foreground: .controlTextColor)
         add.target = self
         add.action = #selector(save)
@@ -39,6 +47,10 @@ final class Name: Pop<Void>, NSTextFieldDelegate {
         field.leftAnchor.constraint(equalTo: header.leftAnchor).isActive = true
         field.widthAnchor.constraint(equalToConstant: 200).isActive = true
         
+        warning.topAnchor.constraint(equalTo: field.bottomAnchor, constant: 10).isActive = true
+        warning.leftAnchor.constraint(equalTo: field.leftAnchor).isActive = true
+        warning.rightAnchor.constraint(lessThanOrEqualTo: field.rightAnchor).isActive = true
+        
         add.centerXAnchor.constraint(equalTo: contentViewController!.view.centerXAnchor).isActive = true
         add.topAnchor.constraint(equalTo: field.bottomAnchor, constant: 70).isActive = true
         
@@ -46,6 +58,7 @@ final class Name: Pop<Void>, NSTextFieldDelegate {
         cancel.topAnchor.constraint(equalTo: add.bottomAnchor, constant: 15).isActive = true
         
         show(relative: relative)
+        update()
     }
     
     func control(_: NSControl, textView: NSTextView, doCommandBy: Selector) -> Bool {
@@ -54,6 +67,15 @@ final class Name: Pop<Void>, NSTextFieldDelegate {
             return true
         }
         return false
+    }
+    
+    func controlTextDidChange(_: Notification) {
+        update()
+    }
+    
+    private func update() {
+        let id = field.stringValue.isEmpty ? field.placeholderString! : field.stringValue
+        warning.isHidden = !website.model.pages.contains { $0.id == id }
     }
     
     @objc private func save() {

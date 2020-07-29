@@ -41,7 +41,7 @@ extension Edit {
             separator.widthAnchor.constraint(equalToConstant: 2).isActive = true
             
             refresh()
-            select(page: .index)
+            select(page: .index, scroll: false)
         }
         
         private func refresh() {
@@ -60,8 +60,13 @@ extension Edit {
             list.bottom.constraint(greaterThanOrEqualTo: top, constant: 20).isActive = true
         }
         
-        private func select(page: Page) {
-            select(item: list.views.map { $0 as! Item }.first { $0.id == page.id }!)
+        private func select(page: Page, scroll: Bool) {
+            let item = list.views.map { $0 as! Item }.first { $0.id == page.id }!
+            select(item: item)
+            if scroll {
+                list.layoutSubtreeIfNeeded()
+                list.center(item.frame, duration: 0.4)
+            }
         }
         
         @objc private func select(item: Item) {
@@ -77,7 +82,7 @@ extension Edit {
             name.subscription = name.sink { [weak self] in
                 self?.refresh()
                 self?.website.model.pages.sorted { $0.created > $1.created }.first.map {
-                    self?.select(page: $0)
+                    self?.select(page: $0, scroll: true)
                 }
             }
        }

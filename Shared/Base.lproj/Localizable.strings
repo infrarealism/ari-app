@@ -28,6 +28,7 @@ Purchases.are = "Purchases are non-consumable, you pay for them only once.\nThey
 Loading = "Loading";
 Purchase = "Purchase";
 New.entry = "New blog entry";
+Name.exists = "You already have a page with that name, this will overwrite it.";
 
 ari.app.blog.title = "Blog";
 ari.app.blog.subtitle = "This In-App Purchase enables creating a Blog.\n\nBlogs are static website that you can constantly update with fresh content or add new entries.";
