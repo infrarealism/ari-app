@@ -100,8 +100,8 @@ extension Edit {
         
         @objc private func delete() {
             let alert = NSAlert()
-            alert.messageText = .key("Delete Page")
-            alert.informativeText = .key("This can't be undone")
+            alert.messageText = .key("Delete.page")
+            alert.informativeText = .key("Cant.undo")
             alert.addButton(withTitle: .key("Cancel"))
             alert.addButton(withTitle: .key("Delete"))
             alert.alertStyle = .informational

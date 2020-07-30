@@ -29,6 +29,10 @@ Loading = "Loading";
 Purchase = "Purchase";
 New.entry = "New blog entry";
 Name.exists = "You already have a page with that name, this will overwrite it.";
+Cant.undo = "This can't be undone";
+Delete.page = "Delete page";
+Cancel = "Cancel";
+Title = "Title";
 
 ari.app.blog.title = "Blog";
 ari.app.blog.subtitle = "This In-App Purchase enables creating a Blog.\n\nBlogs are static website that you can constantly update with fresh content or add new entries.";
