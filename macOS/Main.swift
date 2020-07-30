@@ -14,7 +14,7 @@ final class Main: NSWindow {
         super.init(contentRect: .init(x: 0, y: 0, width: 1200, height: 800), styleMask:
             [.borderless, .closable, .miniaturizable, .resizable, .titled, .unifiedTitleAndToolbar, .fullSizeContentView],
                    backing: .buffered, defer: false)
-        minSize = .init(width: 600, height: 400)
+        minSize = .init(width: 700, height: 400)
         titlebarAppearsTransparent = true
         titleVisibility = .hidden
         toolbar = .init()

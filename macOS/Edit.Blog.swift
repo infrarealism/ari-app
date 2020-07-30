@@ -106,6 +106,7 @@ private final class Item: Control {
         let label = Label(id, .medium())
         label.maximumNumberOfLines = 1
         label.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        label.lineBreakMode = .byTruncatingTail
         addSubview(label)
         
         heightAnchor.constraint(equalToConstant: 42).isActive = true

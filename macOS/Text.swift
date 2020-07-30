@@ -36,8 +36,8 @@ final class Text: NSTextView {
         selectedTextAttributes = [.backgroundColor: NSColor.systemPink, .foregroundColor: NSColor.controlTextColor]
         isVerticallyResizable = true
         isHorizontallyResizable = true
-        textContainerInset.width = 40
-        textContainerInset.height = 40
+        textContainerInset.width = 50
+        textContainerInset.height = 80
     }
     
     override final func drawInsertionPoint(in rect: NSRect, color: NSColor, turnedOn: Bool) {
