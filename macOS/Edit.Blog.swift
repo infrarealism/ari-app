@@ -4,6 +4,7 @@ import Core
 extension Edit {
     final class Blog: Edit<Website.Blog> {
         private weak var list: Scroll!
+        private weak var trash: Blob!
                 
         required init?(coder: NSCoder) { nil }
         required init(website: Website.Blog) {
@@ -19,6 +20,12 @@ extension Edit {
             new.target = self
             new.action = #selector(create)
             addSubview(new)
+            
+            let trash = Blob(icon: "trash")
+            trash.target = self
+            trash.action = #selector(delete)
+            addSubview(trash)
+            self.trash = trash
             
             let separator = NSView()
             separator.translatesAutoresizingMaskIntoConstraints = false
@@ -39,6 +46,9 @@ extension Edit {
             separator.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
             separator.leftAnchor.constraint(equalTo: list.rightAnchor).isActive = true
             separator.widthAnchor.constraint(equalToConstant: 2).isActive = true
+            
+            trash.topAnchor.constraint(equalTo: info.topAnchor).isActive = true
+            trash.rightAnchor.constraint(equalTo: info.leftAnchor, constant: -5).isActive = true
             
             refresh()
             select(page: .index, scroll: false)
@@ -74,6 +84,7 @@ extension Edit {
                 $0.enabled = $0 != item
             }
             text.page = website.model.pages.first { $0.id == item.id }
+            trash.isHidden = text.page == .index
             window?.makeFirstResponder(text)
         }
         
@@ -86,6 +97,21 @@ extension Edit {
                 }
             }
        }
+        
+        @objc private func delete() {
+            let alert = NSAlert()
+            alert.messageText = .key("Delete Page")
+            alert.informativeText = .key("This can't be undone")
+            alert.addButton(withTitle: .key("Cancel"))
+            alert.addButton(withTitle: .key("Delete"))
+            alert.alertStyle = .informational
+            alert.beginSheetModal(for: window!) { [weak self] in
+                guard let self = self, $0 == .alertSecondButtonReturn else { return }
+                self.website.remove(self.text.page)
+                self.refresh()
+                self.select(page: .index, scroll: true)
+            }
+        }
     }
 }
 

@@ -77,4 +77,3 @@ final class Main: NSWindow {
         select(control: bar.preview, view: Web(website: website))
     }
 }
-

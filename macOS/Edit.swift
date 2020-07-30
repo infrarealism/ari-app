@@ -5,6 +5,7 @@ import Core
 class Edit<W>: NSView where W : Website {
     private(set) weak var website: W!
     private(set) weak var text: Text!
+    private(set) weak var info: Blob!
     private(set) weak var scrollLeft: NSLayoutConstraint!
     private var subs = Set<AnyCancellable>()
     
@@ -24,6 +25,12 @@ class Edit<W>: NSView where W : Website {
         let text = Text()
         scroll.documentView = text
         self.text = text
+        
+        let info = Blob(icon: "text.badge.star")
+        info.target = self
+        info.action = #selector(edit)
+        addSubview(info)
+        self.info = info
         
         let link = Blob(icon: "link.circle")
         link.target = self
@@ -47,6 +54,9 @@ class Edit<W>: NSView where W : Website {
         link.topAnchor.constraint(equalTo: image.topAnchor).isActive = true
         link.rightAnchor.constraint(equalTo: image.leftAnchor, constant: -5).isActive = true
         
+        info.topAnchor.constraint(equalTo: image.topAnchor).isActive = true
+        info.rightAnchor.constraint(equalTo: link.leftAnchor, constant: -5).isActive = true
+        
         NotificationCenter.default.publisher(for: NSTextView.didChangeNotification, object: text)
             .map { ($0.object as! Text).updated }
             .debounce(for: .seconds(1.1), scheduler: DispatchQueue(label: "", qos: .utility))
@@ -63,6 +73,10 @@ class Edit<W>: NSView where W : Website {
         didSet {
             text.textContainer!.size.width = bounds.width - (text.textContainerInset.width * 2) - scrollLeft.constant
         }
+    }
+    
+    @objc private func edit(_ button: Button) {
+        _ = Info(relative: button, website: website, page: text.page)
     }
     
     @objc private func link(_ button: Button) {
