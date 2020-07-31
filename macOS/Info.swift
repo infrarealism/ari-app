@@ -2,20 +2,28 @@ import AppKit
 import Core
 
 final class Info: Pop<Void> {
-    private weak var field: Field!
     private weak var website: Website!
     private weak var warning: Label!
+    private var items = [Item]()
     
     required init?(coder: NSCoder) { nil }
     init(relative: NSView, website: Website, page: Page) {
-        super.init(size: .init(width: 260, height: 300))
+        super.init(size: .init(width: 260, height: 460))
         self.website = website
         
-        let title = Item(title: .key("Title"), value: page.title)
-        contentViewController!.view.addSubview(title)
-        
-        title.topAnchor.constraint(equalTo: contentViewController!.view.topAnchor, constant: 30).isActive = true
-        title.centerXAnchor.constraint(equalTo: contentViewController!.view.centerXAnchor).isActive = true
+        var top = contentViewController!.view.topAnchor
+        items = [
+            Item(title: .key("Title"), value: page.title),
+            .init(title: .key("Title"), value: page.title),
+            .init(title: .key("Title"), value: page.title),
+            .init(title: .key("Title"), value: page.title),
+        ].map {
+            contentViewController!.view.addSubview($0)
+            $0.topAnchor.constraint(equalTo: top, constant: 30).isActive = true
+            $0.centerXAnchor.constraint(equalTo: contentViewController!.view.centerXAnchor).isActive = true
+            top = $0.bottomAnchor
+            return $0
+        }
         
         show(relative: relative)
     }
