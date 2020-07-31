@@ -40,7 +40,7 @@ final class Web: NSView {
         web.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         
         website.url.map {
-            _ = web.load(.init(url: $0.appendingPathComponent("index.html")))
+            _ = web.load(.init(url: $0.appendingPathComponent(Page.index.file)))
         }
         
         appeareance.selected.sink {

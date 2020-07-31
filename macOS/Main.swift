@@ -29,6 +29,8 @@ final class Main: NSWindow {
         bar.style.action = #selector(style)
         bar.preview.target = self
         bar.preview.action = #selector(preview)
+        bar.share.target = self
+        bar.share.action = #selector(share)
         contentView!.addSubview(bar)
         self.bar = bar
         
@@ -71,6 +73,10 @@ final class Main: NSWindow {
     
     @objc private func style() {
         select(control: bar.style, view: Design(website: website))
+    }
+    
+    @objc private func share() {
+        NSWorkspace.shared.activateFileViewerSelecting([website.url!.appendingPathComponent(Page.index.file)])
     }
     
     @objc private func preview() {

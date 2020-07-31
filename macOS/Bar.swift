@@ -5,6 +5,7 @@ final class Bar: NSVisualEffectView {
     private(set) weak var edit: Control!
     private(set) weak var style: Control!
     private(set) weak var preview: Control!
+    private(set) weak var share: Control!
     
     required init?(coder: NSCoder) { nil }
     init(website: Website) {
@@ -36,6 +37,10 @@ final class Bar: NSVisualEffectView {
         addSubview(preview)
         self.preview = preview
         
+        let share = Item(icon: "square.and.arrow.up", title: .key("Share"))
+        addSubview(share)
+        self.share = share
+        
         widthAnchor.constraint(equalToConstant: 180).isActive = true
         
         icon.topAnchor.constraint(equalTo: topAnchor, constant: 60).isActive = true
@@ -56,9 +61,13 @@ final class Bar: NSVisualEffectView {
         style.leftAnchor.constraint(equalTo: preview.leftAnchor).isActive = true
         style.rightAnchor.constraint(equalTo: preview.rightAnchor).isActive = true
         
-        preview.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30).isActive = true
+        preview.bottomAnchor.constraint(equalTo: share.topAnchor, constant: -20).isActive = true
         preview.leftAnchor.constraint(equalTo: leftAnchor, constant: 20).isActive = true
         preview.rightAnchor.constraint(equalTo: rightAnchor, constant: -25).isActive = true
+        
+        share.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30).isActive = true
+        share.leftAnchor.constraint(equalTo: leftAnchor, constant: 20).isActive = true
+        share.rightAnchor.constraint(equalTo: rightAnchor, constant: -25).isActive = true
     }
     
     func select(control: Control) {
