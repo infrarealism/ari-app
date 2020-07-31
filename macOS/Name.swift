@@ -35,11 +35,6 @@ final class Name: Pop<Void>, NSTextFieldDelegate {
         add.action = #selector(save)
         contentViewController!.view.addSubview(add)
         
-        let cancel = Button(text: .key("Cancel"), background: .clear, foreground: .secondaryLabelColor)
-        cancel.target = self
-        cancel.action = #selector(close)
-        contentViewController!.view.addSubview(cancel)
-        
         header.topAnchor.constraint(equalTo: contentViewController!.view.topAnchor, constant: 30).isActive = true
         header.leftAnchor.constraint(equalTo: contentViewController!.view.leftAnchor, constant: 30).isActive = true
         
@@ -52,10 +47,7 @@ final class Name: Pop<Void>, NSTextFieldDelegate {
         warning.rightAnchor.constraint(lessThanOrEqualTo: field.rightAnchor).isActive = true
         
         add.centerXAnchor.constraint(equalTo: contentViewController!.view.centerXAnchor).isActive = true
-        add.topAnchor.constraint(equalTo: field.bottomAnchor, constant: 70).isActive = true
-        
-        cancel.centerXAnchor.constraint(equalTo: contentViewController!.view.centerXAnchor).isActive = true
-        cancel.topAnchor.constraint(equalTo: add.bottomAnchor, constant: 15).isActive = true
+        add.bottomAnchor.constraint(equalTo: _cancel.topAnchor, constant: -15).isActive = true
         
         show(relative: relative)
         update()

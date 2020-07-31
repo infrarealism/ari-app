@@ -23,11 +23,6 @@ final class Image: Pop<String>, NSTextFieldDelegate {
         let header = Label(.key("Add.image"), .bold(4))
         contentViewController!.view.addSubview(header)
         
-        let cancel = Button(text: .key("Cancel"), background: .clear, foreground: .secondaryLabelColor)
-        cancel.target = self
-        cancel.action = #selector(close)
-        contentViewController!.view.addSubview(cancel)
-        
         let steps = Steps(bottom: -70)
         contentViewController!.view.addSubview(steps)
         
@@ -158,9 +153,6 @@ final class Image: Pop<String>, NSTextFieldDelegate {
         
         header.topAnchor.constraint(equalTo: contentViewController!.view.topAnchor, constant: 30).isActive = true
         header.leftAnchor.constraint(equalTo: contentViewController!.view.leftAnchor, constant: 30).isActive = true
-        
-        cancel.centerXAnchor.constraint(equalTo: contentViewController!.view.centerXAnchor).isActive = true
-        cancel.bottomAnchor.constraint(equalTo: contentViewController!.view.bottomAnchor, constant: -30).isActive = true
         
         steps.topAnchor.constraint(equalTo: contentViewController!.view.topAnchor).isActive = true
         steps.bottomAnchor.constraint(equalTo: contentViewController!.view.bottomAnchor).isActive = true
