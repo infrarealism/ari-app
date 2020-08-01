@@ -64,12 +64,12 @@ class Edit<W>: NSView where W : Website {
             .store(in: &subs)
     }
     
-    override func becomeFirstResponder() -> Bool {
+    final override func becomeFirstResponder() -> Bool {
         window?.makeFirstResponder(text)
         return true
     }
     
-    override var frame: NSRect {
+    final override var frame: NSRect {
         didSet {
             text.textContainer!.size.width = bounds.width - (text.textContainerInset.width * 2) - scrollLeft.constant
         }
