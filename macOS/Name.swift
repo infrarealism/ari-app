@@ -12,7 +12,7 @@ final class Name: Pop<Void>, NSTextFieldDelegate {
         self.website = website
         
         let formater = DateFormatter()
-        formater.dateFormat = "dd-MM-yyyy"
+        formater.dateFormat = "dd MM yyyy"
         
         let header = Label(.key("New.entry"), .bold(4))
         contentViewController!.view.addSubview(header)
@@ -66,8 +66,7 @@ final class Name: Pop<Void>, NSTextFieldDelegate {
     }
     
     private func update() {
-        let id = field.stringValue.isEmpty ? field.placeholderString! : field.stringValue
-        warning.isHidden = !website.model.pages.contains { $0.id == id }
+        warning.isHidden = !website.contains(id: field.stringValue.isEmpty ? field.placeholderString! : field.stringValue)
     }
     
     @objc private func save() {
