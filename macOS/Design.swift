@@ -27,7 +27,7 @@ final class Design: NSView {
         scroll.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         scroll.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         scroll.right.constraint(equalTo: rightAnchor).isActive = true
-        scroll.bottom.constraint(equalTo: bottomAnchor).isActive = true
+        scroll.bottom.constraint(greaterThanOrEqualTo: bottomAnchor).isActive = true
         
         primary.topAnchor.constraint(equalTo: scroll.top, constant: 30).isActive = true
         primary.leftAnchor.constraint(equalTo: scroll.left).isActive = true

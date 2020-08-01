@@ -4,14 +4,15 @@ import Core
 final class Info: Pop<Void> {
     private weak var website: Website!
     private weak var warning: Label!
-    private var page: Page
     private var items = [Item]()
+    private let id: String
     
     required init?(coder: NSCoder) { nil }
-    init(relative: NSView, website: Website, page: Page) {
-        self.page = page
+    init(relative: NSView, website: Website, id: String) {
+        self.id = id
         super.init(size: .init(width: 340, height: 380))
         self.website = website
+        let page = website.model.pages.first { $0.id == id }!
         
         let header = Label(.key("Page.details"), .bold(4))
         contentViewController!.view.addSubview(header)
@@ -45,6 +46,7 @@ final class Info: Pop<Void> {
     }
     
     @objc private func save() {
+        var page = website.model.pages.first { $0.id == id }!
         page.title = items[0].field.stringValue
         page.description = items[1].field.stringValue
         page.keywords = items[2].field.stringValue

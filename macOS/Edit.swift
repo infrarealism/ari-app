@@ -76,7 +76,7 @@ class Edit<W>: NSView where W : Website {
     }
     
     @objc private func edit(_ button: Button) {
-        _ = Info(relative: button, website: website, page: text.page)
+        _ = Info(relative: button, website: website, id: text.page.id)
     }
     
     @objc private func link(_ button: Button) {
