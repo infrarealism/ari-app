@@ -38,6 +38,30 @@ Keywords = "Keywords";
 Author = "Author";
 Page.details = "Page details";
 How.it.works = "How does it work?";
+How.single = "- You have 1 page where you can keep things simple and easy to modify.
+
+- Every time you edit this page the website gets regenerated so that you can publish it online in your prefered manner.
+
+- On the Style section you can choose what colours to use as highlight and buttons.
+
+- Your website will be adaptable for light and dark modes by default.
+
+- Prepend a hash (#) to your titles, for example: # Hello World
+# Primary title
+## Secondary title
+### Tertiary title
+
+- Use the helper tools on Edit to add images and links to your websites (top-right of the screen).";
+
+How.blog = "- You have all the benefits for single pages.
+
+- The index page is your starting point, the home of your website.
+
+- Every other page you create will be automatically linked on the index page.
+
+- Every page you create will automatically link to your index page to facilitate navigation.
+
+- Pages listed on the index page are displayed in descending order, according the date they were created, that is, the latest created is shown first.";
 
 ari.app.blog.title = "Blog";
 ari.app.blog.subtitle = "This In-App Purchase enables creating a Blog.\n\nBlogs are static website that you can constantly update with fresh content or add new entries.";

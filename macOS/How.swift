@@ -1,6 +1,8 @@
 import AppKit
 
 final class How: NSWindow {
+    private weak var content: Label!
+    
     init() {
         super.init(contentRect: .init(x: 0, y: 0, width: 700, height: 500), styleMask:
             [.borderless, .closable, .titled, .unifiedTitleAndToolbar, .fullSizeContentView],
@@ -33,6 +35,11 @@ final class How: NSWindow {
         blog.action = #selector(self.blog(item:))
         contentView!.addSubview(blog)
         
+        let content = Label("", .regular(2))
+        content.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        contentView!.addSubview(content)
+        self.content = content
+        
         blur.leftAnchor.constraint(equalTo: contentView!.leftAnchor).isActive = true
         blur.rightAnchor.constraint(equalTo: contentView!.rightAnchor).isActive = true
         blur.topAnchor.constraint(equalTo: contentView!.topAnchor).isActive = true
@@ -52,6 +59,10 @@ final class How: NSWindow {
         blog.topAnchor.constraint(equalTo: single.bottomAnchor, constant: 20).isActive = true
         blog.leftAnchor.constraint(equalTo: contentView!.leftAnchor, constant: 20).isActive = true
         
+        content.topAnchor.constraint(equalTo: separator.bottomAnchor, constant: 30).isActive = true
+        content.leftAnchor.constraint(equalTo: contentView!.leftAnchor, constant: 180).isActive = true
+        content.rightAnchor.constraint(lessThanOrEqualTo: contentView!.rightAnchor, constant: -40).isActive = true
+        
         center()
         setFrameAutosaveName("How")
         self.single(item: single)
@@ -70,10 +81,12 @@ final class How: NSWindow {
     
     @objc private func single(item: Item) {
         select(item: item)
+        content.stringValue = .key("How.single")
     }
     
     @objc private func blog(item: Item) {
         select(item: item)
+        content.stringValue = .key("How.blog")
     }
 }
 
