@@ -22,7 +22,7 @@ class Edit<W>: NSView where W : Website {
         scroll.drawsBackground = false
         addSubview(scroll)
         
-        let text = Text()
+        let text = Text(website: website)
         scroll.documentView = text
         self.text = text
         
@@ -76,7 +76,7 @@ class Edit<W>: NSView where W : Website {
     }
     
     @objc private func edit(_ button: Button) {
-        _ = Info(relative: button, website: website, id: text.page.id)
+        _ = Info(relative: button, website: website, id: text.id)
     }
     
     @objc private func link(_ button: Button) {

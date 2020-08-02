@@ -7,7 +7,7 @@ extension Edit {
         required init(website: Website.Single) {
             super.init(website: website)
             scrollLeft.constant = 20
-            text.page = website.model.pages.first!
+            text.id = Page.index.id
         }
     }
 }

@@ -83,8 +83,8 @@ extension Edit {
             list.views.map { $0 as! Item }.forEach {
                 $0.enabled = $0 != item
             }
-            text.page = website.model.pages.first { $0.id == item.id }
-            trash.isHidden = text.page == .index
+            text.id = item.id
+            trash.isHidden = item.id == Page.index.id
             window?.makeFirstResponder(text)
         }
         
@@ -107,7 +107,7 @@ extension Edit {
             alert.alertStyle = .informational
             alert.beginSheetModal(for: window!) { [weak self] in
                 guard let self = self, $0 == .alertSecondButtonReturn else { return }
-                self.website.remove(self.text.page)
+                self.website.remove(self.website.model.pages.first { $0.id == self.text.id }!)
                 self.refresh()
                 self.select(page: .index, scroll: true)
             }
