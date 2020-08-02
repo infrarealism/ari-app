@@ -65,7 +65,8 @@ final class Menu: NSMenu {
     }
     
     private var help: NSMenuItem {
-        menu(.key("Help"), items: [])
+        menu(.key("Help"), items: [
+        .init(title: .key("How.it.works"), action: #selector(NSApp.how), keyEquivalent: "")])
     }
     
     private func menu(_ name: String, items: [NSMenuItem]) -> NSMenuItem {

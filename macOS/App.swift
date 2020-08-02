@@ -59,6 +59,10 @@ extension NSApplication {
         (NSApp.windows.first { $0 is Store } ?? Store()).makeKeyAndOrderFront(nil)
     }
     
+    @objc func how() {
+        (NSApp.windows.first { $0 is How } ?? How()).makeKeyAndOrderFront(nil)
+    }
+    
     fileprivate func open(_ url: URL) {
         Bookmark.open(url).map {
             session.open($0)

@@ -115,7 +115,6 @@ final class Store: NSWindow {
     }
     
     override func close() {
-//        contentView = nil
         NSApp.closedOther()
         super.close()
     }

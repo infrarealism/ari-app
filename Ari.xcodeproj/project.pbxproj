@@ -47,6 +47,7 @@
 		CEE7334724B8A86E0093CBC3 /* Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE7334624B8A86E0093CBC3 /* Design.swift */; };
 		CEEDB19924ACB4A100969FD4 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDB19824ACB4A100969FD4 /* Session.swift */; };
 		CEEDB19B24ACBE0A00969FD4 /* Scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDB19A24ACBE0A00969FD4 /* Scroll.swift */; };
+		CEF2CB0D24D6D62B005A8C4C /* How.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF2CB0C24D6D62B005A8C4C /* How.swift */; };
 		CEFF302324BB4EFB0034C8A4 /* Edit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF302224BB4EFB0034C8A4 /* Edit.swift */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +96,7 @@
 		CEE7334624B8A86E0093CBC3 /* Design.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Design.swift; sourceTree = "<group>"; };
 		CEEDB19824ACB4A100969FD4 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		CEEDB19A24ACBE0A00969FD4 /* Scroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scroll.swift; sourceTree = "<group>"; };
+		CEF2CB0C24D6D62B005A8C4C /* How.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = How.swift; sourceTree = "<group>"; };
 		CEFF302224BB4EFB0034C8A4 /* Edit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Edit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -149,6 +151,7 @@
 				CE9E6B7E24D07DA100C68215 /* Edit.Single.swift */,
 				CEFF302224BB4EFB0034C8A4 /* Edit.swift */,
 				CEB2ADFF24BCB1EE000ED8FD /* Field.swift */,
+				CEF2CB0C24D6D62B005A8C4C /* How.swift */,
 				CE68DC8724BF624500011DC1 /* Image.swift */,
 				CE35ED4424D2F25C00259F77 /* Info.swift */,
 				CE59C4D524A8C82E0068C153 /* Label.swift */,
@@ -290,6 +293,7 @@
 				CE9E4E2D24BC4BEE00F3097C /* Link.swift in Sources */,
 				CE20ADFC24B9C8AC00007F5F /* Segmented.swift in Sources */,
 				CE8524D424C48EBB00F84E60 /* Purchase.swift in Sources */,
+				CEF2CB0D24D6D62B005A8C4C /* How.swift in Sources */,
 				CE58263824A76E090004726F /* String.swift in Sources */,
 				CE59C4D624A8C82E0068C153 /* Label.swift in Sources */,
 				CE3EAF1424A7649B00D29C60 /* App.swift in Sources */,
