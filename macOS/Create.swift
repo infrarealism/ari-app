@@ -66,14 +66,14 @@ final class Create: NSWindow, NSTextFieldDelegate {
         steps.step {
             $0.title(.key("Enter.type"))
 
-            let _single = Segment(icon: "dot.square", title: .key("Single"))
+            let _single = Segment(icon: "single", title: .key("Single"))
             _single.selected = true
             _single.target = self
             _single.action = #selector(single)
             $0.addSubview(_single)
             self._single = _single
 
-            let _blog = Segment(icon: "square.stack.3d.up", title: .key("Blog"))
+            let _blog = Segment(icon: "blog", title: .key("Blog"))
             _blog.target = self
             _blog.action = #selector(blog)
             $0.addSubview(_blog)
