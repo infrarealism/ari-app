@@ -48,6 +48,7 @@
 		CED14EC924D8573A004D4918 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED14EC824D8573A004D4918 /* Assets.xcassets */; };
 		CED14ECF24D8573A004D4918 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CED14ECD24D8573A004D4918 /* LaunchScreen.storyboard */; };
 		CED14ED524D8596B004D4918 /* Tabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED14ED424D8596B004D4918 /* Tabs.swift */; };
+		CED14ED724D85A72004D4918 /* Launch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED14ED624D85A72004D4918 /* Launch.swift */; };
 		CEE0FD1324B89186006B7CF6 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE0FD1224B89186006B7CF6 /* Color.swift */; };
 		CEE7334724B8A86E0093CBC3 /* Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE7334624B8A86E0093CBC3 /* Design.swift */; };
 		CEEDB19924ACB4A100969FD4 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDB19824ACB4A100969FD4 /* Session.swift */; };
@@ -104,6 +105,7 @@
 		CED14ECE24D8573A004D4918 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CED14ED024D8573A004D4918 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CED14ED424D8596B004D4918 /* Tabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabs.swift; sourceTree = "<group>"; };
+		CED14ED624D85A72004D4918 /* Launch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Launch.swift; sourceTree = "<group>"; };
 		CEE0FD1224B89186006B7CF6 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		CEE7334624B8A86E0093CBC3 /* Design.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Design.swift; sourceTree = "<group>"; };
 		CEEDB19824ACB4A100969FD4 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 			children = (
 				CED14ED024D8573A004D4918 /* Info.plist */,
 				CED14EC224D85739004D4918 /* App.swift */,
+				CED14ED624D85A72004D4918 /* Launch.swift */,
 				CED14EC424D85739004D4918 /* Scene.swift */,
 				CED14ED424D8596B004D4918 /* Tabs.swift */,
 				CED14EC824D8573A004D4918 /* Assets.xcassets */,
@@ -377,6 +380,7 @@
 			files = (
 				CED14EC324D85739004D4918 /* App.swift in Sources */,
 				CED14EC524D85739004D4918 /* Scene.swift in Sources */,
+				CED14ED724D85A72004D4918 /* Launch.swift in Sources */,
 				CED14ED524D8596B004D4918 /* Tabs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

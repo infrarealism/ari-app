@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CED14EBF24D85739004D4918"
-               BuildableName = "iOS.app"
+               BuildableName = "Ari.app"
                BlueprintName = "iOS"
                ReferencedContainer = "container:Ari.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CED14EBF24D85739004D4918"
-            BuildableName = "iOS.app"
+            BuildableName = "Ari.app"
             BlueprintName = "iOS"
             ReferencedContainer = "container:Ari.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CED14EBF24D85739004D4918"
-            BuildableName = "iOS.app"
+            BuildableName = "Ari.app"
             BlueprintName = "iOS"
             ReferencedContainer = "container:Ari.xcodeproj">
          </BuildableReference>
