@@ -46,7 +46,10 @@ extension NSApplication {
             browse.message = .key("Open")
             browse.allowedFileTypes = ["ari"]
             browse.begin { [weak self] in
-                guard $0 == .OK, let url = browse.url else { return }
+                guard $0 == .OK, let url = browse.url else {
+                    self?.launch()
+                    return
+                }
                 self?.open(url)
             }
             windows.filter { $0 is Launch }.first?.close()
