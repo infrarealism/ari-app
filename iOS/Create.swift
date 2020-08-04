@@ -2,29 +2,29 @@ import SwiftUI
 
 struct Create: View {
     weak var window: UIWindow!
+    @State private var offset = CGFloat()
     @State private var name = ""
-    @State private var widths = [CGFloat(1), 0, 0]
     
     var body: some View {
         GeometryReader { geo in
-            HStack {
-                First(widths: self.$widths, name: self.$name) {
+            HStack(spacing: 0) {
+                First(offset: self.$offset, name: self.$name) {
                     self.window.endEditing(true)
-                }.frame(width: geo.size.width * self.widths[0], height: geo.size.height)
-                    .opacity(.init(self.widths[0]))
-                Second(widths: self.$widths)
-                    .frame(width: geo.size.width * self.widths[1], height: geo.size.height)
-                    .opacity(.init(self.widths[1]))
-                Third(widths: self.$widths)
-                    .frame(width: geo.size.width * self.widths[2], height: geo.size.height)
-                    .opacity(.init(self.widths[2]))
-            }
+                }.frame(width: geo.size.width, height: geo.size.height)
+                Circle()
+                    .frame(width: geo.size.width, height: geo.size.height)
+                Rectangle()
+                    .frame(width: geo.size.width, height: geo.size.height)
+                Rectangle()
+                    .frame(width: geo.size.width, height: geo.size.height)
+            }.frame(width: geo.size.width, height: geo.size.height, alignment: .leading)
+                .offset(x: geo.size.width * -self.offset)
         }
     }
 }
 
 private struct First: View {
-    @Binding var widths: [CGFloat]
+    @Binding var offset: CGFloat
     @Binding var name: String
     var commit: () -> Void
     
@@ -46,7 +46,7 @@ private struct First: View {
             }
             Button(action: {
                 withAnimation {
-                    self.widths = [0, 1, 0]
+                    self.offset = 1
                 }
             }) {
                 Image(systemName: "arrow.right.circle.fill")
