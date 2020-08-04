@@ -1,33 +1,35 @@
 import SwiftUI
 
 struct Launch: View {
+    weak var window: UIWindow!
+    @State private var create = false
+    
     var body: some View {
-        TabView {
-            Circle()
-                .tabItem {
-                    Image(systemName: "app.fill")
-                    Text("Home")
+        ScrollView {
+            HStack {
+                Spacer()
+                VStack {
+                    Image("logo")
+                        .padding(.top, 50)
+                    Button(action: {
+                        self.create = true
+                    }) {
+                        Image(systemName: "plus.circle.fill")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                    }.foregroundColor(.pink)
+                        .padding(.top, 20)
+                    Text("New")
+                        .font(.title)
+                        .bold()
+                    Text("Create")
+                        .font(.footnote)
+                        .foregroundColor(.secondary)
                 }
-            Circle()
-                .tabItem {
-                    Image(systemName: "textformat.size")
-                    Text("Type")
-                }
-            Circle()
-                .tabItem {
-                    Image(systemName: "circle.lefthalf.fill")
-                    Text("Colors")
-                }
-            Circle()
-                .tabItem {
-                    Image(systemName: "slider.horizontal.3")
-                    Text("Features")
-                }
-            Circle()
-                .tabItem {
-                    Image(systemName: "gear")
-                    Text("Settings")
-                }
-        }.accentColor(.pink)
+                Spacer()
+            }
+        }.sheet(isPresented: $create) {
+            Create(window: self.window)
+        }
     }
 }
