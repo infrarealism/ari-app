@@ -1,4 +1,4 @@
-import UIKit
+import SwiftUI
 import CoreServices
 
 extension UIWindow {
@@ -10,5 +10,9 @@ extension UIWindow {
 //        present(browse, animated: true)
         
         rootViewController!.present(browse, animated: true)
+    }
+    
+    func store() {
+        rootViewController!.present(UIHostingController(rootView: Store()), animated: true)
     }
 }

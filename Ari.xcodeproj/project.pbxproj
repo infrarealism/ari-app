@@ -32,6 +32,7 @@
 		CE4CC13B24DB01F800BCA30F /* Purchases.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8524D724C4913E00F84E60 /* Purchases.swift */; };
 		CE4CC13C24DB020700BCA30F /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58263724A76E090004726F /* String.swift */; };
 		CE4CC13D24DB024100BCA30F /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE87193324A9D15000D5BD55 /* Bookmark.swift */; };
+		CE4CC13F24DB117200BCA30F /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4CC13E24DB117200BCA30F /* Store.swift */; };
 		CE58263524A76DE80004726F /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58263424A76DE80004726F /* Menu.swift */; };
 		CE58263824A76E090004726F /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58263724A76E090004726F /* String.swift */; };
 		CE58264224A76E5D0004726F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE58264024A76E5D0004726F /* Localizable.strings */; };
@@ -94,6 +95,7 @@
 		CE3EAF1C24A7649C00D29C60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE3EAF1D24A7649C00D29C60 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		CE431B6324B1EAE6007B1C53 /* Bar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bar.swift; sourceTree = "<group>"; };
+		CE4CC13E24DB117200BCA30F /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		CE58263424A76DE80004726F /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		CE58263724A76E090004726F /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		CE58263924A76E370004726F /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 				CE32F3AA24D9CFA800F0BF00 /* Create.swift */,
 				CED14ED624D85A72004D4918 /* Launch.swift */,
 				CED14EC424D85739004D4918 /* Scene.swift */,
+				CE4CC13E24DB117200BCA30F /* Store.swift */,
 				CED14ED424D8596B004D4918 /* Tabs.swift */,
 				CE32F3A824D9C1E400F0BF00 /* Window.swift */,
 				CED14EC824D8573A004D4918 /* Assets.xcassets */,
@@ -437,6 +440,7 @@
 				CE32F3A924D9C1E400F0BF00 /* Window.swift in Sources */,
 				CED14EC524D85739004D4918 /* Scene.swift in Sources */,
 				CE4CC13924DB01EA00BCA30F /* User.swift in Sources */,
+				CE4CC13F24DB117200BCA30F /* Store.swift in Sources */,
 				CE4CC13B24DB01F800BCA30F /* Purchases.swift in Sources */,
 				CE32F3AB24D9CFA800F0BF00 /* Create.swift in Sources */,
 				CED14ED724D85A72004D4918 /* Launch.swift in Sources */,
