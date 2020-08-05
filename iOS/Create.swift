@@ -8,9 +8,8 @@ struct Create: View {
     var body: some View {
         GeometryReader { geo in
             HStack(spacing: 0) {
-                First(offset: self.$offset, name: self.$name) {
-                    self.window.endEditing(true)
-                }.frame(width: geo.size.width, height: geo.size.height)
+                First(offset: self.$offset, name: self.$name, window: self.window)
+                    .frame(width: geo.size.width, height: geo.size.height)
                 Circle()
                     .frame(width: geo.size.width, height: geo.size.height)
                 Rectangle()
@@ -26,7 +25,7 @@ struct Create: View {
 private struct First: View {
     @Binding var offset: CGFloat
     @Binding var name: String
-    var commit: () -> Void
+    weak var window: UIWindow!
     
     var body: some View {
         VStack {
@@ -36,8 +35,9 @@ private struct First: View {
                     .foregroundColor(.init(.secondarySystemBackground))
                 HStack {
                     Spacer()
-                    TextField("Website.name", text: $name, onCommit: commit)
-                        .autocapitalization(.sentences)
+                    TextField("Website.name", text: $name) {
+                        self.window.endEditing(true)
+                    }.autocapitalization(.sentences)
                         .multilineTextAlignment(.center)
                         .textFieldStyle(PlainTextFieldStyle())
                         .frame(width: 200, height: 40)
@@ -45,6 +45,7 @@ private struct First: View {
                 }
             }
             Button(action: {
+                self.window.endEditing(true)
                 withAnimation {
                     self.offset = 1
                 }
@@ -54,7 +55,15 @@ private struct First: View {
                     .frame(width: 35, height: 35)
                     .padding()
             }.foregroundColor(.pink)
-                .padding(.vertical, 50)
+                .padding(.top, 50)
+            Button(action: {
+                self.window.rootViewController!.dismiss(animated: true)
+            }) {
+                Text("Cancel")
+                    .font(.footnote)
+                    .foregroundColor(.secondary)
+            }.foregroundColor(.pink)
+                .padding(.vertical, 20)
         }
     }
 }
