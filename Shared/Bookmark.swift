@@ -20,6 +20,6 @@ struct Bookmark: Codable, Identifiable {
         self.name = name
         id = url
         edited = .init()
-        data = try! url.bookmarkData(options: .withSecurityScope)
+        data = url.bookmark
     }
 }

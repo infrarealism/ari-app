@@ -1,5 +1,7 @@
 import UIKit
 
+let session = Session()
+
 @UIApplicationMain final class App: NSObject, UIApplicationDelegate {
     var windows = Set<UIWindow>()
     

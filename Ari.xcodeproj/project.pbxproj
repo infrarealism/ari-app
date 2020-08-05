@@ -27,6 +27,11 @@
 		CE3EAF1824A7649C00D29C60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE3EAF1724A7649C00D29C60 /* Assets.xcassets */; };
 		CE3EAF2324A764E300D29C60 /* Balam in Frameworks */ = {isa = PBXBuildFile; productRef = CE3EAF2224A764E300D29C60 /* Balam */; };
 		CE431B6424B1EAE6007B1C53 /* Bar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE431B6324B1EAE6007B1C53 /* Bar.swift */; };
+		CE4CC13924DB01EA00BCA30F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8524D124C468BF00F84E60 /* User.swift */; };
+		CE4CC13A24DB01F400BCA30F /* Purchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8524D324C48EBB00F84E60 /* Purchase.swift */; };
+		CE4CC13B24DB01F800BCA30F /* Purchases.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8524D724C4913E00F84E60 /* Purchases.swift */; };
+		CE4CC13C24DB020700BCA30F /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58263724A76E090004726F /* String.swift */; };
+		CE4CC13D24DB024100BCA30F /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE87193324A9D15000D5BD55 /* Bookmark.swift */; };
 		CE58263524A76DE80004726F /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58263424A76DE80004726F /* Menu.swift */; };
 		CE58263824A76E090004726F /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58263724A76E090004726F /* String.swift */; };
 		CE58264224A76E5D0004726F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE58264024A76E5D0004726F /* Localizable.strings */; };
@@ -52,6 +57,9 @@
 		CEB1A74824B30D750094DEE1 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1A74724B30D750094DEE1 /* Text.swift */; };
 		CEB2AE0024BCB1EE000ED8FD /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2ADFF24BCB1EE000ED8FD /* Field.swift */; };
 		CEC93C1924BE1BDA00BC86E3 /* Pop.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC93C1824BE1BDA00BC86E3 /* Pop.swift */; };
+		CEC9EF8624DAFF5B0011A8D6 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDB19824ACB4A100969FD4 /* Session.swift */; };
+		CEC9EF8924DAFF690011A8D6 /* Balam in Frameworks */ = {isa = PBXBuildFile; productRef = CEC9EF8824DAFF690011A8D6 /* Balam */; };
+		CEC9EF8B24DAFF6D0011A8D6 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = CEC9EF8A24DAFF6D0011A8D6 /* Core */; };
 		CED14EC324D85739004D4918 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED14EC224D85739004D4918 /* App.swift */; };
 		CED14EC524D85739004D4918 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED14EC424D85739004D4918 /* Scene.swift */; };
 		CED14EC924D8573A004D4918 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED14EC824D8573A004D4918 /* Assets.xcassets */; };
@@ -144,6 +152,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEC9EF8924DAFF690011A8D6 /* Balam in Frameworks */,
+				CEC9EF8B24DAFF6D0011A8D6 /* Core in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,6 +170,7 @@
 				CED14EC124D85739004D4918 /* iOS */,
 				CE3EAF1124A7649B00D29C60 /* Products */,
 				CE58263624A76DFC0004726F /* Shared */,
+				CEC9EF8724DAFF690011A8D6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -181,7 +192,6 @@
 				CE3EAF1324A7649B00D29C60 /* App.swift */,
 				CE431B6324B1EAE6007B1C53 /* Bar.swift */,
 				CE0E87CC24C5FC0900FC9994 /* Blob.swift */,
-				CE87193324A9D15000D5BD55 /* Bookmark.swift */,
 				CE59C4D324A8C8190068C153 /* Button.swift */,
 				CE59C4D124A8C7FD0068C153 /* Control.swift */,
 				CE00286324AA10E700F45C8B /* Create.swift */,
@@ -216,6 +226,7 @@
 		CE58263624A76DFC0004726F /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				CE87193324A9D15000D5BD55 /* Bookmark.swift */,
 				CEE0FD1224B89186006B7CF6 /* Color.swift */,
 				CE59C4D724A8C87D0068C153 /* Font.swift */,
 				CE8524D324C48EBB00F84E60 /* Purchase.swift */,
@@ -227,6 +238,13 @@
 				CE58264024A76E5D0004726F /* Localizable.strings */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		CEC9EF8724DAFF690011A8D6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		CED14EC124D85739004D4918 /* iOS */ = {
@@ -286,6 +304,10 @@
 			dependencies = (
 			);
 			name = iOS;
+			packageProductDependencies = (
+				CEC9EF8824DAFF690011A8D6 /* Balam */,
+				CEC9EF8A24DAFF6D0011A8D6 /* Core */,
+			);
 			productName = iOS;
 			productReference = CED14EC024D85739004D4918 /* Ari.app */;
 			productType = "com.apple.product-type.application";
@@ -408,12 +430,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEC9EF8624DAFF5B0011A8D6 /* Session.swift in Sources */,
+				CE4CC13C24DB020700BCA30F /* String.swift in Sources */,
 				CED14EC324D85739004D4918 /* App.swift in Sources */,
+				CE4CC13A24DB01F400BCA30F /* Purchase.swift in Sources */,
 				CE32F3A924D9C1E400F0BF00 /* Window.swift in Sources */,
 				CED14EC524D85739004D4918 /* Scene.swift in Sources */,
+				CE4CC13924DB01EA00BCA30F /* User.swift in Sources */,
+				CE4CC13B24DB01F800BCA30F /* Purchases.swift in Sources */,
 				CE32F3AB24D9CFA800F0BF00 /* Create.swift in Sources */,
 				CED14ED724D85A72004D4918 /* Launch.swift in Sources */,
 				CED14ED524D8596B004D4918 /* Tabs.swift in Sources */,
+				CE4CC13D24DB024100BCA30F /* Bookmark.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -792,6 +820,16 @@
 			productName = Balam;
 		};
 		CE60EF5124A8DC50001D2A39 /* Core */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE60EF5024A8DC50001D2A39 /* XCRemoteSwiftPackageReference "ari-core" */;
+			productName = Core;
+		};
+		CEC9EF8824DAFF690011A8D6 /* Balam */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE3EAF2124A764E300D29C60 /* XCRemoteSwiftPackageReference "balam" */;
+			productName = Balam;
+		};
+		CEC9EF8A24DAFF6D0011A8D6 /* Core */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CE60EF5024A8DC50001D2A39 /* XCRemoteSwiftPackageReference "ari-core" */;
 			productName = Core;
