@@ -11,8 +11,4 @@ extension UIWindow {
         
         rootViewController!.present(browse, animated: true)
     }
-    
-    func store() {
-        rootViewController!.present(UIHostingController(rootView: Store()), animated: true)
-    }
 }

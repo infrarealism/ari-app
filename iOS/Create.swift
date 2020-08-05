@@ -145,7 +145,7 @@ private struct Second: View {
                 self.blog = user.purchases.contains(.blog)
             }
         }.sheet(isPresented: $store) {
-            Store()
+            Store(display: self.$store)
         }
     }
 }
