@@ -7,17 +7,57 @@ struct Create: View {
     
     var body: some View {
         GeometryReader { geo in
-            HStack(spacing: 0) {
-                First(offset: self.$offset, name: self.$name, window: self.window)
-                    .frame(width: geo.size.width, height: geo.size.height)
-                Circle()
-                    .frame(width: geo.size.width, height: geo.size.height)
-                Rectangle()
-                    .frame(width: geo.size.width, height: geo.size.height)
-                Rectangle()
-                    .frame(width: geo.size.width, height: geo.size.height)
-            }.frame(width: geo.size.width, height: geo.size.height, alignment: .leading)
-                .offset(x: geo.size.width * -self.offset)
+            ZStack {
+                HStack(spacing: 0) {
+                    First(offset: self.$offset, name: self.$name, window: self.window)
+                        .frame(width: geo.size.width, height: geo.size.height)
+                    Circle()
+                        .frame(width: geo.size.width, height: geo.size.height)
+                    Rectangle()
+                        .frame(width: geo.size.width, height: geo.size.height)
+                }.frame(width: geo.size.width, height: geo.size.height, alignment: .leading)
+                    .offset(x: geo.size.width * -self.offset)
+                VStack(spacing: 0) {
+                    Spacer()
+                    HStack {
+                        Button(action: {
+                            self.window.endEditing(true)
+                            withAnimation {
+                                self.offset -= 1
+                            }
+                        }) {
+                            Image(systemName: "arrow.left.circle.fill")
+                                .resizable()
+                                .frame(width: 35, height: 35)
+                                .padding()
+                        }.foregroundColor(.pink)
+                            .disabled(self.offset == 0)
+                            .opacity(self.offset == 0 ? 0.4 : 1)
+                        Button(action: {
+                            self.window.endEditing(true)
+                            withAnimation {
+                                self.offset += 1
+                            }
+                        }) {
+                            Image(systemName: "arrow.right.circle.fill")
+                                .resizable()
+                                .frame(width: 35, height: 35)
+                                .padding()
+                        }.foregroundColor(.pink)
+                            .disabled(self.offset == 2)
+                            .opacity(self.offset == 2 ? 0.4 : 1)
+                    }
+                    Button(action: {
+                        self.window.rootViewController!.dismiss(animated: true)
+                    }) {
+                        Text("Cancel")
+                            .font(.footnote)
+                            .foregroundColor(.secondary)
+                    }.foregroundColor(.pink)
+                        .frame(height: 50)
+                        .padding(.bottom, 20)
+                }
+            }
         }
     }
 }
@@ -44,26 +84,6 @@ private struct First: View {
                     Spacer()
                 }
             }
-            Button(action: {
-                self.window.endEditing(true)
-                withAnimation {
-                    self.offset = 1
-                }
-            }) {
-                Image(systemName: "arrow.right.circle.fill")
-                    .resizable()
-                    .frame(width: 35, height: 35)
-                    .padding()
-            }.foregroundColor(.pink)
-                .padding(.top, 50)
-            Button(action: {
-                self.window.rootViewController!.dismiss(animated: true)
-            }) {
-                Text("Cancel")
-                    .font(.footnote)
-                    .foregroundColor(.secondary)
-            }.foregroundColor(.pink)
-                .padding(.vertical, 20)
         }
     }
 }
