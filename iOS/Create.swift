@@ -4,6 +4,7 @@ struct Create: View {
     weak var window: UIWindow!
     @State private var offset = CGFloat()
     @State private var name = ""
+    @State private var mode = 0
     
     var body: some View {
         GeometryReader { geo in
@@ -72,11 +73,11 @@ struct Create: View {
                         .padding(.bottom, 20)
                 }
                 HStack(spacing: 0) {
-                    First(offset: self.$offset, name: self.$name, window: self.window)
+                    First(name: self.$name, window: self.window)
+                        .frame(width: geo.size.width, height: geo.size.height)
+                    Second(mode: self.$mode)
                         .frame(width: geo.size.width, height: geo.size.height)
                     Circle()
-                        .frame(width: geo.size.width, height: geo.size.height)
-                    Rectangle()
                         .frame(width: geo.size.width, height: geo.size.height)
                 }.frame(width: geo.size.width, height: geo.size.height, alignment: .leading)
                     .offset(x: geo.size.width * -self.offset)
@@ -86,7 +87,6 @@ struct Create: View {
 }
 
 private struct First: View {
-    @Binding var offset: CGFloat
     @Binding var name: String
     weak var window: UIWindow!
     
@@ -110,10 +110,17 @@ private struct First: View {
 }
 
 private struct Second: View {
-    @Binding var widths: [CGFloat]
+    @Binding var mode: Int
     
     var body: some View {
-        Text("World")
+        HStack {
+            Segment(selected: mode == 0, image: "dot.square", name: "Single") {
+                self.mode = 0
+            }
+            Segment(selected: mode == 1, image: "square.stack.3d.up", name: "Blog") {
+                self.mode = 1
+            }
+        }
     }
 }
 
@@ -122,5 +129,32 @@ private struct Third: View {
     
     var body: some View {
         Text("World")
+    }
+}
+
+private struct Segment: View {
+    let selected: Bool
+    let image: String
+    let name: LocalizedStringKey
+    let action: () -> Void
+    
+    var body: some View {
+        Button(action: action) {
+            VStack {
+                ZStack {
+                    Circle()
+                        .frame(width: 60, height: 60)
+                        .foregroundColor(.pink)
+                    Image(systemName: image)
+                        .resizable()
+                        .frame(width: 25, height: 25)
+                }
+                Text(name)
+                    .foregroundColor(.primary)
+                    .font(Font.caption.bold())
+            }
+        }.accentColor(.black)
+            .opacity(selected ? 1 : 0.4)
+            .padding()
     }
 }
