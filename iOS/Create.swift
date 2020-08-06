@@ -139,13 +139,13 @@ private struct Second: View {
                         self.store = true
                     }
                 }
+            }.sheet(isPresented: $store) {
+                Store(display: self.$store)
             }
         }.onReceive(session.user) { user in
             withAnimation {
                 self.blog = user.purchases.contains(.blog)
             }
-        }.sheet(isPresented: $store) {
-            Store(display: self.$store)
         }
     }
 }

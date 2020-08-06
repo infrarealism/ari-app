@@ -26,7 +26,7 @@ final class Store: NSWindow {
         let title = Label(.key("Store"), .bold(6))
         contentView!.addSubview(title)
         
-        let restore = Button(text: .key("Restore.purchases"), background: .systemBlue, foreground: .controlTextColor)
+        let restore = Button(text: .key("Restore.purchases"), background: .systemIndigo, foreground: .controlTextColor)
         restore.target = self
         restore.action = #selector(self.restore)
         contentView!.addSubview(restore)
