@@ -182,7 +182,7 @@ private final class Item: NSView {
         subtitle.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         addSubview(subtitle)
         
-        if session.user.value.purchases.contains(Purchase(rawValue: product.productIdentifier)!) {
+        if session.user.value.purchases.contains(purchase) {
             let purchased = NSImageView(image: NSImage(named: "checkmark.circle.fill")!)
             purchased.translatesAutoresizingMaskIntoConstraints = false
             purchased.imageScaling = .scaleNone

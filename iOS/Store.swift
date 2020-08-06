@@ -4,6 +4,7 @@ import StoreKit
 struct Store: View {
     @Binding var display: Bool
     @State private var products = [SKProduct]()
+    @State private var formatter = NumberFormatter()
     private let purchases = Purchases()
     
     var body: some View {
@@ -14,7 +15,10 @@ struct Store: View {
                     .foregroundColor(.secondary)
                     .padding()
                 Button("Restore.purchases") {
-                    
+                    withAnimation {
+                        self.products = []
+                    }
+                    self.purchases.restore()
                 }.frame(width: 200, height: 40)
                     .background(Color(.systemIndigo))
                     .cornerRadius(20)
@@ -28,9 +32,12 @@ struct Store: View {
                         .foregroundColor(.secondary)
                         .padding()
                 }
-                ForEach(products, id: \.self) {
-                    Item(product: $0, purchase: Purchase(rawValue: $0.productIdentifier)!) { _ in
-                        
+                ForEach(products, id: \.self) { product in
+                    Item(purchase: Purchase(rawValue: product.productIdentifier)!, price: self.price(product)) {
+                        withAnimation {
+                            self.products = []
+                        }
+                        self.purchases.purchase(product)
                     }
                 }
             }.navigationBarTitle("Store", displayMode: .large)
@@ -42,18 +49,26 @@ struct Store: View {
                         .frame(width: 20, height: 20)
                         .padding()
                 }).foregroundColor(.secondary)
-        }.onReceive(purchases.products.dropFirst().receive(on: DispatchQueue.main)) {
-            self.products = $0
+        }.onReceive(purchases.products.dropFirst().receive(on: DispatchQueue.main)) { products in
+            withAnimation {
+                self.products = products
+            }
         }.onAppear {
+            self.formatter.numberStyle = .currencyISOCode
             self.purchases.load()
         }
+    }
+    
+    private func price(_ product: SKProduct) -> String {
+        formatter.locale = product.priceLocale
+        return formatter.string(from: product.price)!
     }
 }
 
 private struct Item: View {
-    let product: SKProduct
     let purchase: Purchase
-    let action: (SKProduct) -> Void
+    let price: String
+    let action: () -> Void
     
     var body: some View {
         VStack {
@@ -71,6 +86,23 @@ private struct Item: View {
             Text(verbatim: purchase.subtitle)
                 .foregroundColor(.secondary)
                 .padding()
+            Text(verbatim: price)
+                .font(.subheadline)
+                .foregroundColor(.primary)
+            if session.user.value.purchases.contains(purchase) {
+                Image(systemName: "checkmark.circle.fill")
+                    .resizable()
+                    .frame(width: 30, height: 30)
+                    .foregroundColor(.init(.systemIndigo))
+                    .padding()
+            } else {
+                Button("Purchase", action: action)
+                    .frame(width: 120, height: 36)
+                    .background(Color.pink)
+                    .cornerRadius(18)
+                    .foregroundColor(.primary)
+                    .padding()
+            }
         }
     }
 }

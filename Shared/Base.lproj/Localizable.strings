@@ -64,7 +64,7 @@ How.blog = "- You have all the benefits for single pages.
 - Pages listed on the index page are displayed in descending order, according the date they were created, that is, the latest created is shown first.";
 
 ari.app.blog.title = "Blog";
-ari.app.blog.subtitle = "This In-App Purchase enables creating a Blog.\n\nBlogs are static website that you can constantly update with fresh content or add new entries.";
+ari.app.blog.subtitle = "This In-App Purchase enables creating a Blog.\n\nBlogs are static websites that you can constantly update with fresh content or add new entries.";
 
 App = "App";
 Open = "Open";
