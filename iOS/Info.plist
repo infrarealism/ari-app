@@ -42,10 +42,8 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Save selected images to photo library</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Select images for adding them to project</string>
+	<string>Select images for adding them to your projects</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
