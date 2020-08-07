@@ -35,7 +35,7 @@ struct Launch: View {
                     }.foregroundColor(.pink)
                         .padding(.top, 20)
                         .sheet(isPresented: $create) {
-                            Create(window: self.window)
+                            Create(window: self.window, display: self.$create)
                         }
                     Text("New")
                         .font(.title)

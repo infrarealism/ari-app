@@ -2,6 +2,7 @@ import SwiftUI
 
 struct Create: View {
     weak var window: UIWindow!
+    @Binding var display: Bool
     @State private var offset = CGFloat()
     @State private var name = ""
     @State private var mode = 0
@@ -64,7 +65,7 @@ struct Create: View {
                             .opacity(self.offset == 2 ? 0.4 : 1)
                     }
                     Button(action: {
-                        self.window.rootViewController!.dismiss(animated: true)
+                        self.display = false
                     }) {
                         Text("Cancel")
                             .font(.footnote)
@@ -153,14 +154,17 @@ private struct Second: View {
 
 private struct Third: View {
     @Binding var url: URL?
+    @State private var browse = false
     
     var body: some View {
         VStack {
             Text("Enter.location")
                 .foregroundColor(.secondary)
             Cta(title: "Select.folder", background: .pink, width: 200) {
-                
+                self.browse = true
             }
+        }.sheet(isPresented: $browse) {
+            Browse(url: self.$url)
         }
     }
 }
