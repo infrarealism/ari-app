@@ -14,16 +14,12 @@ struct Store: View {
                     .fixedSize(horizontal: false, vertical: true)
                     .foregroundColor(.secondary)
                     .padding()
-                Button("Restore.purchases") {
+                Cta(title: "Restore.purchases", background: .init(.systemIndigo), width: 200) {
                     withAnimation {
                         self.products = []
                     }
                     self.purchases.restore()
-                }.frame(width: 200, height: 40)
-                    .background(Color(.systemIndigo))
-                    .cornerRadius(20)
-                    .foregroundColor(.primary)
-                    .padding()
+                }
                 Spacer()
                     .frame(height: 40)
                 if products.isEmpty {
@@ -96,12 +92,7 @@ private struct Item: View {
                     .foregroundColor(.init(.systemIndigo))
                     .padding()
             } else {
-                Button("Purchase", action: action)
-                    .frame(width: 120, height: 36)
-                    .background(Color.pink)
-                    .cornerRadius(18)
-                    .foregroundColor(.primary)
-                    .padding()
+                Cta(title: "Purchase", background: .pink, width: 120, action: action)
             }
         }
     }

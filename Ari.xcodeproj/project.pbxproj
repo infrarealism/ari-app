@@ -67,6 +67,7 @@
 		CED14ECF24D8573A004D4918 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CED14ECD24D8573A004D4918 /* LaunchScreen.storyboard */; };
 		CED14ED524D8596B004D4918 /* Tabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED14ED424D8596B004D4918 /* Tabs.swift */; };
 		CED14ED724D85A72004D4918 /* Launch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED14ED624D85A72004D4918 /* Launch.swift */; };
+		CEDBD54D24DD3B980008CBA3 /* Cta.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDBD54C24DD3B980008CBA3 /* Cta.swift */; };
 		CEE0FD1324B89186006B7CF6 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE0FD1224B89186006B7CF6 /* Color.swift */; };
 		CEE7334724B8A86E0093CBC3 /* Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE7334624B8A86E0093CBC3 /* Design.swift */; };
 		CEEDB19924ACB4A100969FD4 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDB19824ACB4A100969FD4 /* Session.swift */; };
@@ -132,6 +133,7 @@
 		CED14ED024D8573A004D4918 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CED14ED424D8596B004D4918 /* Tabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabs.swift; sourceTree = "<group>"; };
 		CED14ED624D85A72004D4918 /* Launch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Launch.swift; sourceTree = "<group>"; };
+		CEDBD54C24DD3B980008CBA3 /* Cta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cta.swift; sourceTree = "<group>"; };
 		CEE0FD1224B89186006B7CF6 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		CEE7334624B8A86E0093CBC3 /* Design.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Design.swift; sourceTree = "<group>"; };
 		CEEDB19824ACB4A100969FD4 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 				CE048B6824D94CB9007DE13D /* icon_320x320.png */,
 				CED14EC224D85739004D4918 /* App.swift */,
 				CE32F3AA24D9CFA800F0BF00 /* Create.swift */,
+				CEDBD54C24DD3B980008CBA3 /* Cta.swift */,
 				CED14ED624D85A72004D4918 /* Launch.swift */,
 				CED14EC424D85739004D4918 /* Scene.swift */,
 				CE4CC13E24DB117200BCA30F /* Store.swift */,
@@ -441,6 +444,7 @@
 				CED14EC524D85739004D4918 /* Scene.swift in Sources */,
 				CE4CC13924DB01EA00BCA30F /* User.swift in Sources */,
 				CE4CC13F24DB117200BCA30F /* Store.swift in Sources */,
+				CEDBD54D24DD3B980008CBA3 /* Cta.swift in Sources */,
 				CE4CC13B24DB01F800BCA30F /* Purchases.swift in Sources */,
 				CE32F3AB24D9CFA800F0BF00 /* Create.swift in Sources */,
 				CED14ED724D85A72004D4918 /* Launch.swift in Sources */,

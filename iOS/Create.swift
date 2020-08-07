@@ -5,6 +5,7 @@ struct Create: View {
     @State private var offset = CGFloat()
     @State private var name = ""
     @State private var mode = 0
+    @State private var url: URL?
     
     var body: some View {
         GeometryReader { geo in
@@ -77,7 +78,7 @@ struct Create: View {
                         .frame(width: geo.size.width, height: geo.size.height)
                     Second(mode: self.$mode)
                         .frame(width: geo.size.width, height: geo.size.height)
-                    Circle()
+                    Third(url: self.$url)
                         .frame(width: geo.size.width, height: geo.size.height)
                 }.frame(width: geo.size.width, height: geo.size.height, alignment: .leading)
                     .offset(x: geo.size.width * -self.offset)
@@ -151,10 +152,16 @@ private struct Second: View {
 }
 
 private struct Third: View {
-    @Binding var widths: [CGFloat]
+    @Binding var url: URL?
     
     var body: some View {
-        Text("World")
+        VStack {
+            Text("Enter.location")
+                .foregroundColor(.secondary)
+            Cta(title: "Select.folder", background: .pink, width: 200) {
+                
+            }
+        }
     }
 }
 
