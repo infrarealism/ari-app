@@ -46,6 +46,7 @@ struct Store: View {
                         .padding()
                 }).foregroundColor(.secondary)
         }.onReceive(purchases.products.dropFirst().receive(on: DispatchQueue.main)) { products in
+            print("store")
             withAnimation {
                 self.products = products
             }

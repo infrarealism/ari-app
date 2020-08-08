@@ -1,7 +1,10 @@
 import SwiftUI
+import Combine
 
 struct Launch: View {
     weak var window: UIWindow!
+    @State private var sub: AnyCancellable?
+    @State private var bookmarks = [Bookmark]()
     @State private var create = false
     @State private var store = false
     
@@ -45,6 +48,26 @@ struct Launch: View {
                         .foregroundColor(.secondary)
                 }
                 Spacer()
+            }
+            ForEach(bookmarks) { item in
+                Button(action: {
+                    
+                }) {
+                    HStack {
+                        VStack {
+                            Text(verbatim: item.name)
+                                .bold()
+                            Text(verbatim: item.location)
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                }
+            }
+        }.onAppear {
+            self.sub = session.bookmarks.sink {
+                self.bookmarks = $0
+                print($0)
             }
         }
     }

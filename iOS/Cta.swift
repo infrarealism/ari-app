@@ -7,11 +7,15 @@ struct Cta: View {
     let action: () -> Void
     
     var body: some View {
-        Button(title, action: action)
-            .frame(width: width, height: 40)
-            .background(background)
-            .cornerRadius(20)
-            .foregroundColor(.primary)
-            .padding()
+        Button(action: action) {
+            ZStack {
+                RoundedRectangle(cornerRadius: 20)
+                    .frame(width: width, height: 40)
+                    .background(background)
+                    .padding()
+                Text(title)
+                    .foregroundColor(.primary)
+            }
+        }
     }
 }

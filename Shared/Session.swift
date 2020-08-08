@@ -11,7 +11,7 @@ final class Session {
     var bookmarks: Future <[Bookmark], Never> {
         .init { promise in
             var sub: AnyCancellable?
-            self.store.remove(Bookmark.self) { !FileManager.default.fileExists(atPath: $0.id.path) }
+//            self.store.remove(Bookmark.self) { !FileManager.default.fileExists(atPath: $0.id.path) }
             sub = self.store.nodes(Bookmark.self).sink {
                 promise(.success($0.sorted { $0.edited > $1.edited }))
                 sub?.cancel()

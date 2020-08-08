@@ -85,7 +85,7 @@ final class Launch: NSWindow {
         session.bookmarks.sink { [weak self] in
             guard let self = self else { return }
             var top = scroll.top
-            $0.sorted { $0.edited > $1.edited }.forEach {
+            $0.forEach {
                 let item = Item(bookmark: $0)
                 item.target = self
                 item.action = #selector(self.select(item:))
@@ -142,28 +142,23 @@ private final class Item: Control {
         super.init()
         wantsLayer = true
         
+        let name = Label(bookmark.name, .bold(4))
+        name.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        addSubview(name)
+        
         let location = Label(bookmark.location, .regular())
         location.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         addSubview(location)
         
         bottomAnchor.constraint(equalTo: location.bottomAnchor, constant: 15).isActive = true
         
+        name.topAnchor.constraint(equalTo: topAnchor, constant: 15).isActive = true
+        name.leftAnchor.constraint(equalTo: leftAnchor, constant: 20).isActive = true
+        name.rightAnchor.constraint(lessThanOrEqualTo: rightAnchor, constant: -20).isActive = true
+        
+        location.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 5).isActive = true
         location.leftAnchor.constraint(equalTo: leftAnchor, constant: 20).isActive = true
         location.rightAnchor.constraint(lessThanOrEqualTo: rightAnchor, constant: -20).isActive = true
-        
-        if bookmark.name.isEmpty {
-            location.topAnchor.constraint(equalTo: topAnchor, constant: 15).isActive = true
-        } else {
-            let name = Label(bookmark.name, .bold(4))
-            name.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-            addSubview(name)
-            
-            name.topAnchor.constraint(equalTo: topAnchor, constant: 15).isActive = true
-            name.leftAnchor.constraint(equalTo: leftAnchor, constant: 20).isActive = true
-            name.rightAnchor.constraint(lessThanOrEqualTo: rightAnchor, constant: -20).isActive = true
-            
-            location.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 5).isActive = true
-        }
     }
     
     override func hoverOn() {
