@@ -124,10 +124,13 @@ final class Launch: NSWindow {
     }
     
     @objc private func select(item: Item) {
-        if let window = NSApp.windows.compactMap({ $0 as? Main }).first(where: { item.bookmark.id == $0.website.url }) {
+        var bookmark = item.bookmark
+        bookmark.edited = .init()
+        session.update(bookmark)
+        if let window = NSApp.windows.compactMap({ $0 as? Main }).first(where: { bookmark.id == $0.website.url }) {
             window.orderFront(nil)
         } else {
-            Main.open(item.bookmark)
+            Main.open(bookmark)
         }
         close()
     }

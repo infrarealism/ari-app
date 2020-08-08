@@ -11,11 +11,11 @@ struct Cta: View {
             ZStack {
                 RoundedRectangle(cornerRadius: 20)
                     .frame(width: width, height: 40)
-                    .background(background)
+                    .foregroundColor(background)
                     .padding()
                 Text(title)
                     .foregroundColor(.primary)
             }
-        }
+        }.accentColor(.clear)
     }
 }

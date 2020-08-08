@@ -153,7 +153,6 @@ private struct Second: View {
                 Store(display: self.$store)
             }
         }.onReceive(session.user) { user in
-            print("create")
             withAnimation {
                 self.blog = user.purchases.contains(.blog)
             }

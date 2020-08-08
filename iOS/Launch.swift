@@ -49,25 +49,37 @@ struct Launch: View {
                 }
                 Spacer()
             }
+            Spacer()
+                .frame(height: 40)
             ForEach(bookmarks) { item in
+                Spacer()
+                    .frame(height: 2)
                 Button(action: {
-                    
+                    var item = item
+                    item.edited = .init()
+                    session.update(item)
+                    self.window.open(item)
                 }) {
-                    HStack {
-                        VStack {
+                    VStack {
+                        HStack {
                             Text(verbatim: item.name)
-                                .bold()
+                                .font(Font.title.bold())
+                                .foregroundColor(.primary)
+                            Spacer()
+                        }
+                        HStack {
                             Text(verbatim: item.location)
                                 .font(.caption)
                                 .foregroundColor(.secondary)
+                            Spacer()
                         }
-                    }
-                }
+                    }.padding(.init(top: 20, leading: 20, bottom: 20, trailing: 20))
+                }.accentColor(.clear)
+                    .background(Color(.secondarySystemBackground))
             }
         }.onAppear {
             self.sub = session.bookmarks.sink {
                 self.bookmarks = $0
-                print($0)
             }
         }
     }

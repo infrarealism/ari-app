@@ -9,6 +9,8 @@ extension UIWindow {
             rootViewController!.present(alert, animated: true)
             return
         }
+        rootViewController!.dismiss(animated: false)
         rootViewController = UIHostingController(rootView: Main(website: website))
+        UIView.transition(with: self, duration: 0.3, options: .transitionCrossDissolve, animations: nil)
     }
 }

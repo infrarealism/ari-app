@@ -13,6 +13,9 @@ final class Session {
             var sub: AnyCancellable?
 //            self.store.remove(Bookmark.self) { !FileManager.default.fileExists(atPath: $0.id.path) }
             sub = self.store.nodes(Bookmark.self).sink {
+                $0.forEach {
+                    print(FileManager.default.fileExists(atPath: $0.id.startAccessingSecurityScopedResource()))
+                }
                 promise(.success($0.sorted { $0.edited > $1.edited }))
                 sub?.cancel()
             }
@@ -38,7 +41,7 @@ final class Session {
         store.add(bookmark)
     }
     
-    func open(_ bookmark: Bookmark) {
+    func update(_ bookmark: Bookmark) {
         store.remove(bookmark)
         store.add(bookmark)
     }

@@ -68,7 +68,7 @@ extension NSApplication {
     
     fileprivate func open(_ url: URL) {
         Bookmark.open(url).map {
-            session.open($0)
+            session.update($0)
             Main.open($0)
         }
     }
