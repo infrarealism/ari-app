@@ -1,4 +1,5 @@
 import SwiftUI
+import Core
 
 struct Create: View {
     weak var window: UIWindow!
@@ -6,7 +7,6 @@ struct Create: View {
     @State private var offset = CGFloat()
     @State private var name = ""
     @State private var mode = 0
-    @State private var url: URL?
     
     var body: some View {
         GeometryReader { geo in
@@ -79,8 +79,16 @@ struct Create: View {
                         .frame(width: geo.size.width, height: geo.size.height)
                     Second(mode: self.$mode)
                         .frame(width: geo.size.width, height: geo.size.height)
-                    Third(url: self.$url)
-                        .frame(width: geo.size.width, height: geo.size.height)
+                    Third { url in
+                        let name = {
+                            $0.isEmpty ? "Website" : $0
+                        } (self.name.trimmingCharacters(in: .whitespacesAndNewlines))
+                        let bookmark = Bookmark(name, url: self.mode == 0
+                            ? Website.single(name, directory: url)
+                            : Website.blog(name, directory: url))
+                        session.add(bookmark)
+                        self.window.open(bookmark)
+                    }.frame(width: geo.size.width, height: geo.size.height)
                 }.frame(width: geo.size.width, height: geo.size.height, alignment: .leading)
                     .offset(x: geo.size.width * -self.offset)
             }
@@ -153,7 +161,7 @@ private struct Second: View {
 }
 
 private struct Third: View {
-    @Binding var url: URL?
+    let action: (URL) -> Void
     @State private var browse = false
     
     var body: some View {
@@ -164,7 +172,7 @@ private struct Third: View {
                 self.browse = true
             }
         }.sheet(isPresented: $browse) {
-            Browse(url: self.$url)
+            Browse(action: self.action)
         }
     }
 }

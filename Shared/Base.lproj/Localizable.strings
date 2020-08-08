@@ -37,6 +37,9 @@ Description = "Description";
 Keywords = "Keywords";
 Author = "Author";
 Page.details = "Page details";
+Bookmark.error.title = "Error accessing this folder";
+Bookmark.error.message = "Check that it is a valid destination and try again";
+Continue = "Continue";
 How.it.works = "How does it work?";
 How.single = "- You have 1 page where you can keep things simple and easy to modify.
 

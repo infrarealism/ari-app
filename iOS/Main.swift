@@ -1,6 +1,9 @@
 import SwiftUI
+import Core
 
-struct Tabs: View {
+struct Main: View {
+    let website: Website
+    
     var body: some View {
         TabView {
             Circle()

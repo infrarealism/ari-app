@@ -1,14 +1,14 @@
 import SwiftUI
-import CoreServices
+import Core
 
 extension UIWindow {
-    func folder() {
-        let browse = UIDocumentPickerViewController(documentTypes: [kUTTypeFolder as String], in: .open)
-//        browse.popoverPresentationController?.sourceView = view
-//        browse.delegate = self
-//        browse.additionalLeadingNavigationBarButtonItems = [.init(barButtonSystemItem: .stop, target: self, action: #selector(back))]
-//        present(browse, animated: true)
-        
-        rootViewController!.present(browse, animated: true)
+    func open(_ bookmark: Bookmark) {
+        guard let website = bookmark.access.flatMap(Website.load) else {
+            let alert = UIAlertController(title: .key("Bookmark.error.title"), message: .key("Bookmark.error.message"), preferredStyle: .alert)
+            alert.addAction(.init(title: .key("Continue"), style: .cancel))
+            rootViewController!.present(alert, animated: true)
+            return
+        }
+        rootViewController = UIHostingController(rootView: Main(website: website))
     }
 }

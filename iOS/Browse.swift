@@ -2,7 +2,7 @@ import SwiftUI
 import CoreServices
 
 struct Browse: UIViewControllerRepresentable {
-    @Binding var url: URL?
+    let action: (URL) -> Void
     
     func makeCoordinator() -> Coordinator {
         .init(browse: self)
@@ -26,7 +26,7 @@ struct Browse: UIViewControllerRepresentable {
         }
         
         func documentPicker(_: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-            browse.url = urls.first
+            urls.first.map(browse.action)
         }
     }
 }
