@@ -22,6 +22,8 @@
 		CE32F3AB24D9CFA800F0BF00 /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32F3AA24D9CFA800F0BF00 /* Create.swift */; };
 		CE35ED4524D2F25C00259F77 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE35ED4424D2F25C00259F77 /* Info.swift */; };
 		CE38F43324CDA3C50059D7E9 /* ari.icns in Resources */ = {isa = PBXBuildFile; fileRef = CE5F40BC24C81F4200BF93DF /* ari.icns */; };
+		CE3D4BBC24E012AD0080E96E /* Website.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3D4BBB24E012AD0080E96E /* Website.swift */; };
+		CE3D4BBE24E013340080E96E /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3D4BBD24E013340080E96E /* Home.swift */; };
 		CE3EAF1424A7649B00D29C60 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3EAF1324A7649B00D29C60 /* App.swift */; };
 		CE3EAF1624A7649B00D29C60 /* Launch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3EAF1524A7649B00D29C60 /* Launch.swift */; };
 		CE3EAF1824A7649C00D29C60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE3EAF1724A7649C00D29C60 /* Assets.xcassets */; };
@@ -90,6 +92,8 @@
 		CE32F3A824D9C1E400F0BF00 /* Window.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Window.swift; sourceTree = "<group>"; };
 		CE32F3AA24D9CFA800F0BF00 /* Create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Create.swift; sourceTree = "<group>"; };
 		CE35ED4424D2F25C00259F77 /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
+		CE3D4BBB24E012AD0080E96E /* Website.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Website.swift; sourceTree = "<group>"; };
+		CE3D4BBD24E013340080E96E /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		CE3EAF1024A7649B00D29C60 /* Ari.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ari.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE3EAF1324A7649B00D29C60 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		CE3EAF1524A7649B00D29C60 /* Launch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Launch.swift; sourceTree = "<group>"; };
@@ -265,10 +269,12 @@
 				CEDBD54E24DD3FAF0008CBA3 /* Browse.swift */,
 				CE32F3AA24D9CFA800F0BF00 /* Create.swift */,
 				CEDBD54C24DD3B980008CBA3 /* Cta.swift */,
+				CE3D4BBD24E013340080E96E /* Home.swift */,
 				CED14ED624D85A72004D4918 /* Launch.swift */,
 				CED14ED424D8596B004D4918 /* Main.swift */,
 				CED14EC424D85739004D4918 /* Scene.swift */,
 				CE4CC13E24DB117200BCA30F /* Store.swift */,
+				CE3D4BBB24E012AD0080E96E /* Website.swift */,
 				CE32F3A824D9C1E400F0BF00 /* Window.swift */,
 				CED14EC824D8573A004D4918 /* Assets.xcassets */,
 				CED14ECD24D8573A004D4918 /* LaunchScreen.storyboard */,
@@ -445,11 +451,13 @@
 				CE4CC13A24DB01F400BCA30F /* Purchase.swift in Sources */,
 				CE32F3A924D9C1E400F0BF00 /* Window.swift in Sources */,
 				CED14EC524D85739004D4918 /* Scene.swift in Sources */,
+				CE3D4BBE24E013340080E96E /* Home.swift in Sources */,
 				CE4CC13924DB01EA00BCA30F /* User.swift in Sources */,
 				CE4CC13F24DB117200BCA30F /* Store.swift in Sources */,
 				CEDBD54D24DD3B980008CBA3 /* Cta.swift in Sources */,
 				CE4CC13B24DB01F800BCA30F /* Purchases.swift in Sources */,
 				CE32F3AB24D9CFA800F0BF00 /* Create.swift in Sources */,
+				CE3D4BBC24E012AD0080E96E /* Website.swift in Sources */,
 				CED14ED724D85A72004D4918 /* Launch.swift in Sources */,
 				CED14ED524D8596B004D4918 /* Main.swift in Sources */,
 				CEDBD54F24DD3FAF0008CBA3 /* Browse.swift in Sources */,

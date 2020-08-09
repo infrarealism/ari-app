@@ -2,29 +2,30 @@ import SwiftUI
 import Core
 
 struct Main: View {
+    weak var window: UIWindow!
     let website: Website
     
     var body: some View {
         TabView {
-            Circle()
+            Home(window: window)
                 .tabItem {
-                    Image(systemName: "app.fill")
+                    Image(systemName: website.icon)
                     Text("Home")
                 }
             Circle()
                 .tabItem {
-                    Image(systemName: "textformat.size")
-                    Text("Type")
+                    Image(systemName: "hammer")
+                    Text("Edit")
                 }
             Circle()
                 .tabItem {
-                    Image(systemName: "circle.lefthalf.fill")
-                    Text("Colors")
+                    Image(systemName: "paintbrush")
+                    Text("Style")
                 }
             Circle()
                 .tabItem {
-                    Image(systemName: "slider.horizontal.3")
-                    Text("Features")
+                    Image(systemName: "paperplane")
+                    Text("Preview")
                 }
             Circle()
                 .tabItem {
