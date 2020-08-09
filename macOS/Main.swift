@@ -7,6 +7,7 @@ final class Main: NSWindow {
     
     class func open(_ bookmark: Bookmark) {
         bookmark.access.flatMap(Website.load).map(Main.init(website:))?.makeKeyAndOrderFront(nil)
+        bookmark.access?.stopAccessingSecurityScopedResource()
     }
     
     private init(website: Website) {
