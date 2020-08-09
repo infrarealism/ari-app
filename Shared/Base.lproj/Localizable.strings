@@ -40,6 +40,8 @@ Page.details = "Page details";
 Bookmark.error.title = "Error accessing this folder";
 Bookmark.error.message = "Check that it is a valid destination and try again";
 Continue = "Continue";
+Home = "Home";
+
 How.it.works = "How does it work?";
 How.single = "- You have 1 page where you can keep things simple and easy to modify.
 

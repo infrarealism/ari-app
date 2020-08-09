@@ -19,7 +19,7 @@ struct Launch: View {
                         .resizable()
                         .frame(width: 22, height: 22)
                         .padding()
-                }.foregroundColor(.init(.systemIndigo))
+                }.foregroundColor(.pink)
                     .padding()
                     .sheet(isPresented: $store) {
                         Store(display: self.$store)

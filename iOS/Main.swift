@@ -7,7 +7,7 @@ struct Main: View {
     
     var body: some View {
         TabView {
-            Home(window: window)
+            Home(window: window, website: website)
                 .tabItem {
                     Image(systemName: website.icon)
                     Text("Home")
@@ -26,11 +26,6 @@ struct Main: View {
                 .tabItem {
                     Image(systemName: "paperplane")
                     Text("Preview")
-                }
-            Circle()
-                .tabItem {
-                    Image(systemName: "gear")
-                    Text("Settings")
                 }
         }.accentColor(.pink)
     }

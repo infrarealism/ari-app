@@ -14,7 +14,7 @@ struct Store: View {
                     .fixedSize(horizontal: false, vertical: true)
                     .foregroundColor(.secondary)
                     .padding()
-                Cta(title: "Restore.purchases", background: .init(.systemIndigo), width: 200) {
+                Cta(title: "Restore.purchases", background: .pink, width: 200) {
                     withAnimation {
                         self.products = []
                     }
@@ -42,9 +42,9 @@ struct Store: View {
                 }) {
                     Image(systemName: "xmark.circle.fill")
                         .resizable()
-                        .frame(width: 20, height: 20)
-                        .padding()
-                }).foregroundColor(.secondary)
+                        .frame(width: 22, height: 22)
+                        .foregroundColor(.pink)
+                }.accentColor(.clear))
         }.onReceive(purchases.products.dropFirst().receive(on: DispatchQueue.main)) { products in
             withAnimation {
                 self.products = products
