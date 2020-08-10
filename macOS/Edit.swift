@@ -58,8 +58,9 @@ class Edit<W>: NSView where W : Website {
         info.rightAnchor.constraint(equalTo: link.leftAnchor, constant: -5).isActive = true
         
         NotificationCenter.default.publisher(for: NSTextView.didChangeNotification, object: text)
+            .debounce(for: .seconds(1.1), scheduler: DispatchQueue.main)
             .map { ($0.object as! Text).updated }
-            .debounce(for: .seconds(1.1), scheduler: DispatchQueue(label: "", qos: .utility))
+            .receive(on: DispatchQueue(label: "", qos: .utility))
             .sink(receiveValue: website.update)
             .store(in: &subs)
     }

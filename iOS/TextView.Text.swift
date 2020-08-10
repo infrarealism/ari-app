@@ -1,5 +1,6 @@
 import SwiftUI
 import Combine
+import Core
 
 extension TextView {
     final class Text: UIView, UITextViewDelegate {
@@ -49,6 +50,13 @@ extension TextView {
             NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification).sink { [weak self] _ in
                 self?.text.resignFirstResponder()
             }.store(in: &subs)
+            
+            NotificationCenter.default.publisher(for: UITextView.textDidChangeNotification, object: text)
+                .debounce(for: .seconds(1.1), scheduler: DispatchQueue.main)
+                .map { view.website.model.pages.first { $0.id == view.id }!.content(($0.object as! _Text).text) }
+                .receive(on: DispatchQueue(label: "", qos: .utility))
+                .sink(receiveValue: view.website.update)
+                .store(in: &subs)
         }
     }
 }

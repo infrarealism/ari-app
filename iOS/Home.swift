@@ -32,6 +32,7 @@ struct Home: View {
             }.listStyle(GroupedListStyle())
                 .navigationBarTitle(Text(verbatim: website.model.name), displayMode: .large)
                 .navigationBarItems(trailing: Button(action: {
+                    self.website.close()
                     self.window.launch()
                 }) {
                     Image(systemName: "xmark.circle.fill")

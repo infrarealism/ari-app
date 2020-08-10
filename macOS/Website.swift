@@ -18,7 +18,7 @@ extension Website.Single {
 }
 
 extension Website.Blog {
-    override var icon: String { "square.stack.3d.fill" }
+    override var icon: String { "square.stack.3d.up.fill" }
     
     override var edit: NSView {
         Edit.Blog(website: self)

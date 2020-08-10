@@ -28,5 +28,8 @@ struct Main: View {
                     Text("Preview")
                 }
         }.accentColor(.pink)
+            .onAppear {
+                try! self.website.open()
+        }
     }
 }
