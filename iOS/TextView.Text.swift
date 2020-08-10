@@ -32,22 +32,23 @@ extension TextView {
             let bottom = text.bottomAnchor.constraint(equalTo: bottomAnchor)
             bottom.isActive = true
             
-            NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification).sink {
+            NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification).sink { [weak self] in
                 bottom.constant = -(($0.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.height - 70)
-                UIView.animate(withDuration: 0.5) { [weak self] in
+                UIView.animate(withDuration: 0.5) {
                     self?.layoutIfNeeded()
                 }
-            }.store(in: &self.subs)
-            NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification).sink { _ in
+            }.store(in: &subs)
+            
+            NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification).sink { [weak self] _ in
                 bottom.constant = 0
-                UIView.animate(withDuration: 0.5) { [weak self] in
+                UIView.animate(withDuration: 0.5) {
                     self?.layoutIfNeeded()
                 }
-            }.store(in: &self.subs)
-        }
-        
-        func textViewDidEndEditing(_ textView: UITextView) {
-            view.text = textView.text
+            }.store(in: &subs)
+            
+            NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification).sink { [weak self] _ in
+                self?.text.resignFirstResponder()
+            }.store(in: &subs)
         }
     }
 }
