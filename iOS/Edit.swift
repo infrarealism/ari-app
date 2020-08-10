@@ -23,6 +23,7 @@ private struct TextView: UIViewRepresentable {
         let view = UITextView()
         view.font = .preferredFont(forTextStyle: .body)
         view.textContainerInset = .init(top: 20, left: 20, bottom: 20, right: 20)
+        view.keyboardDismissMode = .interactive
         view.delegate = context.coordinator
         return view
     }
@@ -40,6 +41,6 @@ private final class Coordinator: NSObject, UITextViewDelegate {
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        
+        view.text = textView.text
     }
 }
