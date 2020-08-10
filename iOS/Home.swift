@@ -7,19 +7,30 @@ struct Home: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                Spacer()
-                Button(action: {
-                    
+            List {
+                Section(header:
+                    HStack {
+                        Spacer()
+                        Image(systemName: "square.and.arrow.up.fill")
+                            .resizable()
+                            .frame(width: 18, height: 24)
+                            .foregroundColor(.pink)
+                            .padding()
+                        Spacer()
                 }) {
-                    Image(systemName: "square.and.arrow.up.fill")
-                        .resizable()
-                        .frame(width: 25, height: 32)
-                        .foregroundColor(.pink)
-                        .padding()
-                }.accentColor(.clear)
-                Spacer()
-            }.navigationBarTitle(Text(verbatim: website.model.name), displayMode: .large)
+                    Button(action: {
+                        
+                    }) {
+                        Text("Share project")
+                    }
+                    Button(action: {
+                        
+                    }) {
+                        Text("Share folder")
+                    }
+                }
+            }.listStyle(GroupedListStyle())
+                .navigationBarTitle(Text(verbatim: website.model.name), displayMode: .large)
                 .navigationBarItems(trailing: Button(action: {
                     self.window.launch()
                 }) {
