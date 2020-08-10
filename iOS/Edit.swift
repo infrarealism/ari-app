@@ -4,26 +4,26 @@ import Core
 struct Edit: View {
     weak var window: UIWindow!
     weak var website: Website!
+    @State private var id = Page.index.id
+    @State private var text = ""
     
     var body: some View {
-        Circle()
+        TextView(text: $text)
     }
 }
 
 private struct TextView: UIViewRepresentable {
     @Binding var text: String
-    weak var coordinator: Coordinator!
 
     func makeCoordinator() -> Coordinator {
-        coordinator.view = self
-        return coordinator
+        .init(view: self)
     }
     
     func makeUIView(context: Context) -> UITextView {
         let view = UITextView()
         view.font = .preferredFont(forTextStyle: .body)
         view.textContainerInset = .init(top: 20, left: 20, bottom: 20, right: 20)
-        context.coordinator.prepare(view)
+        view.delegate = context.coordinator
         return view
     }
     
@@ -33,20 +33,13 @@ private struct TextView: UIViewRepresentable {
 }
 
 private final class Coordinator: NSObject, UITextViewDelegate {
-    var view: TextView?
-    weak var textView: UITextView?
+    private let view: TextView
     
-    func prepare(_ view: UITextView) {
-        textView = view
-        view.delegate = self
+    init(view: TextView) {
+        self.view = view
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        view?.text = textView.text
-    }
-    
-    func start() {
-        textView?.becomeFirstResponder()
-        textView?.selectAll(nil)
+        
     }
 }
