@@ -3,7 +3,7 @@ import Core
 
 struct Home: View {
     weak var window: UIWindow!
-    let website: Website
+    weak var website: Website!
     
     var body: some View {
         NavigationView {

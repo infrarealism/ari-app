@@ -12,7 +12,7 @@ struct Main: View {
                     Image(systemName: website.icon)
                     Text("Home")
                 }
-            Circle()
+            Edit(window: window, website: website)
                 .tabItem {
                     Image(systemName: "hammer")
                     Text("Edit")
