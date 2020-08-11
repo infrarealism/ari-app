@@ -65,6 +65,7 @@
 		CE9E6B7B24D074F900C68215 /* Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E6B7A24D074F900C68215 /* Name.swift */; };
 		CE9E6B7D24D07D6700C68215 /* Edit.Blog.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E6B7C24D07D6700C68215 /* Edit.Blog.swift */; };
 		CE9E6B7F24D07DA100C68215 /* Edit.Single.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E6B7E24D07DA100C68215 /* Edit.Single.swift */; };
+		CEA45A1024E2EB5200FDBD5D /* Web.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA45A0F24E2EB5200FDBD5D /* Web.swift */; };
 		CEB1A74824B30D750094DEE1 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1A74724B30D750094DEE1 /* Text.swift */; };
 		CEB2AE0024BCB1EE000ED8FD /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2ADFF24BCB1EE000ED8FD /* Field.swift */; };
 		CEC93C1924BE1BDA00BC86E3 /* Pop.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC93C1824BE1BDA00BC86E3 /* Pop.swift */; };
@@ -142,6 +143,7 @@
 		CE9E6B7A24D074F900C68215 /* Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Name.swift; sourceTree = "<group>"; };
 		CE9E6B7C24D07D6700C68215 /* Edit.Blog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Edit.Blog.swift; sourceTree = "<group>"; };
 		CE9E6B7E24D07DA100C68215 /* Edit.Single.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Edit.Single.swift; sourceTree = "<group>"; };
+		CEA45A0F24E2EB5200FDBD5D /* Web.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Web.swift; sourceTree = "<group>"; };
 		CEB1A74724B30D750094DEE1 /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
 		CEB2ADFF24BCB1EE000ED8FD /* Field.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
 		CEC93C1824BE1BDA00BC86E3 /* Pop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pop.swift; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 				CE4CC13E24DB117200BCA30F /* Store.swift */,
 				CE5101AB24E1A51200EA12BC /* TextView.swift */,
 				CE5101AD24E1A55000EA12BC /* TextView.Text.swift */,
+				CEA45A0F24E2EB5200FDBD5D /* Web.swift */,
 				CE3D4BBB24E012AD0080E96E /* Website.swift */,
 				CE32F3A824D9C1E400F0BF00 /* Window.swift */,
 				CED14EC824D8573A004D4918 /* Assets.xcassets */,
@@ -480,6 +483,7 @@
 				CE4CC13924DB01EA00BCA30F /* User.swift in Sources */,
 				CE4CC13F24DB117200BCA30F /* Store.swift in Sources */,
 				CEDBD54D24DD3B980008CBA3 /* Cta.swift in Sources */,
+				CEA45A1024E2EB5200FDBD5D /* Web.swift in Sources */,
 				CE4CC13B24DB01F800BCA30F /* Purchases.swift in Sources */,
 				CE32F3AB24D9CFA800F0BF00 /* Create.swift in Sources */,
 				CE3D4BBC24E012AD0080E96E /* Website.swift in Sources */,

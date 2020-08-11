@@ -44,8 +44,7 @@ struct Create: View {
                             }
                         }) {
                             Image(systemName: "arrow.left.circle.fill")
-                                .resizable()
-                                .frame(width: 35, height: 35)
+                                .font(.largeTitle)
                                 .padding()
                         }.foregroundColor(.pink)
                             .disabled(self.offset == 0)
@@ -57,8 +56,7 @@ struct Create: View {
                             }
                         }) {
                             Image(systemName: "arrow.right.circle.fill")
-                                .resizable()
-                                .frame(width: 35, height: 35)
+                                .font(.largeTitle)
                                 .padding()
                         }.foregroundColor(.pink)
                             .disabled(self.offset == 2)
@@ -191,8 +189,7 @@ private struct Segment: View {
                         .frame(width: 60, height: 60)
                         .foregroundColor(selected ? .pink : .clear)
                     Image(systemName: image)
-                        .resizable()
-                        .frame(width: 25, height: 25)
+                        .font(.title)
                 }
                 Text(name)
                     .foregroundColor(selected ? .primary : .secondary)
@@ -218,8 +215,7 @@ private struct Perk: View {
                         .frame(width: 60, height: 60)
                         .foregroundColor(.clear)
                     Image(systemName: image)
-                        .resizable()
-                        .frame(width: 25, height: 25)
+                        .font(.title)
                 }
                 Text(name)
                     .foregroundColor(.secondary)

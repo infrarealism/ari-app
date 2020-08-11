@@ -22,7 +22,7 @@ struct Main: View {
                     Image(systemName: "paintbrush")
                     Text("Style")
                 }
-            Circle()
+            Web(website: website)
                 .tabItem {
                     Image(systemName: "paperplane")
                     Text("Preview")

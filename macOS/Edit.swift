@@ -32,7 +32,7 @@ class Edit<W>: NSView where W : Website {
         addSubview(info)
         self.info = info
         
-        let link = Blob(icon: "link.circle")
+        let link = Blob(icon: "link")
         link.target = self
         link.action = #selector(self.link)
         addSubview(link)

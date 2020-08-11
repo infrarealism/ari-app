@@ -8,6 +8,23 @@ struct Edit: View {
     @State private var id = Page.index.id
     
     var body: some View {
-        TextView(website: website, id: $id)
+        ZStack {
+            TextView(website: website, id: $id)
+            VStack {
+                HStack(spacing: 0) {
+                    Spacer()
+                    Blub(image: "text.badge.star") {
+                        
+                    }
+                    Blub(image: "link") {
+                        
+                    }
+                    Blub(image: "photo") {
+                        
+                    }
+                }
+                Spacer()
+            }
+        }
     }
 }

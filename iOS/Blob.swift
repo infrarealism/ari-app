@@ -45,7 +45,7 @@ final class Blob: Control {
     
     func update() {
         circle.backgroundColor = enabled ? .secondarySystemBackground : .tertiarySystemBackground
-        icon.tintColor = enabled ? .label : .tertiaryLabel
+        icon.tintColor = enabled ? .secondaryLabel : .tertiaryLabel
     }
     
     override func hoverOn() {

@@ -41,14 +41,14 @@ struct Store: View {
                     self.display = false
                 }) {
                     Image(systemName: "xmark.circle.fill")
-                        .resizable()
-                        .frame(width: 22, height: 22)
+                        .font(.title)
                         .foregroundColor(.pink)
                 }.accentColor(.clear))
-        }.onReceive(purchases.products.dropFirst().receive(on: DispatchQueue.main)) { products in
-            withAnimation {
-                self.products = products
-            }
+        }.navigationViewStyle(StackNavigationViewStyle())
+            .onReceive(purchases.products.dropFirst().receive(on: DispatchQueue.main)) { products in
+                withAnimation {
+                    self.products = products
+                }
         }.onAppear {
             self.formatter.numberStyle = .currencyISOCode
             self.purchases.load()
@@ -87,8 +87,7 @@ private struct Item: View {
                 .foregroundColor(.primary)
             if session.user.value.purchases.contains(purchase) {
                 Image(systemName: "checkmark.circle.fill")
-                    .resizable()
-                    .frame(width: 30, height: 30)
+                    .font(.largeTitle)
                     .foregroundColor(.init(.systemIndigo))
                     .padding()
             } else {

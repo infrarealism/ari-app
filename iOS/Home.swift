@@ -12,8 +12,7 @@ struct Home: View {
                     HStack {
                         Spacer()
                         Image(systemName: "square.and.arrow.up.fill")
-                            .resizable()
-                            .frame(width: 18, height: 24)
+                            .font(.title)
                             .foregroundColor(.pink)
                             .padding()
                         Spacer()
@@ -36,8 +35,7 @@ struct Home: View {
                     self.window.launch()
                 }) {
                     Image(systemName: "xmark.circle.fill")
-                        .resizable()
-                        .frame(width: 22, height: 22)
+                        .font(.title)
                 })
         }.navigationViewStyle(StackNavigationViewStyle())
     }

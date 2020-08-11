@@ -16,8 +16,7 @@ struct Launch: View {
                     self.store = true
                 }) {
                     Image(systemName: "cart.fill")
-                        .resizable()
-                        .frame(width: 22, height: 22)
+                        .font(.title)
                         .padding()
                 }.foregroundColor(.pink)
                     .padding()
@@ -33,8 +32,7 @@ struct Launch: View {
                         self.create = true
                     }) {
                         Image(systemName: "plus.circle.fill")
-                            .resizable()
-                            .frame(width: 30, height: 30)
+                            .font(.title)
                     }.foregroundColor(.pink)
                         .padding(.top, 20)
                         .sheet(isPresented: $create) {

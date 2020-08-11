@@ -41,6 +41,7 @@ Bookmark.error.title = "Error loading this folder";
 Bookmark.error.message = "Check that it is a valid destination and try again";
 Continue = "Continue";
 Home = "Home";
+Appearance = "Appearance";
 
 How.it.works = "How does it work?";
 How.single = "- You have 1 page where you can keep things simple and easy to modify.
