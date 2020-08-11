@@ -17,7 +17,7 @@ struct Main: View {
                     Image(systemName: "hammer")
                     Text("Edit")
                 }
-            Circle()
+            Design(website: website)
                 .tabItem {
                     Image(systemName: "paintbrush")
                     Text("Style")

@@ -11,12 +11,12 @@ struct Web: View {
             WebView(url: website.url!.appendingPathComponent(Page.index.file), mode: $mode)
                 .navigationBarTitle(.init(verbatim: website.model.name), displayMode: .inline)
                 .navigationBarItems(trailing:
-                    Picker("Appearance", selection: $mode, content: {
+                    Picker("Appearance", selection: $mode) {
                         Text(verbatim: "Light")
                             .tag(0)
                         Text(verbatim: "Dark")
                             .tag(1)
-                    }).pickerStyle(SegmentedPickerStyle()))
+                    }.pickerStyle(SegmentedPickerStyle()))
         }.navigationViewStyle(StackNavigationViewStyle())
     }
 }

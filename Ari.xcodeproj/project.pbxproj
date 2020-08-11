@@ -66,6 +66,7 @@
 		CE9E6B7D24D07D6700C68215 /* Edit.Blog.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E6B7C24D07D6700C68215 /* Edit.Blog.swift */; };
 		CE9E6B7F24D07DA100C68215 /* Edit.Single.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E6B7E24D07DA100C68215 /* Edit.Single.swift */; };
 		CEA45A1024E2EB5200FDBD5D /* Web.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA45A0F24E2EB5200FDBD5D /* Web.swift */; };
+		CEA45A1224E2FDA500FDBD5D /* Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA45A1124E2FDA500FDBD5D /* Design.swift */; };
 		CEB1A74824B30D750094DEE1 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1A74724B30D750094DEE1 /* Text.swift */; };
 		CEB2AE0024BCB1EE000ED8FD /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2ADFF24BCB1EE000ED8FD /* Field.swift */; };
 		CEC93C1924BE1BDA00BC86E3 /* Pop.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC93C1824BE1BDA00BC86E3 /* Pop.swift */; };
@@ -144,6 +145,7 @@
 		CE9E6B7C24D07D6700C68215 /* Edit.Blog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Edit.Blog.swift; sourceTree = "<group>"; };
 		CE9E6B7E24D07DA100C68215 /* Edit.Single.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Edit.Single.swift; sourceTree = "<group>"; };
 		CEA45A0F24E2EB5200FDBD5D /* Web.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Web.swift; sourceTree = "<group>"; };
+		CEA45A1124E2FDA500FDBD5D /* Design.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Design.swift; sourceTree = "<group>"; };
 		CEB1A74724B30D750094DEE1 /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
 		CEB2ADFF24BCB1EE000ED8FD /* Field.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
 		CEC93C1824BE1BDA00BC86E3 /* Pop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pop.swift; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 				CE1F5AB524E278F400280A60 /* Control.swift */,
 				CE32F3AA24D9CFA800F0BF00 /* Create.swift */,
 				CEDBD54C24DD3B980008CBA3 /* Cta.swift */,
+				CEA45A1124E2FDA500FDBD5D /* Design.swift */,
 				CE3D594E24E12C6A005459A0 /* Edit.swift */,
 				CE3D4BBD24E013340080E96E /* Home.swift */,
 				CED14ED624D85A72004D4918 /* Launch.swift */,
@@ -494,6 +497,7 @@
 				CEDBD54F24DD3FAF0008CBA3 /* Browse.swift in Sources */,
 				CE4CC13D24DB024100BCA30F /* Bookmark.swift in Sources */,
 				CE1F5AB824E2794700280A60 /* Blob.swift in Sources */,
+				CEA45A1224E2FDA500FDBD5D /* Design.swift in Sources */,
 				CE5101AC24E1A51200EA12BC /* TextView.swift in Sources */,
 				CE3D594F24E12C6A005459A0 /* Edit.swift in Sources */,
 			);
