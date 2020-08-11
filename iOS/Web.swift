@@ -7,16 +7,17 @@ struct Web: View {
     @State private var mode = 1
     
     var body: some View {
-        VStack {
-            Picker("Appearance", selection: $mode, content: {
-                Text(verbatim: "Light")
-                    .tag(0)
-                Text(verbatim: "Dark")
-                    .tag(1)
-            }).pickerStyle(SegmentedPickerStyle())
-                .padding()
+        NavigationView {
             WebView(url: website.url!.appendingPathComponent(Page.index.file), mode: $mode)
-        }
+                .navigationBarTitle(.init(verbatim: website.model.name), displayMode: .inline)
+                .navigationBarItems(trailing:
+                    Picker("Appearance", selection: $mode, content: {
+                        Text(verbatim: "Light")
+                            .tag(0)
+                        Text(verbatim: "Dark")
+                            .tag(1)
+                    }).pickerStyle(SegmentedPickerStyle()))
+        }.navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
