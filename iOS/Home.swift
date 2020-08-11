@@ -40,5 +40,6 @@ struct Home: View {
                         .frame(width: 22, height: 22)
                 })
         }.navigationViewStyle(StackNavigationViewStyle())
+            .background(Color.clear)
     }
 }

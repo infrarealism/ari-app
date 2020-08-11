@@ -6,7 +6,7 @@ extension UIWindow {
         if rootViewController != nil {
             transition(.fromLeft)
         }
-        rootViewController = UIHostingController(rootView: Launch(window: self))
+        rootViewController = Controller(rootView: Launch(window: self))
     }
     
     func open(_ bookmark: Bookmark) {
@@ -20,7 +20,7 @@ extension UIWindow {
         bookmark.access?.stopAccessingSecurityScopedResource()
         rootViewController!.dismiss(animated: false)
         transition(.fromRight)
-        rootViewController = UIHostingController(rootView: Main(window: self, website: website))
+        rootViewController = Controller(rootView: Main(window: self, website: website))
     }
     
     private func transition(_ type: CATransitionSubtype) {
@@ -33,3 +33,10 @@ extension UIWindow {
     }
 }
 
+private final class Controller<Content>: UIHostingController<Content> where Content : View {
+    required init?(coder aDecoder: NSCoder) { nil }
+    override init(rootView: Content) {
+        super.init(rootView: rootView)
+        view.backgroundColor = .clear
+    }
+}

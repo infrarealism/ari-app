@@ -27,11 +27,17 @@ extension TextView {
             addSubview(text)
             self.text = text
             
+            let dismiss = Blob(icon: "keyboard.chevron.compact.down")
+            addSubview(dismiss)
+            
             text.topAnchor.constraint(equalTo: topAnchor).isActive = true
             text.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
             text.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
             let bottom = text.bottomAnchor.constraint(equalTo: bottomAnchor)
             bottom.isActive = true
+            
+            dismiss.bottomAnchor.constraint(equalTo: text.bottomAnchor).isActive = true
+            dismiss.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor).isActive = true
             
             NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification).sink { [weak self] in
                 bottom.constant = -(($0.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.height - 70)
@@ -52,7 +58,7 @@ extension TextView {
             }.store(in: &subs)
             
             NotificationCenter.default.publisher(for: UITextView.textDidChangeNotification, object: text)
-                .debounce(for: .seconds(1.1), scheduler: DispatchQueue.main)
+                .debounce(for: .seconds(0.8), scheduler: DispatchQueue.main)
                 .map { view.website.model.pages.first { $0.id == view.id }!.content(($0.object as! _Text).text) }
                 .receive(on: DispatchQueue(label: "", qos: .utility))
                 .sink(receiveValue: view.website.update)
