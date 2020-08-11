@@ -16,7 +16,7 @@ extension TextView {
             let text = _Text(frame: .zero, textContainer: Container())
             text.translatesAutoresizingMaskIntoConstraints = false
             text.typingAttributes[.font] = UIFont.monospacedSystemFont(ofSize: UIFont.preferredFont(forTextStyle: .body).pointSize + 4, weight: .medium)
-            text.font = .monospacedSystemFont(ofSize: UIFont.preferredFont(forTextStyle: .body).pointSize + 4, weight: .medium)
+            text.font = .monospacedSystemFont(ofSize: UIFont.preferredFont(forTextStyle: .body).pointSize + 2, weight: .regular)
             text.textContainerInset = .init(top: 20, left: 20, bottom: 20, right: 20)
             text.keyboardDismissMode = .interactive
             text.backgroundColor = .clear
@@ -28,6 +28,9 @@ extension TextView {
             self.text = text
             
             let dismiss = Blob(icon: "keyboard.chevron.compact.down")
+            dismiss.target = text
+            dismiss.action = #selector(text.resignFirstResponder)
+            dismiss.isHidden = true
             addSubview(dismiss)
             
             text.topAnchor.constraint(equalTo: topAnchor).isActive = true
@@ -36,11 +39,12 @@ extension TextView {
             let bottom = text.bottomAnchor.constraint(equalTo: bottomAnchor)
             bottom.isActive = true
             
-            dismiss.bottomAnchor.constraint(equalTo: text.bottomAnchor).isActive = true
-            dismiss.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor).isActive = true
+            dismiss.bottomAnchor.constraint(equalTo: text.bottomAnchor, constant: -4).isActive = true
+            dismiss.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -4).isActive = true
             
             NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification).sink { [weak self] in
                 bottom.constant = -(($0.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.height - 70)
+                dismiss.isHidden = false
                 UIView.animate(withDuration: 0.5) {
                     self?.layoutIfNeeded()
                 }
@@ -48,13 +52,10 @@ extension TextView {
             
             NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification).sink { [weak self] _ in
                 bottom.constant = 0
+                dismiss.isHidden = true
                 UIView.animate(withDuration: 0.5) {
                     self?.layoutIfNeeded()
                 }
-            }.store(in: &subs)
-            
-            NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification).sink { [weak self] _ in
-                self?.text.resignFirstResponder()
             }.store(in: &subs)
             
             NotificationCenter.default.publisher(for: UITextView.textDidChangeNotification, object: text)
@@ -70,7 +71,7 @@ extension TextView {
 private final class _Text: UITextView {
     override func caretRect(for position: UITextPosition) -> CGRect {
         var rect = super.caretRect(for: position)
-        rect.size.width += 3
+        rect.size.width += 2
         return rect
     }
 }

@@ -18,7 +18,7 @@ final class Blob: Control {
         circle.translatesAutoresizingMaskIntoConstraints = false
         circle.isUserInteractionEnabled = false
         circle.clipsToBounds = true
-        circle.layer.cornerRadius = 21
+        circle.layer.cornerRadius = 24
         addSubview(circle)
         self.circle = circle
         
@@ -32,7 +32,7 @@ final class Blob: Control {
         widthAnchor.constraint(equalToConstant: 60).isActive = true
         heightAnchor.constraint(equalToConstant: 60).isActive = true
         
-        circle.widthAnchor.constraint(equalToConstant: 42).isActive = true
+        circle.widthAnchor.constraint(equalToConstant: 48).isActive = true
         circle.heightAnchor.constraint(equalTo: circle.widthAnchor).isActive = true
         circle.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         circle.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true

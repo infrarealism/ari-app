@@ -21,7 +21,7 @@ final class Container: NSTextContainer {
 }
 
 private final class Layout: NSLayoutManager, NSLayoutManagerDelegate {
-    private let padding = CGFloat(6)
+    private let padding = CGFloat(4)
     
     func layoutManager(_: NSLayoutManager, shouldSetLineFragmentRect: UnsafeMutablePointer<CGRect>,
                        lineFragmentUsedRect: UnsafeMutablePointer<CGRect>, baselineOffset: UnsafeMutablePointer<CGFloat>,

@@ -5,7 +5,6 @@ final class Scene: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, willConnectTo: UISceneSession, options: UIScene.ConnectionOptions) {
         window = .init(windowScene: scene as! UIWindowScene)
-        window!.backgroundColor = .secondarySystemBackground
         window!.launch()
         window!.makeKeyAndVisible()
     }
