@@ -16,7 +16,7 @@ struct Launch: View {
                     self.store = true
                 }) {
                     Image(systemName: "cart.fill")
-                        .padding()
+                        .padding(.all, 20)
                 }.foregroundColor(.pink)
                     .padding()
                     .sheet(isPresented: $store) {
