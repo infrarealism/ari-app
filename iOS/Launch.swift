@@ -16,7 +16,6 @@ struct Launch: View {
                     self.store = true
                 }) {
                     Image(systemName: "cart.fill")
-                        .font(.title)
                         .padding()
                 }.foregroundColor(.pink)
                     .padding()

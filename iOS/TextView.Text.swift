@@ -17,7 +17,7 @@ extension TextView {
             text.translatesAutoresizingMaskIntoConstraints = false
             text.typingAttributes[.font] = UIFont.monospacedSystemFont(ofSize: UIFont.preferredFont(forTextStyle: .body).pointSize + 4, weight: .medium)
             text.font = .monospacedSystemFont(ofSize: UIFont.preferredFont(forTextStyle: .body).pointSize + 2, weight: .regular)
-            text.textContainerInset = .init(top: 70, left: 20, bottom: 20, right: 20)
+            text.textContainerInset = .init(top: 60, left: 20, bottom: 20, right: 20)
             text.keyboardDismissMode = .interactive
             text.backgroundColor = .clear
             text.tintColor = .systemPink

@@ -13,17 +13,20 @@ struct Edit: View {
             VStack {
                 HStack(spacing: 0) {
                     Spacer()
-                    Blub(image: "text.badge.star") {
-                        
-                    }
                     Blub(image: "link") {
                         
                     }
                     Blub(image: "photo") {
                         
                     }
-                }
+                }.padding(.trailing, 10)
                 Spacer()
+                HStack(spacing: 0) {
+                    Spacer()
+                    Blub(image: "text.badge.star") {
+                        
+                    }
+                }.padding(.all, 10)
             }
         }
     }
