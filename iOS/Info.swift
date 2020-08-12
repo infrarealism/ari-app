@@ -24,9 +24,9 @@ struct Info: View {
                 Button(action: {
                     self.display = false
                 }) {
-                    Text("Cancel")
+                    Image(systemName: "xmark.circle.fill")
+                        .font(.title)
                         .foregroundColor(.secondary)
-                        .padding()
                 }.accentColor(.clear), trailing:
                 Cta(title: "Save", background: .pink, width: 80) {
                     var page = self.website.model.pages.first { $0.id == self.id }!

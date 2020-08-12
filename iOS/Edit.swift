@@ -7,15 +7,22 @@ struct Edit: View {
     weak var website: Website!
     @State private var id = Page.index.id
     @State private var edit = false
+    @State private var link = false
+    private let insert = PassthroughSubject<String, Never>()
+    private let selected = CurrentValueSubject<String, Never>(.init())
     
     var body: some View {
         ZStack {
-            TextView(website: website, id: $id)
+            TextView(website: website, insert: insert, selected: selected, id: $id)
             VStack {
                 HStack(spacing: 0) {
                     Spacer()
                     Blub(image: "link") {
-                        
+                        self.link = true
+                    }.sheet(isPresented: $link) {
+                        Link(title: self.selected.value, display: self.$link) {
+                            self.insert.send($0)
+                        }
                     }
                     Blub(image: "photo") {
                         

@@ -4,12 +4,28 @@ import Core
 
 extension TextView {
     final class Text: UIView, UITextViewDelegate {
+        var id: String! {
+            didSet {
+                text.text = website.model.pages.first { $0.id == id }!.content
+            }
+        }
+        deinit {
+            print("gone")
+        }
+        
         weak var text: UITextView!
+        private weak var website: Website!
+        private weak var insert: PassthroughSubject<String, Never>!
+        private weak var selected: CurrentValueSubject<String, Never>!
         private var subs = Set<AnyCancellable>()
+        private var previous: UITextRange?
         private let view: TextView
         
         required init?(coder: NSCoder) { nil }
-        init(view: TextView) {
+        init(website: Website, insert: PassthroughSubject<String, Never>!, selected: CurrentValueSubject<String, Never>, view: TextView) {
+            self.website = website
+            self.insert = insert
+            self.selected = selected
             self.view = view
             super.init(frame: .zero)
             
@@ -65,6 +81,17 @@ extension TextView {
                 .receive(on: DispatchQueue(label: "", qos: .utility))
                 .sink(receiveValue: view.website.update)
                 .store(in: &subs)
+            
+            insert.sink { [weak self] in
+                self?.text.selectedTextRange = self?.previous
+                self?.text.insertText($0)
+            }.store(in: &subs)
+        }
+        
+        func textViewDidChangeSelection(_: UITextView) {
+            guard text.isFirstResponder, let range = text.selectedTextRange else { return }
+            previous = range
+            selected.value = text.text(in: range) ?? ""
         }
     }
 }

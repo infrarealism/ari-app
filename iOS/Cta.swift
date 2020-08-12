@@ -9,13 +9,13 @@ struct Cta: View {
     var body: some View {
         Button(action: action) {
             ZStack {
-                RoundedRectangle(cornerRadius: 20)
-                    .frame(width: width, height: 40)
+                RoundedRectangle(cornerRadius: 14)
+                    .frame(width: width, height: 30)
                     .foregroundColor(background)
-                    .padding()
                 Text(title)
+                    .font(Font.caption.bold())
                     .foregroundColor(.primary)
-            }
+            }.frame(height: 50)
         }.accentColor(.clear)
     }
 }
