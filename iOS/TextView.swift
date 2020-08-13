@@ -8,15 +8,15 @@ struct TextView: UIViewRepresentable {
     weak var selected: CurrentValueSubject<String, Never>!
     @Binding var id: String
 
-    func makeCoordinator() -> Text {
+    func makeCoordinator() -> Coordinator {
         .init(website: website, insert: insert, selected: selected, view: self)
     }
     
-    func makeUIView(context: Context) -> Text {
+    func makeUIView(context: Context) -> Coordinator {
         context.coordinator
     }
     
-    func updateUIView(_ uiView: Text, context: Context) {
+    func updateUIView(_ uiView: Coordinator, context: Context) {
         if uiView.id != id {
             uiView.id = id
         }

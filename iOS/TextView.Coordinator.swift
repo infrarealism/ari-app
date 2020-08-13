@@ -3,7 +3,7 @@ import Combine
 import Core
 
 extension TextView {
-    final class Text: UIView, UITextViewDelegate {
+    final class Coordinator: UIView, UITextViewDelegate {
         var id: String! {
             didSet {
                 text.text = website.model.pages.first { $0.id == id }!.content
