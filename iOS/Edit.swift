@@ -9,6 +9,8 @@ struct Edit: View {
     @State private var edit = false
     @State private var link = false
     @State private var photo = false
+    @State private var delete = false
+    @State private var list = false
     @State private var image: UIImage?
     @State private var imageName = ""
     private let insert = PassthroughSubject<String, Never>()
@@ -45,6 +47,22 @@ struct Edit: View {
                 Spacer()
                 HStack(spacing: 0) {
                     Spacer()
+                    if website is Website.Blog {
+                        if id != Page.index.id {
+                            Blub(image: "trash") {
+                                self.delete = true
+                            }.alert(isPresented: $delete) {
+                                Alert(title: .init("Delete.page"), message: .init("Cant.undo"), primaryButton: .destructive(.init("Delete")) {
+                                    
+                                }, secondaryButton: .cancel(.init("Cancel")))
+                            }
+                        }
+                        Blub(image: "square.stack.3d.up") {
+                            self.list = true
+                        }.sheet(isPresented: $list) {
+                            Circle()
+                        }
+                    }
                     Blub(image: "text.badge.star") {
                         self.edit = true
                     }.sheet(isPresented: $edit) {
