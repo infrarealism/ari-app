@@ -11,7 +11,15 @@ struct Link: View {
             Form {
                 Section {
                     TextField("Link.title", text: $title)
+                        .textContentType(.none)
+                        .keyboardType(.alphabet)
+                        .autocapitalization(.sentences)
+                        .disableAutocorrection(true)
                     TextField("Link.url", text: $url)
+                        .textContentType(.URL)
+                        .keyboardType(.URL)
+                        .autocapitalization(.none)
+                        .disableAutocorrection(true)
                 }
             }.navigationBarTitle("Link.header", displayMode: .large)
                 .navigationBarItems(leading:

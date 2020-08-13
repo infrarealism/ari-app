@@ -15,9 +15,23 @@ struct Info: View {
             Form {
                 Section {
                     TextField("Title", text: $title)
+                        .textContentType(.none)
+                        .keyboardType(.alphabet)
+                        .autocapitalization(.sentences)
                     TextField("Description", text: $description)
+                        .textContentType(.none)
+                        .keyboardType(.alphabet)
+                        .autocapitalization(.sentences)
                     TextField("Keywords", text: $keywords)
+                        .textContentType(.none)
+                        .keyboardType(.alphabet)
+                        .autocapitalization(.none)
+                        .disableAutocorrection(true)
                     TextField("Author", text: $author)
+                        .textContentType(.none)
+                        .keyboardType(.alphabet)
+                        .autocapitalization(.none)
+                        .disableAutocorrection(true)
                 }
             }.navigationBarTitle("Page.details", displayMode: .large)
             .navigationBarItems(leading:

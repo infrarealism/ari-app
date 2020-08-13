@@ -9,9 +9,6 @@ extension TextView {
                 text.text = website.model.pages.first { $0.id == id }!.content
             }
         }
-        deinit {
-            print("gone")
-        }
         
         weak var text: UITextView!
         private weak var website: Website!
