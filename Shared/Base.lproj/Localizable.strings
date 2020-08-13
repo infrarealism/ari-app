@@ -21,6 +21,7 @@ Link.placeholder = "https://";
 Add.image = "Add image";
 Duplicate = "Copy file to project's directory";
 Edit.original = "This will overwrite the original image";
+Image.name = "Name";
 Image.alt = "Alternate text";
 In.app = "In-App Purchase";
 Restore.purchases = "Restore Purchases";

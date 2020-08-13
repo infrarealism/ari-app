@@ -9,6 +9,8 @@ struct Edit: View {
     @State private var edit = false
     @State private var link = false
     @State private var photo = false
+    @State private var image: UIImage?
+    @State private var imageName = ""
     private let insert = PassthroughSubject<String, Never>()
     private let selected = CurrentValueSubject<String, Never>(.init())
     
@@ -18,6 +20,15 @@ struct Edit: View {
             VStack {
                 HStack(spacing: 0) {
                     Spacer()
+                    .sheet(isPresented: .init(get: {
+                        self.image != nil
+                    }, set: { _ in
+                        self.image = nil
+                    })) {
+                        Photo(website: self.website, image: self.$image, name: self.$imageName) {
+                            self.insert.send($0)
+                        }
+                    }
                     Blub(image: "link") {
                         self.link = true
                     }.sheet(isPresented: $link) {
@@ -28,7 +39,7 @@ struct Edit: View {
                     Blub(image: "photo") {
                         self.photo = true
                     }.sheet(isPresented: $photo) {
-                        Photo.Picker()
+                        Photo.Picker(image: self.$image, name: self.$imageName, display: self.$photo)
                     }
                 }.padding(.trailing, 10)
                 Spacer()
