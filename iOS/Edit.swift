@@ -8,6 +8,7 @@ struct Edit: View {
     @State private var id = Page.index.id
     @State private var edit = false
     @State private var link = false
+    @State private var image = false
     private let insert = PassthroughSubject<String, Never>()
     private let selected = CurrentValueSubject<String, Never>(.init())
     
@@ -26,6 +27,8 @@ struct Edit: View {
                     }
                     Blub(image: "photo") {
                         
+                    }.sheet(isPresented: $image) {
+                        Photo.Picker()
                     }
                 }.padding(.trailing, 10)
                 Spacer()
