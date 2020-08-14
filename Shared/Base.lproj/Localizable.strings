@@ -44,6 +44,7 @@ Continue = "Continue";
 Home = "Home";
 Appearance = "Appearance";
 Colours = "Colours";
+Pages = "Pages";
 
 How.it.works = "How does it work?";
 How.single = "- You have 1 page where you can keep things simple and easy to modify.

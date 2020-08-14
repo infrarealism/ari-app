@@ -60,7 +60,7 @@ struct Edit: View {
                         Blub(image: "square.stack.3d.up") {
                             self.list = true
                         }.sheet(isPresented: $list) {
-                            Circle()
+                            Pages(website: self.website, id: self.$id, display: self.$list)
                         }
                     }
                     Blub(image: "text.badge.star") {
