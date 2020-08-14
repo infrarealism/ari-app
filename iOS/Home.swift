@@ -8,26 +8,7 @@ struct Home: View {
     var body: some View {
         NavigationView {
             List {
-                Section(header:
-                    HStack {
-                        Spacer()
-                        Image(systemName: "square.and.arrow.up.fill")
-                            .font(.title)
-                            .foregroundColor(.pink)
-                            .padding()
-                        Spacer()
-                }) {
-                    Button(action: {
-                        
-                    }) {
-                        Text("Share project")
-                    }
-                    Button(action: {
-                        
-                    }) {
-                        Text("Share folder")
-                    }
-                }
+                EmptyView()
             }.listStyle(GroupedListStyle())
                 .navigationBarTitle(Text(verbatim: website.model.name), displayMode: .large)
                 .navigationBarItems(trailing: Button(action: {
