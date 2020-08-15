@@ -23,6 +23,12 @@ extension UIWindow {
         rootViewController = UIHostingController(rootView: Main(window: self, website: website))
     }
     
+    func share(_ url: URL) {
+        let controller = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        controller.popoverPresentationController?.sourceView = rootViewController?.view
+        rootViewController!.present(controller, animated: true)
+    }
+    
     private func transition(_ type: CATransitionSubtype) {
         layer.add({
             $0.duration = 0.4

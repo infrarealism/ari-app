@@ -4,8 +4,6 @@ import Core
 struct Home: View {
     weak var window: UIWindow!
     weak var website: Website!
-    @State private var project = false
-    @State private var folder = false
     
     var body: some View {
         NavigationView {
@@ -20,14 +18,12 @@ struct Home: View {
                         Spacer()
                 }) {
                     Button(action: {
-                        self.project = true
+                        self.window.share(self.website.file)
                     }) {
                         Text("Share.project")
-                    }.actionSheet(isPresented: $project) {
-                        ActionSheet(title: <#T##Text#>, message: <#T##Text?#>, buttons: <#T##[ActionSheet.Button]#>)
                     }
                     Button(action: {
-                        self.folder = true
+                        self.window.share(self.website.url!)
                     }) {
                         Text("Share.folder")
                     }
