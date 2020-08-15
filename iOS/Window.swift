@@ -23,8 +23,8 @@ extension UIWindow {
         rootViewController = UIHostingController(rootView: Main(window: self, website: website))
     }
     
-    func share(_ url: URL) {
-        let controller = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+    func share(_ urls: [URL]) {
+        let controller = UIActivityViewController(activityItems: urls, applicationActivities: nil)
         controller.popoverPresentationController?.sourceView = rootViewController?.view
         rootViewController!.present(controller, animated: true)
     }

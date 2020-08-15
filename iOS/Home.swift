@@ -18,14 +18,9 @@ struct Home: View {
                         Spacer()
                 }) {
                     Button(action: {
-                        self.window.share(self.website.file)
+                        self.window.share([self.website.file])
                     }) {
                         Text("Share.project")
-                    }
-                    Button(action: {
-                        self.window.share(self.website.url!)
-                    }) {
-                        Text("Share.folder")
                     }
                 }
             }.listStyle(GroupedListStyle())
