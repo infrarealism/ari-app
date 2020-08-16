@@ -5,6 +5,7 @@ struct Store: View {
     @Binding var display: Bool
     @State private var products = [SKProduct]()
     @State private var formatter = NumberFormatter()
+    @State private var load = true
     private let purchases = Purchases()
     
     var body: some View {
@@ -15,25 +16,23 @@ struct Store: View {
                     .foregroundColor(.secondary)
                     .padding()
                 Cta(title: "Restore.purchases", background: .pink, width: 200) {
-                    withAnimation {
-                        self.products = []
-                    }
                     self.purchases.restore()
                 }
                 Spacer()
                     .frame(height: 40)
-                if products.isEmpty {
+                if load || products.isEmpty {
                     Text("Loading")
                         .font(Font.caption.bold())
                         .foregroundColor(.secondary)
                         .padding()
-                }
-                ForEach(products, id: \.self) { product in
-                    Item(purchase: Purchase(rawValue: product.productIdentifier)!, price: self.price(product)) {
-                        withAnimation {
-                            self.products = []
+                } else {
+                    ForEach(products, id: \.self) { product in
+                        Item(purchase: Purchase(rawValue: product.productIdentifier)!, price: self.price(product)) {
+                            withAnimation {
+                                self.load = true
+                            }
+                            self.purchases.purchase(product)
                         }
-                        self.purchases.purchase(product)
                     }
                 }
             }.navigationBarTitle("Store", displayMode: .large)
@@ -47,6 +46,7 @@ struct Store: View {
         }.navigationViewStyle(StackNavigationViewStyle())
             .onReceive(purchases.products.dropFirst().receive(on: DispatchQueue.main)) { products in
                 withAnimation {
+                    self.load = false
                     self.products = products
                 }
         }.onAppear {
