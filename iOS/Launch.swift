@@ -1,5 +1,6 @@
 import SwiftUI
 import Combine
+import Core
 
 struct Launch: View {
     weak var window: UIWindow!
@@ -7,6 +8,7 @@ struct Launch: View {
     @State private var bookmarks = [Bookmark]()
     @State private var create = false
     @State private var store = false
+    @State private var open = false
     
     var body: some View {
         ScrollView {
@@ -27,7 +29,7 @@ struct Launch: View {
                     }
                 Spacer()
                 Button(action: {
-                    self.store = true
+                    self.open = true
                 }) {
                     VStack {
                         Image(systemName: "archivebox.fill")
@@ -37,8 +39,10 @@ struct Launch: View {
                     }.padding()
                 }.foregroundColor(.pink)
                     .padding()
-                    .sheet(isPresented: $store) {
-                        Store(display: self.$store)
+                    .sheet(isPresented: $open) {
+                        Browse(type: "ari.website") {
+                            Bookmark.open($0).map(self.open)
+                        }
                     }
             }
             HStack {
@@ -72,8 +76,7 @@ struct Launch: View {
                 Button(action: {
                     var item = item
                     item.edited = .init()
-                    session.update(item)
-                    self.window.open(item)
+                    self.open(item)
                 }) {
                     VStack {
                         HStack {
@@ -97,5 +100,10 @@ struct Launch: View {
                 self.bookmarks = $0
             }
         }
+    }
+    
+    private func open(_ bookmark: Bookmark) {
+        session.update(bookmark)
+        window.open(bookmark)
     }
 }
