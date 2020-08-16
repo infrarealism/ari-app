@@ -1,5 +1,4 @@
 import UIKit
-import CoreServices
 
 extension Browse {
     final class Coordinator: UIDocumentPickerViewController, UIDocumentPickerDelegate {
@@ -8,7 +7,7 @@ extension Browse {
         required init?(coder: NSCoder) { nil }
         init(browse: Browse) {
             self.browse = browse
-            super.init(documentTypes: [kUTTypeFolder as String], in: .open)
+            super.init(documentTypes: [browse.type], in: .open)
             delegate = self
         }
         

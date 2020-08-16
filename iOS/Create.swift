@@ -1,5 +1,6 @@
 import SwiftUI
 import Core
+import CoreServices
 
 struct Create: View {
     weak var window: UIWindow!
@@ -170,7 +171,7 @@ private struct Third: View {
                 self.browse = true
             }
         }.sheet(isPresented: $browse) {
-            Browse(action: self.action)
+            Browse(type: kUTTypeFolder as String, action: self.action)
         }
     }
 }

@@ -11,12 +11,30 @@ struct Launch: View {
     var body: some View {
         ScrollView {
             HStack {
+                Button(action: {
+                    self.store = true
+                }) {
+                    VStack {
+                        Image(systemName: "cart.fill")
+                            .font(.headline)
+                        Text("Store")
+                            .font(.footnote)
+                    }.padding()
+                }.foregroundColor(.pink)
+                    .padding()
+                    .sheet(isPresented: $store) {
+                        Store(display: self.$store)
+                    }
                 Spacer()
                 Button(action: {
                     self.store = true
                 }) {
-                    Image(systemName: "cart.fill")
-                        .padding(.all, 20)
+                    VStack {
+                        Image(systemName: "archivebox.fill")
+                            .font(.headline)
+                        Text("Open")
+                            .font(.footnote)
+                    }.padding()
                 }.foregroundColor(.pink)
                     .padding()
                     .sheet(isPresented: $store) {

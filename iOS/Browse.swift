@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct Browse: UIViewControllerRepresentable {
+    let type: String
     let action: (URL) -> Void
     
     func makeCoordinator() -> Coordinator {
