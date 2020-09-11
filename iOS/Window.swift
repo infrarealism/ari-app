@@ -10,17 +10,19 @@ extension UIWindow {
     }
     
     func open(_ bookmark: Bookmark) {
-        guard let website = bookmark.access.flatMap(Website.load) else {
+        guard let access = bookmark.access else { return }
+        guard let website = Website.load(access) else {
             let alert = UIAlertController(title: .key("Bookmark.error.title"), message: .key("Bookmark.error.message"), preferredStyle: .alert)
             alert.addAction(.init(title: .key("Continue"), style: .cancel))
             rootViewController!.present(alert, animated: true)
-            bookmark.access?.stopAccessingSecurityScopedResource()
+            access.stopAccessingSecurityScopedResource()
             return
         }
-        bookmark.access?.stopAccessingSecurityScopedResource()
+        try! website.open()
         rootViewController!.dismiss(animated: false)
         transition(.fromRight)
         rootViewController = UIHostingController(rootView: Main(window: self, website: website))
+        access.stopAccessingSecurityScopedResource()
     }
     
     func share(_ urls: [URL]) {

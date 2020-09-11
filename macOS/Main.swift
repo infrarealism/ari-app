@@ -13,7 +13,6 @@ final class Main: NSWindow {
                 let main = Main(website: website)
                 main.makeKeyAndOrderFront(nil)
                 if access.deletingLastPathComponent() != website.url {
-                    
                     website.close()
                     let alert = NSAlert()
                     alert.messageText = .key("Website.moved")
