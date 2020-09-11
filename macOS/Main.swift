@@ -6,8 +6,45 @@ final class Main: NSWindow {
     private weak var bar: Bar!
     
     class func open(_ bookmark: Bookmark) {
-        bookmark.access.flatMap(Website.load).map(Main.init(website:))?.makeKeyAndOrderFront(nil)
-        bookmark.access?.stopAccessingSecurityScopedResource()
+        guard let access = bookmark.access else { return }
+        Website.load(access).map { website in
+            do {
+                try website.open()
+                let main = Main(website: website)
+                main.makeKeyAndOrderFront(nil)
+                if access.deletingLastPathComponent() != website.url {
+                    
+                    website.close()
+                    let alert = NSAlert()
+                    alert.messageText = .key("Website.moved")
+                    alert.informativeText = .key("Website.select")
+                    alert.addButton(withTitle: .key("Cancel"))
+                    alert.addButton(withTitle: .key("Select"))
+                    alert.alertStyle = .critical
+                    alert.beginSheetModal(for: main) {
+                        switch $0 {
+                        case .alertSecondButtonReturn:
+                            let browse = NSOpenPanel()
+                            browse.canChooseFiles = false
+                            browse.canChooseDirectories = true
+                            browse.prompt = .key("Select")
+                            browse.beginSheetModal(for: main) {
+                                guard $0 == .OK else { return }
+                                website.update(browse.url!)
+                                main.close()
+                                Main.open(bookmark)
+                            }
+                            break
+                        default:
+                            main.close()
+                            NSApp.launch()
+                            break
+                        }
+                    }
+                }
+            } catch { }
+        }
+        access.stopAccessingSecurityScopedResource()
     }
     
     private init(website: Website) {
@@ -41,9 +78,6 @@ final class Main: NSWindow {
         
         center()
         setFrameAutosaveName("Main")
-        
-        try! website.open()
-        
         edit()
     }
     
