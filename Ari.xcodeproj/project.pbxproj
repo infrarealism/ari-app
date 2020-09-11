@@ -12,6 +12,7 @@
 		CE048B6D24D94CB9007DE13D /* icon_22x28.png in Resources */ = {isa = PBXBuildFile; fileRef = CE048B6924D94CB9007DE13D /* icon_22x28.png */; };
 		CE048B6E24D94CB9007DE13D /* icon_44x58.png in Resources */ = {isa = PBXBuildFile; fileRef = CE048B6A24D94CB9007DE13D /* icon_44x58.png */; };
 		CE048B6F24D94CB9007DE13D /* icon_64x64.png in Resources */ = {isa = PBXBuildFile; fileRef = CE048B6B24D94CB9007DE13D /* icon_64x64.png */; };
+		CE0700C3250BB7DD00CA40C5 /* How.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0700C2250BB7DD00CA40C5 /* How.swift */; };
 		CE08F0E224C053EE001E033A /* Steps.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08F0E124C053EE001E033A /* Steps.swift */; };
 		CE0D5E4124E41508002D1029 /* Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0D5E4024E41508002D1029 /* Link.swift */; };
 		CE0E87CD24C5FC0900FC9994 /* Blob.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0E87CC24C5FC0900FC9994 /* Blob.swift */; };
@@ -104,6 +105,7 @@
 		CE048B6924D94CB9007DE13D /* icon_22x28.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_22x28.png; sourceTree = "<group>"; };
 		CE048B6A24D94CB9007DE13D /* icon_44x58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_44x58.png; sourceTree = "<group>"; };
 		CE048B6B24D94CB9007DE13D /* icon_64x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_64x64.png; sourceTree = "<group>"; };
+		CE0700C2250BB7DD00CA40C5 /* How.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = How.swift; sourceTree = "<group>"; };
 		CE08F0E124C053EE001E033A /* Steps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Steps.swift; sourceTree = "<group>"; };
 		CE0D5E4024E41508002D1029 /* Link.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Link.swift; sourceTree = "<group>"; };
 		CE0E87CC24C5FC0900FC9994 /* Blob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blob.swift; sourceTree = "<group>"; };
@@ -326,6 +328,7 @@
 				CE32014A24E5264D009C2554 /* Photo.swift */,
 				CED14EC424D85739004D4918 /* Scene.swift */,
 				CE4CC13E24DB117200BCA30F /* Store.swift */,
+				CE0700C2250BB7DD00CA40C5 /* How.swift */,
 				CE5101AD24E1A55000EA12BC /* TextView.Coordinator.swift */,
 				CE5101AB24E1A51200EA12BC /* TextView.swift */,
 				CEA45A0F24E2EB5200FDBD5D /* Web.swift */,
@@ -527,6 +530,7 @@
 				CE144B19250BB465009CF49E /* Mover.swift in Sources */,
 				CED14ED524D8596B004D4918 /* Main.swift in Sources */,
 				CE1F5AB624E278F400280A60 /* Control.swift in Sources */,
+				CE0700C3250BB7DD00CA40C5 /* How.swift in Sources */,
 				CE32014F24E5286D009C2554 /* Browse.Coordinator.swift in Sources */,
 				CE1F5ABA24E289D700280A60 /* Blub.swift in Sources */,
 				CE32014D24E527E7009C2554 /* Photo.Coordinator.swift in Sources */,

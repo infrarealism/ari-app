@@ -9,10 +9,26 @@ struct Launch: View {
     @State private var create = false
     @State private var store = false
     @State private var open = false
+    @State private var how = false
     
     var body: some View {
         ScrollView {
             HStack {
+                Button(action: {
+                    self.how = true
+                }) {
+                    VStack {
+                        Image(systemName: "info.circle.fill")
+                            .font(.headline)
+                        Text("How.to")
+                            .font(.footnote)
+                    }.padding()
+                }.foregroundColor(.pink)
+                    .padding()
+                    .sheet(isPresented: $how) {
+                        How(display: self.$how)
+                    }
+                Spacer()
                 Button(action: {
                     self.store = true
                 }) {

@@ -50,6 +50,7 @@ Website.moved = "Seems like this project was moved to a different folder";
 Website.select = "Select the folder where this projects is contained";
 Select = "Select";
 
+How.to = "How";
 How.it.works = "How does it work?";
 How.single = "- You have 1 page where you can keep things simple and easy to modify.
 
