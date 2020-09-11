@@ -13,7 +13,7 @@ final class Session {
             var sub: AnyCancellable?
             self.store.remove(Bookmark.self) {
                 guard let access = $0.access else { return true }
-                let result = !FileManager.default.fileExists(atPath: access.path) || access.pathComponents.contains(".Trash")
+                let result = !FileManager.default.fileExists(atPath: access.path) || access.pathComponents.contains(".Trash") || access != $0.id
                 access.stopAccessingSecurityScopedResource()
                 return result
             }
