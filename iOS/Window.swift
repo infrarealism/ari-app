@@ -32,7 +32,7 @@ extension UIWindow {
     }
     
     func receive(_ url: URL) {
-        rootViewController!.present(Mover(window: window!, url: url), animated: true)
+        rootViewController!.present(Mover(window: self, url: url), animated: true)
     }
     
     private func transition(_ type: CATransitionSubtype) {
