@@ -15,6 +15,7 @@
 		CE08F0E224C053EE001E033A /* Steps.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08F0E124C053EE001E033A /* Steps.swift */; };
 		CE0D5E4124E41508002D1029 /* Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0D5E4024E41508002D1029 /* Link.swift */; };
 		CE0E87CD24C5FC0900FC9994 /* Blob.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0E87CC24C5FC0900FC9994 /* Blob.swift */; };
+		CE144B19250BB465009CF49E /* Mover.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE144B18250BB465009CF49E /* Mover.swift */; };
 		CE1F5AB624E278F400280A60 /* Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F5AB524E278F400280A60 /* Control.swift */; };
 		CE1F5AB824E2794700280A60 /* Blob.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F5AB724E2794700280A60 /* Blob.swift */; };
 		CE1F5ABA24E289D700280A60 /* Blub.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F5AB924E289D700280A60 /* Blub.swift */; };
@@ -106,6 +107,7 @@
 		CE08F0E124C053EE001E033A /* Steps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Steps.swift; sourceTree = "<group>"; };
 		CE0D5E4024E41508002D1029 /* Link.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Link.swift; sourceTree = "<group>"; };
 		CE0E87CC24C5FC0900FC9994 /* Blob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blob.swift; sourceTree = "<group>"; };
+		CE144B18250BB465009CF49E /* Mover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mover.swift; sourceTree = "<group>"; };
 		CE1F5AB524E278F400280A60 /* Control.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Control.swift; sourceTree = "<group>"; };
 		CE1F5AB724E2794700280A60 /* Blob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blob.swift; sourceTree = "<group>"; };
 		CE1F5AB924E289D700280A60 /* Blub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blub.swift; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 				CED14ED624D85A72004D4918 /* Launch.swift */,
 				CE0D5E4024E41508002D1029 /* Link.swift */,
 				CED14ED424D8596B004D4918 /* Main.swift */,
+				CE144B18250BB465009CF49E /* Mover.swift */,
 				CE32014C24E527E7009C2554 /* Photo.Coordinator.swift */,
 				CE32014824E52644009C2554 /* Photo.Picker.swift */,
 				CE32014A24E5264D009C2554 /* Photo.swift */,
@@ -521,6 +524,7 @@
 				CE3D4BBC24E012AD0080E96E /* Website.swift in Sources */,
 				CE32014B24E5264D009C2554 /* Photo.swift in Sources */,
 				CED14ED724D85A72004D4918 /* Launch.swift in Sources */,
+				CE144B19250BB465009CF49E /* Mover.swift in Sources */,
 				CED14ED524D8596B004D4918 /* Main.swift in Sources */,
 				CE1F5AB624E278F400280A60 /* Control.swift in Sources */,
 				CE32014F24E5286D009C2554 /* Browse.Coordinator.swift in Sources */,

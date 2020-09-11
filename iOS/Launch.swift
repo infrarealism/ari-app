@@ -41,6 +41,7 @@ struct Launch: View {
                     .padding()
                     .sheet(isPresented: $open) {
                         Browse(type: "ari.website") {
+                            _ = $0.startAccessingSecurityScopedResource()
                             Bookmark.open($0).map(self.open)
                         }
                     }
