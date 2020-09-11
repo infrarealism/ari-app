@@ -8,40 +8,38 @@ final class Main: NSWindow {
     class func open(_ bookmark: Bookmark) {
         guard let access = bookmark.access else { return }
         Website.load(access).map { website in
-            do {
-                try website.open()
-                let main = Main(website: website)
-                main.makeKeyAndOrderFront(nil)
-                if access.deletingLastPathComponent() != website.url {
-                    website.close()
-                    let alert = NSAlert()
-                    alert.messageText = .key("Website.moved")
-                    alert.informativeText = .key("Website.select")
-                    alert.addButton(withTitle: .key("Cancel"))
-                    alert.addButton(withTitle: .key("Select"))
-                    alert.alertStyle = .critical
-                    alert.beginSheetModal(for: main) {
-                        switch $0 {
-                        case .alertSecondButtonReturn:
-                            let browse = NSOpenPanel()
-                            browse.canChooseFiles = false
-                            browse.canChooseDirectories = true
-                            browse.prompt = .key("Select")
-                            browse.beginSheetModal(for: main) {
-                                guard $0 == .OK else { return }
-                                website.update(browse.url!)
-                                main.close()
-                                Main.open(bookmark)
-                            }
-                            break
-                        default:
+            try? website.open()
+            let main = Main(website: website)
+            main.makeKeyAndOrderFront(nil)
+            if access.deletingLastPathComponent() != website.url {
+                website.close()
+                let alert = NSAlert()
+                alert.messageText = .key("Website.moved")
+                alert.informativeText = .key("Website.select")
+                alert.addButton(withTitle: .key("Cancel"))
+                alert.addButton(withTitle: .key("Select"))
+                alert.alertStyle = .critical
+                alert.beginSheetModal(for: main) {
+                    switch $0 {
+                    case .alertSecondButtonReturn:
+                        let browse = NSOpenPanel()
+                        browse.canChooseFiles = false
+                        browse.canChooseDirectories = true
+                        browse.prompt = .key("Select")
+                        browse.beginSheetModal(for: main) {
+                            guard $0 == .OK else { return }
+                            website.update(browse.url!)
                             main.close()
-                            NSApp.launch()
-                            break
+                            Main.open(bookmark)
                         }
+                        break
+                    default:
+                        main.close()
+                        NSApp.launch()
+                        break
                     }
                 }
-            } catch { }
+            }
         }
         access.stopAccessingSecurityScopedResource()
     }
