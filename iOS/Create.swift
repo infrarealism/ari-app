@@ -109,9 +109,9 @@ private struct First: View {
                     .foregroundColor(.init(.secondarySystemBackground))
                 HStack {
                     Spacer()
-                    TextField("Website.name", text: $name) {
+                    TextField("Website.name", text: $name, onCommit:  {
                         self.window.endEditing(true)
-                    }.autocapitalization(.sentences)
+                    }).autocapitalization(.sentences)
                         .multilineTextAlignment(.center)
                         .textFieldStyle(PlainTextFieldStyle())
                         .frame(width: 200, height: 40)
