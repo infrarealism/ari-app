@@ -12,7 +12,7 @@ final class Bar: NSVisualEffectView {
         super.init(frame: .zero)
         wantsLayer = true
         translatesAutoresizingMaskIntoConstraints = false
-        material = .hudWindow
+        material = .sidebar
         
         let icon = NSImageView(image: NSImage(named: website.icon)!)
         icon.contentTintColor = .systemIndigo
