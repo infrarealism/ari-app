@@ -9,7 +9,6 @@ extension Photo {
             picker.display = false
         }
         
-        
         func imagePickerController(_: UIImagePickerController, didFinishPickingMediaWithInfo: [UIImagePickerController.InfoKey : Any]) {
             guard PHPhotoLibrary.authorizationStatus() != .notDetermined else { return }
             didFinishPickingMediaWithInfo[.originalImage].flatMap { $0 as? UIImage }.map {
