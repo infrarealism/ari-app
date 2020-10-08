@@ -15,6 +15,7 @@ extension Photo {
             didFinishPickingMediaWithInfo[.originalImage].flatMap { $0 as? UIImage }.map {
                 picker.name = PHAssetResource.assetResources(for: didFinishPickingMediaWithInfo[.phAsset] as! PHAsset).first!.originalFilename
                 self.picker.image = $0
+                self.picker.display = false
             }
         }
     }

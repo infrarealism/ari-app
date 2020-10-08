@@ -12,6 +12,7 @@ extension TextView {
         
         weak var text: UITextView!
         private weak var website: Website!
+        private weak var dismiss: Blob!
         private weak var insert: PassthroughSubject<String, Never>!
         private weak var selected: CurrentValueSubject<String, Never>!
         private var subs = Set<AnyCancellable>()
@@ -46,6 +47,7 @@ extension TextView {
             dismiss.action = #selector(text.resignFirstResponder)
             dismiss.isHidden = true
             addSubview(dismiss)
+            self.dismiss = dismiss
             
             text.topAnchor.constraint(equalTo: topAnchor).isActive = true
             text.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
@@ -55,22 +57,6 @@ extension TextView {
             
             dismiss.bottomAnchor.constraint(equalTo: text.bottomAnchor, constant: -4).isActive = true
             dismiss.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -4).isActive = true
-            
-            NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification).sink { [weak self] in
-                bottom.constant = -(($0.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.height - 70)
-                dismiss.isHidden = false
-                UIView.animate(withDuration: 0.5) {
-                    self?.layoutIfNeeded()
-                }
-            }.store(in: &subs)
-            
-            NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification).sink { [weak self] _ in
-                bottom.constant = 0
-                dismiss.isHidden = true
-                UIView.animate(withDuration: 0.5) {
-                    self?.layoutIfNeeded()
-                }
-            }.store(in: &subs)
             
             NotificationCenter.default.publisher(for: UITextView.textDidChangeNotification, object: text)
                 .debounce(for: .seconds(0.8), scheduler: DispatchQueue.main)
@@ -89,6 +75,14 @@ extension TextView {
             guard text.isFirstResponder, let range = text.selectedTextRange else { return }
             previous = range
             selected.value = text.text(in: range) ?? ""
+        }
+        
+        func textViewDidBeginEditing(_: UITextView) {
+            dismiss.isHidden = false
+        }
+        
+        func textViewDidEndEditing(_: UITextView) {
+            dismiss.isHidden = true
         }
     }
 }

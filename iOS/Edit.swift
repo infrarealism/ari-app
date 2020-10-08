@@ -22,6 +22,8 @@ struct Edit: View {
             VStack {
                 HStack(spacing: 0) {
                     Spacer()
+                    Blub(image: "photo") { }
+                    .hidden()
                     .sheet(isPresented: .init(get: {
                         self.image != nil
                     }, set: { _ in
@@ -43,10 +45,9 @@ struct Edit: View {
                     }.sheet(isPresented: $photo) {
                         Photo.Picker(image: self.$image, name: self.$imageName, display: self.$photo)
                     }
-                }.padding(.trailing, 10)
+                }
                 Spacer()
                 HStack(spacing: 0) {
-                    Spacer()
                     if website is Website.Blog {
                         if id != Page.index.id {
                             Blub(image: "trash") {
@@ -68,6 +69,7 @@ struct Edit: View {
                     }.sheet(isPresented: $edit) {
                         Info(website: self.website, id: self.id, display: self.$edit)
                     }
+                    Spacer()
                 }.padding(.all, 10)
             }
         }
